@@ -44,6 +44,7 @@
 		08FB7794FE84155DC02AAC07 /* peer */ = {
 			isa = PBXGroup;
 			children = (
+				5F31C999126F8D6F0046F4C1 /* External */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -65,6 +66,13 @@
 				8DD76F6C0486A84900D96B5E /* peer */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5F31C999126F8D6F0046F4C1 /* External */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = External;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -141,6 +149,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "${SRCROOT}/External";
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = peer;
 			};
@@ -152,6 +161,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/External/Eigen";
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = peer;
 			};
