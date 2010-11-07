@@ -15,6 +15,9 @@ using Eigen::VectorXf;
 
 
 class cBayesNet {
+public:
+	int N;
+	int components;
 };
 
 
@@ -22,14 +25,14 @@ class cBayesNet {
  * Abstract base class for all Bayes Net nodes
  */
 class cNode {
-protected:
+public:
 	MatrixXf E1;
 	MatrixXf prior;
 	double bound;
-public:
+
 	virtual double entropy();	
-	virtual double calcBound(cBayesNet net);
-	virtual void update(cBayesNet net);
+	virtual double calcBound(cBayesNet *net);
+	virtual void update(cBayesNet *net);
 };
 
 
@@ -45,7 +48,26 @@ protected:
 public:
 	cDirichletNode(int dim, float prior);
 	double entropy();	
-	double calcBound(cBayesNet net);
-	void update(cBayesNet net);
+	double calcBound(cBayesNet *net);
+	void update(cBayesNet *net);
+};
+
+
+/**
+ * Gamma Node - prior for precisions
+ */
+class cGammaNode : public cNode {
+protected:
+    double pa;
+	double pb;
+	VectorXf lnE;
+	VectorXf a;
+	VectorXf b;
+	
+public:
+	cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *E1_val);
+	double entropy();	
+	double calcBound(cBayesNet *net);
+	void update(cBayesNet *net);
 };
 

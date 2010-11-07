@@ -14,11 +14,12 @@
 using Eigen::MatrixXf;
 using Eigen::VectorXf;
 using alglib::lngamma;
+using alglib::psi;
 
 
 double cNode::entropy() {return 0;}
-double cNode::calcBound(cBayesNet net) {return 0;}
-void cNode::update(cBayesNet net) {}
+double cNode::calcBound(cBayesNet *net) {return 0;}
+void cNode::update(cBayesNet *net) {}
 
 
 cDirichletNode::cDirichletNode(int dim, float prior_val){
@@ -31,16 +32,17 @@ cDirichletNode::cDirichletNode(int dim, float prior_val){
 
 
 double cDirichletNode::entropy(){
-	entropy = -lngamma(a.sum());
-	for (int i=0; i < a.rows(); i++) {entropy += lngamma(a(i));}
-	entropy += (a.sum() - a.rows())*psi(a.sum());
-	entropy -= (a - VectorXf::Ones(a.rows())*psi();
-	for (int i=0; i < a.rows(); i++){entropy -= (a(i) - 1)*psi(a(i));}
-	return entropy;
+	double temp = 0;
+	double ent = -lngamma(a.sum(), temp);
+	for (int i=0; i < a.rows(); i++) {ent += lngamma(a(i), temp);}
+	ent += (a.sum() - a.rows())*psi(a.sum());
+//	ent -= (a - VectorXf::Ones(a.rows()))*psi();
+	for (int i=0; i < a.rows(); i++){ent -= (a(i) - 1)*psi(a(i));}
+	return ent;
 }
 
 
-double cDirichletNode::calcBound(cBayesNet net){
+double cDirichletNode::calcBound(cBayesNet *net){
 	double temp = 0;	
 	double bound = ((a0 - VectorXf::Ones(a0.rows()))*lnE).sum() - lngamma(a0.sum(), temp);
 	for (int i=0; i < a0.rows(); i++) { bound += lngamma(a0(i), temp); }
@@ -49,53 +51,68 @@ double cDirichletNode::calcBound(cBayesNet net){
 
 				
 /** Not used, so not implemented */
-void cDirichletNode::update(cBayesNet net){}
+void cDirichletNode::update(cBayesNet *net){}
+
+
+
+
+
+/** Gamma node implementations */
+cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *E1_val){
+	pa = prior_val_a;
+	pb = prior_val_b;
+	a = pa*VectorXf::Ones(dim);
+	b = pb*VectorXf::Ones(dim);
+	E1 = VectorXf::Zero(dim);
+	lnE = VectorXf::Zero(dim);
+	update((cBayesNet*)NULL);
+	if (E1_val != NULL){ 
+		E1 = *E1_val;
+	}
+}
+
+
+
+double cGammaNode::entropy(){
+	double temp = 0;
+	double ent = 0;
+	
+	for (int i=0; i < a.rows(); i++) {
+	    ent += a(i);
+		ent -= log(b(i));
+		ent += lngamma(a(i), temp);
+		ent += (1. - a(i))*psi(a(i));
+	}
+	return ent;
+}
+
+
+
+double cGammaNode::calcBound(cBayesNet *net){
+
+	double bound = 0;
+	double temp = 0;	
+	for (int i=0; i < lnE.rows(); i++) { 
+		bound += pa*log(pb);
+		bound += (pa - 1.)*lnE(i);
+		bound -= pb*E1(i);
+		bound -= lngamma(pa, temp);
+	}
+	return bound + entropy();
+}
+
+
+/** Standard update equation */
+void cGammaNode::update(cBayesNet *net){
+	for (int i=0; i < lnE.rows(); i++){
+		E1(i) = a(i)/b(i);
+		lnE(i) = psi(a(i)) - log(b(i));
+	}
+}
+
 
 
 /*
-
-
-class AGammaNode(ANode):
-
-__slots__ = ['pa','pb','E1','E2','lnE', 'a','b']
-
-def __init__(self, dim=[1], prior=[1E-3,1E-3], E1=None):
-L.debug('AGammaNode __init__')
-ANode.__init__(self)
-
-#save prior:
-self._prior = prior
-self.pa = prior[0]
-self.pb = prior[1]
-# self._dim = dim
-
-self.a  = S.ones(dim)*self.pa
-self.b  = S.ones(dim)*self.pb
-
-AGammaNode.update(self) # updates E1, E2
-
-# Manually set E1 if needed
-if(E1 is not None): self.E1 = E1
-
-
-def update(self, net=None):
-L.debug('AGammaNode update')
-
-self.E1 = self.a/self.b # LEO - everything else was according to Bishop book - made this, too
-self.lnE = special.digamma(self.a) - S.log(self.b)
-
-
-def entropy(self):
-L.debug('AGammaNode entropy')
-return (self.a - S.log(self.b) + special.gammaln(self.a) + (1. - self.a)*special.digamma(self.a)).sum()    
-
-
-def calcBound(self, net):
-L.debug('AGammaNode calcBound')
-return self.b.shape[0]*self.pa*S.log(self.pb) + ((self.pa - 1)*self.lnE - self.pb*self.E1 - special.gammaln(self.pa)).sum() + self.entropy()
-
-
-
 
 class AVGaussNode(ANode):
 ''' Vector-Gauss-Node which sits in two plates
@@ -103,21 +120,6 @@ dim is supposed to be (N,d) where d is the vectorized gauss-node dimension and N
 
 
 __slots__ = ['E2','cov'];
-
-def __init__(self,dim=[1,1],cdim=S.nan,prior=[0,1]):
-L.debug('AVGaussNode __init__')
-ANode.__init__(self)        
-#        self._dim = dim
-#        self._cdim = cdim
-self._prior = prior
-if(S.isnan(cdim)):  cdim = dim[0]
-
-self.E1 = prior[0] + random.standard_normal(size=dim)
-self.E2 = S.zeros([dim[0],dim[1],dim[1]])
-self.cov= S.zeros([cdim,dim[1],dim[1]])
-
-for c in range(cdim): self.cov[c,:,:] = prior[1]*S.eye(dim[1])
-AVGaussNode.update(self)
 
 
 # calculate 2nd moment from mean and covariance
