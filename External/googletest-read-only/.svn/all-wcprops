@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 23
+/svn/!svn/ver/512/trunk
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/428/trunk/configure.ac
+END
+CHANGES
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/407/trunk/CHANGES
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/40/trunk/COPYING
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/478/trunk/Makefile.am
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/488/trunk/README
+END
+CONTRIBUTORS
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/405/trunk/CONTRIBUTORS
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/500/trunk/CMakeLists.txt
+END
