@@ -6,7 +6,8 @@
  *  Copyright 2010 __MyCompanyName__. All rights reserved.
  *
  */
-
+#ifndef __BAYESNET_H__
+#define __BAYESNET_H__
 
 #include "Eigen/Eigen"
 
@@ -70,4 +71,7 @@ public:
 	double calcBound(cBayesNet *net);
 	void update(cBayesNet *net);
 };
+
+
+#endif
 

@@ -24,6 +24,7 @@
 		9AA505C11281F2BB00ABCDDC /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AF1281F2BB00ABCDDC /* solvers.cpp */; };
 		9AA505C21281F2BB00ABCDDC /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B11281F2BB00ABCDDC /* specialfunctions.cpp */; };
 		9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B31281F2BB00ABCDDC /* statistics.cpp */; };
+		DB2DC4FF128D95C20085EEA2 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB2DC4FE128D95C20085EEA2 /* vbfa.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +75,8 @@
 		9AA505B51281F2BB00ABCDDC /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = External/alglib/src/stdafx.h; sourceTree = "<group>"; };
 		9AA505B61281F2BB00ABCDDC /* ap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ap.h; path = External/alglib/src/ap.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* peer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = peer.1; sourceTree = "<group>"; };
+		DB2DC4FD128D95C20085EEA2 /* vbfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vbfa.h; sourceTree = "<group>"; };
+		DB2DC4FE128D95C20085EEA2 /* vbfa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vbfa.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +109,8 @@
 				9AA504631281A1E700ABCDDC /* model.h */,
 				9AA504641281A1E700ABCDDC /* model.cpp */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				DB2DC4FD128D95C20085EEA2 /* vbfa.h */,
+				DB2DC4FE128D95C20085EEA2 /* vbfa.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "peer" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -225,6 +231,7 @@
 				9AA505C11281F2BB00ABCDDC /* solvers.cpp in Sources */,
 				9AA505C21281F2BB00ABCDDC /* specialfunctions.cpp in Sources */,
 				9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */,
+				DB2DC4FF128D95C20085EEA2 /* vbfa.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

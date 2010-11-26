@@ -7,23 +7,42 @@
  *
  */
 
+#ifndef __VBFA_H__
+#define __VBFA_H__
+
+#include "bayesnet.h"
+
+
 class cVBFA : public cBayesNet {
 
 protected:
+	//TODO
+	/*
+	 
+	pheno = CGaussian()
+	 */
+	int Nj; //individuals 
+	int Np; //phenotypes
+	int Nk; //factors
 	
-    VectorXf a0;
-	VectorXf a;
-	VectorXf lnE;
+	void updateW();
+	void updateX();
+	void updateAlpha();
 	
+    	
 public:
 	//default constructor
-	cVBFA();
+	//cVBFA();
 	
 	//constructor from expression data
-	cVBFA(MatrixXf& pheno_mean);
+	cVBFA(MatrixXf pheno_mean);
 	//constructor that take variance into account
-	cVBFA(MatrixXf& pheno_mean,MatrixXf& pheno_var);
+	cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var);
 	
-	void update(cBayesNet *net);
 
+	void update();
+	
+	
 };
+
+#endif

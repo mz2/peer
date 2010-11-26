@@ -14,3 +14,17 @@
 
 
 
+
+//constructor from expression data
+cVBFA::cVBFA(MatrixXf pheno_mean)
+{
+	MatrixXf pheno_var(pheno_mean.rows(),pheno_mean.cols());
+	cVBFA::cVBFA(pheno_mean,pheno_var);
+}
+//constructor that take variance into account
+cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var)
+{
+	
+
+}
+
