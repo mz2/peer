@@ -26,6 +26,8 @@
 		9AA505C11281F2BB00ABCDDC /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AF1281F2BB00ABCDDC /* solvers.cpp */; };
 		9AA505C21281F2BB00ABCDDC /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B11281F2BB00ABCDDC /* specialfunctions.cpp */; };
 		9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B31281F2BB00ABCDDC /* statistics.cpp */; };
+		9ABBF93812A02354004E2668 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBF93712A02354004E2668 /* vbfa.cpp */; };
+		9ABBF93A12A0238E004E2668 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBF93712A02354004E2668 /* vbfa.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +82,8 @@
 		9AA505B41281F2BB00ABCDDC /* statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = statistics.h; path = External/alglib/src/statistics.h; sourceTree = "<group>"; };
 		9AA505B51281F2BB00ABCDDC /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = External/alglib/src/stdafx.h; sourceTree = "<group>"; };
 		9AA505B61281F2BB00ABCDDC /* ap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ap.h; path = External/alglib/src/ap.h; sourceTree = "<group>"; };
+		9ABBF93712A02354004E2668 /* vbfa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vbfa.cpp; sourceTree = "<group>"; };
+		9ABBF93912A02370004E2668 /* vbfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vbfa.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* peer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = peer.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,12 +122,14 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9ABBF93912A02370004E2668 /* vbfa.h */,
 				5FE0C5C71295B754001431C7 /* Unit Tests */,
 				9AA504691281A43500ABCDDC /* bayesnet.h */,
 				9AA5046A1281A43500ABCDDC /* bayesnet.cpp */,
 				9AA504631281A1E700ABCDDC /* model.h */,
 				9AA504641281A1E700ABCDDC /* model.cpp */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				9ABBF93712A02354004E2668 /* vbfa.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -248,7 +254,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "peer" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -272,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FE0C67A1295BF6B001431C7 /* tests.cpp in Sources */,
+				9ABBF93A12A0238E004E2668 /* vbfa.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +301,7 @@
 				9AA505C11281F2BB00ABCDDC /* solvers.cpp in Sources */,
 				9AA505C21281F2BB00ABCDDC /* specialfunctions.cpp in Sources */,
 				9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */,
+				9ABBF93812A02354004E2668 /* vbfa.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +384,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/External\"";
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = tests;
@@ -396,6 +404,7 @@
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/External\"";
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = tests;
