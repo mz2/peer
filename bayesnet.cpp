@@ -58,6 +58,8 @@ void cDirichletNode::update(cBayesNet *net){}
 
 
 /** Gamma node implementations */
+cGammaNode::cGammaNode(){}
+
 cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *E1_val){
 	pa = prior_val_a;
 	pb = prior_val_b;

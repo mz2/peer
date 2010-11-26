@@ -5,7 +5,7 @@
  *  Created by Leopold Parts on 03/11/2010.
  *  Copyright 2010 __MyCompanyName__. All rights reserved.
  *
- */
+ 
 
 
 double logdet(MatrixXf m);
@@ -15,7 +15,7 @@ class cBayesianFA {
 };
 
 
-/** Factor activation node */
+/** Factor activation node /
 class cNodeS : public cNode {
 public:
     MatrixXf E2S; // sum of second moments
@@ -26,4 +26,4 @@ public:
 	double entropy();	
 	double calcBound(cBayesNet *net);
 	void update(cBayesNet *net);
-};
+}; */

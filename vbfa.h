@@ -12,25 +12,79 @@
 
 #include "bayesnet.h"
 
+/** Weight node (vector normal with shared precision) */
+class cWNode : public cNode {
+protected: MatrixXf E2;	
+public:
+	cWNode(); // default
+	cWNode(MatrixXf E1); // from mean
+	void update(cBayesNet *net);
+	double calcBound(cBayesNet *net);
+	double entropy();
+};
 
+
+/** Factor node (vector normal) */
+class cXNode : public cNode {
+protected: MatrixXf E2;	
+public:
+	cXNode(); // default
+	cXNode(MatrixXf E1); // from mean
+	void update(cBayesNet *net);
+	double calcBound(cBayesNet *net);
+	double entropy();
+};
+
+
+/** Weight precision node (vector Gamma) */
+class cAlphaNode : public cGammaNode {
+public:
+	void update(cBayesNet *net);
+};
+
+
+/** Noise precision node (vector Gamma) */
+class cEpsNode : public cGammaNode {
+public:
+	void update(cBayesNet *net);
+};
+
+
+
+/** Factor node (vector normal) */
+class cPhenoNode {
+protected: MatrixXf E1,E2;	
+public:
+	cPhenoNode(); // default
+};
+
+
+
+
+/** Main class for variational Bayesian factor analysis */
 class cVBFA : public cBayesNet {
 
 protected:
-	//TODO
-	/*
-	 
-	pheno = CGaussian()
-	 */
+	/** Dimensions */
 	int Nj; //individuals 
 	int Np; //phenotypes
 	int Nk; //factors
 	
-	void updateW();
-	void updateX();
-	void updateAlpha();
+	/** Nodes */ 
+	cWNode W;
+	cXNode X;
+	cEpsNode Eps;
+	cAlphaNode Alpha;
+    cPhenoNode pheno;
+	
+	
 	
     	
 public:
+	/** Inference parameters */
+	int Niterations; 
+	int initialisation; // type
+
 	//default constructor
 	//cVBFA();
 	

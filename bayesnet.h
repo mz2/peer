@@ -66,6 +66,7 @@ protected:
 	VectorXf b;
 	
 public:
+	cGammaNode();
 	cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *E1_val);
 	double entropy();	
 	double calcBound(cBayesNet *net);
