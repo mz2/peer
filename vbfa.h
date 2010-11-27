@@ -18,8 +18,10 @@
 
 /** Weight node (vector normal with shared precision) */
 class cWNode : public cNode {
-protected: 	MatrixXf E2S;	
+protected: 	
 public:
+	MatrixXf E2S;	
+	
 	cWNode(); // default
 	cWNode(MatrixXf E1); // from mean
 	void update(cBayesNet &net);
@@ -30,8 +32,10 @@ public:
 
 /** Factor node (vector normal) */
 class cXNode : public cNode {
-protected: MatrixXf E2S;	
+protected: 
 public:
+	MatrixXf E2S;	
+	
 	cXNode(); // default
 	cXNode(MatrixXf E1); // from mean
 	void update(cBayesNet &net);
@@ -57,8 +61,10 @@ public:
 
 /** Factor node (vector normal) */
 class cPhenoNode {
-protected: MatrixXf E1,E2;	
+protected: 	
 public:
+	MatrixXf E1,E2;
+	
 	cPhenoNode(); // default
 };
 

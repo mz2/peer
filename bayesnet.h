@@ -71,7 +71,7 @@ public:
 	double entropy();	
 	double calcBound(cBayesNet &net);
 	void update(cBayesNet &net);
-	void updateParams();
+	void updateMoments();
 };
 
 

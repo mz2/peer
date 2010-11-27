@@ -58,6 +58,7 @@ void play_matrix(){
 	
     MatrixXf alpha = MatrixXf::Zero(K,K);//randn(K,1);
 	alpha.diagonal() = randn(K,1);
+	cout << alpha << endl;
 	MatrixXf XE2s = randn(K,K);
 	MatrixXf X = randn(N,K);
 	MatrixXf eps = randn(P,1);
@@ -65,9 +66,18 @@ void play_matrix(){
 	MatrixXf E2S = randn(K,K);
 	MatrixXf pheno = randn(N,P);
 
+	// W update 
 	for(int i=0; i<P; ++i){
 		MatrixXf prec = alpha + XE2s*eps(i);
 		MatrixXf cov = prec.inverse();
+		// cout << alpha << endl << XE2s << endl << XE2s*eps(i) << endl << prec << endl << cov << endl;
+		cout << pheno.col(i).rows() << pheno.col(i).cols() << endl << X.rows() << X.cols() << endl;
+		cout << eps(i)*cov*X.transpose()*pheno.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+		E1.row(i) = eps(i)*cov*X.transpose()*pheno.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+//		E1(i) = eps(i)*cov*X*pheno(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+		MatrixXf outer = E1.row(i).transpose()*E1.row(i);
+		E2S += (cov + outer); //  E2 = dcov + outer(self.E1[d], self.E1[d])
+		
 	}
 }
 

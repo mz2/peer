@@ -38,12 +38,13 @@ double cWNode::entropy(){
 void cWNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
 
-	//    // for each phenotype, calculate covariance and mean of weight
+	// for each phenotype, calculate covariance and mean of weight
 	for(int i = 0; i < n.Np; i++){
-//		MatrixXf diagAE1 = MatrixXf::Zero(n.
-//		cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
-//		this->E1(d) = cov*(net->Eps.E1(i)&net->S.E1&net->pheno.E1(i)); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
-//		this->E2S += (cov + this->E1(d)*this->E1(d)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
+		MatrixXf diagAE1 = MatrixXf::Zero(n.Np);
+		diagAE1.diagonal() = n.Alpha.E1;
+		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
+		E1.row(i) = n.Eps.E1(i)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+		E2S += (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
 	}
 }
 
@@ -60,14 +61,40 @@ double cXNode::entropy(){
 
 
 void cXNode::update(cBayesNet &net){
+	cVBFA n = (cVBFA&)net;
+	
+	// big work - calculate precision matrix
+	MatrixXf prec = MatrixXf::Identity(n.Nk, n.Nk);
+	for(int i = 0; i < n.Np; i++){ // as we don't keep W.E2 in memory, have to recalculate it to compute the sum WE2[i]*Eps[i]
+		MatrixXf diagAE1 = MatrixXf::Zero(n.Np);
+		diagAE1.diagonal() = n.Alpha.E1;
+		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
+		E1.row(i) = n.Eps.E1(i)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+		prec += n.Eps.E1(i)*(cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
+	}
+	
+	// Invert precision to get covariance, update moments
+	MatrixXf cov = prec.inverse(); 
+	E1 = n.pheno.E1*cov*n.W.E1.transpose()*n.Eps.E1;
+	E2S = cov + E1.transpose()*E1;
 }
 
 
 void cAlphaNode::update(cBayesNet &net){
+	cVBFA n = (cVBFA&)net;
+	b = pb + 0.5*n.W.E2S.diagonal().array();
+	a = (pa + 0.5*n.Np)*MatrixXf::Ones(n.Nk);
+	updateMoments();
 }
 
 
 void cEpsNode::update(cBayesNet &net){
+	cVBFA n = (cVBFA&)net;
+	a = (pa + 0.5*n.Nj)*MatrixXf::Ones(n.Np);
+	
+	MatrixXf m = n.pheno.E1*n.X.E1*n.W.E1.transpose();
+	b = pa + 0.5*(m).array(); // INCOMPLETE!! + n.pheno.E2*MatrixXf::Ones());
+	updateMoments();
 }
 
 

@@ -67,7 +67,7 @@ cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *
 	b = pb*VectorXf::Ones(dim);
 	E1 = VectorXf::Zero(dim);
 	lnE = VectorXf::Zero(dim);
-	updateParams();
+	updateMoments();
 	if (E1_val != NULL){ 
 		E1 = *E1_val;
 	}
@@ -104,7 +104,7 @@ double cGammaNode::calcBound(cBayesNet &net){
 }
 
 
-void cGammaNode::updateParams(){
+void cGammaNode::updateMoments(){
 	for (int i=0; i < lnE.rows(); i++){
 		E1(i) = a(i)/b(i);
 		lnE(i) = psi(a(i)) - log(b(i));
@@ -113,7 +113,7 @@ void cGammaNode::updateParams(){
 
 /** Standard update equation */
 void cGammaNode::update(cBayesNet &net){
-	this->updateParams();
+	this->updateMoments();
 }
 
 
