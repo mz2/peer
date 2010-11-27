@@ -104,11 +104,11 @@ MatrixXf simulate_expression(int N, int D, int K,double sigma=0.1)
 
 
 int main (int argc, char * const argv[]) {
-	play_matrix();
+	//play_matrix();
 	//1. simulate small dataset
-//	MatrixXf Y=simulate_expression(10,100,5);
+	MatrixXf Y=simulate_expression(10,100,5);
 	//2. create object
-//	cVBFA vb(Y);
+	cVBFA vb(Y,10);
 	
 	
 }
