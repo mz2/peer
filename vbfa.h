@@ -57,9 +57,13 @@ public:
 
 /** Factor node (vector normal) */
 class cPhenoNode {
+	friend class cVBFA;
 protected: MatrixXf E1,E2;	
 public:
-	cPhenoNode(); // default
+	cPhenoNode()
+	{};
+	cPhenoNode(MatrixXf pheno_mean,MatrixXf pheno_var); // default
+	
 };
 
 
@@ -69,7 +73,6 @@ public:
 class cVBFA : public cBayesNet {
 	
 protected:
-	
 	
 public:
 	/** Dimensions */
@@ -92,9 +95,9 @@ public:
 	//cVBFA();
 	
 	//constructor from expression data
-	cVBFA(MatrixXf pheno_mean);
+	cVBFA(MatrixXf pheno_mean,int Nfactors);
 	//constructor that take variance into account
-	cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var);
+	cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors);
 	
 	
 	void update();
