@@ -32,8 +32,8 @@ public:
 	double bound;
 
 	virtual double entropy();	
-	virtual double calcBound(cBayesNet *net);
-	virtual void update(cBayesNet *net);
+	virtual double calcBound(cBayesNet &net);
+	virtual void update(cBayesNet &net);
 };
 
 
@@ -49,8 +49,8 @@ protected:
 public:
 	cDirichletNode(int dim, float prior);
 	double entropy();	
-	double calcBound(cBayesNet *net);
-	void update(cBayesNet *net);
+	double calcBound(cBayesNet &net);
+	void update(cBayesNet &net);
 };
 
 
@@ -69,8 +69,9 @@ public:
 	cGammaNode();
 	cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *E1_val);
 	double entropy();	
-	double calcBound(cBayesNet *net);
-	void update(cBayesNet *net);
+	double calcBound(cBayesNet &net);
+	void update(cBayesNet &net);
+	void updateParams();
 };
 
 

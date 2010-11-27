@@ -38,6 +38,7 @@ void playing()
 }
 
 
+
 MatrixXf randn(int n, int m)
 /* create a randn matrix */
 {
@@ -48,6 +49,30 @@ MatrixXf randn(int n, int m)
 		}
 	return rv;
 }
+
+/** Trying out update equations etc */
+void play_matrix(){
+	int N = 3;
+	int P = 4;
+	int K = 2;
+	
+    MatrixXf alpha = MatrixXf::Zero(K,K);//randn(K,1);
+	alpha.diagonal() = randn(K,1);
+	MatrixXf XE2s = randn(K,K);
+	MatrixXf X = randn(N,K);
+	MatrixXf eps = randn(P,1);
+	MatrixXf E1 = randn(P,K);
+	MatrixXf E2S = randn(K,K);
+	MatrixXf pheno = randn(N,P);
+
+	for(int i=0; i<P; ++i){
+		MatrixXf prec = alpha + XE2s*eps(i);
+		MatrixXf cov = prec.inverse();
+	}
+}
+
+
+
 
 MatrixXf simulate_expression(int N, int D, int K,double sigma=0.1)
 /*
@@ -69,11 +94,11 @@ MatrixXf simulate_expression(int N, int D, int K,double sigma=0.1)
 
 
 int main (int argc, char * const argv[]) {
-	
+	play_matrix();
 	//1. simulate small dataset
-	MatrixXf Y=simulate_expression(10,100,5);
+//	MatrixXf Y=simulate_expression(10,100,5);
 	//2. create object
-	cVBFA vb(Y);
+//	cVBFA vb(Y);
 	
 	
 }

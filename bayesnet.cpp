@@ -18,8 +18,8 @@ using alglib::psi;
 
 
 double cNode::entropy() {return 0;}
-double cNode::calcBound(cBayesNet *net) {return 0;}
-void cNode::update(cBayesNet *net) {}
+double cNode::calcBound(cBayesNet &net) {return 0;}
+void cNode::update(cBayesNet &net) {}
 
 
 cDirichletNode::cDirichletNode(int dim, float prior_val){
@@ -42,7 +42,7 @@ double cDirichletNode::entropy(){
 }
 
 
-double cDirichletNode::calcBound(cBayesNet *net){
+double cDirichletNode::calcBound(cBayesNet &net){
 	double temp = 0;	
 	double bound = ((a0 - VectorXf::Ones(a0.rows()))*lnE).sum() - lngamma(a0.sum(), temp);
 	for (int i=0; i < a0.rows(); i++) { bound += lngamma(a0(i), temp); }
@@ -51,7 +51,7 @@ double cDirichletNode::calcBound(cBayesNet *net){
 
 				
 /** Not used, so not implemented */
-void cDirichletNode::update(cBayesNet *net){}
+void cDirichletNode::update(cBayesNet &net){}
 
 
 
@@ -67,7 +67,7 @@ cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *
 	b = pb*VectorXf::Ones(dim);
 	E1 = VectorXf::Zero(dim);
 	lnE = VectorXf::Zero(dim);
-	update((cBayesNet*)NULL);
+	updateParams();
 	if (E1_val != NULL){ 
 		E1 = *E1_val;
 	}
@@ -90,7 +90,7 @@ double cGammaNode::entropy(){
 
 
 
-double cGammaNode::calcBound(cBayesNet *net){
+double cGammaNode::calcBound(cBayesNet &net){
 
 	double bound = 0;
 	double temp = 0;	
@@ -104,12 +104,16 @@ double cGammaNode::calcBound(cBayesNet *net){
 }
 
 
-/** Standard update equation */
-void cGammaNode::update(cBayesNet *net){
+void cGammaNode::updateParams(){
 	for (int i=0; i < lnE.rows(); i++){
 		E1(i) = a(i)/b(i);
 		lnE(i) = psi(a(i)) - log(b(i));
 	}
+}
+
+/** Standard update equation */
+void cGammaNode::update(cBayesNet &net){
+	this->updateParams();
 }
 
 
