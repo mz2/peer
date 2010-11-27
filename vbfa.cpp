@@ -7,10 +7,16 @@
  *
  */
 
+#include <iostream>
+#include <assert.h>
 #include "bayesnet.h"
 #include "Eigen/Eigen"
+#include <Eigen/Dense>
 #include "alglib/src/specialfunctions.h"
 #include "vbfa.h"
+
+using namespace Eigen;
+using namespace std;
 
 /** Default constructors */ 
 cWNode::cWNode(){}
@@ -60,6 +66,8 @@ double cXNode::entropy(){
 
 
 void cXNode::update(cBayesNet &net){
+	
+	
 }
 
 
@@ -71,21 +79,46 @@ void cEpsNode::update(cBayesNet &net){
 }
 
 
-cPhenoNode::cPhenoNode(){}
+cPhenoNode::cPhenoNode(MatrixXf pheno_mean,MatrixXf pheno_var)
+{
+	E1 = pheno_mean;
+	E2 = pheno_var;
+}
 
 
 //constructor from expression data
-cVBFA::cVBFA(MatrixXf pheno_mean)
+cVBFA::cVBFA(MatrixXf pheno_mean,int Nfactors)
 {
 	MatrixXf pheno_var(pheno_mean.rows(),pheno_mean.cols());
-	cVBFA::cVBFA(pheno_mean,pheno_var);
+	cVBFA::cVBFA(pheno_mean,pheno_var,Nfactors);
 }
-//constructor that take variance into account
-cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var)
-{
-	
 
+//constructor that take variance into account
+cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors)
+{
+	//1. checkups of parameters passed
+	assert (pheno_mean.rows()==pheno_var.rows());
+	assert (pheno_mean.cols()==pheno_var.cols());
+	Nj = pheno_mean.rows();
+	Np = pheno_mean.cols();
+	Nk = Nfactors;
+	//2. create nodes
+	pheno = cPhenoNode(pheno_mean,pheno_var);
+	//3. initialize with PCA
+	//JacobiSVD test;
+	JacobiSVD<MatrixXf> svd(pheno.E1,ComputeThinU | ComputeThinV);
+	cout << "Its singular values are:" << endl << svd.singularValues() << endl;
+	cout << "Its left singular vectors are the columns of the thin U matrix:" << endl << svd.matrixU() << endl;
+	cout << "Its right singular vectors are the columns of the thin V matrix:" << endl << svd.matrixV() << endl;
+	//create a diagonal matrix
+	MatrixXf Sdiag = svd.singularValues().asDiagonal();
+	MatrixXf U = svd.matrixU();
+	MatrixXf V = svd.MatrixV();
+	
+	
 }
+
+
 
 
 // Global update
