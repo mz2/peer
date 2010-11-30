@@ -98,8 +98,18 @@ void cEpsNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
 	a = (pa + 0.5*n.Nj)*MatrixXf::Ones(n.Np);
 	
-	MatrixXf m = n.pheno.E1*n.X.E1*n.W.E1.transpose();
-	b = pa + 0.5*(m).array(); // INCOMPLETE!! + n.pheno.E2*MatrixXf::Ones());
+	MatrixXf b1 = n.pheno.E1*n.X.E1*n.W.E1.transpose();
+	MatrixXf b2 = MatrixXf::Ones(1, n.Nj)*n.pheno.E2;
+	MatrixXf b3 = MatrixXf::Zero(n.Np);
+	// for each phenotype, recalculate second moment of W
+	MatrixXf diagAE1 = MatrixXf::Zero(n.Np);
+	diagAE1.diagonal() = n.Alpha.E1;
+	for(int i = 0; i < n.Np; i++){
+		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse();
+		b3(i) = (n.X.E2S*(cov + n.W.E1.row(i).transpose()*n.W.E1.row(i))).sum();
+	}
+	
+	b = pb + 0.5*(b1.array() - 2.*b2.array() + b3.array());
 	updateMoments();
 }
 
@@ -138,9 +148,8 @@ cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors)
 	//create a diagonal matrix
 	MatrixXf Sdiag = svd.singularValues().asDiagonal();
 	MatrixXf U = svd.matrixU();
-	MatrixXf V = svd.MatrixV();
-	
-	
+	//MatrixXf V = svd.MatrixV();
+		
 }
 
 
@@ -149,9 +158,9 @@ cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors)
 // Global update
 void cVBFA::update(){
 	for(int i=0; i < this->Niterations; ++i){
-//		this.W.update();
-//		this.Alpha.update();
-//		this.S.update();
-//		this.Eps.update();
+		W.update(*this);
+		Alpha.update(*this);
+		X.update(*this);
+		Eps.update(*this);
 	}
 }
