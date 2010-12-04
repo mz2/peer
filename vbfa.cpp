@@ -148,7 +148,15 @@ cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors)
 	//create a diagonal matrix
 	MatrixXf Sdiag = svd.singularValues().asDiagonal();
 	MatrixXf U = svd.matrixU();
-	//MatrixXf V = svd.MatrixV();
+	MatrixXf V = svd.matrixV();
+	//dot product Sdiag V
+	MatrixXf SV = Sdiag*V.transpose();
+	//get the factors up to the Kth component
+	MatrixXf W0 = U.block(0,0,U.rows(),Nk);
+	MatrixXf S0 = SV.block(0,0,Nk,SV.cols());
+	
+	
+	
 		
 }
 

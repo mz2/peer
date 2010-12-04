@@ -108,7 +108,7 @@ int main (int argc, char * const argv[]) {
 	//1. simulate small dataset
 	MatrixXf Y=simulate_expression(10,100,5);
 	//2. create object
-	cVBFA vb(Y,10);
+	cVBFA vb(Y,5);
 	
 	
 }
