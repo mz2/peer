@@ -46,7 +46,7 @@ void cWNode::update(cBayesNet &net){
 
 	// for each phenotype, calculate covariance and mean of weight
 	for(int i = 0; i < n.Np; i++){
-		MatrixXf diagAE1 = MatrixXf::Zero(n.Np,1);
+		MatrixXf diagAE1 = MatrixXf::Zero(n.Nk,n.Nk);
 		diagAE1.diagonal() = n.Alpha.E1;
 		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
 		E1.row(i) = n.Eps.E1(i)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
@@ -72,16 +72,17 @@ void cXNode::update(cBayesNet &net){
 	// big work - calculate precision matrix
 	MatrixXf prec = MatrixXf::Identity(n.Nk, n.Nk);
 	for(int i = 0; i < n.Np; i++){ // as we don't keep W.E2 in memory, have to recalculate it to compute the sum WE2[i]*Eps[i]
-		MatrixXf diagAE1 = MatrixXf::Zero(n.Np,1);
+		MatrixXf diagAE1 = MatrixXf::Zero(n.Nk, n.Nk);
 		diagAE1.diagonal() = n.Alpha.E1;
 		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
-		E1.row(i) = n.Eps.E1(i)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
-		prec += n.Eps.E1(i)*(cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
+		prec += n.Eps.E1(i,0)*(cov + n.W.E1.row(i).transpose()*n.W.E1.row(i)); //  only care about sum of 2nd moments
 	}
 	
 	// Invert precision to get covariance, update moments
+	MatrixXf diagEpsE1 = MatrixXf::Zero(n.Np, n.Np);
+	diagEpsE1.diagonal() = n.Eps.E1;
 	MatrixXf cov = prec.inverse(); 
-	E1 = n.pheno.E1*cov*n.W.E1.transpose()*n.Eps.E1;
+	E1 = n.pheno.E1*diagEpsE1*n.W.E1*cov;
 	E2S = cov + E1.transpose()*E1;
 }
 
