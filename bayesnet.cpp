@@ -16,7 +16,6 @@ using Eigen::VectorXf;
 using alglib::lngamma;
 using alglib::psi;
 
-
 double cNode::entropy() {return 0;}
 double cNode::calcBound(cBayesNet &net) {return 0;}
 void cNode::update(cBayesNet &net) {}
@@ -60,17 +59,19 @@ void cDirichletNode::update(cBayesNet &net){}
 /** Gamma node implementations */
 cGammaNode::cGammaNode(){}
 
-cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *E1_val){
+cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, MatrixXf *E1_val){
 	pa = prior_val_a;
 	pb = prior_val_b;
-	a = pa*VectorXf::Ones(dim);
-	b = pb*VectorXf::Ones(dim);
-	E1 = VectorXf::Zero(dim);
-	lnE = VectorXf::Zero(dim);
+	a = pa*MatrixXf::Ones(dim,1).array();
+	b = pb*MatrixXf::Ones(dim,1).array();
+	E1 = MatrixXf::Zero(dim,1);
+	lnE = MatrixXf::Zero(dim,1);
+	cout << "Gamma Node init, ncol = " << E1.cols() << endl;
 	updateMoments();
 	if (E1_val != NULL){ 
 		E1 = *E1_val;
 	}
+	cout << "Gamma Node init end, ncol = " << E1.cols() << endl;
 }
 
 
@@ -106,8 +107,8 @@ double cGammaNode::calcBound(cBayesNet &net){
 
 void cGammaNode::updateMoments(){
 	for (int i=0; i < lnE.rows(); i++){
-		E1(i) = a(i)/b(i);
-		lnE(i) = psi(a(i)) - log(b(i));
+		this->E1(i) = a(i)/b(i);
+		this->lnE(i) = psi(a(i)) - log(b(i));
 	}
 }
 

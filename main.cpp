@@ -55,7 +55,7 @@ void play_matrix(){
 	int N = 3;
 	int P = 4;
 	int K = 2;
-	
+
     MatrixXf alpha = MatrixXf::Zero(K,K);//randn(K,1);
 	alpha.diagonal() = randn(K,1);
 	cout << alpha << endl;
@@ -65,7 +65,10 @@ void play_matrix(){
 	MatrixXf E1 = randn(P,K);
 	MatrixXf E2S = randn(K,K);
 	MatrixXf pheno = randn(N,P);
-
+	MatrixXf b = 0.1 + 0.5*E2S.diagonal().array();
+	MatrixXf a = (10.0 + 0.5*P)*(MatrixXf::Ones(K, 1).array());
+	
+	
 	// W update 
 	for(int i=0; i<P; ++i){
 		MatrixXf prec = alpha + XE2s*eps(i);
@@ -107,8 +110,12 @@ int main (int argc, char * const argv[]) {
 	//play_matrix();
 	//1. simulate small dataset
 	MatrixXf Y=simulate_expression(10,100,5);
+	MatrixXf YE2 = MatrixXf::Ones(Y.rows(), Y.cols()) + Y.cwiseProduct(Y);
 	//2. create object
-	cVBFA vb(Y,5);
 	
-	
+	cVBFA vb(Y,YE2, 8);
+	for(int i=0; i < 10; i++){
+		vb.update();
+	}
+	cout << vb.W.E1 << endl << vb.X.E1 << endl << vb.Alpha.E1 << endl;
 }

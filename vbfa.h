@@ -47,6 +47,8 @@ public:
 /** Weight precision node (vector Gamma) */
 class cAlphaNode : public cGammaNode {
 public:
+	cAlphaNode() {};
+	cAlphaNode(int dim, float pa, float pb, MatrixXf* E1): cGammaNode(dim,pa,pb,E1) {};
 	void update(cBayesNet &net);
 };
 
@@ -54,6 +56,8 @@ public:
 /** Noise precision node (vector Gamma) */
 class cEpsNode : public cGammaNode {
 public:
+	cEpsNode() {};
+	cEpsNode(int dim, float pa, float pb, MatrixXf* E1): cGammaNode(dim,pa,pb,E1) {};
 	void update(cBayesNet &net);
 };
 
@@ -64,8 +68,7 @@ class cPhenoNode {
 public:
 	MatrixXf E1,E2;	
 
-	cPhenoNode()
-	{};
+	cPhenoNode() {};
 	cPhenoNode(MatrixXf pheno_mean,MatrixXf pheno_var); // default
 };
 

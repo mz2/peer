@@ -10,9 +10,11 @@
 #define __BAYESNET_H__
 
 #include "Eigen/Eigen"
+#include <iostream>
 
 using Eigen::MatrixXf;
 using Eigen::VectorXf;
+using namespace std;
 
 
 class cBayesNet {
@@ -61,13 +63,13 @@ class cGammaNode : public cNode {
 protected:
     double pa;
 	double pb;
-	VectorXf lnE;
-	VectorXf a;
-	VectorXf b;
+	MatrixXf lnE;
+	MatrixXf a;
+	MatrixXf b;
 	
 public:
 	cGammaNode();
-	cGammaNode(int dim, float prior_val_a, float prior_val_b, VectorXf *E1_val);
+	cGammaNode(int dim, float prior_val_a, float prior_val_b, MatrixXf *E1_val);
 	double entropy();	
 	double calcBound(cBayesNet &net);
 	void update(cBayesNet &net);
