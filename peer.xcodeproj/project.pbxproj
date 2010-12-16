@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F7A868112BA8E7700C6E1F8 /* alglibinternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059C1281F2BB00ABCDDC /* alglibinternal.cpp */; };
+		5F7A868212BA8E7800C6E1F8 /* alglibmisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059E1281F2BB00ABCDDC /* alglibmisc.cpp */; };
+		5F7A868312BA8E7900C6E1F8 /* ap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A01281F2BB00ABCDDC /* ap.cpp */; };
+		5F7A868412BA8E7900C6E1F8 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE0C6441295B99B001431C7 /* AppKit.framework */; };
+		5F7A868512BA8E7A00C6E1F8 /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5046A1281A43500ABCDDC /* bayesnet.cpp */; };
+		5F7A868612BA8E7B00C6E1F8 /* dataanalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A11281F2BB00ABCDDC /* dataanalysis.cpp */; };
+		5F7A868712BA8E7C00C6E1F8 /* diffequations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A31281F2BB00ABCDDC /* diffequations.cpp */; };
+		5F7A868812BA8E7D00C6E1F8 /* fasttransforms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A51281F2BB00ABCDDC /* fasttransforms.cpp */; };
+		5F7A868912BA8E7E00C6E1F8 /* integration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A71281F2BB00ABCDDC /* integration.cpp */; };
+		5F7A868B12BA8E8400C6E1F8 /* interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A91281F2BB00ABCDDC /* interpolation.cpp */; };
+		5F7A868C12BA8E8500C6E1F8 /* linalg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AB1281F2BB00ABCDDC /* linalg.cpp */; };
+		5F7A868E12BA8E8900C6E1F8 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA504641281A1E700ABCDDC /* model.cpp */; };
+		5F7A868F12BA8E8A00C6E1F8 /* optimization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AD1281F2BB00ABCDDC /* optimization.cpp */; };
+		5F7A869012BA8E8B00C6E1F8 /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AF1281F2BB00ABCDDC /* solvers.cpp */; };
+		5F7A869112BA8E8E00C6E1F8 /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B11281F2BB00ABCDDC /* specialfunctions.cpp */; };
+		5F7A869212BA8E8E00C6E1F8 /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B31281F2BB00ABCDDC /* statistics.cpp */; };
+		5F7A86B312BA8F7100C6E1F8 /* gtest.framework in Copy gtest.framework */ = {isa = PBXBuildFile; fileRef = 5FE0C6271295B967001431C7 /* gtest.framework */; };
 		5FE0C6761295BF53001431C7 /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE0C6271295B967001431C7 /* gtest.framework */; };
 		5FE0C67A1295BF6B001431C7 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0C6791295BF6B001431C7 /* tests.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -31,6 +48,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		5F7A86B612BA8F9000C6E1F8 /* Copy gtest.framework */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5F7A86B312BA8F7100C6E1F8 /* gtest.framework in Copy gtest.framework */,
+			);
+			name = "Copy gtest.framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F690486A84900D96B5E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
@@ -93,6 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FE0C6761295BF53001431C7 /* gtest.framework in Frameworks */,
+				5F7A868412BA8E7900C6E1F8 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +248,7 @@
 			buildPhases = (
 				5FE0C66F1295BF3E001431C7 /* Sources */,
 				5FE0C6701295BF3E001431C7 /* Frameworks */,
+				5F7A86B612BA8F9000C6E1F8 /* Copy gtest.framework */,
 			);
 			buildRules = (
 			);
@@ -279,6 +309,21 @@
 			files = (
 				5FE0C67A1295BF6B001431C7 /* tests.cpp in Sources */,
 				9ABBF93A12A0238E004E2668 /* vbfa.cpp in Sources */,
+				5F7A868112BA8E7700C6E1F8 /* alglibinternal.cpp in Sources */,
+				5F7A868212BA8E7800C6E1F8 /* alglibmisc.cpp in Sources */,
+				5F7A868312BA8E7900C6E1F8 /* ap.cpp in Sources */,
+				5F7A868512BA8E7A00C6E1F8 /* bayesnet.cpp in Sources */,
+				5F7A868612BA8E7B00C6E1F8 /* dataanalysis.cpp in Sources */,
+				5F7A868712BA8E7C00C6E1F8 /* diffequations.cpp in Sources */,
+				5F7A868812BA8E7D00C6E1F8 /* fasttransforms.cpp in Sources */,
+				5F7A868912BA8E7E00C6E1F8 /* integration.cpp in Sources */,
+				5F7A868B12BA8E8400C6E1F8 /* interpolation.cpp in Sources */,
+				5F7A868C12BA8E8500C6E1F8 /* linalg.cpp in Sources */,
+				5F7A868E12BA8E8900C6E1F8 /* model.cpp in Sources */,
+				5F7A868F12BA8E8A00C6E1F8 /* optimization.cpp in Sources */,
+				5F7A869012BA8E8B00C6E1F8 /* solvers.cpp in Sources */,
+				5F7A869112BA8E8E00C6E1F8 /* specialfunctions.cpp in Sources */,
+				5F7A869212BA8E8E00C6E1F8 /* statistics.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
