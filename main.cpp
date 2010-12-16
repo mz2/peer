@@ -3,7 +3,7 @@
 #include "alglib/src/ap.h"
 #include "alglib/src/specialfunctions.h"
 #include "vbfa.h"
-
+#include "sim.h"
 
 using namespace Eigen;
 using namespace std;
@@ -38,17 +38,6 @@ void playing()
 }
 
 
-
-MatrixXf randn(int n, int m)
-/* create a randn matrix */
-{
-	MatrixXf rv(n,m);
-	for (int i=0; i<n; i++)
-		for (int j=0; j<m; j++) {
-			rv(i,j) = randomreal();
-		}
-	return rv;
-}
 
 /** Trying out update equations etc */
 void play_matrix(){
@@ -85,31 +74,10 @@ void play_matrix(){
 }
 
 
-
-
-MatrixXf simulate_expression(int N, int D, int K,double sigma=0.1)
-/*
- Simulate an expresison matrix with N entries, D dimensions and K factors
-*/
-{	
-	//1. create factors
-	MatrixXf X = randn(N,K);
-	MatrixXf W = randn(K,D);
-	
-	MatrixXf eps = sigma*randn(N,D);
-	
-	MatrixXf Y = X*W;
-	Y = Y + eps;
-	//2. output array
-	
-	return Y;
-}
-
-
 int main (int argc, char * const argv[]) {
 	//play_matrix();
 	//1. simulate small dataset
-	MatrixXf Y=simulate_expression(10,100,5);
+	MatrixXf Y=simulate_expression(10,100,5).expr;
 	MatrixXf YE2 = MatrixXf::Ones(Y.rows(), Y.cols()) + Y.cwiseProduct(Y);
 	//2. create object
 	

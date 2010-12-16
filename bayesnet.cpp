@@ -66,12 +66,12 @@ cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, MatrixXf *
 	b = pb*MatrixXf::Ones(dim,1).array();
 	E1 = MatrixXf::Zero(dim,1);
 	lnE = MatrixXf::Zero(dim,1);
-	cout << "Gamma Node init, ncol = " << E1.cols() << endl;
+	//cout << "Gamma Node init, ncol = " << E1.cols() << endl;
 	updateMoments();
 	if (E1_val != NULL){ 
 		E1 = *E1_val;
 	}
-	cout << "Gamma Node init end, ncol = " << E1.cols() << endl;
+	//cout << "Gamma Node init end, ncol = " << E1.cols() << endl;
 }
 
 

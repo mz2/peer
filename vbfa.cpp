@@ -90,11 +90,11 @@ void cXNode::update(cBayesNet &net){
 
 void cAlphaNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
-	cout << "Alpha Node update start, ncol=" << E1.cols() << endl; 
+	// cout << "Alpha Node update start, ncol=" << E1.cols() << endl; 
 	b = pb + 0.5*n.W.E2S.diagonal().array();
 	a = (pa + 0.5*n.Np)*(MatrixXf::Ones(n.Nk, 1).array());
 	updateMoments();
-	cout << "Alpha Node update end, ncol=" << E1.cols() << endl; 
+	// cout << "Alpha Node update end, ncol=" << E1.cols() << endl; 
 }
 
 
@@ -113,7 +113,7 @@ void cEpsNode::update(cBayesNet &net){
 		b3(i,0) = (n.X.E2S*(cov + n.W.E1.row(i).transpose()*n.W.E1.row(i))).sum();
 	}
 	
-	b = pb + 0.5*(b1.array() - 2.*b2.array() + b3.array());
+	b = pb + 0.5*b1.array() - b2.array() + 0.5*b3.array();
 	updateMoments();
 }
 
@@ -164,9 +164,9 @@ cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors)
 	W = cWNode(W0);
 	X = cXNode(X0);
 	Alpha = cAlphaNode((int)Nk, (float)0.1, (float)10, (MatrixXf *)NULL);
-	cout << Alpha.E1.cols() << endl;
+	// cout << Alpha.E1.cols() << endl;
 	Eps = cEpsNode(Np, 0.1, 10, (MatrixXf *)NULL);
-    cout << Alpha.E1.cols() << endl;
+    // cout << Alpha.E1.cols() << endl;
 	// update precision nodes to initialise them
 	Alpha.update(*this);
 	Eps.update(*this);
@@ -183,5 +183,5 @@ void cVBFA::update(){
 		X.update(*this);
 		Eps.update(*this);
 	}
-	cout << "Update of cVBFA done, " << this->Niterations << " iterations elapsed" << endl;
+//	cout << "Update of cVBFA done, " << this->Niterations << " iterations elapsed" << endl;
 }
