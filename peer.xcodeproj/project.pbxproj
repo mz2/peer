@@ -28,6 +28,8 @@
 		5FE0C67A1295BF6B001431C7 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0C6791295BF6B001431C7 /* tests.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* peer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* peer.1 */; };
+		9A1BA03F12BA9166007DAA0E /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BA03D12BA9166007DAA0E /* sim.cpp */; };
+		9A1BA04012BA9166007DAA0E /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BA03D12BA9166007DAA0E /* sim.cpp */; };
 		9AA504651281A1E700ABCDDC /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA504641281A1E700ABCDDC /* model.cpp */; };
 		9AA5046B1281A43500ABCDDC /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5046A1281A43500ABCDDC /* bayesnet.cpp */; };
 		9AA505B71281F2BB00ABCDDC /* alglibinternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059C1281F2BB00ABCDDC /* alglibinternal.cpp */; };
@@ -79,6 +81,8 @@
 		5FE0C6721295BF3E001431C7 /* tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FE0C6791295BF6B001431C7 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* peer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = peer; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A1BA03D12BA9166007DAA0E /* sim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sim.cpp; sourceTree = "<group>"; };
+		9A1BA03E12BA9166007DAA0E /* sim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sim.h; sourceTree = "<group>"; };
 		9AA504631281A1E700ABCDDC /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
 		9AA504641281A1E700ABCDDC /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
 		9AA504691281A43500ABCDDC /* bayesnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bayesnet.h; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				9A1BA03D12BA9166007DAA0E /* sim.cpp */,
+				9A1BA03E12BA9166007DAA0E /* sim.h */,
 				9ABBF93912A02370004E2668 /* vbfa.h */,
 				5FE0C5C71295B754001431C7 /* Unit Tests */,
 				9AA504691281A43500ABCDDC /* bayesnet.h */,
@@ -284,7 +290,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "peer" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -324,6 +329,7 @@
 				5F7A869012BA8E8B00C6E1F8 /* solvers.cpp in Sources */,
 				5F7A869112BA8E8E00C6E1F8 /* specialfunctions.cpp in Sources */,
 				5F7A869212BA8E8E00C6E1F8 /* statistics.cpp in Sources */,
+				9A1BA03F12BA9166007DAA0E /* sim.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +354,7 @@
 				9AA505C21281F2BB00ABCDDC /* specialfunctions.cpp in Sources */,
 				9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */,
 				9ABBF93812A02354004E2668 /* vbfa.cpp in Sources */,
+				9A1BA04012BA9166007DAA0E /* sim.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
