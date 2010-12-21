@@ -18,6 +18,16 @@
 using namespace Eigen;
 using namespace std;
 
+
+/** Helpers */
+double logdet(MatrixXf m){
+	SelfAdjointEigenSolver<MatrixXf> eigensolver(m);
+	return eigensolver.eigenvalues().array().log().sum();
+}
+
+const double PI = 3.14159;
+
+
 /** Default constructors */ 
 cWNode::cWNode(){}
 cWNode::cWNode(MatrixXf E1){
@@ -31,38 +41,37 @@ cXNode::cXNode(MatrixXf E1){
 }
 
 
-double cWNode::calcBound(cBayesNet &net){
-	return 0.;
-}
-
-
-double cWNode::entropy(){
-	return 0;
-}
-
-
 void cWNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
+	lndetcovS = 0.;
+	E2S = MatrixXf::Zero(n.Nk, n.Nk);
 
 	// for each phenotype, calculate covariance and mean of weight
+	MatrixXf diagAE1 = MatrixXf::Zero(n.Nk,n.Nk);
+	diagAE1.diagonal() = n.Alpha.E1;
 	for(int i = 0; i < n.Np; i++){
-		MatrixXf diagAE1 = MatrixXf::Zero(n.Nk,n.Nk);
-		diagAE1.diagonal() = n.Alpha.E1;
-		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
-		E1.row(i) = n.Eps.E1(i)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i,0)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
+		lndetcovS += logdet(cov);
+		E1.row(i) = n.Eps.E1(i,0)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
 		E2S += (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
 	}
 }
 
 
-
-double cXNode::calcBound(cBayesNet &net){
-	return 0.;
+double cWNode::calcBound(cBayesNet &net){
+	cVBFA n = (cVBFA&)net;
+	int D = E1.rows();
+	int K = E1.cols();
+//	cout << "WD = " << D << " K = " << K << endl;
+	return -0.5*D*(K*log(2.*PI) - n.Alpha.lnE.sum()) - 0.5*(n.Alpha.E1.array()*E2S.diagonal().array()).sum() + entropy();
 }
 
 
-double cXNode::entropy(){
-	return 0;
+double cWNode::entropy(){
+	int K = E1.cols();
+	int D = E1.rows();
+//	cout << "WD = " << D << " K = " << K << endl;
+	return 0.5*D*K*log(2.*PI) + 0.5*lndetcovS;
 }
 
 
@@ -71,19 +80,39 @@ void cXNode::update(cBayesNet &net){
 	
 	// big work - calculate precision matrix
 	MatrixXf prec = MatrixXf::Identity(n.Nk, n.Nk);
+	MatrixXf diagAE1 = MatrixXf::Zero(n.Nk, n.Nk);
+	diagAE1.diagonal() = n.Alpha.E1;
+
 	for(int i = 0; i < n.Np; i++){ // as we don't keep W.E2 in memory, have to recalculate it to compute the sum WE2[i]*Eps[i]
-		MatrixXf diagAE1 = MatrixXf::Zero(n.Nk, n.Nk);
-		diagAE1.diagonal() = n.Alpha.E1;
-		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
-		prec += n.Eps.E1(i,0)*(cov + n.W.E1.row(i).transpose()*n.W.E1.row(i)); //  only care about sum of 2nd moments
+		MatrixXf WE2 = (diagAE1 + n.X.E2S*n.Eps.E1(i,0)).inverse() + n.W.E1.row(i).transpose()*n.W.E1.row(i); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
+		prec += n.Eps.E1(i,0)*WE2; //  only care about sum of 2nd moments
 	}
 	
 	// Invert precision to get covariance, update moments
-	MatrixXf diagEpsE1 = MatrixXf::Zero(n.Np, n.Np);
+	MatrixXf diagEpsE1 = MatrixXf::Zero(n.Np, n.Np); // may need to switch this when Np gets large
 	diagEpsE1.diagonal() = n.Eps.E1;
-	MatrixXf cov = prec.inverse(); 
+	cov = (prec + MatrixXf::Identity(n.Nk, n.Nk)).inverse(); 
 	E1 = n.pheno.E1*diagEpsE1*n.W.E1*cov;
-	E2S = cov + E1.transpose()*E1;
+	E2S = n.Nj*cov;
+	for (int i=0;i<n.Nj; ++i){
+		E2S += E1.row(i).transpose()*E1.row(i);
+	} // the covariance matrix is shared by design between individuals
+}
+
+
+double cXNode::calcBound(cBayesNet &net){
+	int K = E1.cols();
+	int N = E1.rows();
+//	cout << "WN = " << N << " K = " << K << endl;
+	return -0.5*N*K*log(2.*PI) - 0.5*(N*cov.diagonal().sum() + E1.array().pow(2).sum()) + entropy();
+}
+
+
+double cXNode::entropy(){
+    int K = E1.cols();
+	int N = E1.rows();
+//	cout << "WN = " << N << " K = " << K << endl;
+	return 0.5*N*(K*log(2.*PI) + K + logdet(cov));
 }
 
 
@@ -103,14 +132,14 @@ void cEpsNode::update(cBayesNet &net){
 	a = (pa + 0.5*n.Nj)*MatrixXf::Ones(n.Np,1).array();
 	
 	MatrixXf b1 = (MatrixXf::Ones(1, n.Nj)*n.pheno.E2).transpose();
-	MatrixXf b2 = (MatrixXf::Ones(1, n.Nj)*(n.pheno.E1.cwiseProduct(n.X.E1*n.W.E1.transpose()))).transpose();
+	MatrixXf b2 = (MatrixXf::Ones(1, n.Nj)*((n.pheno.E1.array()*(n.X.E1*n.W.E1.transpose()).array()).matrix())).transpose();
 	MatrixXf b3 = MatrixXf::Zero(n.Np,1);
 	// for each phenotype, recalculate second moment of W
 	MatrixXf diagAE1 = MatrixXf::Zero(n.Nk,n.Nk);
 	diagAE1.diagonal() = n.Alpha.E1;
 	for(int i = 0; i < n.Np; i++){
-		MatrixXf cov = (diagAE1 + n.X.E2S*n.Eps.E1(i)).inverse();
-		b3(i,0) = (n.X.E2S*(cov + n.W.E1.row(i).transpose()*n.W.E1.row(i))).sum();
+		MatrixXf Wcov = (diagAE1 + n.X.E2S*n.Eps.E1(i,0)).inverse();
+		b3(i,0) = (n.X.E2S.array()*(Wcov + n.W.E1.row(i).transpose()*n.W.E1.row(i)).array()).sum();
 	}
 	
 	b = pb + 0.5*b1.array() - b2.array() + 0.5*b3.array();
@@ -121,35 +150,54 @@ void cEpsNode::update(cBayesNet &net){
 cPhenoNode::cPhenoNode(MatrixXf pheno_mean,MatrixXf pheno_var)
 {
 	E1 = pheno_mean;
-	E2 = pheno_var;
+	E2 = pheno_var + E1.cwiseProduct(E1);
 }
 
 
 //constructor from expression data
-cVBFA::cVBFA(MatrixXf pheno_mean,int Nfactors)
-{
-	MatrixXf pheno_var(pheno_mean.rows(),pheno_mean.cols());
-	// cannot 'chain' constructors in C++ so cannot call another constructor here..
-}
+cVBFA::cVBFA(MatrixXf *pheno_mean,int Nfactors) { init_net(pheno_mean, (MatrixXf *)NULL, (MatrixXf *)NULL, Nfactors); }
+//constructor that take covariates into account
+cVBFA::cVBFA(MatrixXf *pheno_mean, MatrixXf *covs, int Nfactors) { init_net(pheno_mean, (MatrixXf *)NULL, covs, Nfactors); }
+//constructor that take variance and covariates into account
+cVBFA::cVBFA(MatrixXf *pheno_mean,MatrixXf *pheno_var, MatrixXf *covs, int Nfactors) { init_net(pheno_mean, pheno_var, covs, Nfactors); }
 
-//constructor that take variance into account
-cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors)
-{
+
+void cVBFA::init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, int Nfactors){
+	//0. extract dimensions, fill unspecified parameters 
+	Nj = pheno_mean->rows();
+	Np = pheno_mean->cols();
+	Niterations = 10;
+	cout << 1 << endl;
+	if (pheno_var == NULL){	
+		MatrixXf temp = 0.01*(MatrixXf::Ones(pheno_mean->rows(), pheno_mean->cols())); // if uncertainty in expression not provided, assume pretty certain
+	    pheno_var = &temp;
+	}
+	if (covs == NULL) { 
+		MatrixXf temp = MatrixXf::Ones(pheno_mean->rows(), 1); 
+		covs = &temp;
+	} // if no covariates, insert one for mean
+	Nc = covs->cols();
+	Nk = Nfactors + Nc;
 	//1. checkups of parameters passed
-	assert (pheno_mean.rows()==pheno_var.rows());
-	assert (pheno_mean.cols()==pheno_var.cols());
-	Nj = pheno_mean.rows();
-	Np = pheno_mean.cols();
-	Nk = Nfactors;
-	Niterations = 1;
+	assert (pheno_mean->rows()==pheno_var->rows());
+	assert (pheno_mean->cols()==pheno_var->cols());
+	assert (covs->rows() == pheno_mean->rows());
 	//2. create nodes
-	pheno = cPhenoNode(pheno_mean,pheno_var);
-	//3. initialize with PCA
+	cout << 2 << endl;
+	pheno = cPhenoNode(*pheno_mean,*pheno_var);
+
+	//3. find ML estimates for known factors and PCA for rest
+	MatrixXf X0 = MatrixXf::Zero(Nj,Nk);
+	MatrixXf W0 = MatrixXf::Zero(Np,Nk);
+	cout << 3 << endl;
+	MatrixXf cov_weights = covs->colPivHouseholderQr().solve(pheno.E1);
+	MatrixXf residuals = pheno.E1 - (*covs)*cov_weights;
+	cout << 4 << endl;
+	W0.block(0,0,Np, Nc) = cov_weights.transpose();
+	X0.block(0,0,Nj,Nc) = *covs;
+	cout << 5 << endl;
 	//JacobiSVD test;
-	JacobiSVD<MatrixXf> svd(pheno.E1,ComputeThinU | ComputeThinV);
-	//cout << "Its singular values are:" << endl << svd.singularValues() << endl;
-	//cout << "Its left singular vectors are the columns of the thin U matrix:" << endl << svd.matrixU() << endl;
-	//cout << "Its right singular vectors are the columns of the thin V matrix:" << endl << svd.matrixV() << endl;
+	JacobiSVD<MatrixXf> svd(residuals, ComputeThinU | ComputeThinV);
 	//create a diagonal matrix
 	MatrixXf Sdiag = svd.singularValues().asDiagonal();
 	MatrixXf U = svd.matrixU();
@@ -157,31 +205,52 @@ cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors)
 	//dot product Sdiag V
 	MatrixXf SV = Sdiag*V.transpose();
 	//get the factors up to the Kth component
-	MatrixXf X0 = U.block(0,0,U.rows(),Nk);
-	MatrixXf W0 = SV.block(0,0,Nk,SV.cols()).transpose();
+	X0.block(0,Nc,Nj,Nfactors) = U.block(0,0,U.rows(),Nfactors);
+	W0.block(0,Nc,Np,Nfactors) = SV.block(0,0,Nfactors,SV.cols()).transpose();
 	
-	// create nodes and initialise to the PCA solution
+	// 4. create nodes and initialise
 	W = cWNode(W0);
 	X = cXNode(X0);
-	Alpha = cAlphaNode((int)Nk, (float)0.1, (float)10, (MatrixXf *)NULL);
-	// cout << Alpha.E1.cols() << endl;
+	Alpha = cAlphaNode((int)Nk, (float)0.001, (float)0.1, (MatrixXf *)NULL);
 	Eps = cEpsNode(Np, 0.1, 10, (MatrixXf *)NULL);
-    // cout << Alpha.E1.cols() << endl;
 	// update precision nodes to initialise them
 	Alpha.update(*this);
-	Eps.update(*this);
+	Eps.update(*this);	
 }
-
-
 
 
 // Global update
 void cVBFA::update(){
 	for(int i=0; i < this->Niterations; ++i){
+		cout << "\titeration" << i << endl;
 		W.update(*this);
+		if(i > 0) {cout << "\tAfter W " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
 		Alpha.update(*this);
+		if(i > 0) {cout << "\tAfter A " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
 		X.update(*this);
+		cout << "\tAfter X " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
 		Eps.update(*this);
+		cout << "\tAfter E " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
 	}
 //	cout << "Update of cVBFA done, " << this->Niterations << " iterations elapsed" << endl;
+}
+
+
+double cVBFA::logprob(){
+	MatrixXf diagAE1 = MatrixXf::Zero(Nk,Nk);
+	diagAE1.diagonal() = Alpha.E1;
+
+	float result = 0.5*(Nj*(Eps.lnE.sum() - Np*log(2.*PI)));
+	for(int i=0; i < Np; ++i){
+		result -= 0.5*Eps.E1(i,0)*(pheno.E1.col(i).transpose()*pheno.E1.col(i))(0,0);
+		result += Eps.E1(i,0)*(pheno.E1.col(i).transpose()*(X.E1*W.E1.row(i).transpose()))(0,0);
+		MatrixXf WE2 = (diagAE1 + X.E2S*Eps.E1(i,0)).inverse() + W.E1.row(i).transpose()*W.E1.row(i);
+		result -= 0.5*Eps.E1(i,0)*(X.E2S.array()*WE2.array()).sum();
+	}
+	return result;
+}
+
+
+double cVBFA::calcBound(){
+	return logprob() + W.calcBound(*this) + Alpha.calcBound(*this) + X.calcBound(*this) + Eps.calcBound(*this);
 }

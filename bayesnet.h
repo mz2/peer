@@ -60,14 +60,13 @@ public:
  * Gamma Node - prior for precisions
  */
 class cGammaNode : public cNode {
-protected:
+public:
     double pa;
 	double pb;
 	MatrixXf lnE;
 	MatrixXf a;
 	MatrixXf b;
-	
-public:
+
 	cGammaNode();
 	cGammaNode(int dim, float prior_val_a, float prior_val_b, MatrixXf *E1_val);
 	double entropy();	

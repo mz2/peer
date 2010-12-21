@@ -12,7 +12,8 @@
 
 #include "bayesnet.h"
 
-
+/** Helpers */
+double logdet(MatrixXf m);
 
 
 
@@ -21,6 +22,7 @@ class cWNode : public cNode {
 protected: 	
 public:
 	MatrixXf E2S;	
+	float lndetcovS;
 	
 	cWNode(); // default
 	cWNode(MatrixXf E1); // from mean
@@ -34,7 +36,9 @@ public:
 class cXNode : public cNode {
 protected: 
 public:
-	MatrixXf E2S;	
+	MatrixXf E2S;
+	MatrixXf cov;
+	double xwwxs;
 	
 	cXNode(); // default
 	cXNode(MatrixXf E1); // from mean
@@ -85,6 +89,7 @@ public:
 	int Nj; //individuals 
 	int Np; //phenotypes
 	int Nk; //factors
+	int Nc; //covariates
 	
 	/** Nodes */ 
 	cWNode W;
@@ -101,14 +106,16 @@ public:
 	//cVBFA();
 	
 	//constructor from expression data
-	cVBFA(MatrixXf pheno_mean,int Nfactors);
-	//constructor that take variance into account
-	cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var,int Nfactors);
+	cVBFA(MatrixXf *pheno_mean,int Nfactors);
+	//constructor that takes covariates into account
+	cVBFA(MatrixXf *pheno_mean, MatrixXf *covs,int Nfactors);
+	//constructor that take variance and covariates into account
+	cVBFA(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, int Nfactors);
+	void init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, int Nfactors);
 	
-	
+	double calcBound();
+	double logprob();
 	void update();
-	
-	
 };
 
 

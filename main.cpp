@@ -77,13 +77,11 @@ void play_matrix(){
 int main (int argc, char * const argv[]) {
 	//play_matrix();
 	//1. simulate small dataset
-	MatrixXf Y=simulate_expression(10,100,5).expr;
-	MatrixXf YE2 = MatrixXf::Ones(Y.rows(), Y.cols()) + Y.cwiseProduct(Y);
+	MatrixXf Y = simulate_expression(10,100,5).expr;
+	MatrixXf Yvar = 0.1*MatrixXf::Ones(10,100);
 	//2. create object
 	
-	cVBFA vb(Y,YE2, 8);
-	for(int i=0; i < 10; i++){
-		vb.update();
-	}
-	cout << vb.W.E1 << endl << vb.X.E1 << endl << vb.Alpha.E1 << endl;
+	cVBFA vb(&Y,&Yvar, (MatrixXf *)NULL, 8);
+	vb.update();
+	cout << vb.Alpha.E1 << endl;
 }
