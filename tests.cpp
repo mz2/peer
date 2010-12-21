@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "sim.h"
 #include "vbfa.h"
+#include "ossolog.h"
 #include <iostream>
 
 using namespace std;
@@ -68,21 +69,24 @@ namespace {
 			cout << "Expr mean " << sim.expr.array().abs().mean() << "\n";
 			//2. create object
 			
+			
+			
 			cVBFA vb(Y,YE2, 8);
 //			cout << vb.W.E1.cols() << endl << vb.Alpha.E1 << endl;
 			for(int i=0; i < 10; i++){ vb.update();	}
 			assert(vb.pheno.E1.array().abs().mean() > 0.4);
 			assert((vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() > 0.2);
 			assert((vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() < 0.21);
-			cout << "Expr mean " << vb.pheno.E1.array().abs().mean() << "\nError mean " << (vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() << endl;
-
+			
+			ULOG_DEBUG("Expr mean %.3f\nError mean %.2f",vb.pheno.E1.array().abs().mean(),(vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean());
+			
 			vb = cVBFA(Y,YE2, 12);
 //			cout << vb.W.E1.cols() << endl << vb.Alpha.E1 << endl;
 			for(int i=0; i < 10; i++){ vb.update();	}
 			assert(vb.pheno.E1.array().abs().mean() > 0.4);
 			assert((vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() > 0.2);
 			assert((vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() < 0.21);
-			cout << "Expr mean " << vb.pheno.E1.array().abs().mean() << "\nError mean " << (vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() << endl;
+			ULOG_DEBUG("Expr mean %.3f \nError mean %.3f", vb.pheno.E1.array().abs().mean(),(vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean());
 
 			vb = cVBFA(Y,YE2, 1);
 //			cout << vb.W.E1.cols() << endl << vb.Alpha.E1 << endl;
@@ -90,7 +94,8 @@ namespace {
 			assert(vb.pheno.E1.array().abs().mean() > 0.4);
 			assert((vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() > 0.33);
 			assert((vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() < 0.35);
-			cout << "Expr mean " << vb.pheno.E1.array().abs().mean() << "\nError mean " << (vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean() << endl;
+			
+			ULOG_DEBUG("Expr mean %.3f\nError mean %.3f",vb.pheno.E1.array().abs().mean(),(vb.pheno.E1 - vb.X.E1*(vb.W.E1.transpose())).array().abs().mean());
 		}
 	};
 	

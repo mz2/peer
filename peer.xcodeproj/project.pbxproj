@@ -75,6 +75,7 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5F4BB32912C10ECB002864CA /* ossolog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ossolog.h; sourceTree = "<group>"; };
 		5FE0C6271295B967001431C7 /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = External/gtest.framework; sourceTree = "<group>"; };
 		5FE0C6441295B99B001431C7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5FE0C6461295B99B001431C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -181,10 +182,19 @@
 		5F31C999126F8D6F0046F4C1 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				5F4BB2F612C10B72002864CA /* ossolog */,
 				5FE0C5861295B09E001431C7 /* alglib */,
 				5FE0C5F71295B834001431C7 /* gtest */,
 			);
 			name = External;
+			sourceTree = "<group>";
+		};
+		5F4BB2F612C10B72002864CA /* ossolog */ = {
+			isa = PBXGroup;
+			children = (
+				5F4BB32912C10ECB002864CA /* ossolog.h */,
+			);
+			name = ossolog;
 			sourceTree = "<group>";
 		};
 		5FE0C5861295B09E001431C7 /* alglib */ = {
@@ -290,6 +300,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "peer" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -375,6 +386,10 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"OSSOLOG_STDERR=1",
+					"DEBUG=1",
+				);
 				HEADER_SEARCH_PATHS = "${SRCROOT}/External";
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = peer;
@@ -437,6 +452,10 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"OSSOLOG_STDERR=1",
+				);
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/External\"";
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
