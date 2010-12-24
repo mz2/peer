@@ -38,10 +38,12 @@ protected:
 public:
 	MatrixXf E2S;
 	MatrixXf cov;
-	double xwwxs;
+	MatrixXf prior_offset;
+	MatrixXf prior_prec;
 	
 	cXNode(); // default
 	cXNode(MatrixXf E1); // from mean
+	cXNode(MatrixXf E1, MatrixXf prior_offset, MatrixXf prior_prec); // from mean and prior precision
 	void update(cBayesNet &net);
 	double calcBound(cBayesNet &net);
 	double entropy();

@@ -38,6 +38,14 @@ cXNode::cXNode(){}
 cXNode::cXNode(MatrixXf E1){
 	this->E1 = E1;
 	this->E2S = E1.transpose()*E1;
+	this->prior_prec = MatrixXf::Identity(E1.cols(), E1.cols());
+	this->prior_offset = MatrixXf::Zero(E1.cols(), E1.rows());
+}
+cXNode::cXNode(MatrixXf E1, MatrixXf prior_offset, MatrixXf prior_prec){
+	this->E1 = E1;
+	this->E2S = E1.transpose()*E1;
+	this->prior_prec = prior_prec;
+	this->prior_offset = prior_offset;
 }
 
 
@@ -91,8 +99,8 @@ void cXNode::update(cBayesNet &net){
 	// Invert precision to get covariance, update moments
 	MatrixXf diagEpsE1 = MatrixXf::Zero(n.Np, n.Np); // may need to switch this when Np gets large
 	diagEpsE1.diagonal() = n.Eps.E1;
-	cov = (prec + MatrixXf::Identity(n.Nk, n.Nk)).inverse(); 
-	E1 = n.pheno.E1*diagEpsE1*n.W.E1*cov;
+	cov = (prec + prior_prec).inverse(); 
+	E1 = (n.pheno.E1*diagEpsE1*n.W.E1 + prior_offset*prior_prec)*cov;
 	E2S = n.Nj*cov;
 	for (int i=0;i<n.Nj; ++i){
 		E2S += E1.row(i).transpose()*E1.row(i);
@@ -104,7 +112,7 @@ double cXNode::calcBound(cBayesNet &net){
 	int K = E1.cols();
 	int N = E1.rows();
 //	cout << "WN = " << N << " K = " << K << endl;
-	return -0.5*N*K*log(2.*PI) - 0.5*(N*cov.diagonal().sum() + E1.array().pow(2).sum()) + entropy();
+	return -0.5*N*K*log(2.*PI) - 0.5*(N*cov.diagonal().sum() + ((E1.array().pow(2).matrix())*prior_prec).array().sum()) + entropy();
 }
 
 
@@ -167,14 +175,17 @@ void cVBFA::init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, 
 	Nj = pheno_mean->rows();
 	Np = pheno_mean->cols();
 	Niterations = 10;
-	cout << 1 << endl;
+	MatrixXf covs_original; // need to keep a copy - transformations change the matrix :S
+
 	if (pheno_var == NULL){	
 		MatrixXf temp = 0.01*(MatrixXf::Ones(pheno_mean->rows(), pheno_mean->cols())); // if uncertainty in expression not provided, assume pretty certain
 	    pheno_var = &temp;
+		covs_original = temp;
 	}
 	if (covs == NULL) { 
 		MatrixXf temp = MatrixXf::Ones(pheno_mean->rows(), 1); 
 		covs = &temp;
+		covs_original = temp;
 	} // if no covariates, insert one for mean
 	Nc = covs->cols();
 	Nk = Nfactors + Nc;
@@ -183,19 +194,15 @@ void cVBFA::init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, 
 	assert (pheno_mean->cols()==pheno_var->cols());
 	assert (covs->rows() == pheno_mean->rows());
 	//2. create nodes
-	cout << 2 << endl;
 	pheno = cPhenoNode(*pheno_mean,*pheno_var);
 
 	//3. find ML estimates for known factors and PCA for rest
 	MatrixXf X0 = MatrixXf::Zero(Nj,Nk);
 	MatrixXf W0 = MatrixXf::Zero(Np,Nk);
-	cout << 3 << endl;
 	MatrixXf cov_weights = covs->colPivHouseholderQr().solve(pheno.E1);
-	MatrixXf residuals = pheno.E1 - (*covs)*cov_weights;
-	cout << 4 << endl;
+	MatrixXf residuals = pheno.E1 - covs_original*cov_weights;
 	W0.block(0,0,Np, Nc) = cov_weights.transpose();
-	X0.block(0,0,Nj,Nc) = *covs;
-	cout << 5 << endl;
+	X0.block(0,0,Nj,Nc) = covs_original;
 	//JacobiSVD test;
 	JacobiSVD<MatrixXf> svd(residuals, ComputeThinU | ComputeThinV);
 	//create a diagonal matrix
@@ -209,13 +216,18 @@ void cVBFA::init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, 
 	W0.block(0,Nc,Np,Nfactors) = SV.block(0,0,Nfactors,SV.cols()).transpose();
 	
 	// 4. create nodes and initialise
+	MatrixXf Xprec_prior = MatrixXf::Identity(Nk,Nk);
+	Xprec_prior.diagonal().block(0,0,1,Nc) = MatrixXf::Ones(1,Nc)*10000.; // covariates are very precise
+	MatrixXf Xmean_prior = MatrixXf::Zero(Nj, Nk);
+	Xmean_prior.block(0,0,Nj,Nc) = covs_original;
 	W = cWNode(W0);
-	X = cXNode(X0);
+	X = cXNode(X0, Xmean_prior,Xprec_prior);
 	Alpha = cAlphaNode((int)Nk, (float)0.001, (float)0.1, (MatrixXf *)NULL);
 	Eps = cEpsNode(Np, 0.1, 10, (MatrixXf *)NULL);
 	// update precision nodes to initialise them
 	Alpha.update(*this);
 	Eps.update(*this);	
+	cout << "\tAfter initi, residual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
 }
 
 
