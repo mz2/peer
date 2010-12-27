@@ -25,6 +25,41 @@ double logdet(MatrixXf m){
 	return eigensolver.eigenvalues().array().log().sum();
 }
 
+
+void array2matrixT(double* matrix,int rows,int cols)
+{
+	printf("array2matrix (%d,%d)", rows,cols);
+}
+
+MatrixXf array2matrix(double* matrix,int rows,int cols)
+{
+	printf("array2matrix (%d,%d)", rows,cols);
+	
+	//create a matrix from a double array
+	MatrixXf m = MatrixXf(rows,cols);
+	for(int i=0;i<rows;i++)
+		for(int j=0;j<cols;j++)
+		{
+			m(i,j) = matrix[i*cols+j];
+		}
+	return m;
+	
+}
+
+void matrix_floor(double* matrix, int rows, int cols,double floor) {
+  int i, j, index;
+  printf("matrix follor (%d,%d)",rows,cols);
+
+  for (j=0; j<cols; ++j) {
+    for (i=0; i<rows; ++i) {
+      index = j*rows + i;
+      if (matrix[index] < floor) matrix[index] = 0.0;
+  
+  }
+  }
+}
+
+
 const double PI = 3.14159;
 
 
@@ -47,6 +82,7 @@ cXNode::cXNode(MatrixXf E1, MatrixXf prior_offset, MatrixXf prior_prec){
 	this->prior_prec = prior_prec;
 	this->prior_offset = prior_offset;
 }
+
 
 
 void cWNode::update(cBayesNet &net){
@@ -168,6 +204,15 @@ cVBFA::cVBFA(MatrixXf *pheno_mean,int Nfactors) { init_net(pheno_mean, (MatrixXf
 cVBFA::cVBFA(MatrixXf *pheno_mean, MatrixXf *covs, int Nfactors) { init_net(pheno_mean, (MatrixXf *)NULL, covs, Nfactors); }
 //constructor that take variance and covariates into account
 cVBFA::cVBFA(MatrixXf *pheno_mean,MatrixXf *pheno_var, MatrixXf *covs, int Nfactors) { init_net(pheno_mean, pheno_var, covs, Nfactors); }
+
+cVBFA::cVBFA(double* pheno_mean,int rows_pheno_mean,int cols_pheno_mean,int Nfactors)
+{
+	//1. create matrix object
+	MatrixXf* matrix = new MatrixXf(rows_pheno_mean,cols_pheno_mean);
+	//TODO: unfinished
+	
+	
+}
 
 
 void cVBFA::init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, int Nfactors){
