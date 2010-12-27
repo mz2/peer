@@ -14,7 +14,8 @@
 
 /** Helpers */
 double logdet(MatrixXf m);
-
+MatrixXf array2matrix(double* matrix,int rows,int cols);
+void matrix_floor(double* matrix, int rows, int cols,double floor);
 
 
 /** Weight node (vector normal with shared precision) */
