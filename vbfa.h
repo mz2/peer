@@ -11,12 +11,10 @@
 #define __VBFA_H__
 
 #include "bayesnet.h"
+#include "array_helper.h"
 
 /** Helpers */
 double logdet(MatrixXf m);
-MatrixXf array2matrix(double* matrix,int rows,int cols);
-void matrix_floor(double* matrix, int rows, int cols,double floor);
-
 
 /** Weight node (vector normal with shared precision) */
 class cWNode : public cNode {
@@ -30,6 +28,9 @@ public:
 	void update(cBayesNet &net);
 	double calcBound(cBayesNet &net);
 	double entropy();
+	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
+	
+
 };
 
 
@@ -48,6 +49,9 @@ public:
 	void update(cBayesNet &net);
 	double calcBound(cBayesNet &net);
 	double entropy();
+	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
+	
+
 };
 
 
@@ -57,6 +61,9 @@ public:
 	cAlphaNode() {};
 	cAlphaNode(int dim, float pa, float pb, MatrixXf* E1): cGammaNode(dim,pa,pb,E1) {};
 	void update(cBayesNet &net);
+	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
+	
+
 };
 
 
@@ -66,6 +73,7 @@ public:
 	cEpsNode() {};
 	cEpsNode(int dim, float pa, float pb, MatrixXf* E1): cGammaNode(dim,pa,pb,E1) {};
 	void update(cBayesNet &net);
+	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 };
 
 
@@ -91,9 +99,14 @@ public:
 	/** Dimensions */
 	int Nj; //individuals 
 	int Np; //phenotypes
-	int Nk; //factors
-	int Nc; //covariates
+	int Nk; //Total number of factors
+	int Nc; //Number of covariates
 	
+	/* input data */
+	MatrixXf pheno_mean;
+	MatrixXf pheno_var;
+	MatrixXf covs;
+		
 	/** Nodes */ 
 	cWNode W;
 	cXNode X;
@@ -106,15 +119,38 @@ public:
 	int initialisation; // type
 	
 	//default constructor
-	//cVBFA();
-	
+	//we need this mainly for the python/R interface as they don't support function overloading easily
+	cVBFA();	
+
+#ifndef SWIG
 	//constructor from expression data
-	cVBFA(MatrixXf *pheno_mean,int Nfactors);
+	cVBFA(MatrixXf pheno_mean,int Nfactors);
 	//constructor that takes covariates into account
-	cVBFA(MatrixXf *pheno_mean, MatrixXf *covs,int Nfactors);
+	cVBFA(MatrixXf pheno_mean, MatrixXf covs,int Nfactors);
 	//constructor that take variance and covariates into account
-	cVBFA(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, int Nfactors);
-	void init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, int Nfactors);
+	cVBFA(MatrixXf pheno_mean, MatrixXf pheno_var, MatrixXf covs, int Nfactors);
+#endif
+	
+	//setters 
+#ifndef SWIG
+	//excludede fromo the swig interface as overloade functions do not get type mapped (and we don't port MatrixXf anyway)
+	void setPhenoMean(MatrixXf pheno_mean);
+	void setPhenoVar(MatrixXf pheno_var);
+	void setCovariates(MatrixXf covs);
+#endif
+	
+	void setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols);
+	void setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols);
+	void setCovariates(float64_t* matrix,int32_t rows,int32_t cols);
+	void setK(int Nfactors);
+	
+	//getters
+#ifndef SWIG
+	MatrixXf getResiduals();
+#endif
+	void getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols);
+	
+	void init_net();
 	
 	double calcBound();
 	double logprob();

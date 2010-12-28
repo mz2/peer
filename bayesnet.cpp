@@ -11,6 +11,7 @@
 #include "Eigen/Eigen"
 #include "alglib/src/specialfunctions.h"
 
+
 using Eigen::MatrixXf;
 using Eigen::VectorXf;
 using alglib::lngamma;
@@ -19,6 +20,7 @@ using alglib::psi;
 double cNode::entropy() {return 0;}
 double cNode::calcBound(cBayesNet &net) {return 0;}
 void cNode::update(cBayesNet &net) {}
+
 
 
 cDirichletNode::cDirichletNode(int dim, float prior_val){

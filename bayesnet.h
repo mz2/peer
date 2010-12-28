@@ -10,6 +10,7 @@
 #define __BAYESNET_H__
 
 #include "Eigen/Eigen"
+#include "array_helper.h"
 #include <iostream>
 
 using Eigen::MatrixXf;
@@ -36,7 +37,8 @@ public:
 	virtual double entropy();	
 	virtual double calcBound(cBayesNet &net);
 	virtual void update(cBayesNet &net);
-};
+	
+	};
 
 
 /**
@@ -73,6 +75,8 @@ public:
 	double calcBound(cBayesNet &net);
 	void update(cBayesNet &net);
 	void updateMoments();
+	
+	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 };
 
 

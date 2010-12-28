@@ -65,6 +65,9 @@
 		DB330CB212C8F0CD0000432A /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA504641281A1E700ABCDDC /* model.cpp */; };
 		DB330CB312C8F0CD0000432A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; };
 		DB330CB412C8F0CD0000432A /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBF93712A02354004E2668 /* vbfa.cpp */; };
+		DB8F309A12CA4751002F2831 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8F309912CA4751002F2831 /* array_helper.cpp */; };
+		DB8F30C112CA4CBB002F2831 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8F309912CA4751002F2831 /* array_helper.cpp */; };
+		DB8F30C412CA4CD3002F2831 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8F309912CA4751002F2831 /* array_helper.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,6 +140,8 @@
 		9ABBF93912A02370004E2668 /* vbfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vbfa.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* peer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = peer.1; sourceTree = "<group>"; };
 		DB330C9F12C8F0760000432A /* libpeer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpeer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB8F309812CA4751002F2831 /* array_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array_helper.h; sourceTree = "<group>"; };
+		DB8F309912CA4751002F2831 /* array_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_helper.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +197,8 @@
 				9AA504641281A1E700ABCDDC /* model.cpp */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 				9ABBF93712A02354004E2668 /* vbfa.cpp */,
+				DB8F309812CA4751002F2831 /* array_helper.h */,
+				DB8F309912CA4751002F2831 /* array_helper.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -378,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB8F30C412CA4CD3002F2831 /* array_helper.cpp in Sources */,
 				5FE0C67A1295BF6B001431C7 /* tests.cpp in Sources */,
 				9ABBF93A12A0238E004E2668 /* vbfa.cpp in Sources */,
 				5F7A868112BA8E7700C6E1F8 /* alglibinternal.cpp in Sources */,
@@ -421,6 +429,7 @@
 				9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */,
 				9ABBF93812A02354004E2668 /* vbfa.cpp in Sources */,
 				9A1BA04012BA9166007DAA0E /* sim.cpp in Sources */,
+				DB8F309A12CA4751002F2831 /* array_helper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB8F30C112CA4CBB002F2831 /* array_helper.cpp in Sources */,
 				DB330CB012C8F0CD0000432A /* sim.cpp in Sources */,
 				DB330CB112C8F0CD0000432A /* bayesnet.cpp in Sources */,
 				DB330CB212C8F0CD0000432A /* model.cpp in Sources */,

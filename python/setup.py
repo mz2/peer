@@ -10,7 +10,7 @@ import numpy
 # _Series extension module
 _peer = Extension("_peer",
                     ["peer_wrap.cxx"],
-                    include_dirs = [numpy.get_numpy_include(),"..","./../External"],
+                    include_dirs = [numpy.get_include(),"..","./../External"],
                     library_dirs = ['lib'],
                     libraries = ["peer"]
                     )

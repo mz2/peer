@@ -80,8 +80,16 @@ int main (int argc, char * const argv[]) {
 	MatrixXf Y = simulate_expression(10,100,5,0.01).expr;
 	MatrixXf Yvar = 0.1*MatrixXf::Ones(10,100);
 	//2. create object
-	
-	cVBFA vb(&Y,&Yvar, (MatrixXf *)NULL, 8);
+	//test with nonexisting variance:
+	Yvar = MatrixXf();
+	cVBFA vb(Y,Yvar, MatrixXf(), 8);
+	vb.init_net();
 	vb.update();
 	cout << vb.Alpha.E1 << endl << vb.X.E1.col(0);
+	
+	double** m;
+	int* rows;
+	int* cols;
+	vb.X.getE1(m, rows, cols);
+	
 }

@@ -26,38 +26,7 @@ double logdet(MatrixXf m){
 }
 
 
-void array2matrixT(double* matrix,int rows,int cols)
-{
-	printf("array2matrix (%d,%d)", rows,cols);
-}
 
-MatrixXf array2matrix(double* matrix,int rows,int cols)
-{
-	printf("array2matrix (%d,%d)", rows,cols);
-	
-	//create a matrix from a double array
-	MatrixXf m = MatrixXf(rows,cols);
-	for(int i=0;i<rows;i++)
-		for(int j=0;j<cols;j++)
-		{
-			m(i,j) = matrix[i*cols+j];
-		}
-	return m;
-	
-}
-
-void matrix_floor(double* matrix, int rows, int cols,double floor) {
-  int i, j, index;
-  printf("matrix follor (%d,%d)",rows,cols);
-
-  for (j=0; j<cols; ++j) {
-    for (i=0; i<rows; ++i) {
-      index = j*rows + i;
-      if (matrix[index] < floor) matrix[index] = 0.0;
-  
-  }
-  }
-}
 
 
 const double PI = 3.14159;
@@ -81,6 +50,17 @@ cXNode::cXNode(MatrixXf E1, MatrixXf prior_offset, MatrixXf prior_prec){
 	this->E2S = E1.transpose()*E1;
 	this->prior_prec = prior_prec;
 	this->prior_offset = prior_offset;
+}
+
+void cXNode::getE1(float64_t** matrix,int32_t* rows,int32_t* cols)
+{
+	matrix2array(this->E1, matrix,rows,cols);
+}
+
+
+void cWNode::getE1(float64_t** matrix,int32_t* rows,int32_t* cols)
+{
+	matrix2array(this->E1, matrix,rows,cols);
 }
 
 
@@ -160,6 +140,11 @@ double cXNode::entropy(){
 }
 
 
+void cAlphaNode::getE1(float64_t** matrix,int32_t* rows,int32_t* cols)
+{
+	matrix2array(this->E1, matrix,rows,cols);
+}
+
 
 void cAlphaNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
@@ -170,6 +155,11 @@ void cAlphaNode::update(cBayesNet &net){
 	// cout << "Alpha Node update end, ncol=" << E1.cols() << endl; 
 }
 
+
+void cEpsNode::getE1(float64_t** matrix,int32_t* rows,int32_t* cols)
+{
+	matrix2array(this->E1, matrix,rows,cols);
+}
 
 void cEpsNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
@@ -198,53 +188,132 @@ cPhenoNode::cPhenoNode(MatrixXf pheno_mean,MatrixXf pheno_var)
 }
 
 
+/**** CVBFA *****/
+
+
+/*Constructors*/
+
+cVBFA::cVBFA() { 
+};
+
 //constructor from expression data
+cVBFA::cVBFA(MatrixXf pheno_mean,int Nfactors) { 
+	this->pheno_mean = pheno_mean;
+	this->Nk         = Nfactors;
+}
+//constructor that take covariates into account
+cVBFA::cVBFA(MatrixXf pheno_mean, MatrixXf covs, int Nfactors) { 
+	this->pheno_mean = pheno_mean;
+	this->covs       = covs;
+	this->Nk         = Nfactors;
+}
+//constructor that take variance and covariates into account
+cVBFA::cVBFA(MatrixXf pheno_mean,MatrixXf pheno_var, MatrixXf covs, int Nfactors) 
+{ 
+	this->pheno_mean = pheno_mean;
+	this->pheno_var  = pheno_var;
+	this->covs       = covs;
+	this->Nk         = Nfactors;
+}
+
+/*
 cVBFA::cVBFA(MatrixXf *pheno_mean,int Nfactors) { init_net(pheno_mean, (MatrixXf *)NULL, (MatrixXf *)NULL, Nfactors); }
 //constructor that take covariates into account
 cVBFA::cVBFA(MatrixXf *pheno_mean, MatrixXf *covs, int Nfactors) { init_net(pheno_mean, (MatrixXf *)NULL, covs, Nfactors); }
 //constructor that take variance and covariates into account
 cVBFA::cVBFA(MatrixXf *pheno_mean,MatrixXf *pheno_var, MatrixXf *covs, int Nfactors) { init_net(pheno_mean, pheno_var, covs, Nfactors); }
+*/
 
-cVBFA::cVBFA(double* pheno_mean,int rows_pheno_mean,int cols_pheno_mean,int Nfactors)
+
+/* setters */
+
+
+
+void cVBFA::setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
 {
-	//1. create matrix object
-	MatrixXf* matrix = new MatrixXf(rows_pheno_mean,cols_pheno_mean);
-	//TODO: unfinished
-	
-	
+	this->setPhenoMean(array2matrix(matrix,rows,cols));
+};
+
+void cVBFA::setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols)
+{
+	this->setPhenoVar(array2matrix(matrix,rows,cols));
+};
+
+void cVBFA::setCovariates(float64_t* matrix,int32_t rows,int32_t cols)
+{
+	this->setCovariates(array2matrix(matrix,rows,cols));
+};
+
+
+void cVBFA::setPhenoMean(MatrixXf m)
+{
+	this->pheno_mean = m;
+}
+
+void cVBFA::setPhenoVar(MatrixXf pheno_var)
+{
+	this->pheno_var = pheno_var;
+}
+void cVBFA::setCovariates(MatrixXf covs)
+{
+	this->covs = covs;
 }
 
 
-void cVBFA::init_net(MatrixXf *pheno_mean, MatrixXf *pheno_var, MatrixXf *covs, int Nfactors){
-	//0. extract dimensions, fill unspecified parameters 
-	Nj = pheno_mean->rows();
-	Np = pheno_mean->cols();
-	Niterations = 10;
-	MatrixXf covs_original; // need to keep a copy - transformations change the matrix :S
 
-	if (pheno_var == NULL){	
-		MatrixXf temp = 0.01*(MatrixXf::Ones(pheno_mean->rows(), pheno_mean->cols())); // if uncertainty in expression not provided, assume pretty certain
-	    pheno_var = &temp;
-		covs_original = temp;
+void cVBFA::setK(int Nfactors)
+{
+	this->Nk = Nfactors;
+};
+
+
+/* getters */ 
+
+
+void cVBFA::init_net()
+{
+	//0. extract dimensions, fill unspecified parameters 
+	Nj = pheno_mean.rows();
+	Np = pheno_mean.cols();
+	Niterations = 10;
+	
+	if (isnull(pheno_var))
+	{	
+		MatrixXf temp = 0.01*(MatrixXf::Ones(pheno_mean.rows(), pheno_mean.cols())); // if uncertainty in expression not provided, assume pretty certain
+	    pheno_var = temp;
+		printf("XX %d/%d -- %d/%d",pheno_mean.rows(),pheno_mean.cols(),pheno_var.rows(),pheno_var.cols());	
 	}
-	if (covs == NULL) { 
-		MatrixXf temp = MatrixXf::Ones(pheno_mean->rows(), 1); 
-		covs = &temp;
-		covs_original = temp;
+	if (isnull(covs)) 
+	{ 
+		MatrixXf temp = MatrixXf::Ones(pheno_mean.rows(), 1); 
+		covs = temp;
 	} // if no covariates, insert one for mean
-	Nc = covs->cols();
-	Nk = Nfactors + Nc;
+	
+	//Oli: is this truely still needed ? Leo, please test this quickly and remove if not, I think the main reason was this pointer madness
+	MatrixXf covs_original; // need to keep a copy - transformations change the matrix :S
+	covs_original = covs;
+	
+	
+	Nc = covs.cols();
+	Nk = Nk + Nc;
+	//how many "non covariate factors"?
+	int Nfactors = Nk-Nc;
+	
+	//debug output:
+	//printf("Nk:%d,Nj: %d,Np: %d", Nk,Nj,Np);
+	//cout << pheno_mean;
+
 	//1. checkups of parameters passed
-	assert (pheno_mean->rows()==pheno_var->rows());
-	assert (pheno_mean->cols()==pheno_var->cols());
-	assert (covs->rows() == pheno_mean->rows());
+	assert (pheno_mean.rows()==pheno_var.rows());
+	assert (pheno_mean.cols()==pheno_var.cols());
+	assert (covs.rows() == pheno_mean.rows());
 	//2. create nodes
-	pheno = cPhenoNode(*pheno_mean,*pheno_var);
+	pheno = cPhenoNode(pheno_mean,pheno_var);
 
 	//3. find ML estimates for known factors and PCA for rest
 	MatrixXf X0 = MatrixXf::Zero(Nj,Nk);
 	MatrixXf W0 = MatrixXf::Zero(Np,Nk);
-	MatrixXf cov_weights = covs->colPivHouseholderQr().solve(pheno.E1);
+	MatrixXf cov_weights = covs.colPivHouseholderQr().solve(pheno.E1);
 	MatrixXf residuals = pheno.E1 - covs_original*cov_weights;
 	W0.block(0,0,Np, Nc) = cov_weights.transpose();
 	X0.block(0,0,Nj,Nc) = covs_original;
@@ -292,6 +361,17 @@ void cVBFA::update(){
 //	cout << "Update of cVBFA done, " << this->Niterations << " iterations elapsed" << endl;
 }
 
+
+MatrixXf cVBFA::getResiduals()
+{
+	return (pheno.E1 - X.E1*W.E1.transpose());
+}
+
+void cVBFA::getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
+{
+	MatrixXf r = this->getResiduals();
+	matrix2array(r, matrix,rows,cols);
+}
 
 double cVBFA::logprob(){
 	MatrixXf diagAE1 = MatrixXf::Zero(Nk,Nk);
