@@ -1,3 +1,9 @@
-1) port CGaussNode
-2) Make sure that incoming data is CGaussNode
-3) Convert updates
+1) Test that the covariates functionality works propperly (Leo, there are some comments in the codes also)
+2) Deal with all the debugging output. Where shall these messages go in the future?
+3) R wrapper 
+4) Priors (pa,pb) have setters but no getters, probably not that critical though..
+5) Documentation, doxygen? 
+6) Propper build system using autoconfigu or similar.
+   Matias: we need to get the python support in also. Either we use the python distutils for this (I currenlty do) or we need python-configure to figure out where python is  etc.
+   With autoconfig that is all reasonably easy. Maybe "shogun" (http://www.shogun-toolbox.org/) has some things to steal from.
+   I copied the typempas for R and python from them also, foud this very useful in many ways.

@@ -5,7 +5,7 @@ PROXIES    = $(INTERFACES:.i=.py      )
 all: $(WRAPPERS) peer_wrap.cxx 
 	./setup.py build
 
-%_wrap.cxx: %.i numpy.i 
+%_wrap.cxx: %.i 
 	swig -c++ -python -I../External -I.. $<
 
 clean:

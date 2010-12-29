@@ -12,8 +12,7 @@
 #include "alglib/src/specialfunctions.h"
 
 
-using Eigen::MatrixXf;
-using Eigen::VectorXf;
+using namespace Eigen;
 using alglib::lngamma;
 using alglib::psi;
 
@@ -21,14 +20,15 @@ double cNode::entropy() {return 0;}
 double cNode::calcBound(cBayesNet &net) {return 0;}
 void cNode::update(cBayesNet &net) {}
 
+PMatrix cNode::getE1(){ return E1;}
 
 
 cDirichletNode::cDirichletNode(int dim, float prior_val){
-	prior = prior_val*VectorXf::Ones(dim);	
-	a0 = VectorXf::Zero(dim);
-	a = VectorXf::Zero(dim);
-	E1 = VectorXf::Zero(dim);
-	lnE = VectorXf::Zero(dim);
+	prior = prior_val*PVector::Ones(dim);	
+	a0 = PVector::Zero(dim);
+	a = PVector::Zero(dim);
+	E1 = PVector::Zero(dim);
+	lnE = PVector::Zero(dim);
 }
 
 
@@ -37,7 +37,7 @@ double cDirichletNode::entropy(){
 	double ent = -lngamma(a.sum(), temp);
 	for (int i=0; i < a.rows(); i++) {ent += lngamma(a(i), temp);}
 	ent += (a.sum() - a.rows())*psi(a.sum());
-//	ent -= (a - VectorXf::Ones(a.rows()))*psi();
+//	ent -= (a - PVector::Ones(a.rows()))*psi();
 	for (int i=0; i < a.rows(); i++){ent -= (a(i) - 1)*psi(a(i));}
 	return ent;
 }
@@ -45,7 +45,7 @@ double cDirichletNode::entropy(){
 
 double cDirichletNode::calcBound(cBayesNet &net){
 	double temp = 0;	
-	double bound = ((a0 - VectorXf::Ones(a0.rows()))*lnE).sum() - lngamma(a0.sum(), temp);
+	double bound = ((a0 - PVector::Ones(a0.rows()))*lnE).sum() - lngamma(a0.sum(), temp);
 	for (int i=0; i < a0.rows(); i++) { bound += lngamma(a0(i), temp); }
 	return bound + entropy();
 }
@@ -61,17 +61,17 @@ void cDirichletNode::update(cBayesNet &net){}
 /** Gamma node implementations */
 cGammaNode::cGammaNode(){}
 
-cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, MatrixXf *E1_val){
+cGammaNode::cGammaNode(int dim, float prior_val_a, float prior_val_b, PMatrix E1_val){
 	pa = prior_val_a;
 	pb = prior_val_b;
-	a = pa*MatrixXf::Ones(dim,1).array();
-	b = pb*MatrixXf::Ones(dim,1).array();
-	E1 = MatrixXf::Zero(dim,1);
-	lnE = MatrixXf::Zero(dim,1);
+	a = pa*PMatrix::Ones(dim,1).array();
+	b = pb*PMatrix::Ones(dim,1).array();
+	E1 = PMatrix::Zero(dim,1);
+	lnE = PMatrix::Zero(dim,1);
 	//cout << "Gamma Node init, ncol = " << E1.cols() << endl;
 	updateMoments();
-	if (E1_val != NULL){ 
-		E1 = *E1_val;
+	if (!isnull(E1_val)){ 
+		E1 = E1_val;
 	}
 	//cout << "Gamma Node init end, ncol = " << E1.cols() << endl;
 }

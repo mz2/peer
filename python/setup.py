@@ -12,7 +12,8 @@ _peer = Extension("_peer",
                     ["peer_wrap.cxx"],
                     include_dirs = [numpy.get_include(),"..","./../External"],
                     library_dirs = ['lib'],
-                    libraries = ["peer"]
+                  define_macros  = [('SWIG',None)],
+                  libraries = ["peer"]
                     )
 
 # Series setup

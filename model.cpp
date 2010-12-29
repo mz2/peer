@@ -15,19 +15,19 @@
 using alglib::hqrndnormal;
 using Eigen::LUDecomposition;
 
-double logdet(MatrixXf m){
-	Eigen::LUDecomposition<MatrixXf> lu(m);	
+double logdet(PMatrix m){
+	Eigen::LUDecomposition<PMatrix> lu(m);	
 	return log(lu.determinant());
 }
 
-cNodeS::cNodeS(cBayesNet *net, MatrixXf *E1_val) : cNode() {
+cNodeS::cNodeS(cBayesNet *net, PMatrix *E1_val) : cNode() {
 	cNode::prior = Vector2f(0,1);
 	N = net->N;
 	int K = net->components;
 
 	// init mean
 	if (E1_val == NULL){ 
-		E1 = MatrixXf(N, K);
+		E1 = PMatrix(N, K);
 		for (int i=0; i < E1.rows(); i++){
 			for (int j=0; j<E1.cols(); j++){
 			    E1(i,j) = prior(0) + hqrndnormal()*prior(1);
@@ -37,10 +37,10 @@ cNodeS::cNodeS(cBayesNet *net, MatrixXf *E1_val) : cNode() {
 	else { E1 = *E1_val; }
 
 	// init variance
-	cov = prior(1)*MatrixXf::Identity(net->components, net->components);
-	E2S = MatrixXf::Zero(net->components, net->components);
+	cov = prior(1)*PMatrix::Identity(net->components, net->components);
+	E2S = PMatrix::Zero(net->components, net->components);
 	for (int i=0; i < net->N; i++){
-		E2S += MatrixXf::Ones(net->components, net->components);
+		E2S += PMatrix::Ones(net->components, net->components);
 		E2S += E1.col(i)*E1.col(i).transpose();
     }
 }
@@ -50,7 +50,7 @@ cNodeS::cNodeS(cBayesNet *net, MatrixXf *E1_val) : cNode() {
 double cNodeS::entropy() {
     int K = E1.cols();
 	double ent = 0.5*N*K*(1 + log(2.*pi()));
-	MatrixXf ld = logdet(cov);
+	PMatrix ld = logdet(cov);
 	ent += 0.5*N*ld.sum();
 
 	return ent;

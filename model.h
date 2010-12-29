@@ -8,7 +8,7 @@
  
 
 
-double logdet(MatrixXf m);
+double logdet(PMatrix m);
 
 class cBayesianFA {
 	int a;
@@ -18,11 +18,11 @@ class cBayesianFA {
 /** Factor activation node /
 class cNodeS : public cNode {
 public:
-    MatrixXf E2S; // sum of second moments
+    PMatrix E2S; // sum of second moments
 	int N; // number of individuals
 	
 
-	cNodeS(cBayesNet *net, MatrixXf *E1_val):cNode();
+	cNodeS(cBayesNet *net, PMatrix *E1_val):cNode();
 	double entropy();	
 	double calcBound(cBayesNet *net);
 	void update(cBayesNet *net);

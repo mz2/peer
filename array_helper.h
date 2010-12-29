@@ -11,18 +11,28 @@
 #define __ARRAY_HELPER_H__
 
 #include <Eigen/Eigen>
+#include "alglib/src/ap.h"
+using namespace Eigen;
+using alglib::randomreal;
 
+
+//some definitions for the python interface
 #define float64_t double
 #define int32_t int
 
-using namespace Eigen;
-using Eigen::MatrixXf;
+//standard Matrix type to use in this project
+typedef Matrix<double, Dynamic, Dynamic> PMatrix;
+typedef Matrix<double, Dynamic, 1> PVector;
+
 
 //array 2 matrix and vice versa
-MatrixXf array2matrix(const float64_t* matrix,int32_t rows,int32_t cols);
-void matrix2array(const MatrixXf m,float64_t** matrix, int32_t* rows, int32_t*cols);
+PMatrix array2matrix(const float64_t* matrix,int32_t rows,int32_t cols);
+void matrix2array(const PMatrix m,float64_t** matrix, int32_t* rows, int32_t*cols);
 
 //check for null Matrix (empty)
-bool isnull(const MatrixXf m);
+bool isnull(const PMatrix m);
+
+//create random matrix:
+PMatrix randn(int n, int m);
 
 #endif

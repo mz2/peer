@@ -8,24 +8,13 @@
  */
 
 #include "sim.h"
-#include "alglib/src/ap.h"
 #include <Eigen/Eigen>
 
 using namespace Eigen;
-using Eigen::MatrixXf;
-using alglib::randomreal;
 
 
-MatrixXf randn(int n, int m)
-/* create a randn matrix */
-{
-	MatrixXf rv(n,m);
-	for (int i=0; i<n; i++)
-		for (int j=0; j<m; j++) {
-			rv(i,j) = randomreal();
-		}
-	return rv;
-}
+
+
 
 
 

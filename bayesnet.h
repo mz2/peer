@@ -13,9 +13,8 @@
 #include "array_helper.h"
 #include <iostream>
 
-using Eigen::MatrixXf;
-using Eigen::VectorXf;
 using namespace std;
+using namespace Eigen;
 
 
 class cBayesNet {
@@ -30,14 +29,17 @@ public:
  */
 class cNode {
 public:
-	MatrixXf E1;
-	MatrixXf prior;
+	PMatrix E1;
+	PMatrix prior;
 	double bound;
 
 	virtual double entropy();	
 	virtual double calcBound(cBayesNet &net);
 	virtual void update(cBayesNet &net);
-	
+
+#ifndef SWIG
+	PMatrix getE1();
+#endif	
 	};
 
 
@@ -46,9 +48,9 @@ public:
  */
 class cDirichletNode : public cNode {
 protected:
-    VectorXf a0;
-	VectorXf a;
-	VectorXf lnE;
+    PVector a0;
+	PVector a;
+	PVector lnE;
 	
 public:
 	cDirichletNode(int dim, float prior);
@@ -65,12 +67,12 @@ class cGammaNode : public cNode {
 public:
     double pa;
 	double pb;
-	MatrixXf lnE;
-	MatrixXf a;
-	MatrixXf b;
+	PMatrix lnE;
+	PMatrix a;
+	PMatrix b;
 
 	cGammaNode();
-	cGammaNode(int dim, float prior_val_a, float prior_val_b, MatrixXf *E1_val);
+	cGammaNode(int dim, float prior_val_a, float prior_val_b, PMatrix E1_val);
 	double entropy();	
 	double calcBound(cBayesNet &net);
 	void update(cBayesNet &net);

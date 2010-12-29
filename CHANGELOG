@@ -1,0 +1,12 @@
+26-29/12/2010 (OS):
+ * Added array_helper. This contains functions to convert from eigen matrices to C matrices and vice versa.
+   This is used by the python swig wrappers and those to come for R
+ * Added a default matrix type PMatrix, PVector (PeerMatrix...), this is just an alias but makes life easier
+ * Added getters and setters for most things and moved variables to procted areas. THis is needed to have a consistent
+   interface from python/R and C++
+ * Added swig versions of the interfaces. WHen compiled with swig the setters/getters with Matrix objects disappear. 
+   Note: this is neede, otherwise swig refuses fom appplying typemaps
+ * Added build target "libpeer"
+ * Added "python" directory. This contains a make file, "make" should be all it takes to generate the python wrapper
+ * Added python_demo.py 
+ 

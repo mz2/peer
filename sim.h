@@ -7,20 +7,19 @@
  *
  */
 #include <Eigen/Eigen>
+#include "array_helper.h"
 
 using namespace Eigen;
-using Eigen::MatrixXf;
 
 
 struct sSimulation {
-	MatrixXf expr;
-	MatrixXf W;
-	MatrixXf X;
-	MatrixXf Eps;
+	PMatrix expr;
+	PMatrix W;
+	PMatrix X;
+	PMatrix Eps;
 };
 
 
 
-MatrixXf randn(int n, int m);
 sSimulation simulate_expression(int N, int D, int K,double sigma=0.1);
 

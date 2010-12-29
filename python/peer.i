@@ -39,12 +39,12 @@
 %apply (float64_t** ARGOUT2, int32_t* DIM1, int32_t* DIM2) {(float64_t** matrix, int32_t* rows, int32_t* cols)};
 
 
-/* Generic argout */
-
+/* Remove C Prefix */
+%rename(VBFA) cVBFA;
 
 /* Include the header file to be wrapped */
 %include "vbfa.h"
 
-/* Remove C Prefix */
-%rename(VBFA) cVBFA;
+
+
  
