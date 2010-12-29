@@ -1,6 +1,6 @@
 1) Test that the covariates functionality works propperly (Leo, there are some comments in the codes also)
 2) Deal with all the debugging output. Where shall these messages go in the future?
-3) R wrapper 
+3) R wrapper, I just don't understand how R works, the lib is build; found this here (http://www.swig.org/Doc1.3/R.html#R_nn6) which does not help me.. 
 4) Priors (pa,pb) have setters but no getters, probably not that critical though..
 5) Documentation, doxygen? 
 6) Propper build system using autoconfigu or similar.
