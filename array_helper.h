@@ -18,16 +18,20 @@ using alglib::randomreal;
 
 //some definitions for the python interface
 #define float64_t double
+#define float32_t float
 #define int32_t int
 
 //standard Matrix type to use in this project
-typedef Matrix<double, Dynamic, Dynamic> PMatrix;
-typedef Matrix<double, Dynamic, 1> PVector;
+typedef Matrix<float32_t, Dynamic, Dynamic> PMatrix;
+typedef Matrix<float32_t, Dynamic, 1> PVector;
 
 
 //array 2 matrix and vice versa
+PMatrix array2matrix(const float32_t* matrix,int32_t rows,int32_t cols);
 PMatrix array2matrix(const float64_t* matrix,int32_t rows,int32_t cols);
+void matrix2array(const PMatrix m,float32_t** matrix, int32_t* rows, int32_t*cols);
 void matrix2array(const PMatrix m,float64_t** matrix, int32_t* rows, int32_t*cols);
+
 
 //check for null Matrix (empty)
 bool isnull(const PMatrix m);

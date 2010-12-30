@@ -186,6 +186,7 @@ public:
 	//setters
 	void setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
 	{this->pheno_mean = array2matrix(matrix,rows,cols);is_initialized=false;}
+
 	void setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols)
 	{this->pheno_var = array2matrix(matrix,rows,cols);is_initialized=false;}
 	void setCovariates(float64_t* matrix,int32_t rows,int32_t cols)
@@ -211,9 +212,9 @@ public:
 	{return matrix2array(calc_residuals(),matrix,rows,cols);}
 #else
 	//excludede fromo the swig interface as overloade functions do not get type mapped (and we don't port PMatrix anyway)
-	void setPhenoMean(PMatrix pheno_mean) {this->pheno_mean = pheno_mean;is_initialized=false;}
-	void setPhenoVar(PMatrix pheno_var) {this->pheno_var = pheno_var;is_initialized=false;}
-	void setCovariates(PMatrix covs) { this->covs = covs;is_initialized=false;}	
+	void setPhenoMean(const PMatrix pheno_mean) {this->pheno_mean = pheno_mean;is_initialized=false;}
+	void setPhenoVar(const PMatrix pheno_var) {this->pheno_var = pheno_var;is_initialized=false;}
+	void setCovariates(const PMatrix covs) { this->covs = covs;is_initialized=false;}	
 	
 	//getters
 	PMatrix getPhenoMean(){return this->pheno_mean;}
