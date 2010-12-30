@@ -1,3 +1,6 @@
+30/12/2010 (OS):
+Changed PMatrix to be a float matrix rather than double to save space
+
 26-29/12/2010 (OS):
  * Added array_helper. This contains functions to convert from eigen matrices to C matrices and vice versa.
    This is used by the python swig wrappers and those to come for R
