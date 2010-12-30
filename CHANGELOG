@@ -1,5 +1,9 @@
 30/12/2010 (OS):
-Changed PMatrix to be a float matrix rather than double to save space
+* Changed PMatrix to be a float matrix rather than double to save space
+* Added setVerbose, getVerbose
+* Moved peer into namespace PEER (have consistently, at least vbfa.XX)
+* Added convergence tolerance level
+* Sanitised debug messages
 
 26-29/12/2010 (OS):
  * Added array_helper. This contains functions to convert from eigen matrices to C matrices and vice versa.

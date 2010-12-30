@@ -10,6 +10,8 @@ import pylab as PL
 
 #1. simulate sth.
 N = 100
+
+N = 30
 K = 5
 G = 20
 sigma = 0.1
@@ -23,13 +25,13 @@ Y+= sigma*SP.random.randn(N,G)
 #run peer
 #use up to 10 factors
 Kinf = 20
-Niterations = 50
+Nmax_iterations = 10
 vb = peer.VBFA()
 #set data and parameters
 vb.setNk(Kinf)
 vb.setAdd_mean(False)
 vb.setPhenoMean(Y)
-vb.setNiterations(Niterations)
+vb.setNmax_iterations(Nmax_iterations)
 vb.update()
 
 #investigate inferance results

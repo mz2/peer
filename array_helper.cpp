@@ -15,7 +15,6 @@ PMatrix array2matrix(const float32_t* matrix,int32_t rows,int32_t cols)
 {
 	//create a matrix from a double array
 	PMatrix m = PMatrix(rows,cols);
-	printf("starting copying");
 	for(int i=0;i<rows;i++)
 		for(int j=0;j<cols;j++)
 		{
@@ -29,7 +28,6 @@ PMatrix array2matrix(const float64_t* matrix,int32_t rows,int32_t cols)
 {
 	//create a matrix from a double array
 	PMatrix m = PMatrix(rows,cols);
-	printf("starting copying");
 	for(int i=0;i<rows;i++)
 		for(int j=0;j<cols;j++)
 		{

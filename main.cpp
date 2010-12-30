@@ -7,12 +7,14 @@
 
 using namespace Eigen;
 using namespace std;
+using namespace PEER;
 
 
 //using Cwise;
 using alglib::randomreal;
 using alglib::psi;
 using alglib::gammafunction;
+
 
 void playing()
 {
@@ -83,7 +85,7 @@ int main (int argc, char * const argv[]) {
 	Yvar = PMatrix();
 	cVBFA vb(Y,Yvar, PMatrix(), 8);
 	vb.setAdd_mean(false);
-	vb.setNiterations(50);
+	vb.setNmax_iterations(50);
 	vb.update();
 	cout << vb.Alpha.E1 << endl << vb.X.E1.col(0);
 	

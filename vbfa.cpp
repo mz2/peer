@@ -17,16 +17,25 @@
 
 using namespace Eigen;
 using namespace std;
+using namespace PEER;
 
 
 /** Helpers */
-double logdet(PMatrix m){
+double PEER::logdet(PMatrix m){
 	SelfAdjointEigenSolver<PMatrix> eigensolver(m);
 	return eigensolver.eigenvalues().array().log().sum();
 }
 
 
+//verbosity level:
+int VERBOSE = 1;
 
+
+void PEER::setVerbose(int verbose)
+{ VERBOSE = verbose;}
+
+int PEER::getVerbose()
+{return VERBOSE;}
 
 
 const double PI = 3.14159;
@@ -227,7 +236,8 @@ cVBFA::cVBFA(PMatrix pheno_mean,PMatrix pheno_var, PMatrix covs, int Nfactors)
 // initialiser shared by constructors
 void cVBFA::init_params()
 {
-	Niterations = 10;
+	tolerance = 1E-3;
+	Nmax_iterations = 1000;
 	add_mean    = true;
 	initialisation = PCA;	
 	is_initialized = false;
@@ -253,7 +263,7 @@ void cVBFA::init_net()
 	{	
 		PMatrix temp = 0.01*(PMatrix::Ones(pheno_mean.rows(), pheno_mean.cols())); // if uncertainty in expression not provided, assume pretty certain
 	    pheno_var = temp;
-		printf("XX %d/%d -- %d/%d",pheno_mean.rows(),pheno_mean.cols(),pheno_var.rows(),pheno_var.cols());	
+		printf("XX %d/%d -- %d/%d\n",pheno_mean.rows(),pheno_mean.cols(),pheno_var.rows(),pheno_var.cols());	
 	}
 	// if no covariates, create empty structure
 	if (isnull(covs)) 
@@ -286,9 +296,12 @@ void cVBFA::init_net()
 	int Nfactors = Nk-Nc;
 	
 	//debug output:
-	//printf("Nk:%d,Nj: %d,Np: %d", Nk,Nj,Np);
+	if(VERBOSE>=2)
+	{
+		printf("Initialising Net\n");
+		printf("Data dimensions: Nk:%d,Nj: %d,Np: %d, Nc: %d\n", Nk,Nj,Np,Nc);
+	}
 	//cout << pheno_mean;
-
 	//1. checkups of parameters passed
 	assert (pheno_mean.rows()==pheno_var.rows());
 	assert (pheno_mean.cols()==pheno_var.cols());
@@ -341,7 +354,8 @@ void cVBFA::init_net()
 	// update precision nodes to initialise them
 	Alpha.update(*this);
 	Eps.update(*this);	
-	cout << "\tAfter initi, residual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
+	if (VERBOSE>=2)
+		cout << "\tAfter initi, residual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
 	
 	is_initialized = true;
 }
@@ -354,18 +368,62 @@ void cVBFA::update(){
 	if(!is_initialized)
 		init_net();
 	
-	for(int i=0; i < this->Niterations; ++i){
-		cout << "\titeration" << i << endl;
+	double last_bound=-HUGE_VAL;
+	double current_bound=-HUGE_VAL;
+	double delta_bound = HUGE_VAL;
+	int i=0;
+	for(i=0; i < this->Nmax_iterations; ++i){
+		if (VERBOSE>=1)
+			printf("\titeration %d/%d\n",i,Nmax_iterations);
+		
 		W.update(*this);
-		if(i > 0) {cout << "\tAfter W " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
+		
+		if((VERBOSE>=3) && (i > 0) )
+			{cout << "\tAfter W " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
 		Alpha.update(*this);
-		if(i > 0) {cout << "\tAfter A " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
+		if((VERBOSE>=3) && (i > 0) )
+			{cout << "\tAfter A " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
 		X.update(*this);
-		cout << "\tAfter X " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
+		if (VERBOSE>=3)
+			cout << "\tAfter X " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
 		Eps.update(*this);
-		cout << "\tAfter E " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
+		
+		if (VERBOSE>=3)
+			cout << "\tAfter E " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
+
+		//calc bound?
+		if ((VERBOSE>=2) || (tolerance>0))
+		{
+			last_bound    = current_bound;
+			current_bound = calcBound();
+			delta_bound = abs(current_bound - last_bound);
+		}
+		
+		//debug output?
+		
+		if (VERBOSE>=2)
+		{
+			double res_var = getResiduals().array().array().pow(2.).mean();
+			printf("Residual variance: %.4f, Delta bound: %.4f\n",res_var,delta_bound);
+		}
+		
+		//converged?
+		if (delta_bound<tolerance)
+			break;
+	//endfor
 	}
-//	cout << "Update of cVBFA done, " << this->Niterations << " iterations elapsed" << endl;
+	
+	//debug output on convergence?
+	if (VERBOSE>=1)
+	{
+		if(delta_bound<tolerance)
+		{
+			printf("Converged after %d iterations\n", i);
+		}
+		else {
+			printf("Maximum number of iterations reached: %d\n",i);
+		}
+	}
 }
 
 
