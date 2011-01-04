@@ -7,31 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F7A868112BA8E7700C6E1F8 /* alglibinternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059C1281F2BB00ABCDDC /* alglibinternal.cpp */; };
-		5F7A868212BA8E7800C6E1F8 /* alglibmisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059E1281F2BB00ABCDDC /* alglibmisc.cpp */; };
-		5F7A868312BA8E7900C6E1F8 /* ap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A01281F2BB00ABCDDC /* ap.cpp */; };
 		5F7A868412BA8E7900C6E1F8 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE0C6441295B99B001431C7 /* AppKit.framework */; };
-		5F7A868512BA8E7A00C6E1F8 /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5046A1281A43500ABCDDC /* bayesnet.cpp */; };
-		5F7A868612BA8E7B00C6E1F8 /* dataanalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A11281F2BB00ABCDDC /* dataanalysis.cpp */; };
-		5F7A868712BA8E7C00C6E1F8 /* diffequations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A31281F2BB00ABCDDC /* diffequations.cpp */; };
-		5F7A868812BA8E7D00C6E1F8 /* fasttransforms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A51281F2BB00ABCDDC /* fasttransforms.cpp */; };
-		5F7A868912BA8E7E00C6E1F8 /* integration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A71281F2BB00ABCDDC /* integration.cpp */; };
-		5F7A868B12BA8E8400C6E1F8 /* interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A91281F2BB00ABCDDC /* interpolation.cpp */; };
-		5F7A868C12BA8E8500C6E1F8 /* linalg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AB1281F2BB00ABCDDC /* linalg.cpp */; };
-		5F7A868E12BA8E8900C6E1F8 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA504641281A1E700ABCDDC /* model.cpp */; };
-		5F7A868F12BA8E8A00C6E1F8 /* optimization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AD1281F2BB00ABCDDC /* optimization.cpp */; };
-		5F7A869012BA8E8B00C6E1F8 /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AF1281F2BB00ABCDDC /* solvers.cpp */; };
-		5F7A869112BA8E8E00C6E1F8 /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B11281F2BB00ABCDDC /* specialfunctions.cpp */; };
-		5F7A869212BA8E8E00C6E1F8 /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B31281F2BB00ABCDDC /* statistics.cpp */; };
 		5F7A86B312BA8F7100C6E1F8 /* gtest.framework in Copy gtest.framework */ = {isa = PBXBuildFile; fileRef = 5FE0C6271295B967001431C7 /* gtest.framework */; };
 		5FE0C6761295BF53001431C7 /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE0C6271295B967001431C7 /* gtest.framework */; };
-		5FE0C67A1295BF6B001431C7 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0C6791295BF6B001431C7 /* tests.cpp */; };
-		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		5FED85E112D395B500BAC3A8 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DA12D395B500BAC3A8 /* array_helper.cpp */; };
+		5FED85E212D395B500BAC3A8 /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DB12D395B500BAC3A8 /* bayesnet.cpp */; };
+		5FED85E412D395B500BAC3A8 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DD12D395B500BAC3A8 /* model.cpp */; };
+		5FED85E512D395B500BAC3A8 /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DE12D395B500BAC3A8 /* sim.cpp */; };
+		5FED85E612D395B500BAC3A8 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DF12D395B500BAC3A8 /* tests.cpp */; };
+		5FED85E712D395B500BAC3A8 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85E012D395B500BAC3A8 /* vbfa.cpp */; };
+		5FED85E812D395B500BAC3A8 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DA12D395B500BAC3A8 /* array_helper.cpp */; };
+		5FED85E912D395B500BAC3A8 /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DB12D395B500BAC3A8 /* bayesnet.cpp */; };
+		5FED85EA12D395B500BAC3A8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DC12D395B500BAC3A8 /* main.cpp */; };
+		5FED85EB12D395B500BAC3A8 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DD12D395B500BAC3A8 /* model.cpp */; };
+		5FED85EC12D395B500BAC3A8 /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DE12D395B500BAC3A8 /* sim.cpp */; };
+		5FED85EE12D395B500BAC3A8 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85E012D395B500BAC3A8 /* vbfa.cpp */; };
+		5FED85EF12D395B500BAC3A8 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DA12D395B500BAC3A8 /* array_helper.cpp */; };
+		5FED85F012D395B500BAC3A8 /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DB12D395B500BAC3A8 /* bayesnet.cpp */; };
+		5FED85F212D395B500BAC3A8 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DD12D395B500BAC3A8 /* model.cpp */; };
+		5FED85F312D395B500BAC3A8 /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DE12D395B500BAC3A8 /* sim.cpp */; };
+		5FED85F512D395B500BAC3A8 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85E012D395B500BAC3A8 /* vbfa.cpp */; };
+		5FED860712D3961F00BAC3A8 /* array_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860212D3961F00BAC3A8 /* array_helper.h */; };
+		5FED860812D3961F00BAC3A8 /* bayesnet.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860312D3961F00BAC3A8 /* bayesnet.h */; };
+		5FED860912D3961F00BAC3A8 /* model.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860412D3961F00BAC3A8 /* model.h */; };
+		5FED860A12D3961F00BAC3A8 /* sim.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860512D3961F00BAC3A8 /* sim.h */; };
+		5FED860B12D3961F00BAC3A8 /* vbfa.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860612D3961F00BAC3A8 /* vbfa.h */; };
+		5FED860F12D3962C00BAC3A8 /* ossolog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860E12D3962C00BAC3A8 /* ossolog.h */; };
+		5FED865512D3993500BAC3A8 /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B11281F2BB00ABCDDC /* specialfunctions.cpp */; };
+		5FED865612D3993600BAC3A8 /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AF1281F2BB00ABCDDC /* solvers.cpp */; };
+		5FED865712D3993700BAC3A8 /* optimization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AD1281F2BB00ABCDDC /* optimization.cpp */; };
+		5FED865812D3993800BAC3A8 /* linalg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AB1281F2BB00ABCDDC /* linalg.cpp */; };
+		5FED865912D3993900BAC3A8 /* interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A91281F2BB00ABCDDC /* interpolation.cpp */; };
+		5FED865A12D3993A00BAC3A8 /* integration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A71281F2BB00ABCDDC /* integration.cpp */; };
+		5FED865B12D3993B00BAC3A8 /* fasttransforms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A51281F2BB00ABCDDC /* fasttransforms.cpp */; };
+		5FED865C12D3993C00BAC3A8 /* diffequations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A31281F2BB00ABCDDC /* diffequations.cpp */; };
+		5FED865D12D3993F00BAC3A8 /* dataanalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A11281F2BB00ABCDDC /* dataanalysis.cpp */; };
+		5FED865E12D3994300BAC3A8 /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B31281F2BB00ABCDDC /* statistics.cpp */; };
+		5FED865F12D3994B00BAC3A8 /* ap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A01281F2BB00ABCDDC /* ap.cpp */; };
+		5FED866012D3994C00BAC3A8 /* alglibmisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059E1281F2BB00ABCDDC /* alglibmisc.cpp */; };
+		5FED866112D3994D00BAC3A8 /* alglibinternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059C1281F2BB00ABCDDC /* alglibinternal.cpp */; };
+		5FED868912D39A5800BAC3A8 /* libalglib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FED861A12D3965700BAC3A8 /* libalglib.a */; };
 		8DD76F6A0486A84900D96B5E /* peer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* peer.1 */; };
-		9A1BA03F12BA9166007DAA0E /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BA03D12BA9166007DAA0E /* sim.cpp */; };
-		9A1BA04012BA9166007DAA0E /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BA03D12BA9166007DAA0E /* sim.cpp */; };
-		9AA504651281A1E700ABCDDC /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA504641281A1E700ABCDDC /* model.cpp */; };
-		9AA5046B1281A43500ABCDDC /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5046A1281A43500ABCDDC /* bayesnet.cpp */; };
 		9AA505B71281F2BB00ABCDDC /* alglibinternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059C1281F2BB00ABCDDC /* alglibinternal.cpp */; };
 		9AA505B81281F2BB00ABCDDC /* alglibmisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059E1281F2BB00ABCDDC /* alglibmisc.cpp */; };
 		9AA505B91281F2BB00ABCDDC /* ap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A01281F2BB00ABCDDC /* ap.cpp */; };
@@ -45,8 +61,6 @@
 		9AA505C11281F2BB00ABCDDC /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AF1281F2BB00ABCDDC /* solvers.cpp */; };
 		9AA505C21281F2BB00ABCDDC /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B11281F2BB00ABCDDC /* specialfunctions.cpp */; };
 		9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B31281F2BB00ABCDDC /* statistics.cpp */; };
-		9ABBF93812A02354004E2668 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBF93712A02354004E2668 /* vbfa.cpp */; };
-		9ABBF93A12A0238E004E2668 /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBF93712A02354004E2668 /* vbfa.cpp */; };
 		DB330CA312C8F0C00000432A /* alglibinternal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059C1281F2BB00ABCDDC /* alglibinternal.cpp */; };
 		DB330CA412C8F0C00000432A /* alglibmisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5059E1281F2BB00ABCDDC /* alglibmisc.cpp */; };
 		DB330CA512C8F0C00000432A /* ap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505A01281F2BB00ABCDDC /* ap.cpp */; };
@@ -60,15 +74,31 @@
 		DB330CAD12C8F0C00000432A /* solvers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505AF1281F2BB00ABCDDC /* solvers.cpp */; };
 		DB330CAE12C8F0C00000432A /* specialfunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B11281F2BB00ABCDDC /* specialfunctions.cpp */; };
 		DB330CAF12C8F0C00000432A /* statistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA505B31281F2BB00ABCDDC /* statistics.cpp */; };
-		DB330CB012C8F0CD0000432A /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A1BA03D12BA9166007DAA0E /* sim.cpp */; };
-		DB330CB112C8F0CD0000432A /* bayesnet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA5046A1281A43500ABCDDC /* bayesnet.cpp */; };
-		DB330CB212C8F0CD0000432A /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AA504641281A1E700ABCDDC /* model.cpp */; };
-		DB330CB312C8F0CD0000432A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; };
-		DB330CB412C8F0CD0000432A /* vbfa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ABBF93712A02354004E2668 /* vbfa.cpp */; };
-		DB8F309A12CA4751002F2831 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8F309912CA4751002F2831 /* array_helper.cpp */; };
-		DB8F30C112CA4CBB002F2831 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8F309912CA4751002F2831 /* array_helper.cpp */; };
-		DB8F30C412CA4CD3002F2831 /* array_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB8F309912CA4751002F2831 /* array_helper.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5FED861D12D3966400BAC3A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5FED861912D3965700BAC3A8 /* alglib */;
+			remoteInfo = alglib;
+		};
+		5FED861F12D3966D00BAC3A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5FED861912D3965700BAC3A8 /* alglib */;
+			remoteInfo = alglib;
+		};
+		5FED862112D3967600BAC3A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5FED861912D3965700BAC3A8 /* alglib */;
+			remoteInfo = alglib;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5F7A86B612BA8F9000C6E1F8 /* Copy gtest.framework */ = {
@@ -95,20 +125,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		5F4BB32912C10ECB002864CA /* ossolog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ossolog.h; sourceTree = "<group>"; };
 		5FE0C6271295B967001431C7 /* gtest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtest.framework; path = External/gtest.framework; sourceTree = "<group>"; };
 		5FE0C6441295B99B001431C7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5FE0C6461295B99B001431C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5FE0C6721295BF3E001431C7 /* tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tests; sourceTree = BUILT_PRODUCTS_DIR; };
-		5FE0C6791295BF6B001431C7 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		5FED85DA12D395B500BAC3A8 /* array_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = array_helper.cpp; path = src/array_helper.cpp; sourceTree = "<group>"; };
+		5FED85DB12D395B500BAC3A8 /* bayesnet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bayesnet.cpp; path = src/bayesnet.cpp; sourceTree = "<group>"; };
+		5FED85DC12D395B500BAC3A8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		5FED85DD12D395B500BAC3A8 /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = model.cpp; path = src/model.cpp; sourceTree = "<group>"; };
+		5FED85DE12D395B500BAC3A8 /* sim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sim.cpp; path = src/sim.cpp; sourceTree = "<group>"; };
+		5FED85DF12D395B500BAC3A8 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tests.cpp; path = src/tests.cpp; sourceTree = "<group>"; };
+		5FED85E012D395B500BAC3A8 /* vbfa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vbfa.cpp; path = src/vbfa.cpp; sourceTree = "<group>"; };
+		5FED860212D3961F00BAC3A8 /* array_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = array_helper.h; path = include/array_helper.h; sourceTree = "<group>"; };
+		5FED860312D3961F00BAC3A8 /* bayesnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bayesnet.h; path = include/bayesnet.h; sourceTree = "<group>"; };
+		5FED860412D3961F00BAC3A8 /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = model.h; path = include/model.h; sourceTree = "<group>"; };
+		5FED860512D3961F00BAC3A8 /* sim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sim.h; path = include/sim.h; sourceTree = "<group>"; };
+		5FED860612D3961F00BAC3A8 /* vbfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vbfa.h; path = include/vbfa.h; sourceTree = "<group>"; };
+		5FED860E12D3962C00BAC3A8 /* ossolog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ossolog.h; path = include/ossolog.h; sourceTree = "<group>"; };
+		5FED861A12D3965700BAC3A8 /* libalglib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libalglib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD76F6C0486A84900D96B5E /* peer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = peer; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A1BA03D12BA9166007DAA0E /* sim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sim.cpp; sourceTree = "<group>"; };
-		9A1BA03E12BA9166007DAA0E /* sim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sim.h; sourceTree = "<group>"; };
-		9AA504631281A1E700ABCDDC /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
-		9AA504641281A1E700ABCDDC /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
-		9AA504691281A43500ABCDDC /* bayesnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bayesnet.h; sourceTree = "<group>"; };
-		9AA5046A1281A43500ABCDDC /* bayesnet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bayesnet.cpp; sourceTree = "<group>"; };
 		9AA5059C1281F2BB00ABCDDC /* alglibinternal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alglibinternal.cpp; path = External/alglib/src/alglibinternal.cpp; sourceTree = "<group>"; };
 		9AA5059D1281F2BB00ABCDDC /* alglibinternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alglibinternal.h; path = External/alglib/src/alglibinternal.h; sourceTree = "<group>"; };
 		9AA5059E1281F2BB00ABCDDC /* alglibmisc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alglibmisc.cpp; path = External/alglib/src/alglibmisc.cpp; sourceTree = "<group>"; };
@@ -136,12 +171,8 @@
 		9AA505B41281F2BB00ABCDDC /* statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = statistics.h; path = External/alglib/src/statistics.h; sourceTree = "<group>"; };
 		9AA505B51281F2BB00ABCDDC /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = External/alglib/src/stdafx.h; sourceTree = "<group>"; };
 		9AA505B61281F2BB00ABCDDC /* ap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ap.h; path = External/alglib/src/ap.h; sourceTree = "<group>"; };
-		9ABBF93712A02354004E2668 /* vbfa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vbfa.cpp; sourceTree = "<group>"; };
-		9ABBF93912A02370004E2668 /* vbfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vbfa.h; sourceTree = "<group>"; };
 		C6859E8B029090EE04C91782 /* peer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = peer.1; sourceTree = "<group>"; };
 		DB330C9F12C8F0760000432A /* libpeer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpeer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB8F309812CA4751002F2831 /* array_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array_helper.h; sourceTree = "<group>"; };
-		DB8F309912CA4751002F2831 /* array_helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array_helper.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +182,14 @@
 			files = (
 				5FE0C6761295BF53001431C7 /* gtest.framework in Frameworks */,
 				5F7A868412BA8E7900C6E1F8 /* AppKit.framework in Frameworks */,
+				5FED868912D39A5800BAC3A8 /* libalglib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5FED861812D3965700BAC3A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,18 +226,14 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				9A1BA03D12BA9166007DAA0E /* sim.cpp */,
-				9A1BA03E12BA9166007DAA0E /* sim.h */,
-				9ABBF93912A02370004E2668 /* vbfa.h */,
+				5FED85FD12D3961100BAC3A8 /* Headers */,
+				5FED85DA12D395B500BAC3A8 /* array_helper.cpp */,
+				5FED85DB12D395B500BAC3A8 /* bayesnet.cpp */,
+				5FED85DC12D395B500BAC3A8 /* main.cpp */,
+				5FED85DD12D395B500BAC3A8 /* model.cpp */,
+				5FED85DE12D395B500BAC3A8 /* sim.cpp */,
+				5FED85E012D395B500BAC3A8 /* vbfa.cpp */,
 				5FE0C5C71295B754001431C7 /* Unit Tests */,
-				9AA504691281A43500ABCDDC /* bayesnet.h */,
-				9AA5046A1281A43500ABCDDC /* bayesnet.cpp */,
-				9AA504631281A1E700ABCDDC /* model.h */,
-				9AA504641281A1E700ABCDDC /* model.cpp */,
-				08FB7796FE84155DC02AAC07 /* main.cpp */,
-				9ABBF93712A02354004E2668 /* vbfa.cpp */,
-				DB8F309812CA4751002F2831 /* array_helper.h */,
-				DB8F309912CA4751002F2831 /* array_helper.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -209,6 +244,7 @@
 				8DD76F6C0486A84900D96B5E /* peer */,
 				5FE0C6721295BF3E001431C7 /* tests */,
 				DB330C9F12C8F0760000432A /* libpeer.a */,
+				5FED861A12D3965700BAC3A8 /* libalglib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,19 +252,11 @@
 		5F31C999126F8D6F0046F4C1 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				5F4BB2F612C10B72002864CA /* ossolog */,
+				5FED860C12D3962200BAC3A8 /* ossolog */,
 				5FE0C5861295B09E001431C7 /* alglib */,
 				5FE0C5F71295B834001431C7 /* gtest */,
 			);
 			name = External;
-			sourceTree = "<group>";
-		};
-		5F4BB2F612C10B72002864CA /* ossolog */ = {
-			isa = PBXGroup;
-			children = (
-				5F4BB32912C10ECB002864CA /* ossolog.h */,
-			);
-			name = ossolog;
 			sourceTree = "<group>";
 		};
 		5FE0C5861295B09E001431C7 /* alglib */ = {
@@ -268,7 +296,7 @@
 		5FE0C5C71295B754001431C7 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
-				5FE0C6791295BF6B001431C7 /* tests.cpp */,
+				5FED85DF12D395B500BAC3A8 /* tests.cpp */,
 			);
 			name = "Unit Tests";
 			sourceTree = "<group>";
@@ -279,6 +307,26 @@
 				5FE0C6271295B967001431C7 /* gtest.framework */,
 			);
 			name = gtest;
+			sourceTree = "<group>";
+		};
+		5FED85FD12D3961100BAC3A8 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				5FED860212D3961F00BAC3A8 /* array_helper.h */,
+				5FED860312D3961F00BAC3A8 /* bayesnet.h */,
+				5FED860412D3961F00BAC3A8 /* model.h */,
+				5FED860512D3961F00BAC3A8 /* sim.h */,
+				5FED860612D3961F00BAC3A8 /* vbfa.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		5FED860C12D3962200BAC3A8 /* ossolog */ = {
+			isa = PBXGroup;
+			children = (
+				5FED860E12D3962C00BAC3A8 /* ossolog.h */,
+			);
+			name = ossolog;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -292,10 +340,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		5FED861612D3965700BAC3A8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB330C9B12C8F0760000432A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FED860712D3961F00BAC3A8 /* array_helper.h in Headers */,
+				5FED860812D3961F00BAC3A8 /* bayesnet.h in Headers */,
+				5FED860912D3961F00BAC3A8 /* model.h in Headers */,
+				5FED860A12D3961F00BAC3A8 /* sim.h in Headers */,
+				5FED860B12D3961F00BAC3A8 /* vbfa.h in Headers */,
+				5FED860F12D3962C00BAC3A8 /* ossolog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,11 +374,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				5FED862012D3966D00BAC3A8 /* PBXTargetDependency */,
 			);
 			name = tests;
 			productName = tests;
 			productReference = 5FE0C6721295BF3E001431C7 /* tests */;
 			productType = "com.apple.product-type.tool";
+		};
+		5FED861912D3965700BAC3A8 /* alglib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5FED862A12D396B700BAC3A8 /* Build configuration list for PBXNativeTarget "alglib" */;
+			buildPhases = (
+				5FED861612D3965700BAC3A8 /* Headers */,
+				5FED861712D3965700BAC3A8 /* Sources */,
+				5FED861812D3965700BAC3A8 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = alglib;
+			productName = alglib;
+			productReference = 5FED861A12D3965700BAC3A8 /* libalglib.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		8DD76F620486A84900D96B5E /* main */ = {
 			isa = PBXNativeTarget;
@@ -330,6 +409,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5FED861E12D3966400BAC3A8 /* PBXTargetDependency */,
 			);
 			name = main;
 			productInstallPath = "$(HOME)/bin";
@@ -348,6 +428,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5FED862212D3967600BAC3A8 /* PBXTargetDependency */,
 			);
 			name = peer;
 			productName = peer;
@@ -375,6 +456,7 @@
 			targets = (
 				8DD76F620486A84900D96B5E /* main */,
 				5FE0C6711295BF3E001431C7 /* tests */,
+				5FED861912D3965700BAC3A8 /* alglib */,
 				DB330C9E12C8F0760000432A /* peer */,
 			);
 		};
@@ -385,25 +467,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB8F30C412CA4CD3002F2831 /* array_helper.cpp in Sources */,
-				5FE0C67A1295BF6B001431C7 /* tests.cpp in Sources */,
-				9ABBF93A12A0238E004E2668 /* vbfa.cpp in Sources */,
-				5F7A868112BA8E7700C6E1F8 /* alglibinternal.cpp in Sources */,
-				5F7A868212BA8E7800C6E1F8 /* alglibmisc.cpp in Sources */,
-				5F7A868312BA8E7900C6E1F8 /* ap.cpp in Sources */,
-				5F7A868512BA8E7A00C6E1F8 /* bayesnet.cpp in Sources */,
-				5F7A868612BA8E7B00C6E1F8 /* dataanalysis.cpp in Sources */,
-				5F7A868712BA8E7C00C6E1F8 /* diffequations.cpp in Sources */,
-				5F7A868812BA8E7D00C6E1F8 /* fasttransforms.cpp in Sources */,
-				5F7A868912BA8E7E00C6E1F8 /* integration.cpp in Sources */,
-				5F7A868B12BA8E8400C6E1F8 /* interpolation.cpp in Sources */,
-				5F7A868C12BA8E8500C6E1F8 /* linalg.cpp in Sources */,
-				5F7A868E12BA8E8900C6E1F8 /* model.cpp in Sources */,
-				5F7A868F12BA8E8A00C6E1F8 /* optimization.cpp in Sources */,
-				5F7A869012BA8E8B00C6E1F8 /* solvers.cpp in Sources */,
-				5F7A869112BA8E8E00C6E1F8 /* specialfunctions.cpp in Sources */,
-				5F7A869212BA8E8E00C6E1F8 /* statistics.cpp in Sources */,
-				9A1BA03F12BA9166007DAA0E /* sim.cpp in Sources */,
+				5FED85E112D395B500BAC3A8 /* array_helper.cpp in Sources */,
+				5FED85E212D395B500BAC3A8 /* bayesnet.cpp in Sources */,
+				5FED85E412D395B500BAC3A8 /* model.cpp in Sources */,
+				5FED85E512D395B500BAC3A8 /* sim.cpp in Sources */,
+				5FED85E612D395B500BAC3A8 /* tests.cpp in Sources */,
+				5FED85E712D395B500BAC3A8 /* vbfa.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5FED861712D3965700BAC3A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FED865512D3993500BAC3A8 /* specialfunctions.cpp in Sources */,
+				5FED865612D3993600BAC3A8 /* solvers.cpp in Sources */,
+				5FED865712D3993700BAC3A8 /* optimization.cpp in Sources */,
+				5FED865812D3993800BAC3A8 /* linalg.cpp in Sources */,
+				5FED865912D3993900BAC3A8 /* interpolation.cpp in Sources */,
+				5FED865A12D3993A00BAC3A8 /* integration.cpp in Sources */,
+				5FED865B12D3993B00BAC3A8 /* fasttransforms.cpp in Sources */,
+				5FED865C12D3993C00BAC3A8 /* diffequations.cpp in Sources */,
+				5FED865D12D3993F00BAC3A8 /* dataanalysis.cpp in Sources */,
+				5FED865E12D3994300BAC3A8 /* statistics.cpp in Sources */,
+				5FED865F12D3994B00BAC3A8 /* ap.cpp in Sources */,
+				5FED866012D3994C00BAC3A8 /* alglibmisc.cpp in Sources */,
+				5FED866112D3994D00BAC3A8 /* alglibinternal.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,9 +500,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
-				9AA504651281A1E700ABCDDC /* model.cpp in Sources */,
-				9AA5046B1281A43500ABCDDC /* bayesnet.cpp in Sources */,
 				9AA505B71281F2BB00ABCDDC /* alglibinternal.cpp in Sources */,
 				9AA505B81281F2BB00ABCDDC /* alglibmisc.cpp in Sources */,
 				9AA505B91281F2BB00ABCDDC /* ap.cpp in Sources */,
@@ -427,9 +513,12 @@
 				9AA505C11281F2BB00ABCDDC /* solvers.cpp in Sources */,
 				9AA505C21281F2BB00ABCDDC /* specialfunctions.cpp in Sources */,
 				9AA505C31281F2BB00ABCDDC /* statistics.cpp in Sources */,
-				9ABBF93812A02354004E2668 /* vbfa.cpp in Sources */,
-				9A1BA04012BA9166007DAA0E /* sim.cpp in Sources */,
-				DB8F309A12CA4751002F2831 /* array_helper.cpp in Sources */,
+				5FED85E812D395B500BAC3A8 /* array_helper.cpp in Sources */,
+				5FED85E912D395B500BAC3A8 /* bayesnet.cpp in Sources */,
+				5FED85EA12D395B500BAC3A8 /* main.cpp in Sources */,
+				5FED85EB12D395B500BAC3A8 /* model.cpp in Sources */,
+				5FED85EC12D395B500BAC3A8 /* sim.cpp in Sources */,
+				5FED85EE12D395B500BAC3A8 /* vbfa.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,12 +526,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB8F30C112CA4CBB002F2831 /* array_helper.cpp in Sources */,
-				DB330CB012C8F0CD0000432A /* sim.cpp in Sources */,
-				DB330CB112C8F0CD0000432A /* bayesnet.cpp in Sources */,
-				DB330CB212C8F0CD0000432A /* model.cpp in Sources */,
-				DB330CB312C8F0CD0000432A /* main.cpp in Sources */,
-				DB330CB412C8F0CD0000432A /* vbfa.cpp in Sources */,
 				DB330CA312C8F0C00000432A /* alglibinternal.cpp in Sources */,
 				DB330CA412C8F0C00000432A /* alglibmisc.cpp in Sources */,
 				DB330CA512C8F0C00000432A /* ap.cpp in Sources */,
@@ -456,10 +539,33 @@
 				DB330CAD12C8F0C00000432A /* solvers.cpp in Sources */,
 				DB330CAE12C8F0C00000432A /* specialfunctions.cpp in Sources */,
 				DB330CAF12C8F0C00000432A /* statistics.cpp in Sources */,
+				5FED85EF12D395B500BAC3A8 /* array_helper.cpp in Sources */,
+				5FED85F012D395B500BAC3A8 /* bayesnet.cpp in Sources */,
+				5FED85F212D395B500BAC3A8 /* model.cpp in Sources */,
+				5FED85F312D395B500BAC3A8 /* sim.cpp in Sources */,
+				5FED85F512D395B500BAC3A8 /* vbfa.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5FED861E12D3966400BAC3A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5FED861912D3965700BAC3A8 /* alglib */;
+			targetProxy = 5FED861D12D3966400BAC3A8 /* PBXContainerItemProxy */;
+		};
+		5FED862012D3966D00BAC3A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5FED861912D3965700BAC3A8 /* alglib */;
+			targetProxy = 5FED861F12D3966D00BAC3A8 /* PBXContainerItemProxy */;
+		};
+		5FED862212D3967600BAC3A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5FED861912D3965700BAC3A8 /* alglib */;
+			targetProxy = 5FED862112D3967600BAC3A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB923208733DC60010E9CD /* Debug */ = {
@@ -511,6 +617,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/External/alglib/src\"",
+					"\"$(SRCROOT)/External/Eigen\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
@@ -524,6 +634,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/External/alglib/src\"",
+					"\"$(SRCROOT)/External/Eigen\"",
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 			};
@@ -546,7 +660,10 @@
 					"DEBUG=1",
 					"OSSOLOG_STDERR=1",
 				);
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/External\"";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/External/alglib/src",
+					"$(SRCROOT)/External",
+				);
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = tests;
@@ -566,11 +683,52 @@
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/External\"";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/External/alglib/src",
+					"$(SRCROOT)/External",
+				);
 				INSTALL_PATH = /usr/local/bin;
 				PREBINDING = NO;
 				PRODUCT_NAME = tests;
 				VALID_ARCHS = "i386 x86_64";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		5FED861B12D3965700BAC3A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = "";
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = alglib;
+			};
+			name = Debug;
+		};
+		5FED861C12D3965700BAC3A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				HEADER_SEARCH_PATHS = "";
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = alglib;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -596,6 +754,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				HEADER_SEARCH_PATHS = "${SRCROOT}/External";
 				PREBINDING = NO;
 				PRODUCT_NAME = peer;
 				ZERO_LINK = NO;
@@ -628,6 +787,15 @@
 			buildConfigurations = (
 				5FE0C6741295BF3F001431C7 /* Debug */,
 				5FE0C6751295BF3F001431C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5FED862A12D396B700BAC3A8 /* Build configuration list for PBXNativeTarget "alglib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5FED861B12D3965700BAC3A8 /* Debug */,
+				5FED861C12D3965700BAC3A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
