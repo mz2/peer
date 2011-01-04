@@ -3,6 +3,8 @@
 %{
 #define SWIG_FILE_WITH_INIT
 #include "vbfa.h"
+//use namessace:
+using namespace PEER;
 %}
 
 

@@ -161,12 +161,12 @@ function(fun, userData = NULL)
 
 
 setClass('C++Reference', contains = 'ExternalReference')
-setClass('_p_cWNode', contains = 'C++Reference')
-setClass('_p_cXNode', contains = 'C++Reference')
-setClass('_p_cAlphaNode', contains = 'C++Reference')
-setClass('_p_cEpsNode', contains = 'C++Reference')
-setClass('_p_cPhenoNode', contains = 'C++Reference')
-setClass('_p_cVBFA', contains = 'C++Reference')
+setClass('_p_PEER__cWNode', contains = 'C++Reference')
+setClass('_p_PEER__cXNode', contains = 'C++Reference')
+setClass('_p_PEER__cAlphaNode', contains = 'C++Reference')
+setClass('_p_PEER__cEpsNode', contains = 'C++Reference')
+setClass('_p_PEER__cPhenoNode', contains = 'C++Reference')
+setClass('_p_PEER__cVBFA', contains = 'C++Reference')
 
 
 
@@ -189,6 +189,35 @@ function(from) {if (!is.null(from$"__str__")) from$"__str__"()})
 setMethod('print', 'ExternalReference',
 function(x) {print(as(x, "character"))})
 
+# Start of getVerbose
+
+`getVerbose` = function(.copy = FALSE)
+{
+  ;.Call('R_swig_getVerbose', as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`getVerbose`, 'returnType') = 'integer'
+class(`getVerbose`) = c("SWIGFunction", class('getVerbose'))
+
+# Start of setVerbose
+
+`setVerbose` = function(verbose)
+{
+  verbose = as.integer(verbose); 
+  
+  if(length(verbose) > 1) {
+    warning("using only the first element of verbose");
+  };
+  
+  ;.Call('R_swig_setVerbose', verbose, PACKAGE='peer');
+  
+}
+
+attr(`setVerbose`, 'returnType') = 'void'
+attr(`setVerbose`, "inputTypes") = c('integer')
+class(`setVerbose`) = c("SWIGFunction", class('setVerbose'))
+
 # Start of logdet
 
 `logdet` = function(m, .copy = FALSE)
@@ -210,7 +239,7 @@ class(`logdet`) = c("SWIGFunction", class('logdet'))
 }
 
 attr(`cWNode_E2S_set`, 'returnType') = 'void'
-attr(`cWNode_E2S_set`, "inputTypes") = c('_p_cWNode', '_p_PMatrix')
+attr(`cWNode_E2S_set`, "inputTypes") = c('_p_PEER__cWNode', '_p_PMatrix')
 class(`cWNode_E2S_set`) = c("SWIGFunction", class('cWNode_E2S_set'))
 
 # Start of cWNode_E2S_get
@@ -225,7 +254,7 @@ class(`cWNode_E2S_set`) = c("SWIGFunction", class('cWNode_E2S_set'))
 }
 
 attr(`cWNode_E2S_get`, 'returnType') = '_p_PMatrix'
-attr(`cWNode_E2S_get`, "inputTypes") = c('_p_cWNode')
+attr(`cWNode_E2S_get`, "inputTypes") = c('_p_PEER__cWNode')
 class(`cWNode_E2S_get`) = c("SWIGFunction", class('cWNode_E2S_get'))
 
 # Start of cWNode_lndetcovS_set
@@ -237,7 +266,7 @@ class(`cWNode_E2S_get`) = c("SWIGFunction", class('cWNode_E2S_get'))
 }
 
 attr(`cWNode_lndetcovS_set`, 'returnType') = 'void'
-attr(`cWNode_lndetcovS_set`, "inputTypes") = c('_p_cWNode', 'numeric')
+attr(`cWNode_lndetcovS_set`, "inputTypes") = c('_p_PEER__cWNode', 'numeric')
 class(`cWNode_lndetcovS_set`) = c("SWIGFunction", class('cWNode_lndetcovS_set'))
 
 # Start of cWNode_lndetcovS_get
@@ -249,7 +278,7 @@ class(`cWNode_lndetcovS_set`) = c("SWIGFunction", class('cWNode_lndetcovS_set'))
 }
 
 attr(`cWNode_lndetcovS_get`, 'returnType') = 'numeric'
-attr(`cWNode_lndetcovS_get`, "inputTypes") = c('_p_cWNode')
+attr(`cWNode_lndetcovS_get`, "inputTypes") = c('_p_PEER__cWNode')
 class(`cWNode_lndetcovS_get`) = c("SWIGFunction", class('cWNode_lndetcovS_get'))
 
 # Start of new_cWNode
@@ -257,14 +286,14 @@ class(`cWNode_lndetcovS_get`) = c("SWIGFunction", class('cWNode_lndetcovS_get'))
 `cWNode__SWIG_0` = function()
 {
   ;ans = .Call('R_swig_new_cWNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_cWNode";
+  class(ans) <- "_p_PEER__cWNode";
   
   reg.finalizer(ans, delete_cWNode)
   ans
   
 }
 
-attr(`cWNode__SWIG_0`, 'returnType') = '_p_cWNode'
+attr(`cWNode__SWIG_0`, 'returnType') = '_p_PEER__cWNode'
 class(`cWNode__SWIG_0`) = c("SWIGFunction", class('cWNode__SWIG_0'))
 
 # Start of new_cWNode
@@ -272,14 +301,14 @@ class(`cWNode__SWIG_0`) = c("SWIGFunction", class('cWNode__SWIG_0'))
 `cWNode__SWIG_1` = function(E1)
 {
   ;ans = .Call('R_swig_new_cWNode__SWIG_1', E1, PACKAGE='peer');
-  class(ans) <- "_p_cWNode";
+  class(ans) <- "_p_PEER__cWNode";
   
   reg.finalizer(ans, delete_cWNode)
   ans
   
 }
 
-attr(`cWNode__SWIG_1`, 'returnType') = '_p_cWNode'
+attr(`cWNode__SWIG_1`, 'returnType') = '_p_PEER__cWNode'
 attr(`cWNode__SWIG_1`, "inputTypes") = c('_p_PMatrix')
 class(`cWNode__SWIG_1`) = c("SWIGFunction", class('cWNode__SWIG_1'))
 
@@ -308,7 +337,7 @@ class(`cWNode__SWIG_1`) = c("SWIGFunction", class('cWNode__SWIG_1'))
 }
 
 attr(`cWNode_update`, 'returnType') = 'void'
-attr(`cWNode_update`, "inputTypes") = c('_p_cWNode', '_p_cBayesNet')
+attr(`cWNode_update`, "inputTypes") = c('_p_PEER__cWNode', '_p_cBayesNet')
 class(`cWNode_update`) = c("SWIGFunction", class('cWNode_update'))
 
 # Start of cWNode_calcBound
@@ -320,7 +349,7 @@ class(`cWNode_update`) = c("SWIGFunction", class('cWNode_update'))
 }
 
 attr(`cWNode_calcBound`, 'returnType') = 'numeric'
-attr(`cWNode_calcBound`, "inputTypes") = c('_p_cWNode', '_p_cBayesNet')
+attr(`cWNode_calcBound`, "inputTypes") = c('_p_PEER__cWNode', '_p_cBayesNet')
 class(`cWNode_calcBound`) = c("SWIGFunction", class('cWNode_calcBound'))
 
 # Start of cWNode_entropy
@@ -332,7 +361,7 @@ class(`cWNode_calcBound`) = c("SWIGFunction", class('cWNode_calcBound'))
 }
 
 attr(`cWNode_entropy`, 'returnType') = 'numeric'
-attr(`cWNode_entropy`, "inputTypes") = c('_p_cWNode')
+attr(`cWNode_entropy`, "inputTypes") = c('_p_PEER__cWNode')
 class(`cWNode_entropy`) = c("SWIGFunction", class('cWNode_entropy'))
 
 # Start of cWNode_getE1
@@ -344,7 +373,7 @@ class(`cWNode_entropy`) = c("SWIGFunction", class('cWNode_entropy'))
 }
 
 attr(`cWNode_getE1`, 'returnType') = 'void'
-attr(`cWNode_getE1`, "inputTypes") = c('_p_cWNode')
+attr(`cWNode_getE1`, "inputTypes") = c('_p_PEER__cWNode')
 class(`cWNode_getE1`) = c("SWIGFunction", class('cWNode_getE1'))
 
 # Start of delete_cWNode
@@ -356,11 +385,11 @@ class(`cWNode_getE1`) = c("SWIGFunction", class('cWNode_getE1'))
 }
 
 attr(`delete_cWNode`, 'returnType') = 'void'
-attr(`delete_cWNode`, "inputTypes") = c('_p_cWNode')
+attr(`delete_cWNode`, "inputTypes") = c('_p_PEER__cWNode')
 class(`delete_cWNode`) = c("SWIGFunction", class('delete_cWNode'))
 
-# Start of accessor method for cWNode
-setMethod('$', '_p_cWNode', function(x, name)
+# Start of accessor method for PEER::cWNode
+setMethod('$', '_p_PEER__cWNode', function(x, name)
 
 {
   accessorFuns = list('E2S' = cWNode_E2S_get, 'lndetcovS' = cWNode_lndetcovS_get, 'update' = cWNode_update, 'calcBound' = cWNode_calcBound, 'entropy' = cWNode_entropy, 'getE1' = cWNode_getE1);
@@ -375,9 +404,9 @@ setMethod('$', '_p_cWNode', function(x, name)
 
 
 );
-# end of accessor method for cWNode
-# Start of accessor method for cWNode
-setMethod('$<-', '_p_cWNode', function(x, name, value)
+# end of accessor method for PEER::cWNode
+# Start of accessor method for PEER::cWNode
+setMethod('$<-', '_p_PEER__cWNode', function(x, name, value)
 
 {
   accessorFuns = list('E2S' = cWNode_E2S_set, 'lndetcovS' = cWNode_lndetcovS_set);
@@ -391,7 +420,7 @@ setMethod('$<-', '_p_cWNode', function(x, name, value)
 
 
 );
-setMethod('[[<-', c('_p_cWNode', 'character'),function(x, i, j, ..., value)
+setMethod('[[<-', c('_p_PEER__cWNode', 'character'),function(x, i, j, ..., value)
 
 {
   name = i;
@@ -406,8 +435,8 @@ setMethod('[[<-', c('_p_cWNode', 'character'),function(x, i, j, ..., value)
 
 
 );
-# end of accessor method for cWNode
-setMethod('delete', '_p_cWNode', function(obj) {delete_cWNode(obj)})
+# end of accessor method for PEER::cWNode
+setMethod('delete', '_p_PEER__cWNode', function(obj) {delete_PEER__cWNode(obj)})
 # Start of cXNode_E2S_set
 
 `cXNode_E2S_set` = function(self, s_E2S)
@@ -417,7 +446,7 @@ setMethod('delete', '_p_cWNode', function(obj) {delete_cWNode(obj)})
 }
 
 attr(`cXNode_E2S_set`, 'returnType') = 'void'
-attr(`cXNode_E2S_set`, "inputTypes") = c('_p_cXNode', '_p_PMatrix')
+attr(`cXNode_E2S_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
 class(`cXNode_E2S_set`) = c("SWIGFunction", class('cXNode_E2S_set'))
 
 # Start of cXNode_E2S_get
@@ -432,7 +461,7 @@ class(`cXNode_E2S_set`) = c("SWIGFunction", class('cXNode_E2S_set'))
 }
 
 attr(`cXNode_E2S_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_E2S_get`, "inputTypes") = c('_p_cXNode')
+attr(`cXNode_E2S_get`, "inputTypes") = c('_p_PEER__cXNode')
 class(`cXNode_E2S_get`) = c("SWIGFunction", class('cXNode_E2S_get'))
 
 # Start of cXNode_cov_set
@@ -444,7 +473,7 @@ class(`cXNode_E2S_get`) = c("SWIGFunction", class('cXNode_E2S_get'))
 }
 
 attr(`cXNode_cov_set`, 'returnType') = 'void'
-attr(`cXNode_cov_set`, "inputTypes") = c('_p_cXNode', '_p_PMatrix')
+attr(`cXNode_cov_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
 class(`cXNode_cov_set`) = c("SWIGFunction", class('cXNode_cov_set'))
 
 # Start of cXNode_cov_get
@@ -459,7 +488,7 @@ class(`cXNode_cov_set`) = c("SWIGFunction", class('cXNode_cov_set'))
 }
 
 attr(`cXNode_cov_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_cov_get`, "inputTypes") = c('_p_cXNode')
+attr(`cXNode_cov_get`, "inputTypes") = c('_p_PEER__cXNode')
 class(`cXNode_cov_get`) = c("SWIGFunction", class('cXNode_cov_get'))
 
 # Start of cXNode_prior_offset_set
@@ -471,7 +500,7 @@ class(`cXNode_cov_get`) = c("SWIGFunction", class('cXNode_cov_get'))
 }
 
 attr(`cXNode_prior_offset_set`, 'returnType') = 'void'
-attr(`cXNode_prior_offset_set`, "inputTypes") = c('_p_cXNode', '_p_PMatrix')
+attr(`cXNode_prior_offset_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
 class(`cXNode_prior_offset_set`) = c("SWIGFunction", class('cXNode_prior_offset_set'))
 
 # Start of cXNode_prior_offset_get
@@ -486,7 +515,7 @@ class(`cXNode_prior_offset_set`) = c("SWIGFunction", class('cXNode_prior_offset_
 }
 
 attr(`cXNode_prior_offset_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_prior_offset_get`, "inputTypes") = c('_p_cXNode')
+attr(`cXNode_prior_offset_get`, "inputTypes") = c('_p_PEER__cXNode')
 class(`cXNode_prior_offset_get`) = c("SWIGFunction", class('cXNode_prior_offset_get'))
 
 # Start of cXNode_prior_prec_set
@@ -498,7 +527,7 @@ class(`cXNode_prior_offset_get`) = c("SWIGFunction", class('cXNode_prior_offset_
 }
 
 attr(`cXNode_prior_prec_set`, 'returnType') = 'void'
-attr(`cXNode_prior_prec_set`, "inputTypes") = c('_p_cXNode', '_p_PMatrix')
+attr(`cXNode_prior_prec_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
 class(`cXNode_prior_prec_set`) = c("SWIGFunction", class('cXNode_prior_prec_set'))
 
 # Start of cXNode_prior_prec_get
@@ -513,7 +542,7 @@ class(`cXNode_prior_prec_set`) = c("SWIGFunction", class('cXNode_prior_prec_set'
 }
 
 attr(`cXNode_prior_prec_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_prior_prec_get`, "inputTypes") = c('_p_cXNode')
+attr(`cXNode_prior_prec_get`, "inputTypes") = c('_p_PEER__cXNode')
 class(`cXNode_prior_prec_get`) = c("SWIGFunction", class('cXNode_prior_prec_get'))
 
 # Start of new_cXNode
@@ -521,14 +550,14 @@ class(`cXNode_prior_prec_get`) = c("SWIGFunction", class('cXNode_prior_prec_get'
 `cXNode__SWIG_0` = function()
 {
   ;ans = .Call('R_swig_new_cXNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_cXNode";
+  class(ans) <- "_p_PEER__cXNode";
   
   reg.finalizer(ans, delete_cXNode)
   ans
   
 }
 
-attr(`cXNode__SWIG_0`, 'returnType') = '_p_cXNode'
+attr(`cXNode__SWIG_0`, 'returnType') = '_p_PEER__cXNode'
 class(`cXNode__SWIG_0`) = c("SWIGFunction", class('cXNode__SWIG_0'))
 
 # Start of new_cXNode
@@ -536,14 +565,14 @@ class(`cXNode__SWIG_0`) = c("SWIGFunction", class('cXNode__SWIG_0'))
 `cXNode__SWIG_1` = function(E1)
 {
   ;ans = .Call('R_swig_new_cXNode__SWIG_1', E1, PACKAGE='peer');
-  class(ans) <- "_p_cXNode";
+  class(ans) <- "_p_PEER__cXNode";
   
   reg.finalizer(ans, delete_cXNode)
   ans
   
 }
 
-attr(`cXNode__SWIG_1`, 'returnType') = '_p_cXNode'
+attr(`cXNode__SWIG_1`, 'returnType') = '_p_PEER__cXNode'
 attr(`cXNode__SWIG_1`, "inputTypes") = c('_p_PMatrix')
 class(`cXNode__SWIG_1`) = c("SWIGFunction", class('cXNode__SWIG_1'))
 
@@ -552,14 +581,14 @@ class(`cXNode__SWIG_1`) = c("SWIGFunction", class('cXNode__SWIG_1'))
 `cXNode__SWIG_2` = function(E1, prior_offset, prior_prec)
 {
   ;ans = .Call('R_swig_new_cXNode__SWIG_2', E1, prior_offset, prior_prec, PACKAGE='peer');
-  class(ans) <- "_p_cXNode";
+  class(ans) <- "_p_PEER__cXNode";
   
   reg.finalizer(ans, delete_cXNode)
   ans
   
 }
 
-attr(`cXNode__SWIG_2`, 'returnType') = '_p_cXNode'
+attr(`cXNode__SWIG_2`, 'returnType') = '_p_PEER__cXNode'
 attr(`cXNode__SWIG_2`, "inputTypes") = c('_p_PMatrix', '_p_PMatrix', '_p_PMatrix')
 class(`cXNode__SWIG_2`) = c("SWIGFunction", class('cXNode__SWIG_2'))
 
@@ -592,7 +621,7 @@ class(`cXNode__SWIG_2`) = c("SWIGFunction", class('cXNode__SWIG_2'))
 }
 
 attr(`cXNode_update`, 'returnType') = 'void'
-attr(`cXNode_update`, "inputTypes") = c('_p_cXNode', '_p_cBayesNet')
+attr(`cXNode_update`, "inputTypes") = c('_p_PEER__cXNode', '_p_cBayesNet')
 class(`cXNode_update`) = c("SWIGFunction", class('cXNode_update'))
 
 # Start of cXNode_calcBound
@@ -604,7 +633,7 @@ class(`cXNode_update`) = c("SWIGFunction", class('cXNode_update'))
 }
 
 attr(`cXNode_calcBound`, 'returnType') = 'numeric'
-attr(`cXNode_calcBound`, "inputTypes") = c('_p_cXNode', '_p_cBayesNet')
+attr(`cXNode_calcBound`, "inputTypes") = c('_p_PEER__cXNode', '_p_cBayesNet')
 class(`cXNode_calcBound`) = c("SWIGFunction", class('cXNode_calcBound'))
 
 # Start of cXNode_entropy
@@ -616,7 +645,7 @@ class(`cXNode_calcBound`) = c("SWIGFunction", class('cXNode_calcBound'))
 }
 
 attr(`cXNode_entropy`, 'returnType') = 'numeric'
-attr(`cXNode_entropy`, "inputTypes") = c('_p_cXNode')
+attr(`cXNode_entropy`, "inputTypes") = c('_p_PEER__cXNode')
 class(`cXNode_entropy`) = c("SWIGFunction", class('cXNode_entropy'))
 
 # Start of cXNode_getE1
@@ -628,7 +657,7 @@ class(`cXNode_entropy`) = c("SWIGFunction", class('cXNode_entropy'))
 }
 
 attr(`cXNode_getE1`, 'returnType') = 'void'
-attr(`cXNode_getE1`, "inputTypes") = c('_p_cXNode')
+attr(`cXNode_getE1`, "inputTypes") = c('_p_PEER__cXNode')
 class(`cXNode_getE1`) = c("SWIGFunction", class('cXNode_getE1'))
 
 # Start of delete_cXNode
@@ -640,11 +669,11 @@ class(`cXNode_getE1`) = c("SWIGFunction", class('cXNode_getE1'))
 }
 
 attr(`delete_cXNode`, 'returnType') = 'void'
-attr(`delete_cXNode`, "inputTypes") = c('_p_cXNode')
+attr(`delete_cXNode`, "inputTypes") = c('_p_PEER__cXNode')
 class(`delete_cXNode`) = c("SWIGFunction", class('delete_cXNode'))
 
-# Start of accessor method for cXNode
-setMethod('$', '_p_cXNode', function(x, name)
+# Start of accessor method for PEER::cXNode
+setMethod('$', '_p_PEER__cXNode', function(x, name)
 
 {
   accessorFuns = list('E2S' = cXNode_E2S_get, 'cov' = cXNode_cov_get, 'prior_offset' = cXNode_prior_offset_get, 'prior_prec' = cXNode_prior_prec_get, 'update' = cXNode_update, 'calcBound' = cXNode_calcBound, 'entropy' = cXNode_entropy, 'getE1' = cXNode_getE1);
@@ -659,9 +688,9 @@ setMethod('$', '_p_cXNode', function(x, name)
 
 
 );
-# end of accessor method for cXNode
-# Start of accessor method for cXNode
-setMethod('$<-', '_p_cXNode', function(x, name, value)
+# end of accessor method for PEER::cXNode
+# Start of accessor method for PEER::cXNode
+setMethod('$<-', '_p_PEER__cXNode', function(x, name, value)
 
 {
   accessorFuns = list('E2S' = cXNode_E2S_set, 'cov' = cXNode_cov_set, 'prior_offset' = cXNode_prior_offset_set, 'prior_prec' = cXNode_prior_prec_set);
@@ -675,7 +704,7 @@ setMethod('$<-', '_p_cXNode', function(x, name, value)
 
 
 );
-setMethod('[[<-', c('_p_cXNode', 'character'),function(x, i, j, ..., value)
+setMethod('[[<-', c('_p_PEER__cXNode', 'character'),function(x, i, j, ..., value)
 
 {
   name = i;
@@ -690,21 +719,21 @@ setMethod('[[<-', c('_p_cXNode', 'character'),function(x, i, j, ..., value)
 
 
 );
-# end of accessor method for cXNode
-setMethod('delete', '_p_cXNode', function(obj) {delete_cXNode(obj)})
+# end of accessor method for PEER::cXNode
+setMethod('delete', '_p_PEER__cXNode', function(obj) {delete_PEER__cXNode(obj)})
 # Start of new_cAlphaNode
 
 `cAlphaNode__SWIG_0` = function()
 {
   ;ans = .Call('R_swig_new_cAlphaNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_cAlphaNode";
+  class(ans) <- "_p_PEER__cAlphaNode";
   
   reg.finalizer(ans, delete_cAlphaNode)
   ans
   
 }
 
-attr(`cAlphaNode__SWIG_0`, 'returnType') = '_p_cAlphaNode'
+attr(`cAlphaNode__SWIG_0`, 'returnType') = '_p_PEER__cAlphaNode'
 class(`cAlphaNode__SWIG_0`) = c("SWIGFunction", class('cAlphaNode__SWIG_0'))
 
 # Start of new_cAlphaNode
@@ -721,14 +750,14 @@ class(`cAlphaNode__SWIG_0`) = c("SWIGFunction", class('cAlphaNode__SWIG_0'))
   
   
   ;ans = .Call('R_swig_new_cAlphaNode__SWIG_1', dim, pa, pb, E1, PACKAGE='peer');
-  class(ans) <- "_p_cAlphaNode";
+  class(ans) <- "_p_PEER__cAlphaNode";
   
   reg.finalizer(ans, delete_cAlphaNode)
   ans
   
 }
 
-attr(`cAlphaNode__SWIG_1`, 'returnType') = '_p_cAlphaNode'
+attr(`cAlphaNode__SWIG_1`, 'returnType') = '_p_PEER__cAlphaNode'
 attr(`cAlphaNode__SWIG_1`, "inputTypes") = c('integer', 'numeric', 'numeric', '_p_PMatrix')
 class(`cAlphaNode__SWIG_1`) = c("SWIGFunction", class('cAlphaNode__SWIG_1'))
 
@@ -757,7 +786,7 @@ class(`cAlphaNode__SWIG_1`) = c("SWIGFunction", class('cAlphaNode__SWIG_1'))
 }
 
 attr(`cAlphaNode_update`, 'returnType') = 'void'
-attr(`cAlphaNode_update`, "inputTypes") = c('_p_cAlphaNode', '_p_cBayesNet')
+attr(`cAlphaNode_update`, "inputTypes") = c('_p_PEER__cAlphaNode', '_p_cBayesNet')
 class(`cAlphaNode_update`) = c("SWIGFunction", class('cAlphaNode_update'))
 
 # Start of cAlphaNode_getE1
@@ -769,7 +798,7 @@ class(`cAlphaNode_update`) = c("SWIGFunction", class('cAlphaNode_update'))
 }
 
 attr(`cAlphaNode_getE1`, 'returnType') = 'void'
-attr(`cAlphaNode_getE1`, "inputTypes") = c('_p_cAlphaNode')
+attr(`cAlphaNode_getE1`, "inputTypes") = c('_p_PEER__cAlphaNode')
 class(`cAlphaNode_getE1`) = c("SWIGFunction", class('cAlphaNode_getE1'))
 
 # Start of delete_cAlphaNode
@@ -781,11 +810,11 @@ class(`cAlphaNode_getE1`) = c("SWIGFunction", class('cAlphaNode_getE1'))
 }
 
 attr(`delete_cAlphaNode`, 'returnType') = 'void'
-attr(`delete_cAlphaNode`, "inputTypes") = c('_p_cAlphaNode')
+attr(`delete_cAlphaNode`, "inputTypes") = c('_p_PEER__cAlphaNode')
 class(`delete_cAlphaNode`) = c("SWIGFunction", class('delete_cAlphaNode'))
 
-# Start of accessor method for cAlphaNode
-setMethod('$', '_p_cAlphaNode', function(x, name)
+# Start of accessor method for PEER::cAlphaNode
+setMethod('$', '_p_PEER__cAlphaNode', function(x, name)
 
 {
   accessorFuns = list('update' = cAlphaNode_update, 'getE1' = cAlphaNode_getE1);
@@ -799,21 +828,21 @@ setMethod('$', '_p_cAlphaNode', function(x, name)
 
 
 );
-# end of accessor method for cAlphaNode
-setMethod('delete', '_p_cAlphaNode', function(obj) {delete_cAlphaNode(obj)})
+# end of accessor method for PEER::cAlphaNode
+setMethod('delete', '_p_PEER__cAlphaNode', function(obj) {delete_PEER__cAlphaNode(obj)})
 # Start of new_cEpsNode
 
 `cEpsNode__SWIG_0` = function()
 {
   ;ans = .Call('R_swig_new_cEpsNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_cEpsNode";
+  class(ans) <- "_p_PEER__cEpsNode";
   
   reg.finalizer(ans, delete_cEpsNode)
   ans
   
 }
 
-attr(`cEpsNode__SWIG_0`, 'returnType') = '_p_cEpsNode'
+attr(`cEpsNode__SWIG_0`, 'returnType') = '_p_PEER__cEpsNode'
 class(`cEpsNode__SWIG_0`) = c("SWIGFunction", class('cEpsNode__SWIG_0'))
 
 # Start of new_cEpsNode
@@ -830,14 +859,14 @@ class(`cEpsNode__SWIG_0`) = c("SWIGFunction", class('cEpsNode__SWIG_0'))
   
   
   ;ans = .Call('R_swig_new_cEpsNode__SWIG_1', dim, pa, pb, E1, PACKAGE='peer');
-  class(ans) <- "_p_cEpsNode";
+  class(ans) <- "_p_PEER__cEpsNode";
   
   reg.finalizer(ans, delete_cEpsNode)
   ans
   
 }
 
-attr(`cEpsNode__SWIG_1`, 'returnType') = '_p_cEpsNode'
+attr(`cEpsNode__SWIG_1`, 'returnType') = '_p_PEER__cEpsNode'
 attr(`cEpsNode__SWIG_1`, "inputTypes") = c('integer', 'numeric', 'numeric', '_p_PMatrix')
 class(`cEpsNode__SWIG_1`) = c("SWIGFunction", class('cEpsNode__SWIG_1'))
 
@@ -866,7 +895,7 @@ class(`cEpsNode__SWIG_1`) = c("SWIGFunction", class('cEpsNode__SWIG_1'))
 }
 
 attr(`cEpsNode_update`, 'returnType') = 'void'
-attr(`cEpsNode_update`, "inputTypes") = c('_p_cEpsNode', '_p_cBayesNet')
+attr(`cEpsNode_update`, "inputTypes") = c('_p_PEER__cEpsNode', '_p_cBayesNet')
 class(`cEpsNode_update`) = c("SWIGFunction", class('cEpsNode_update'))
 
 # Start of cEpsNode_getE1
@@ -878,7 +907,7 @@ class(`cEpsNode_update`) = c("SWIGFunction", class('cEpsNode_update'))
 }
 
 attr(`cEpsNode_getE1`, 'returnType') = 'void'
-attr(`cEpsNode_getE1`, "inputTypes") = c('_p_cEpsNode')
+attr(`cEpsNode_getE1`, "inputTypes") = c('_p_PEER__cEpsNode')
 class(`cEpsNode_getE1`) = c("SWIGFunction", class('cEpsNode_getE1'))
 
 # Start of delete_cEpsNode
@@ -890,11 +919,11 @@ class(`cEpsNode_getE1`) = c("SWIGFunction", class('cEpsNode_getE1'))
 }
 
 attr(`delete_cEpsNode`, 'returnType') = 'void'
-attr(`delete_cEpsNode`, "inputTypes") = c('_p_cEpsNode')
+attr(`delete_cEpsNode`, "inputTypes") = c('_p_PEER__cEpsNode')
 class(`delete_cEpsNode`) = c("SWIGFunction", class('delete_cEpsNode'))
 
-# Start of accessor method for cEpsNode
-setMethod('$', '_p_cEpsNode', function(x, name)
+# Start of accessor method for PEER::cEpsNode
+setMethod('$', '_p_PEER__cEpsNode', function(x, name)
 
 {
   accessorFuns = list('update' = cEpsNode_update, 'getE1' = cEpsNode_getE1);
@@ -908,8 +937,8 @@ setMethod('$', '_p_cEpsNode', function(x, name)
 
 
 );
-# end of accessor method for cEpsNode
-setMethod('delete', '_p_cEpsNode', function(obj) {delete_cEpsNode(obj)})
+# end of accessor method for PEER::cEpsNode
+setMethod('delete', '_p_PEER__cEpsNode', function(obj) {delete_PEER__cEpsNode(obj)})
 # Start of cPhenoNode_E1_set
 
 `cPhenoNode_E1_set` = function(self, s_E1)
@@ -919,7 +948,7 @@ setMethod('delete', '_p_cEpsNode', function(obj) {delete_cEpsNode(obj)})
 }
 
 attr(`cPhenoNode_E1_set`, 'returnType') = 'void'
-attr(`cPhenoNode_E1_set`, "inputTypes") = c('_p_cPhenoNode', '_p_PMatrix')
+attr(`cPhenoNode_E1_set`, "inputTypes") = c('_p_PEER__cPhenoNode', '_p_PMatrix')
 class(`cPhenoNode_E1_set`) = c("SWIGFunction", class('cPhenoNode_E1_set'))
 
 # Start of cPhenoNode_E1_get
@@ -934,7 +963,7 @@ class(`cPhenoNode_E1_set`) = c("SWIGFunction", class('cPhenoNode_E1_set'))
 }
 
 attr(`cPhenoNode_E1_get`, 'returnType') = '_p_PMatrix'
-attr(`cPhenoNode_E1_get`, "inputTypes") = c('_p_cPhenoNode')
+attr(`cPhenoNode_E1_get`, "inputTypes") = c('_p_PEER__cPhenoNode')
 class(`cPhenoNode_E1_get`) = c("SWIGFunction", class('cPhenoNode_E1_get'))
 
 # Start of cPhenoNode_E2_set
@@ -946,7 +975,7 @@ class(`cPhenoNode_E1_get`) = c("SWIGFunction", class('cPhenoNode_E1_get'))
 }
 
 attr(`cPhenoNode_E2_set`, 'returnType') = 'void'
-attr(`cPhenoNode_E2_set`, "inputTypes") = c('_p_cPhenoNode', '_p_PMatrix')
+attr(`cPhenoNode_E2_set`, "inputTypes") = c('_p_PEER__cPhenoNode', '_p_PMatrix')
 class(`cPhenoNode_E2_set`) = c("SWIGFunction", class('cPhenoNode_E2_set'))
 
 # Start of cPhenoNode_E2_get
@@ -961,7 +990,7 @@ class(`cPhenoNode_E2_set`) = c("SWIGFunction", class('cPhenoNode_E2_set'))
 }
 
 attr(`cPhenoNode_E2_get`, 'returnType') = '_p_PMatrix'
-attr(`cPhenoNode_E2_get`, "inputTypes") = c('_p_cPhenoNode')
+attr(`cPhenoNode_E2_get`, "inputTypes") = c('_p_PEER__cPhenoNode')
 class(`cPhenoNode_E2_get`) = c("SWIGFunction", class('cPhenoNode_E2_get'))
 
 # Start of new_cPhenoNode
@@ -969,14 +998,14 @@ class(`cPhenoNode_E2_get`) = c("SWIGFunction", class('cPhenoNode_E2_get'))
 `cPhenoNode__SWIG_0` = function()
 {
   ;ans = .Call('R_swig_new_cPhenoNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_cPhenoNode";
+  class(ans) <- "_p_PEER__cPhenoNode";
   
   reg.finalizer(ans, delete_cPhenoNode)
   ans
   
 }
 
-attr(`cPhenoNode__SWIG_0`, 'returnType') = '_p_cPhenoNode'
+attr(`cPhenoNode__SWIG_0`, 'returnType') = '_p_PEER__cPhenoNode'
 class(`cPhenoNode__SWIG_0`) = c("SWIGFunction", class('cPhenoNode__SWIG_0'))
 
 # Start of new_cPhenoNode
@@ -984,14 +1013,14 @@ class(`cPhenoNode__SWIG_0`) = c("SWIGFunction", class('cPhenoNode__SWIG_0'))
 `cPhenoNode__SWIG_1` = function(pheno_mean, pheno_var)
 {
   ;ans = .Call('R_swig_new_cPhenoNode__SWIG_1', pheno_mean, pheno_var, PACKAGE='peer');
-  class(ans) <- "_p_cPhenoNode";
+  class(ans) <- "_p_PEER__cPhenoNode";
   
   reg.finalizer(ans, delete_cPhenoNode)
   ans
   
 }
 
-attr(`cPhenoNode__SWIG_1`, 'returnType') = '_p_cPhenoNode'
+attr(`cPhenoNode__SWIG_1`, 'returnType') = '_p_PEER__cPhenoNode'
 attr(`cPhenoNode__SWIG_1`, "inputTypes") = c('_p_PMatrix', '_p_PMatrix')
 class(`cPhenoNode__SWIG_1`) = c("SWIGFunction", class('cPhenoNode__SWIG_1'))
 
@@ -1020,7 +1049,7 @@ class(`cPhenoNode__SWIG_1`) = c("SWIGFunction", class('cPhenoNode__SWIG_1'))
 }
 
 attr(`cPhenoNode_getE1`, 'returnType') = 'void'
-attr(`cPhenoNode_getE1`, "inputTypes") = c('_p_cPhenoNode')
+attr(`cPhenoNode_getE1`, "inputTypes") = c('_p_PEER__cPhenoNode')
 class(`cPhenoNode_getE1`) = c("SWIGFunction", class('cPhenoNode_getE1'))
 
 # Start of delete_cPhenoNode
@@ -1032,11 +1061,11 @@ class(`cPhenoNode_getE1`) = c("SWIGFunction", class('cPhenoNode_getE1'))
 }
 
 attr(`delete_cPhenoNode`, 'returnType') = 'void'
-attr(`delete_cPhenoNode`, "inputTypes") = c('_p_cPhenoNode')
+attr(`delete_cPhenoNode`, "inputTypes") = c('_p_PEER__cPhenoNode')
 class(`delete_cPhenoNode`) = c("SWIGFunction", class('delete_cPhenoNode'))
 
-# Start of accessor method for cPhenoNode
-setMethod('$', '_p_cPhenoNode', function(x, name)
+# Start of accessor method for PEER::cPhenoNode
+setMethod('$', '_p_PEER__cPhenoNode', function(x, name)
 
 {
   accessorFuns = list('E1' = cPhenoNode_E1_get, 'E2' = cPhenoNode_E2_get, 'getE1' = cPhenoNode_getE1);
@@ -1051,9 +1080,9 @@ setMethod('$', '_p_cPhenoNode', function(x, name)
 
 
 );
-# end of accessor method for cPhenoNode
-# Start of accessor method for cPhenoNode
-setMethod('$<-', '_p_cPhenoNode', function(x, name, value)
+# end of accessor method for PEER::cPhenoNode
+# Start of accessor method for PEER::cPhenoNode
+setMethod('$<-', '_p_PEER__cPhenoNode', function(x, name, value)
 
 {
   accessorFuns = list('E1' = cPhenoNode_E1_set, 'E2' = cPhenoNode_E2_set);
@@ -1067,7 +1096,7 @@ setMethod('$<-', '_p_cPhenoNode', function(x, name, value)
 
 
 );
-setMethod('[[<-', c('_p_cPhenoNode', 'character'),function(x, i, j, ..., value)
+setMethod('[[<-', c('_p_PEER__cPhenoNode', 'character'),function(x, i, j, ..., value)
 
 {
   name = i;
@@ -1082,9 +1111,9 @@ setMethod('[[<-', c('_p_cPhenoNode', 'character'),function(x, i, j, ..., value)
 
 
 );
-# end of accessor method for cPhenoNode
-setMethod('delete', '_p_cPhenoNode', function(obj) {delete_cPhenoNode(obj)})
-defineEnumeration('_intialisation_types',
+# end of accessor method for PEER::cPhenoNode
+setMethod('delete', '_p_PEER__cPhenoNode', function(obj) {delete_PEER__cPhenoNode(obj)})
+defineEnumeration('_PEER__intialisation_types',
                     .values = c(
                         'PCA' = 0
 ))
@@ -1097,7 +1126,7 @@ defineEnumeration('_intialisation_types',
 }
 
 attr(`VBFA_W_set`, 'returnType') = 'void'
-attr(`VBFA_W_set`, "inputTypes") = c('_p_cVBFA', '_p_cWNode')
+attr(`VBFA_W_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cWNode')
 class(`VBFA_W_set`) = c("SWIGFunction", class('VBFA_W_set'))
 
 # Start of VBFA_W_get
@@ -1105,14 +1134,14 @@ class(`VBFA_W_set`) = c("SWIGFunction", class('VBFA_W_set'))
 `VBFA_W_get` = function(self)
 {
   ;ans = .Call('R_swig_VBFA_W_get', self, PACKAGE='peer');
-  class(ans) <- "_p_cWNode";
+  class(ans) <- "_p_PEER__cWNode";
   
   ans
   
 }
 
-attr(`VBFA_W_get`, 'returnType') = '_p_cWNode'
-attr(`VBFA_W_get`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_W_get`, 'returnType') = '_p_PEER__cWNode'
+attr(`VBFA_W_get`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_W_get`) = c("SWIGFunction", class('VBFA_W_get'))
 
 # Start of VBFA_X_set
@@ -1124,7 +1153,7 @@ class(`VBFA_W_get`) = c("SWIGFunction", class('VBFA_W_get'))
 }
 
 attr(`VBFA_X_set`, 'returnType') = 'void'
-attr(`VBFA_X_set`, "inputTypes") = c('_p_cVBFA', '_p_cXNode')
+attr(`VBFA_X_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cXNode')
 class(`VBFA_X_set`) = c("SWIGFunction", class('VBFA_X_set'))
 
 # Start of VBFA_X_get
@@ -1132,14 +1161,14 @@ class(`VBFA_X_set`) = c("SWIGFunction", class('VBFA_X_set'))
 `VBFA_X_get` = function(self)
 {
   ;ans = .Call('R_swig_VBFA_X_get', self, PACKAGE='peer');
-  class(ans) <- "_p_cXNode";
+  class(ans) <- "_p_PEER__cXNode";
   
   ans
   
 }
 
-attr(`VBFA_X_get`, 'returnType') = '_p_cXNode'
-attr(`VBFA_X_get`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_X_get`, 'returnType') = '_p_PEER__cXNode'
+attr(`VBFA_X_get`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_X_get`) = c("SWIGFunction", class('VBFA_X_get'))
 
 # Start of VBFA_Eps_set
@@ -1151,7 +1180,7 @@ class(`VBFA_X_get`) = c("SWIGFunction", class('VBFA_X_get'))
 }
 
 attr(`VBFA_Eps_set`, 'returnType') = 'void'
-attr(`VBFA_Eps_set`, "inputTypes") = c('_p_cVBFA', '_p_cEpsNode')
+attr(`VBFA_Eps_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cEpsNode')
 class(`VBFA_Eps_set`) = c("SWIGFunction", class('VBFA_Eps_set'))
 
 # Start of VBFA_Eps_get
@@ -1159,14 +1188,14 @@ class(`VBFA_Eps_set`) = c("SWIGFunction", class('VBFA_Eps_set'))
 `VBFA_Eps_get` = function(self)
 {
   ;ans = .Call('R_swig_VBFA_Eps_get', self, PACKAGE='peer');
-  class(ans) <- "_p_cEpsNode";
+  class(ans) <- "_p_PEER__cEpsNode";
   
   ans
   
 }
 
-attr(`VBFA_Eps_get`, 'returnType') = '_p_cEpsNode'
-attr(`VBFA_Eps_get`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_Eps_get`, 'returnType') = '_p_PEER__cEpsNode'
+attr(`VBFA_Eps_get`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_Eps_get`) = c("SWIGFunction", class('VBFA_Eps_get'))
 
 # Start of VBFA_Alpha_set
@@ -1178,7 +1207,7 @@ class(`VBFA_Eps_get`) = c("SWIGFunction", class('VBFA_Eps_get'))
 }
 
 attr(`VBFA_Alpha_set`, 'returnType') = 'void'
-attr(`VBFA_Alpha_set`, "inputTypes") = c('_p_cVBFA', '_p_cAlphaNode')
+attr(`VBFA_Alpha_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cAlphaNode')
 class(`VBFA_Alpha_set`) = c("SWIGFunction", class('VBFA_Alpha_set'))
 
 # Start of VBFA_Alpha_get
@@ -1186,14 +1215,14 @@ class(`VBFA_Alpha_set`) = c("SWIGFunction", class('VBFA_Alpha_set'))
 `VBFA_Alpha_get` = function(self)
 {
   ;ans = .Call('R_swig_VBFA_Alpha_get', self, PACKAGE='peer');
-  class(ans) <- "_p_cAlphaNode";
+  class(ans) <- "_p_PEER__cAlphaNode";
   
   ans
   
 }
 
-attr(`VBFA_Alpha_get`, 'returnType') = '_p_cAlphaNode'
-attr(`VBFA_Alpha_get`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_Alpha_get`, 'returnType') = '_p_PEER__cAlphaNode'
+attr(`VBFA_Alpha_get`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_Alpha_get`) = c("SWIGFunction", class('VBFA_Alpha_get'))
 
 # Start of VBFA_pheno_set
@@ -1205,7 +1234,7 @@ class(`VBFA_Alpha_get`) = c("SWIGFunction", class('VBFA_Alpha_get'))
 }
 
 attr(`VBFA_pheno_set`, 'returnType') = 'void'
-attr(`VBFA_pheno_set`, "inputTypes") = c('_p_cVBFA', '_p_cPhenoNode')
+attr(`VBFA_pheno_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cPhenoNode')
 class(`VBFA_pheno_set`) = c("SWIGFunction", class('VBFA_pheno_set'))
 
 # Start of VBFA_pheno_get
@@ -1213,14 +1242,14 @@ class(`VBFA_pheno_set`) = c("SWIGFunction", class('VBFA_pheno_set'))
 `VBFA_pheno_get` = function(self)
 {
   ;ans = .Call('R_swig_VBFA_pheno_get', self, PACKAGE='peer');
-  class(ans) <- "_p_cPhenoNode";
+  class(ans) <- "_p_PEER__cPhenoNode";
   
   ans
   
 }
 
-attr(`VBFA_pheno_get`, 'returnType') = '_p_cPhenoNode'
-attr(`VBFA_pheno_get`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_pheno_get`, 'returnType') = '_p_PEER__cPhenoNode'
+attr(`VBFA_pheno_get`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_pheno_get`) = c("SWIGFunction", class('VBFA_pheno_get'))
 
 # Start of new_VBFA
@@ -1228,14 +1257,14 @@ class(`VBFA_pheno_get`) = c("SWIGFunction", class('VBFA_pheno_get'))
 `VBFA` = function()
 {
   ;ans = .Call('R_swig_new_VBFA', PACKAGE='peer');
-  class(ans) <- "_p_cVBFA";
+  class(ans) <- "_p_PEER__cVBFA";
   
   reg.finalizer(ans, delete_VBFA)
   ans
   
 }
 
-attr(`VBFA`, 'returnType') = '_p_cVBFA'
+attr(`VBFA`, 'returnType') = '_p_PEER__cVBFA'
 class(`VBFA`) = c("SWIGFunction", class('VBFA'))
 
 # Start of VBFA_getNj
@@ -1247,7 +1276,7 @@ class(`VBFA`) = c("SWIGFunction", class('VBFA'))
 }
 
 attr(`VBFA_getNj`, 'returnType') = 'integer'
-attr(`VBFA_getNj`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getNj`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getNj`) = c("SWIGFunction", class('VBFA_getNj'))
 
 # Start of VBFA_getNp
@@ -1259,7 +1288,7 @@ class(`VBFA_getNj`) = c("SWIGFunction", class('VBFA_getNj'))
 }
 
 attr(`VBFA_getNp`, 'returnType') = 'integer'
-attr(`VBFA_getNp`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getNp`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getNp`) = c("SWIGFunction", class('VBFA_getNp'))
 
 # Start of VBFA_getNk
@@ -1271,7 +1300,7 @@ class(`VBFA_getNp`) = c("SWIGFunction", class('VBFA_getNp'))
 }
 
 attr(`VBFA_getNk`, 'returnType') = 'integer'
-attr(`VBFA_getNk`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getNk`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getNk`) = c("SWIGFunction", class('VBFA_getNk'))
 
 # Start of VBFA_getNc
@@ -1283,20 +1312,32 @@ class(`VBFA_getNk`) = c("SWIGFunction", class('VBFA_getNk'))
 }
 
 attr(`VBFA_getNc`, 'returnType') = 'integer'
-attr(`VBFA_getNc`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getNc`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getNc`) = c("SWIGFunction", class('VBFA_getNc'))
 
-# Start of VBFA_getNiterations
+# Start of VBFA_getNmax_iterations
 
-`VBFA_getNiterations` = function(self, .copy = FALSE)
+`VBFA_getNmax_iterations` = function(self, .copy = FALSE)
 {
-  ;.Call('R_swig_VBFA_getNiterations', self, as.logical(.copy), PACKAGE='peer');
+  ;.Call('R_swig_VBFA_getNmax_iterations', self, as.logical(.copy), PACKAGE='peer');
   
 }
 
-attr(`VBFA_getNiterations`, 'returnType') = 'integer'
-attr(`VBFA_getNiterations`, "inputTypes") = c('_p_cVBFA')
-class(`VBFA_getNiterations`) = c("SWIGFunction", class('VBFA_getNiterations'))
+attr(`VBFA_getNmax_iterations`, 'returnType') = 'integer'
+attr(`VBFA_getNmax_iterations`, "inputTypes") = c('_p_PEER__cVBFA')
+class(`VBFA_getNmax_iterations`) = c("SWIGFunction", class('VBFA_getNmax_iterations'))
+
+# Start of VBFA_getTolerance
+
+`VBFA_getTolerance` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_VBFA_getTolerance', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`VBFA_getTolerance`, 'returnType') = 'numeric'
+attr(`VBFA_getTolerance`, "inputTypes") = c('_p_PEER__cVBFA')
+class(`VBFA_getTolerance`) = c("SWIGFunction", class('VBFA_getTolerance'))
 
 # Start of VBFA_getAdd_mean
 
@@ -1307,7 +1348,7 @@ class(`VBFA_getNiterations`) = c("SWIGFunction", class('VBFA_getNiterations'))
 }
 
 attr(`VBFA_getAdd_mean`, 'returnType') = 'logical'
-attr(`VBFA_getAdd_mean`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getAdd_mean`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getAdd_mean`) = c("SWIGFunction", class('VBFA_getAdd_mean'))
 
 # Start of VBFA_setNk
@@ -1325,7 +1366,7 @@ class(`VBFA_getAdd_mean`) = c("SWIGFunction", class('VBFA_getAdd_mean'))
 }
 
 attr(`VBFA_setNk`, 'returnType') = 'void'
-attr(`VBFA_setNk`, "inputTypes") = c('_p_cVBFA', 'integer')
+attr(`VBFA_setNk`, "inputTypes") = c('_p_PEER__cVBFA', 'integer')
 class(`VBFA_setNk`) = c("SWIGFunction", class('VBFA_setNk'))
 
 # Start of VBFA_setAdd_mean
@@ -1338,26 +1379,38 @@ class(`VBFA_setNk`) = c("SWIGFunction", class('VBFA_setNk'))
 }
 
 attr(`VBFA_setAdd_mean`, 'returnType') = 'void'
-attr(`VBFA_setAdd_mean`, "inputTypes") = c('_p_cVBFA', 'logical')
+attr(`VBFA_setAdd_mean`, "inputTypes") = c('_p_PEER__cVBFA', 'logical')
 class(`VBFA_setAdd_mean`) = c("SWIGFunction", class('VBFA_setAdd_mean'))
 
-# Start of VBFA_setNiterations
+# Start of VBFA_setNmax_iterations
 
-`VBFA_setNiterations` = function(self, Niterations)
+`VBFA_setNmax_iterations` = function(self, Nmax_iterations)
 {
-  Niterations = as.integer(Niterations); 
+  Nmax_iterations = as.integer(Nmax_iterations); 
   
-  if(length(Niterations) > 1) {
-    warning("using only the first element of Niterations");
+  if(length(Nmax_iterations) > 1) {
+    warning("using only the first element of Nmax_iterations");
   };
   
-  ;.Call('R_swig_VBFA_setNiterations', self, Niterations, PACKAGE='peer');
+  ;.Call('R_swig_VBFA_setNmax_iterations', self, Nmax_iterations, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setNiterations`, 'returnType') = 'void'
-attr(`VBFA_setNiterations`, "inputTypes") = c('_p_cVBFA', 'integer')
-class(`VBFA_setNiterations`) = c("SWIGFunction", class('VBFA_setNiterations'))
+attr(`VBFA_setNmax_iterations`, 'returnType') = 'void'
+attr(`VBFA_setNmax_iterations`, "inputTypes") = c('_p_PEER__cVBFA', 'integer')
+class(`VBFA_setNmax_iterations`) = c("SWIGFunction", class('VBFA_setNmax_iterations'))
+
+# Start of VBFA_setTolerance
+
+`VBFA_setTolerance` = function(self, tolerance)
+{
+  ;.Call('R_swig_VBFA_setTolerance', self, tolerance, PACKAGE='peer');
+  
+}
+
+attr(`VBFA_setTolerance`, 'returnType') = 'void'
+attr(`VBFA_setTolerance`, "inputTypes") = c('_p_PEER__cVBFA', 'numeric')
+class(`VBFA_setTolerance`) = c("SWIGFunction", class('VBFA_setTolerance'))
 
 # Start of VBFA_setPriorAlpha
 
@@ -1368,7 +1421,7 @@ class(`VBFA_setNiterations`) = c("SWIGFunction", class('VBFA_setNiterations'))
 }
 
 attr(`VBFA_setPriorAlpha`, 'returnType') = 'void'
-attr(`VBFA_setPriorAlpha`, "inputTypes") = c('_p_cVBFA', 'numeric', 'numeric')
+attr(`VBFA_setPriorAlpha`, "inputTypes") = c('_p_PEER__cVBFA', 'numeric', 'numeric')
 class(`VBFA_setPriorAlpha`) = c("SWIGFunction", class('VBFA_setPriorAlpha'))
 
 # Start of VBFA_setPriorEps
@@ -1380,7 +1433,7 @@ class(`VBFA_setPriorAlpha`) = c("SWIGFunction", class('VBFA_setPriorAlpha'))
 }
 
 attr(`VBFA_setPriorEps`, 'returnType') = 'void'
-attr(`VBFA_setPriorEps`, "inputTypes") = c('_p_cVBFA', 'numeric', 'numeric')
+attr(`VBFA_setPriorEps`, "inputTypes") = c('_p_PEER__cVBFA', 'numeric', 'numeric')
 class(`VBFA_setPriorEps`) = c("SWIGFunction", class('VBFA_setPriorEps'))
 
 # Start of VBFA_init_net
@@ -1392,7 +1445,7 @@ class(`VBFA_setPriorEps`) = c("SWIGFunction", class('VBFA_setPriorEps'))
 }
 
 attr(`VBFA_init_net`, 'returnType') = 'void'
-attr(`VBFA_init_net`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_init_net`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_init_net`) = c("SWIGFunction", class('VBFA_init_net'))
 
 # Start of VBFA_calcBound
@@ -1404,7 +1457,7 @@ class(`VBFA_init_net`) = c("SWIGFunction", class('VBFA_init_net'))
 }
 
 attr(`VBFA_calcBound`, 'returnType') = 'numeric'
-attr(`VBFA_calcBound`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_calcBound`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_calcBound`) = c("SWIGFunction", class('VBFA_calcBound'))
 
 # Start of VBFA_logprob
@@ -1416,7 +1469,7 @@ class(`VBFA_calcBound`) = c("SWIGFunction", class('VBFA_calcBound'))
 }
 
 attr(`VBFA_logprob`, 'returnType') = 'numeric'
-attr(`VBFA_logprob`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_logprob`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_logprob`) = c("SWIGFunction", class('VBFA_logprob'))
 
 # Start of VBFA_update
@@ -1428,7 +1481,7 @@ class(`VBFA_logprob`) = c("SWIGFunction", class('VBFA_logprob'))
 }
 
 attr(`VBFA_update`, 'returnType') = 'void'
-attr(`VBFA_update`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_update`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_update`) = c("SWIGFunction", class('VBFA_update'))
 
 # Start of VBFA_setPhenoMean
@@ -1440,7 +1493,7 @@ class(`VBFA_update`) = c("SWIGFunction", class('VBFA_update'))
 }
 
 attr(`VBFA_setPhenoMean`, 'returnType') = 'void'
-attr(`VBFA_setPhenoMean`, "inputTypes") = c('_p_cVBFA', '_p_float64_t')
+attr(`VBFA_setPhenoMean`, "inputTypes") = c('_p_PEER__cVBFA', '_p_float64_t')
 class(`VBFA_setPhenoMean`) = c("SWIGFunction", class('VBFA_setPhenoMean'))
 
 # Start of VBFA_setPhenoVar
@@ -1452,7 +1505,7 @@ class(`VBFA_setPhenoMean`) = c("SWIGFunction", class('VBFA_setPhenoMean'))
 }
 
 attr(`VBFA_setPhenoVar`, 'returnType') = 'void'
-attr(`VBFA_setPhenoVar`, "inputTypes") = c('_p_cVBFA', '_p_float64_t')
+attr(`VBFA_setPhenoVar`, "inputTypes") = c('_p_PEER__cVBFA', '_p_float64_t')
 class(`VBFA_setPhenoVar`) = c("SWIGFunction", class('VBFA_setPhenoVar'))
 
 # Start of VBFA_setCovariates
@@ -1464,7 +1517,7 @@ class(`VBFA_setPhenoVar`) = c("SWIGFunction", class('VBFA_setPhenoVar'))
 }
 
 attr(`VBFA_setCovariates`, 'returnType') = 'void'
-attr(`VBFA_setCovariates`, "inputTypes") = c('_p_cVBFA', '_p_float64_t')
+attr(`VBFA_setCovariates`, "inputTypes") = c('_p_PEER__cVBFA', '_p_float64_t')
 class(`VBFA_setCovariates`) = c("SWIGFunction", class('VBFA_setCovariates'))
 
 # Start of VBFA_getPhenoMean
@@ -1476,7 +1529,7 @@ class(`VBFA_setCovariates`) = c("SWIGFunction", class('VBFA_setCovariates'))
 }
 
 attr(`VBFA_getPhenoMean`, 'returnType') = 'void'
-attr(`VBFA_getPhenoMean`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getPhenoMean`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getPhenoMean`) = c("SWIGFunction", class('VBFA_getPhenoMean'))
 
 # Start of VBFA_getPhenoVar
@@ -1488,7 +1541,7 @@ class(`VBFA_getPhenoMean`) = c("SWIGFunction", class('VBFA_getPhenoMean'))
 }
 
 attr(`VBFA_getPhenoVar`, 'returnType') = 'void'
-attr(`VBFA_getPhenoVar`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getPhenoVar`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getPhenoVar`) = c("SWIGFunction", class('VBFA_getPhenoVar'))
 
 # Start of VBFA_getCovariates
@@ -1500,7 +1553,7 @@ class(`VBFA_getPhenoVar`) = c("SWIGFunction", class('VBFA_getPhenoVar'))
 }
 
 attr(`VBFA_getCovariates`, 'returnType') = 'void'
-attr(`VBFA_getCovariates`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getCovariates`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getCovariates`) = c("SWIGFunction", class('VBFA_getCovariates'))
 
 # Start of VBFA_getX
@@ -1512,7 +1565,7 @@ class(`VBFA_getCovariates`) = c("SWIGFunction", class('VBFA_getCovariates'))
 }
 
 attr(`VBFA_getX`, 'returnType') = 'void'
-attr(`VBFA_getX`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getX`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getX`) = c("SWIGFunction", class('VBFA_getX'))
 
 # Start of VBFA_getW
@@ -1524,7 +1577,7 @@ class(`VBFA_getX`) = c("SWIGFunction", class('VBFA_getX'))
 }
 
 attr(`VBFA_getW`, 'returnType') = 'void'
-attr(`VBFA_getW`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getW`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getW`) = c("SWIGFunction", class('VBFA_getW'))
 
 # Start of VBFA_getEps
@@ -1536,7 +1589,7 @@ class(`VBFA_getW`) = c("SWIGFunction", class('VBFA_getW'))
 }
 
 attr(`VBFA_getEps`, 'returnType') = 'void'
-attr(`VBFA_getEps`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getEps`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getEps`) = c("SWIGFunction", class('VBFA_getEps'))
 
 # Start of VBFA_getAlpha
@@ -1548,7 +1601,7 @@ class(`VBFA_getEps`) = c("SWIGFunction", class('VBFA_getEps'))
 }
 
 attr(`VBFA_getAlpha`, 'returnType') = 'void'
-attr(`VBFA_getAlpha`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getAlpha`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getAlpha`) = c("SWIGFunction", class('VBFA_getAlpha'))
 
 # Start of VBFA_getResiduals
@@ -1560,7 +1613,7 @@ class(`VBFA_getAlpha`) = c("SWIGFunction", class('VBFA_getAlpha'))
 }
 
 attr(`VBFA_getResiduals`, 'returnType') = 'void'
-attr(`VBFA_getResiduals`, "inputTypes") = c('_p_cVBFA')
+attr(`VBFA_getResiduals`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`VBFA_getResiduals`) = c("SWIGFunction", class('VBFA_getResiduals'))
 
 # Start of delete_VBFA
@@ -1572,14 +1625,14 @@ class(`VBFA_getResiduals`) = c("SWIGFunction", class('VBFA_getResiduals'))
 }
 
 attr(`delete_VBFA`, 'returnType') = 'void'
-attr(`delete_VBFA`, "inputTypes") = c('_p_cVBFA')
+attr(`delete_VBFA`, "inputTypes") = c('_p_PEER__cVBFA')
 class(`delete_VBFA`) = c("SWIGFunction", class('delete_VBFA'))
 
-# Start of accessor method for cVBFA
-setMethod('$', '_p_cVBFA', function(x, name)
+# Start of accessor method for PEER::cVBFA
+setMethod('$', '_p_PEER__cVBFA', function(x, name)
 
 {
-  accessorFuns = list('W' = VBFA_W_get, 'X' = VBFA_X_get, 'Eps' = VBFA_Eps_get, 'Alpha' = VBFA_Alpha_get, 'pheno' = VBFA_pheno_get, 'getNj' = VBFA_getNj, 'getNp' = VBFA_getNp, 'getNk' = VBFA_getNk, 'getNc' = VBFA_getNc, 'getNiterations' = VBFA_getNiterations, 'getAdd_mean' = VBFA_getAdd_mean, 'setNk' = VBFA_setNk, 'setAdd_mean' = VBFA_setAdd_mean, 'setNiterations' = VBFA_setNiterations, 'setPriorAlpha' = VBFA_setPriorAlpha, 'setPriorEps' = VBFA_setPriorEps, 'init_net' = VBFA_init_net, 'calcBound' = VBFA_calcBound, 'logprob' = VBFA_logprob, 'update' = VBFA_update, 'setPhenoMean' = VBFA_setPhenoMean, 'setPhenoVar' = VBFA_setPhenoVar, 'setCovariates' = VBFA_setCovariates, 'getPhenoMean' = VBFA_getPhenoMean, 'getPhenoVar' = VBFA_getPhenoVar, 'getCovariates' = VBFA_getCovariates, 'getX' = VBFA_getX, 'getW' = VBFA_getW, 'getEps' = VBFA_getEps, 'getAlpha' = VBFA_getAlpha, 'getResiduals' = VBFA_getResiduals);
+  accessorFuns = list('W' = VBFA_W_get, 'X' = VBFA_X_get, 'Eps' = VBFA_Eps_get, 'Alpha' = VBFA_Alpha_get, 'pheno' = VBFA_pheno_get, 'getNj' = VBFA_getNj, 'getNp' = VBFA_getNp, 'getNk' = VBFA_getNk, 'getNc' = VBFA_getNc, 'getNmax_iterations' = VBFA_getNmax_iterations, 'getTolerance' = VBFA_getTolerance, 'getAdd_mean' = VBFA_getAdd_mean, 'setNk' = VBFA_setNk, 'setAdd_mean' = VBFA_setAdd_mean, 'setNmax_iterations' = VBFA_setNmax_iterations, 'setTolerance' = VBFA_setTolerance, 'setPriorAlpha' = VBFA_setPriorAlpha, 'setPriorEps' = VBFA_setPriorEps, 'init_net' = VBFA_init_net, 'calcBound' = VBFA_calcBound, 'logprob' = VBFA_logprob, 'update' = VBFA_update, 'setPhenoMean' = VBFA_setPhenoMean, 'setPhenoVar' = VBFA_setPhenoVar, 'setCovariates' = VBFA_setCovariates, 'getPhenoMean' = VBFA_getPhenoMean, 'getPhenoVar' = VBFA_getPhenoVar, 'getCovariates' = VBFA_getCovariates, 'getX' = VBFA_getX, 'getW' = VBFA_getW, 'getEps' = VBFA_getEps, 'getAlpha' = VBFA_getAlpha, 'getResiduals' = VBFA_getResiduals);
   vaccessors = c('W', 'X', 'Eps', 'Alpha', 'pheno');
   ;        idx = pmatch(name, names(accessorFuns));
   if(is.na(idx)) 
@@ -1591,9 +1644,9 @@ setMethod('$', '_p_cVBFA', function(x, name)
 
 
 );
-# end of accessor method for cVBFA
-# Start of accessor method for cVBFA
-setMethod('$<-', '_p_cVBFA', function(x, name, value)
+# end of accessor method for PEER::cVBFA
+# Start of accessor method for PEER::cVBFA
+setMethod('$<-', '_p_PEER__cVBFA', function(x, name, value)
 
 {
   accessorFuns = list('W' = VBFA_W_set, 'X' = VBFA_X_set, 'Eps' = VBFA_Eps_set, 'Alpha' = VBFA_Alpha_set, 'pheno' = VBFA_pheno_set);
@@ -1607,7 +1660,7 @@ setMethod('$<-', '_p_cVBFA', function(x, name, value)
 
 
 );
-setMethod('[[<-', c('_p_cVBFA', 'character'),function(x, i, j, ..., value)
+setMethod('[[<-', c('_p_PEER__cVBFA', 'character'),function(x, i, j, ..., value)
 
 {
   name = i;
@@ -1622,6 +1675,6 @@ setMethod('[[<-', c('_p_cVBFA', 'character'),function(x, i, j, ..., value)
 
 
 );
-# end of accessor method for cVBFA
-setMethod('delete', '_p_cVBFA', function(obj) {delete_cVBFA(obj)})
+# end of accessor method for PEER::cVBFA
+setMethod('delete', '_p_PEER__cVBFA', function(obj) {delete_PEER__cVBFA(obj)})
 

@@ -13,6 +13,14 @@
 #include "bayesnet.h"
 #include "array_helper.h"
 
+namespace PEER 
+{
+
+
+	int getVerbose();
+	void setVerbose(int verbose);
+	
+	
 /** Helpers */
 double logdet(PMatrix m);
 
@@ -115,7 +123,10 @@ protected:
 	double Eps_pb;
 	
 	/* number of iterations*/
-	int Niterations; 
+	int Nmax_iterations; 
+	/* Convergence tolerance*/
+	double tolerance;
+	
 	bool is_initialized;
 	/* initialisation parameters*/
 	bool add_mean;
@@ -160,14 +171,16 @@ public:
 	int getNp() {return Np;};
 	int getNk() {return Nk;};
 	int getNc() {return Nc;};
-	int getNiterations() {return Niterations;};
+	int getNmax_iterations() {return Nmax_iterations;};
+	double getTolerance() {return tolerance;};
 	bool getAdd_mean() { return add_mean;}				
 	//TODO: think about getters for PrioAlpha and Eps
 	
 	//setters 
 	void setNk(int Nk) {this->Nk = Nk;is_initialized=false;}
 	void setAdd_mean(bool add_mean) {this->add_mean = add_mean;is_initialized=false;};
-	void setNiterations(int Niterations) {this->Niterations = Niterations;};
+	void setNmax_iterations(int Nmax_iterations) {this->Nmax_iterations = Nmax_iterations;};
+	void setTolerance(double tolerance){this->tolerance = tolerance;};
 	void setPriorAlpha(double pa,double pb){ Alpha_pa=pa;Alpha_pb = pb;is_initialized=false;}
 	void setPriorEps(double pa,double pb){Eps_pa = pa;Eps_pb=pb;is_initialized=false;}
 	
@@ -186,6 +199,7 @@ public:
 	//setters
 	void setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
 	{this->pheno_mean = array2matrix(matrix,rows,cols);is_initialized=false;}
+
 	void setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols)
 	{this->pheno_var = array2matrix(matrix,rows,cols);is_initialized=false;}
 	void setCovariates(float64_t* matrix,int32_t rows,int32_t cols)
@@ -211,9 +225,9 @@ public:
 	{return matrix2array(calc_residuals(),matrix,rows,cols);}
 #else
 	//excludede fromo the swig interface as overloade functions do not get type mapped (and we don't port PMatrix anyway)
-	void setPhenoMean(PMatrix pheno_mean) {this->pheno_mean = pheno_mean;is_initialized=false;}
-	void setPhenoVar(PMatrix pheno_var) {this->pheno_var = pheno_var;is_initialized=false;}
-	void setCovariates(PMatrix covs) { this->covs = covs;is_initialized=false;}	
+	void setPhenoMean(const PMatrix pheno_mean) {this->pheno_mean = pheno_mean;is_initialized=false;}
+	void setPhenoVar(const PMatrix pheno_var) {this->pheno_var = pheno_var;is_initialized=false;}
+	void setCovariates(const PMatrix covs) { this->covs = covs;is_initialized=false;}	
 	
 	//getters
 	PMatrix getPhenoMean(){return this->pheno_mean;}
@@ -228,5 +242,6 @@ public:
 #endif
 };
 
-
+	
+}
 #endif

@@ -3,6 +3,8 @@
 %{
 #define SWIG_FILE_WITH_INIT
 #include "vbfa.h"
+//use namessace:
+using namespace PEER;
 %}
 
 
@@ -34,9 +36,12 @@
 
 //typemap for matrix arguments
 %apply (float64_t* IN_ARRAY2, int32_t DIM1, int32_t DIM2) {(float64_t* matrix, int32_t rows, int32_t cols)};
+%apply (float32_t* IN_ARRAY2, int32_t DIM1, int32_t DIM2) {(float32_t* matrix, int32_t rows, int32_t cols)};
+
 
 //typemap for return matrix arguments
 %apply (float64_t** ARGOUT2, int32_t* DIM1, int32_t* DIM2) {(float64_t** matrix, int32_t* rows, int32_t* cols)};
+%apply (float32_t** ARGOUT2, int32_t* DIM1, int32_t* DIM2) {(float32_t** matrix, int32_t* rows, int32_t* cols)};
 
 
 /* Remove C Prefix */
@@ -44,7 +49,6 @@
 
 /* Include the header file to be wrapped */
 %include "vbfa.h"
-
 
 
  
