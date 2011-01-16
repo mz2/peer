@@ -6,7 +6,6 @@ sys.path.append('build/lib.macosx-10.6-x86_64-2.6')
 import scipy as SP
 import peer
 import pdb
-import pylab as PL
 
 #1. simulate sth.
 N = 100
@@ -42,6 +41,7 @@ W = vb.getW()
 #ARD parameters
 Alpha = vb.getAlpha()
 
-
-PL.figure()
-PL.plot(Alpha)
+if 0:
+	import pylab as PL	
+	PL.figure()
+	PL.plot(Alpha)
