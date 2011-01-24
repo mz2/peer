@@ -16,6 +16,9 @@ include_directories(./include)
 
 add_definitions(-g -Wextra -D_BSD_SOURCE)
 
+set(NUMPY_INCLUDE_DIR "/Library/Python/2.6/site-packages/numpy/core/include")
+set(R_SHARED_LIB_PATH "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
+
 include_directories(./External/alglib/src)
 add_subdirectory(./External/alglib/src)
 add_subdirectory(./src)

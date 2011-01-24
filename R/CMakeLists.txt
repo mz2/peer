@@ -10,11 +10,11 @@ include_directories("/usr/local/Cellar/r/2.12.0/R.framework/Resources/include")
 
 set(CMAKE_SWIG_FLAGS "")
 SET(R_LIBRARIES "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
-SET(SWIGLINKLIBS ${R_LIBRARIES})
+SET(SWIGLINKLIBS ${R_SHARED_LIB_PATH} alglib peerlib)
 
 set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-cpperraswarn")
 add_definitions(-DSWIG)
 swig_add_module(peerr r peer.i)
-swig_link_libraries(peerr ${SWIGLINKLIBS} alglib peerlib)
+swig_link_libraries(peerr ${SWIGLINKLIBS})
