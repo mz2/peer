@@ -20,6 +20,7 @@ include_directories(./External/alglib/src)
 add_subdirectory(./External/alglib/src)
 add_subdirectory(./src)
 add_subdirectory(./python)
+add_subdirectory(./R)
 
 #include_directories(
 #    .
