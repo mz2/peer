@@ -5,7 +5,7 @@
 # the SWIG interface file instead.
 
 ##   Generated via the command line invocation:
-##	 swig -c++ -r -o peer_wrap.cpp -I../Include -I../External -I.. peer.i
+##	 /usr/bin/swig -r -cpperraswarn -outdir /Users/mz2/PearComp/peer/build/R -c++ -I/Users/mz2/PearComp/peer -I/Users/mz2/PearComp/peer/./include -I/Users/mz2/PearComp/peer/./External/alglib/src -I/Users/mz2/PearComp/peer/R/./../External -I/Users/mz2/PearComp/peer/R/./../External/Eigen -I/External/alglib -I/include -I/opt/local/lib/R/include -I/opt/local/lib/R/include/x86_64 -I/usr/local/Cellar/r/2.12.0/R.framework/Resources/include -o /Users/mz2/PearComp/peer/build/R/peerR_wrap.cxx /Users/mz2/PearComp/peer/R/peer.i
 
 
 #                         srun.swg                            #
