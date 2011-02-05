@@ -11,7 +11,7 @@ include_directories(${PEER_SRC_DIR}/External/alglib)
 include_directories(${PEER_SRC_DIR}/include)
 
 set(CMAKE_SWIG_FLAGS "")
-SET(SWIGLINKLIBS ${PYTHON_SHARED_LIB})
+SET(SWIGLINKLIBS ${PYTHON_SHARED_LIB_PATH})
 
 set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
