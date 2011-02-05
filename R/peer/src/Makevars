@@ -1,0 +1,2 @@
+PKG_LIBS=-L/Users/mz2/PearComp/peer/build/src -llibpeerlib.a
+PKG_CPPFLAGS= -I/Users/mz2/PearComp/peer/include -I/Users/mz2/PearComp/peer/External/alglib -I/Users/mz2/PearComp/peer/External/alglib/src -I/Users/mz2/PearComp/peer/External -DSWIG
