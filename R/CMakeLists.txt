@@ -10,7 +10,8 @@ include_directories("/opt/local/lib/R/include")
 include_directories("/opt/local/lib/R/include/x86_64")
 
 set(CMAKE_SWIG_FLAGS "")
-SET(R_LIBRARIES "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
+include_directories(${R_INCLUDE_DIR})
+
 SET(SWIGLINKLIBS ${R_SHARED_LIB_PATH} alglib peerlib)
 
 set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
