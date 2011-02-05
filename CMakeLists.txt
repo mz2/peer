@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 project(PEER)
 
 # Python header and shared library paths
-set(PYTHON_INCLUDE_DIR "/System/Library/Frameworks/Python.framework/Headers")
-set(NUMPY_INCLUDE_DIR "/Library/Python/2.6/site-packages/numpy/core/include")
+set(PYTHON_INCLUDE_DIR "/usr/include/python2.6")
+set(NUMPY_INCLUDE_DIR "/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/core/include")
+
 set(PYTHON_SHARED_LIB_PATH "/usr/lib/libpython2.6.dylib")
 
 # R header and shared library paths
