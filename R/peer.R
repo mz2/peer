@@ -5,7 +5,7 @@
 # the SWIG interface file instead.
 
 ##   Generated via the command line invocation:
-##	 swig -c++ -r -o peer_wrap.cpp -I../External -I.. peer.i
+##	 swig -c++ -r -o peer_wrap.cpp -I../Include -I../External -I.. peer.i
 
 
 #                         srun.swg                            #

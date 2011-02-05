@@ -3,6 +3,9 @@ find_package(PythonLibs REQUIRED)
 
 INCLUDE(${SWIG_USE_FILE})
 
+include_directories("/System/Library/Frameworks/Python.framework/Headers")
+include_directories("/Library/Python/2.6/site-packages/numpy/core/include")
+
 include_directories(${PYTHON_INCLUDE_DIRS})
 include_directories(${NUMPY_INCLUDE_DIR})
 include_directories(./../External)
@@ -11,7 +14,7 @@ include_directories(${PEER_SRC_DIR}/External/alglib)
 include_directories(${PEER_SRC_DIR}/include)
 
 set(CMAKE_SWIG_FLAGS "")
-SET(SWIGLINKLIBS ${PYTHON_LIBRARIES})
+SET(SWIGLINKLIBS /usr/lib/libpython2.6.dylib)
 
 set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
