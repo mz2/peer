@@ -1,20 +1,40 @@
 cmake_minimum_required(VERSION 2.8)
 project(PEER)
 
+
+## Documentation for final package
+# manual installation paths
+
+##PYTHON
+#SET(PYTHON_EXECUTABLE "")
+#python library (so file)
+#SET(PYTHON_LIBRARIES "")
+#include directory 
+#SET(PYTHON_INCLUDE_DIRS "")
+#installation path of python (site-packages)
+#SET(PYTHON_INSTDIR "")
+#numpy includes
+#SET(NUMPY_INCLUDE_DIR "")
+##/Python END
+
+#R
+# R header and shared library paths
+#set(R_INCLUDE_DIR "/usr/local/Cellar/r/2.12.0/R.framework/Resources/include")
+#set(R_SHARED_LIB_PATH "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
+##/R END
+
+
+#OLIs version
+SET(PYTHON_LIBRARIES "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/Python")
+SET(PYTHON_INCLUDE_DIRS "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/include/python2.6")
+SET(R_SHARED_LIB_PATH  "/opt/local/lib/R/lib/x86_64/libR.dylib")
+SET(R_INCLUDE_DIR "/opt/local/lib/R/include")
+
 #Matias versoin
 #set(PYTHON_INCLUDE_DIR "/usr/include/python2.6")
 #set(NUMPY_INCLUDE_DIR "/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/core/include")
 #set(PYTHON_SHARED_LIB_PATH "/usr/lib/libpython2.6.dylib")
 
-#OLIs version
-set(PYTHON_INCLUDE_DIR "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/Headers")
-set(NUMPY_INCLUDE_DIR "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/site-packages/numpy/core/include")
-set(PYTHON_SHARED_LIB_PATH "/opt/local/lib/libpython2.6.dylib")
-
-
-# R header and shared library paths
-set(R_INCLUDE_DIR "/usr/local/Cellar/r/2.12.0/R.framework/Resources/include")
-set(R_SHARED_LIB_PATH "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
 
 #There are lots of scripts with cmake
 #for finding external libraries. 
