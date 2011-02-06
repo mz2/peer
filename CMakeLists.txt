@@ -40,7 +40,7 @@ SET(R_INCLUDE_DIR "/opt/local/lib/R/include")
 #for finding external libraries. 
 #see /usr/local/share/cmake-2.6/Modules/Find*.cmake for more examples
 
-find_package(swig REQUIRED)
+find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
