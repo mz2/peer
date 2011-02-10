@@ -24,11 +24,21 @@ project(PEER)
 ##/R END
 
 
+
 #OLIs version
+SET(PYTHON_EXECUTABLE "/opt/local/bin/python")
 SET(PYTHON_LIBRARIES "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/Python")
-SET(PYTHON_INCLUDE_DIRS "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/include/python2.6")
-SET(R_SHARED_LIB_PATH  "/opt/local/lib/R/lib/x86_64/libR.dylib")
-SET(R_INCLUDE_DIR "/opt/local/lib/R/include")
+SET(PYTHON_INCLUDE_DIRS
+"/opt/local/Library/Frameworks/Python.framework/Versions/2.6/include/python2.6")
+SET(PYTHON_LIBRARIES "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/Python")
+
+#SET(PYTHON_INCLUDE_DIRS "/usr/include/python2.6")
+#SET(PYTHON_LIBRARIES "libpython2.6.so")
+
+#SET(R_SHARED_LIB_PATH  "/opt/local/lib/R/lib/x86_64/libR.dylib")
+#SET(R_INCLUDE_DIR "/opt/local/lib/R/include")
+
+#SET(PYTHON_EXECUTABLE "/agbs/agkbshare/software/LINUX64/python/bin/python")
 
 #Matias versoin
 #set(PYTHON_INCLUDE_DIR "/usr/include/python2.6")
@@ -51,12 +61,15 @@ include_directories(./include)
 
 add_definitions(-g -Wextra -D_BSD_SOURCE)
 
+#fPic while compiling on:
+set(CMAKE_CXX_FLAGS "-fPIC")
+
 include_directories(./External/alglib/src)
 
 add_subdirectory(./External/alglib/src)
 add_subdirectory(./src)
 add_subdirectory(./python)
-add_subdirectory(./R)
+#add_subdirectory(./R)
 
 #include_directories(
 #    .
