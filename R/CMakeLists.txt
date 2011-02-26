@@ -6,13 +6,13 @@ include_directories(./../External)
 include_directories(./../External/Eigen)
 include_directories(${PEER_SRC_DIR}/External/alglib)
 include_directories(${PEER_SRC_DIR}/include)
-include_directories("/opt/local/lib/R/include")
-include_directories("/opt/local/lib/R/include/x86_64")
+#include_directories("/opt/local/lib/R/include")
+#include_directories("/opt/local/lib/R/include/x86_64")
 
 set(CMAKE_SWIG_FLAGS "")
 include_directories(${R_INCLUDE_DIR})
 
-SET(SWIGLINKLIBS ${R_SHARED_LIB_PATH} alglib peerlib)
+SET(SWIGLINKLIBS ${R_SHARED_LIB_PATH_64} ${R_SHARED_LIB_PATH} alglib peerlib)
 
 set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
