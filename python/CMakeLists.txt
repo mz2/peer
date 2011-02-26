@@ -20,8 +20,10 @@ endif()
 
 #find python libs and includes
 if (NOT PYTHON_LIBRARIES OR NOT PYTHON_INCLUDE_DIRS)
-     FIND_PACKAGE(PythonLibsDist)
+    # FIND_PACKAGE(PythonLibsDist)
+ FIND_PACKAGE(PythonLibs)
 endif()
+
 #find dist-packages
 if (NOT PYTHON_DIST_PACKAGES)
    FIND_PACKAGE(PythonInst)
@@ -33,26 +35,31 @@ if (NOT NUMPY_INCLUDE_DIR)
 endif()
 
 
-if ( (NOT EXISTS ${PYTHON_LIBRARIES}))
-   message("Did not find python libs")
-   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
-endif()
+#stupid, does not work on linux
+#if ( (NOT EXISTS ${PYTHON_LIBRARIES}))
+#   message("Did not find python libs")
+#   message(${PYTHON_LIBRARIES})
+#   #set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+#endif()
 
 if ( (NOT EXISTS ${PYTHON_INCLUDE_DIRS}))
    message("Did not find python include dirs")
+   message(${PYTHON_INCLUDE_DIRS})
    set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 
 if ( (NOT EXISTS ${NUMPY_INCLUDE_DIR}) )
    message("Did not find numpy, disabling python interface")
+   message(${NUMPY_INCLUDE_DIR})
    set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 
 if ( NOT EXISTS ${PYTHON_INSTDIR})
    message("Did not find python install directory")
-   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+   message(${PYTHON_INSTDIR})
+      #set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 
