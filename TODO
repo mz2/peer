@@ -1,12 +1,23 @@
-1) Test that the covariates functionality works propperly (Leo, there are some comments in the codes also) (Leo)
-2) Deal with all the debugging output. Where shall these messages go in the future? Verbosity. (Oli)
-3) R wrapper, I just don't understand how R works, the lib is build; found this here (http://www.swig.org/Doc1.3/R.html#R_nn6) which does not help me.. (Matias)
-4) Priors (pa,pb) have setters but no getters, probably not that critical though.. (Oli)
-5) Documentation, doxygen? (Matias)
-6) Propper build system using autoconfigu or similar.
-   Matias: we need to get the python support in also. Either we use the python distutils for this (I currenlty do) or we need python-configure to figure out where python is  etc.
-   With autoconfig that is all reasonably easy. Maybe "shogun" (http://www.shogun-toolbox.org/) has some things to steal from.
-   I copied the typempas for R and python from them also, foud this very useful in many ways. (Matias)
-7) Check for memory leaks
-8) Stress tests for large matrices - memory usage, speed for CPP/Py/R versions (Leo)
-9) Convergence - from lower bound, not number of iterations (Oli)
+Current TODOs in oder of priority
+
+MUST HAVE
+
+* R interface.
+Matias: please get this working. I guess the simplets option is to use the R build system only.
+You could just make the Cmake thing copy from the source-tree to the build tree and symlink everything in there to get the build going. This should not be too hard. I can assist if needed.
+
+* binary
+The binary is a nice idea; also the lib.
+Matias: can you add the header to the install target? 
+Not sure what is needed but I guess it's actually quite a lot as one also needs the header files for eigen etc. etc.
+I suggest to drop the install of the library and leave it with the binary for now.
+
+* Install tests.
+Let's all test the basic install procedure and the python/R modules
+
+Nice to have
+
+* Verbosity: deal with verbose messages in a sensible way. Matias: you proposed a logger for this right?
+* Documentation, doxygen? (Matias)
+* Check for memory leaks
+* Stress tests for large matrices - memory usage, speed for CPP/Py/R versions (Leo)

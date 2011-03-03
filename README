@@ -1,0 +1,33 @@
+PEER package source distribution.
+
+
+
+***For the impatient***
+
+Install instructions.
+The peer installation tree is baed on cmake.
+
+1) Create a target directory for the build tree
+#   mkdir build
+2) go to the build directory and call cmake
+   cd build
+#  cmake ./..
+3) 
+#   make 
+#   make install
+
+
+***Troubleshooting and further details***
+
+Installing peer binaries:
+If make is called with the "install" flag; the standard behviour is to install a peer binary and the peer C++ library to the system-wide targets.
+Use "cmake ./.. -DCMAKE_INSTALL_PREFIX=~/my_software/peer" or equivalent to specify your own build target.
+
+*Python module
+The python module is not affected by CMAKE_INSTALL_PREFIX. Instead, cmake tries to build the python module and installs it using the python version which is int he path when using the command "python".
+You can specify your own python binary by editing CMakeLists.txt
+The python interface requires a recent numppy version to be present.
+
+*R module
+TODO: Matias
+

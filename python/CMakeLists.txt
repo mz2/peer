@@ -8,8 +8,8 @@ option(ENABLE_python "Enable Python bindings" ON)
 INCLUDE(${SWIG_USE_FILE})
 
 #find python
-if(NOT PTHON_EXECUTABLE)
-       FIND_PACKAGE(PythonInterp)
+if(NOT PYTHON_EXECUTABLE)
+       FIND_PACKAGE(PythonInterpWhich)
 endif()
 
 #we got everything?
@@ -20,8 +20,8 @@ endif()
 
 #find python libs and includes
 if (NOT PYTHON_LIBRARIES OR NOT PYTHON_INCLUDE_DIRS)
-    # FIND_PACKAGE(PythonLibsDist)
- FIND_PACKAGE(PythonLibs)
+   FIND_PACKAGE(PythonLibsDist)
+  #FIND_PACKAGE(PythonLibs)
 endif()
 
 #find dist-packages
@@ -35,12 +35,11 @@ if (NOT NUMPY_INCLUDE_DIR)
 endif()
 
 
-#stupid, does not work on linux
-#if ( (NOT EXISTS ${PYTHON_LIBRARIES}))
-#   message("Did not find python libs")
-#   message(${PYTHON_LIBRARIES})
-#   #set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
-#endif()
+if ( (NOT EXISTS ${PYTHON_EXECUTABLE}))
+   message("Did not find python executable, disabling python interface.")
+   message("Try specifying executable manually in CMakeLists.txt")
+   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+endif()
 
 if ( (NOT EXISTS ${PYTHON_INCLUDE_DIRS}))
    message("Did not find python include dirs")
@@ -57,10 +56,10 @@ endif()
 
 
 if ( NOT EXISTS ${PYTHON_INSTDIR})
-   message("Did not find python install directory")
-   message(${PYTHON_INSTDIR})
-      #set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+   message("Did not find python install directory, disabling python interface")
+   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
+
 
 
 if(ENABLE_python)
@@ -80,16 +79,26 @@ include_directories(${PEER_SRC_DIR}/External/alglib)
 include_directories(${PEER_SRC_DIR}/include)
 
 set(CMAKE_SWIG_FLAGS "")
-SET(SWIGLINKLIBS ${PYTHON_LIBRARIES})
+#SET(SWIGLINKLIBS ${PYTHON_LIBRARIES})
 
 set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-cpperraswarn")
 add_definitions(-DSWIG)
 swig_add_module(peer python peer.i)
-swig_link_libraries(peer ${SWIGLINKLIBS} alglib peerlib)
+swig_link_libraries(peer ${SWIGLINKLIBS} peerlib alglib)
+
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")	 
+  # Mac OS X specific code
+  SET(CMAKE_MODULE_LINKER_FLAGS "-undefined dynamic_lookup")
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
+
 
 #TODO:
 #install _peer.so and peer.py into PYTHON_INSTDIR
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/_peer.so DESTINATION ${PYTHON_INSTDIR})
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/peer.py DESTINATION ${PYTHON_INSTDIR})
+
 
 endif(ENABLE_python)

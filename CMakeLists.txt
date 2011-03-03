@@ -5,17 +5,29 @@ project(PEER)
 ## Documentation for final package
 # manual installation paths
 
-##PYTHON
+##PYTHON##
+#
+# Path to python executable. If specified peer is built against this
+# python version, otherwise "which python" is used for auto-detection
 #SET(PYTHON_EXECUTABLE "")
-#python library (so file)
-#SET(PYTHON_LIBRARIES "")
-#include directory 
+#Python include directory 
+#normally there is no need to specify them;instead these are
+#auto-determined from the location of the binary.
 #SET(PYTHON_INCLUDE_DIRS "")
-#installation path of python (site-packages)
+#Python install directory
+#If specified, the peer module will be installed here. Otherwise the
+#default site-packages location of the respective python installation
+#is used. 
 #SET(PYTHON_INSTDIR "")
-#numpy includes
+#Numpy header fiels.
+#Usually there is no need to specify them as they are automatically
+#determined from the python binary.
+#Note: it is vital that peer is built against the exact same python
+#installation that you are aiming to use.
 #SET(NUMPY_INCLUDE_DIR "")
-##/Python END
+#
+##/PYTHON END##
+
 
 # R package build configuration
 # R header and shared library paths
@@ -23,18 +35,11 @@ project(PEER)
 #set(R_SHARED_LIB_PATH "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
 ##/R END
 
-#OLIs version
-#SET(PYTHON_EXECUTABLE "/opt/local/bin/python")
-#SET(PYTHON_LIBRARIES "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/Python")
-#SET(PYTHON_INCLUDE_DIRS
-#"/opt/local/Library/Frameworks/Python.framework/Versions/2.6/include/python2.6")
-#SET(PYTHON_LIBRARIES "/opt/local/Library/Frameworks/Python.framework/Versions/2.6/Python")
-
 #Matias version
-set(PYTHON_EXECUTABLE "/usr/bin/python")
-set(PYTHON_INCLUDE_DIRS "/usr/include/python2.6")
-set(NUMPY_INCLUDE_DIR "/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/core/include")
-set(PYTHON_SHARED_LIB_PATH "/usr/lib/libpython2.6.dylib")
+#set(PYTHON_EXECUTABLE "/usr/bin/python")
+#set(PYTHON_INCLUDE_DIRS "/usr/include/python2.6")
+#set(NUMPY_INCLUDE_DIR "/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/core/include")
+#set(PYTHON_SHARED_LIB_PATH "/usr/lib/libpython2.6.dylib")
 
 set(R_INCLUDE_DIR "/Library/Frameworks/R.framework/Versions/2.12/Resources/include")
 set(R_SHARED_LIB_PATH "/Library/Frameworks/R.framework/Versions/2.12/Resources/lib/i386/libR.dylib")
