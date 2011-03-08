@@ -38,7 +38,7 @@ int PEER::getVerbose()
 {return VERBOSE;}
 
 
-const double PI = 3.14159;
+const double PI = 3.14159265;
 
 
 /** Default constructors */ 
@@ -46,6 +46,7 @@ cWNode::cWNode(){}
 cWNode::cWNode(PMatrix E1){
 	this->E1 = E1;
 	this->E2S = E1.transpose()*E1;
+	this->Xprec = E1.rows()*E1.transpose()*E1; // approximate
 }
 cXNode::cXNode(){}
 cXNode::cXNode(PMatrix E1){
@@ -86,8 +87,15 @@ void cWNode::update(cBayesNet &net){
 		PMatrix cov = (diagAE1 + n.X.E2S*n.Eps.E1(i,0)).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
 		lndetcovS += logdet(cov);
 		E1.row(i) = n.Eps.E1(i,0)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
-		E2S += (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
+		PMatrix E2 = (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
+		E2S += E2;
+		Xprec += n.Eps.E1(i,0)*E2;
 	}
+	
+	// store values needed to calculate covariance for each p
+	E_last = n.Eps.E1;
+	XE2S_last = n.X.E2S;
+	A_last = n.Alpha.E1;	
 }
 
 
@@ -110,23 +118,16 @@ double cWNode::entropy(){
 
 void cXNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
-	// big work - calculate precision matrix
-	PMatrix prec = PMatrix::Identity(n.Nk, n.Nk);
-	PMatrix diagAE1 = PMatrix::Zero(n.Nk, n.Nk);
-	diagAE1.diagonal() = n.Alpha.E1;
-
-	for(int i = 0; i < n.Np; i++){ // as we don't keep W.E2 in memory, have to recalculate it to compute the sum WE2[i]*Eps[i]
-		PMatrix WE2 = (diagAE1 + n.X.E2S*n.Eps.E1(i,0)).inverse() + n.W.E1.row(i).transpose()*n.W.E1.row(i); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
-		prec += n.Eps.E1(i,0)*WE2; //  only care about sum of 2nd moments
-	}
 	
-	// Invert precision to get covariance, update moments
-	PMatrix diagEpsE1 = PMatrix::Zero(n.Np, n.Np); // may need to switch this when Np gets large
-	diagEpsE1.diagonal() = n.Eps.E1;
-	cov = (prec + prior_prec).inverse(); 
-	E1 = (n.pheno.E1*diagEpsE1*n.W.E1 + prior_offset*prior_prec)*cov;
+	cov = (n.W.Xprec + prior_prec).inverse();
+	E1 = PMatrix::Zero(n.Nj, n.Nk);
+	for (int i=0; i < n.Np; i++){
+		E1 += n.Eps.E1(i,0)*n.pheno.E1.col(i)*n.W.E1.row(i);
+	}
+	E1 = (E1 + prior_offset*prior_prec)*cov;
+	
 	E2S = n.Nj*cov;
-	for (int i=0;i<n.Nj; ++i){
+	for (int i = 0; i < n.Nj; ++i){
 		E2S += E1.row(i).transpose()*E1.row(i);
 	} // the covariance matrix is shared by design between individuals
 }
@@ -136,7 +137,11 @@ double cXNode::calcBound(cBayesNet &net){
 	int K = E1.cols();
 	int N = E1.rows();
 //	cout << "WN = " << N << " K = " << K << endl;
-	return -0.5*N*K*log(2.*PI) - 0.5*(N*cov.diagonal().sum() + ((E1.array().pow(2).matrix())*prior_prec).array().sum()) + entropy();
+	double result = -0.5*N*K*log(2.*PI) + 0.5*N*prior_prec.diagonal().array().log().sum();
+	for(int k = 0; k < K; k++){
+		result -= 0.5*prior_prec(k,k)*(N*cov(k,k) + E1.col(k).array().pow(2).sum() - 2*E1.col(k).dot(prior_offset.col(k)) + prior_offset.col(k).dot(prior_offset.col(k)));
+	}
+	return result + entropy();
 }
 
 
@@ -180,16 +185,14 @@ void cEpsNode::update(cBayesNet &net){
 	PMatrix b1 = (PMatrix::Ones(1, n.Nj)*n.pheno.E2).transpose();
 	PMatrix b2 = (PMatrix::Ones(1, n.Nj)*((n.pheno.E1.array()*(n.X.E1*n.W.E1.transpose()).array()).matrix())).transpose();
 	PMatrix b3 = PMatrix::Zero(n.Np,1);
-	// for each phenotype, recalculate second moment of W
 	PMatrix diagAE1 = PMatrix::Zero(n.Nk,n.Nk);
-	diagAE1.diagonal() = n.Alpha.E1;
+	diagAE1.diagonal() = n.W.A_last;
 	for(int i = 0; i < n.Np; i++){
-		PMatrix Wcov = (diagAE1 + n.X.E2S*n.Eps.E1(i,0)).inverse();
+    	PMatrix Wcov = (diagAE1 + n.W.XE2S_last*n.Eps.E1(i,0)).inverse(); // calculate current covariance matrix of W (cannot use updated values for X,A)
 		b3(i,0) = (n.X.E2S.array()*(Wcov + n.W.E1.row(i).transpose()*n.W.E1.row(i)).array()).sum();
 	}
-	
 	b = pb + 0.5*b1.array() - b2.array() + 0.5*b3.array();
-	updateMoments();
+	updateMoments();	
 }
 
 
@@ -237,15 +240,19 @@ cVBFA::cVBFA(PMatrix pheno_mean,PMatrix pheno_var, PMatrix covs, int Nfactors)
 void cVBFA::init_params()
 {
 	tolerance = 1E-3;
+	var_tolerance = 1E-5;	
 	Nmax_iterations = 1000;
 	add_mean    = true;
 	initialisation = PCA;	
 	is_initialized = false;
+	covariate_prec = 100;
+	
 	//prior settings
 	Alpha_pa =0.001;
 	Alpha_pb = 0.1;
 	Eps_pa  = 0.1;
 	Eps_pb  = 10;
+	
 }
 
 /* setters */
@@ -261,33 +268,24 @@ void cVBFA::init_net()
 	
 	if (isnull(pheno_var))
 	{	
-		PMatrix temp = 0.01*(PMatrix::Ones(pheno_mean.rows(), pheno_mean.cols())); // if uncertainty in expression not provided, assume pretty certain
-	    pheno_var = temp;
+		pheno_var = 0.01*(PMatrix::Ones(pheno_mean.rows(), pheno_mean.cols())); // if uncertainty in expression not provided, assume pretty certain
 		printf("XX %d/%d -- %d/%d\n",pheno_mean.rows(),pheno_mean.cols(),pheno_var.rows(),pheno_var.cols());	
 	}
 	// if no covariates, create empty structure
 	if (isnull(covs)) 
 	{ 
 		//create an emptyp matrix of the correct shape:
-		//PMatrix temp = PMatrix::Ones(pheno_mean.rows(), 1); 
-		PMatrix temp = PMatrix::Ones(Nj,0);
-		covs = temp;
+		covs = PMatrix::Ones(Nj,0);
 	} 
 	
 	// add mean column in covariates?
 	if (add_mean)
 	{
-		PMatrix temp = PMatrix::Ones(Nj, 1); 
 		//create a larger matrix and concatenate mean column:
 		int nc = covs.cols();
 		covs.resize(Nj,nc+1);
-		covs.block(0,nc,Nj,nc+1) = temp;
+		covs.block(0,nc,Nj,nc+1) = PMatrix::Ones(Nj, 1); 
 	}
-	
-	//Oli: is this truely still needed ? Leo, please test this quickly and remove if not, I think the main reason was this pointer madness
-	PMatrix covs_original; // need to keep a copy - transformations change the matrix :S
-	//note for me: in eigen "=" means create a copy of the matrix
-	covs_original = covs;
 	
 	
 	Nc = covs.cols();
@@ -320,9 +318,9 @@ void cVBFA::init_net()
 	if (Nc>0)
 	{
 		PMatrix cov_weights = covs.colPivHouseholderQr().solve(pheno.E1);
-		residuals = pheno.E1 - covs_original*cov_weights;
+		residuals = pheno.E1 - covs*cov_weights;
 		W0.block(0,0,Np, Nc) = cov_weights.transpose();
-		X0.block(0,0,Nj,Nc) = covs_original;
+		X0.block(0,0,Nj,Nc) = covs;
 	}
 	else {
 		residuals = pheno.E1;
@@ -343,9 +341,9 @@ void cVBFA::init_net()
 	
 	// 4. create nodes and initialise
 	PMatrix Xprec_prior = PMatrix::Identity(Nk,Nk);
-	Xprec_prior.diagonal().block(0,0,1,Nc) = PMatrix::Ones(1,Nc)*10000.; // covariates are very precise
+	Xprec_prior.diagonal().block(0,0,Nc,1) = PMatrix::Ones(Nc,1)*covariate_prec;
 	PMatrix Xmean_prior = PMatrix::Zero(Nj, Nk);
-	Xmean_prior.block(0,0,Nj,Nc) = covs_original;
+	Xmean_prior.block(0,0,Nj,Nc) = covs;
 	W = cWNode(W0);
 	X = cXNode(X0, Xmean_prior,Xprec_prior);
 	
@@ -353,12 +351,13 @@ void cVBFA::init_net()
 	Eps = cEpsNode(Np, Eps_pa,Eps_pb, PMatrix());
 	// update precision nodes to initialise them
 	Alpha.update(*this);
-	Eps.update(*this);	
+	//Eps.update(*this);	
 	if (VERBOSE>=2)
 		cout << "\tAfter initi, residual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
 	
 	is_initialized = true;
 }
+
 
 
 // Global update
@@ -369,34 +368,38 @@ void cVBFA::update(){
 		init_net();
 	
 	double last_bound=-HUGE_VAL;
+	double last_residual_var = HUGE_VAL;
 	double current_bound=-HUGE_VAL;
+	double current_residual_var = -HUGE_VAL;
 	double delta_bound = HUGE_VAL;
+	double delta_residual_var = HUGE_VAL;
 	int i=0;
 	for(i=0; i < this->Nmax_iterations; ++i){
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
 		
-		W.update(*this);
-		
+		W.update(*this);		
 		if((VERBOSE>=3) && (i > 0) )
-			{cout << "\tAfter W " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
+		{cout << "\tAfter W " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;}
 		Alpha.update(*this);
 		if((VERBOSE>=3) && (i > 0) )
-			{cout << "\tAfter A " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;}
+		{cout << "\tAfter A " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;}
 		X.update(*this);
 		if (VERBOSE>=3)
-			cout << "\tAfter X " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
-		Eps.update(*this);
-		
+			cout << "\tAfter X " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
+		Eps.update(*this);		
 		if (VERBOSE>=3)
-			cout << "\tAfter E " << calcBound() << "\tResidual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
-
+			cout << "\tAfter E " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
+		
 		//calc bound?
 		if ((VERBOSE>=2) || (tolerance>0))
 		{
 			last_bound    = current_bound;
+			last_residual_var = current_residual_var;
 			current_bound = calcBound();
-			delta_bound = abs(current_bound - last_bound);
+			current_residual_var = calc_residuals().array().pow(2).mean();
+			delta_bound = (current_bound - last_bound); // bound should increase
+			delta_residual_var = last_residual_var - current_residual_var; // variance should decrease
 		}
 		
 		//debug output?
@@ -404,21 +407,26 @@ void cVBFA::update(){
 		if (VERBOSE>=2)
 		{
 			double res_var = getResiduals().array().array().pow(2.).mean();
-			printf("Residual variance: %.4f, Delta bound: %.4f\n",res_var,delta_bound);
+			printf("Residual variance: %.4f, Delta bound: %.4f, Delta var(residuals): %.4f\n",res_var,delta_bound, delta_residual_var);
 		}
 		
 		//converged?
-		if (delta_bound<tolerance)
+		if (abs(delta_bound)<tolerance)
 			break;
-	//endfor
+		if (abs(delta_residual_var)<var_tolerance)
+			break;
+		//endfor
 	}
 	
 	//debug output on convergence?
 	if (VERBOSE>=1)
 	{
-		if(delta_bound<tolerance)
+		if(abs(delta_bound)<tolerance)
 		{
-			printf("Converged after %d iterations\n", i);
+			printf("Converged (bound) after %d iterations\n", i);
+		}
+		else if(abs(delta_residual_var) < var_tolerance){
+			printf("Converged (var(residuals)) after %d iterations\n", i);
 		}
 		else {
 			printf("Maximum number of iterations reached: %d\n",i);
@@ -435,16 +443,18 @@ PMatrix cVBFA::calc_residuals()
 
 double cVBFA::logprob(){
 	PMatrix diagAE1 = PMatrix::Zero(Nk,Nk);
-	diagAE1.diagonal() = Alpha.E1;
-
-	float result = 0.5*(Nj*(Eps.lnE.sum() - Np*log(2.*PI)));
+	diagAE1.diagonal() = W.A_last;
+	
+	double r1 = 0.5*(Nj*(Eps.lnE.sum() - Np*log(2.*PI)));
+	double r2 = -0.5*Eps.E1.col(0).dot((PMatrix::Ones(1, Nj)*pheno.E2).row(0));
+	double r3 = -0.5*Eps.E1.col(0).dot(-2.*(PMatrix::Ones(1, Nj)*((pheno.E1.array()*(X.E1*W.E1.transpose()).array()).matrix())).transpose().col(0));
+	double r4 = 0;
 	for(int i=0; i < Np; ++i){
-		result -= 0.5*Eps.E1(i,0)*(pheno.E1.col(i).transpose()*pheno.E1.col(i))(0,0);
-		result += Eps.E1(i,0)*(pheno.E1.col(i).transpose()*(X.E1*W.E1.row(i).transpose()))(0,0);
-		PMatrix WE2 = (diagAE1 + X.E2S*Eps.E1(i,0)).inverse() + W.E1.row(i).transpose()*W.E1.row(i);
-		result -= 0.5*Eps.E1(i,0)*(X.E2S.array()*WE2.array()).sum();
+		PMatrix WE2 = (diagAE1 + W.XE2S_last*W.E_last(i,0)).inverse() + W.E1.row(i).transpose()*W.E1.row(i);
+		r4 -= 0.5*Eps.E1(i,0)*(X.E2S.array()*WE2.array()).sum();
 	}
-	return result;
+	//cout << "R: " << r1 << " " << r2 << " " << r3 << " " << r4 << endl;
+	return r1 + r2 + r3 + r4;
 }
 
 

@@ -29,6 +29,8 @@ class cWNode : public cNode {
 protected: 	
 public:
 	PMatrix E2S;	
+	PMatrix Xprec;
+	PMatrix A_last, E_last, XE2S_last;
 	float lndetcovS;
 	
 	cWNode(); // default
@@ -124,8 +126,11 @@ protected:
 	
 	/* number of iterations*/
 	int Nmax_iterations; 
-	/* Convergence tolerance*/
+	/* Convergence tolerances - bound and residual variance*/
 	double tolerance;
+	double var_tolerance;
+	/* (very high) precision of known covariates */
+	double covariate_prec;
 	
 	bool is_initialized;
 	/* initialisation parameters*/
