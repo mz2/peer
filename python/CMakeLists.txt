@@ -25,7 +25,7 @@ if (NOT PYTHON_LIBRARIES OR NOT PYTHON_INCLUDE_DIRS)
 endif()
 
 #find dist-packages
-if (NOT PYTHON_DIST_PACKAGES)
+if (NOT PYTHON_INSTDIR)
    FIND_PACKAGE(PythonInst)
 endif()
 
