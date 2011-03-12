@@ -1,2 +1,0 @@
-/usr/bin/ar cr libpeerlib.a  CMakeFiles/peerlib.dir/bayesnet.cpp.o CMakeFiles/peerlib.dir/array_helper.cpp.o CMakeFiles/peerlib.dir/sim.cpp.o CMakeFiles/peerlib.dir/vbfa.cpp.o
-/usr/bin/ranlib libpeerlib.a

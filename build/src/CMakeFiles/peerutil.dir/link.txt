@@ -1,1 +1,0 @@
-/usr/bin/c++   -fPIC -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/peerutil.dir/sim.cpp.o CMakeFiles/peerutil.dir/vbfa.cpp.o CMakeFiles/peerutil.dir/main.cpp.o  -o peerutil  libpeerlib.a ../External/alglib/src/libalglib.a 

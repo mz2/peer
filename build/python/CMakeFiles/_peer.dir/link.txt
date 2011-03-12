@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC -bundle -headerpad_max_install_names -undefined dynamic_lookup -o _peer.so CMakeFiles/_peer.dir/peerPYTHON_wrap.cxx.o ../src/libpeerlib.a ../External/alglib/src/libalglib.a 
