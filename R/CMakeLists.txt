@@ -1,3 +1,5 @@
+find_package(RInterpWhich REQUIRED)
+
 OPTION(BUILD_R_PACKAGE "Build the peer R package" ON)
 
 if (BUILD_R_PACKAGE)
