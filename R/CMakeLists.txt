@@ -1,4 +1,5 @@
-find_package(RInterpWhich REQUIRED)
+#oli: I changed this to FindR which seems quite stable here
+find_package(R REQUIRED)
 
 OPTION(BUILD_R_PACKAGE "Build the peer R package" ON)
 
@@ -13,9 +14,11 @@ if (BUILD_R_PACKAGE)
   include_directories(${PEER_SRC_DIR}/include)
 
   set(CMAKE_SWIG_FLAGS "")
-  include_directories(${R_INCLUDE_DIR})
+  #Oli: changed to R_INCLUDEDIR
+  include_directories(${R_INCLUDEDIR})
 
-  SET(SWIGLINKLIBS ${R_SHARED_LIB_PATH_64} ${R_SHARED_LIB_PATH} alglib peerlib)
+  #OLI: changed to LIBR_SO
+  SET(SWIGLINKLIBS ${LIBR_SO} alglib peerlib)
 
   set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
   set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
