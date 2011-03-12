@@ -1,0 +1,443 @@
+PEER usage
+
+This document describes usage of the PEER framework that can be quickly applied 'out-of-the-box'. For more information on the underlying probabilistic model and inference procedure, see the publications. Here, we demonstrate how to fit the framework to your needs on the simulated dataset included in the framework.
+
+To run PEER, you have to call ' /main/main.py'. In the following, this is shorthanded as 'peer'.
+
+You can (and should) have a convenience script, accessible in your PATH variable that does this, an example is in the 'main' directory.
+
+Email lp2@sanger.ac.uk with any issues with running PEER.
+1. Basic application
+
+All you have to do is go to the directory where the data matrices are located, and run PEER with the factor analysis (FA) module:
+
+> cd /home/user/peer/examples/sim1
+> peer --modules=FA
+
+You should see the following log information:
+
+  Module:FA1 iteration 1, time=1.12 sec
+  Module:FA1 iteration 2, time=1.14 sec
+  Module:FA1 iteration 3, time=1.10 sec
+  Net:net Iteration 1: time=3.45 bound=-80932.612349
+
+By default, no output is produced. A run.xml file is produced containing information about the run. This is explained in more detail below. It is straightforward to include other modules as well - we can choose to explain the observed phenotype variability by genetic effects and hidden factors:
+
+> peer --modules=genetic,FA
+  Module:genetic1 iteration 1, time=4.09 sec
+  Module:genetic1 iteration 2, time=4.08 sec
+  Module:genetic1 iteration 3, time=4.07 sec
+  Module:FA1 iteration 1, time=1.14 sec
+  Module:FA1 iteration 2, time=1.13 sec
+  Module:FA1 iteration 3, time=1.15 sec
+  Net:net Iteration 1: time=20.52 bound=-79640.833063
+  
+
+2. Specifying input and output data
+
+Specifying the observed data matrix
+
+The input and ouput files can be specified on command line. The observed data matrix for the additive model is specified by --net.initData= See the section on individual module inputs and outputs for full list of configurable inputs.
+
+The inputs can be in csv (.csv), tab-delimeted (.tab), or Python pickle (.pickle) format. Using the input data from the other simulation scenario:
+
+> peer --modules=FA --net.initData=../sim0/expr.pickle
+
+You should see the following log information:
+
+  Module:FA1 iteration 1, time=1.09 sec
+  Module:FA1 iteration 2, time=1.11 sec
+  Module:FA1 iteration 3, time=1.08 sec
+  Net:net Iteration 1: time=3.37 bound=-72500.155119
+
+No output is still produced.
+
+Specifying output data
+
+The output object destinations are specified as --output=: You can specify several output options. PEER will guess the type of file from the extension. The formats supported are .tab, .csv, and .pickle (Python object storage format). For standard output (e.g summary statistics), use --output=:stdout
+
+For example, to print residuals of the hidden factor model, use
+
+> peer --modules=FA --output=net.residuals:stdout
+  
+
+You should see the following output:
+
+  Module:FA1 iteration 1, time=1.09 sec
+  Module:FA1 iteration 2, time=1.11 sec
+  Module:FA1 iteration 3, time=1.08 sec
+  Net:net Iteration 1: time=3.31 bound=-80932.612349
+  [[-0.08412385 -0.12678206 0.45420936 ..., 0.36389956 0.52859975
+  0.1686771 ]
+  [ 0.13539521 -0.54953097 0.52517942 ..., -0.72757079 -0.41486114
+  -0.32233289]
+  [-0.0245847 0.47490732 0.56722934 ..., 0.39059222 0.49523693
+  0.71791872]
+  ...,
+  [-0.57305373 0.39038363 0.697317 ..., -0.91213252 -0.09760005
+  0.1162533 ]
+  [-0.26058042 0.19848227 -0.53816282 ..., 0.21246777 -0.01727171
+  0.94182765]
+  [-0.17853499 0.45365758 0.07170947 ..., 0.05321867 -0.58368993
+  -0.8242152 ]]
+
+It is usually more useful to output the resulting posteriors into a file, e.g. tab or csv:
+
+> peer --modules=FA --output=net.residuals:residuals.tab
+  > head -3 residuals.tab | cut -f1,2
+  -0.0841238463326 -0.126782056223
+
+> peer --modules=FA --output=net.residuals:residuals.csv
+  > head -3 residuals.csv | cut -d',' -f1,2
+  -0.0841238463326,-0.126782056223
+
+Referencing objects to output
+
+The output objects are referenced using the hierarchical structure of the network. To output properties of the network, use --output=net.: where can be one of "residuals" or "prediction". In practice, any attribute of the Python object can be output.
+
+The global learned model is referenced to as 'net'. The individual modules are referenced by module type (e.g 'FA', 'genetic', 'SVA') and index (e.g. if there are 3 genetic modules, they are referred to as 'genetic1', 'genetic2', and 'genetic3'
+
+Similarly, posteriors of module parameters can be referenced. For example, to output the posteriors of the precisions of mixture weights, and latent factors to files, and the number of associations found to standard output one can use
+
+> peer --modules=genetic,FA --output=net.FA1.Alpha.E1:alpha_posterior.tab --output=net.FA1.S .E1:factor_posterior.csv --output=net.genetic1.nAssociations:stdout
+  Module:genetic1 iteration 1, time=4.09 sec
+  Module:genetic1 iteration 2, time=4.16 sec
+  Module:genetic1 iteration 3, time=4.08 sec
+  Module:FA1 iteration 1, time=1.17 sec
+  Module:FA1 iteration 2, time=1.23 sec
+  Module:FA1 iteration 3, time=1.20 sec
+  Net:net Iteration 1: time=20.42 bound=-79640.833063
+  141
+  > cat alpha_posterior.tab | cut -f1,2
+  5.29220918951 12.3933347258
+
+3. Specifying model parameters
+
+The run parameters can be set from command line. Analogously to specifying the output, the node, module, or net parameters need to be referenced into. Effectively this means setting the value of a parameter in the object constructor. The list of configurable parameters is given in the section for individual module inputs and outputs.
+
+For example, to set the number of latent factors to learn for the first factor analysis module of the net:
+
+> peer --modules=FA --net.FA1.components=2
+  Module:FA1 iteration 1, time=0.15 sec
+  Module:FA1 iteration 2, time=0.14 sec
+  Module:FA1 iteration 3, time=0.14 sec
+  Net:net Iteration 1: time=0.50 bound=-32572.201158
+
+An important parameter is the number of iterations of the model. The default used for the simulations is small. To perform two passes of the model with five iterations of the factor analysis and four iterations of genetic module, use
+
+> peer --modules=genetic,FA --net.FA1.nIterations=5 --net.genetic1.nIterations=4 --net.nIterations=2
+  Module:genetic1 iteration 1, time=4.19 sec
+  Module:genetic1 iteration 2, time=4.22 sec
+  Module:genetic1 iteration 3, time=4.40 sec
+  Module:genetic1 iteration 4, time=4.38 sec
+  Module:FA1 iteration 1, time=1.52 sec
+  Module:FA1 iteration 2, time=1.69 sec
+  Module:FA1 iteration 3, time=2.65 sec
+  Module:FA1 iteration 4, time=1.89 sec
+  Module:FA1 iteration 5, time=1.41 sec
+  Net:net Iteration 1: time=31.16 bound=-65454.021950
+  Module:genetic1 iteration 1, time=4.07 sec
+  Module:genetic1 iteration 2, time=4.07 sec
+  Module:genetic1 iteration 3, time=4.08 sec
+  Module:genetic1 iteration 4, time=4.34 sec
+  Module:FA1 iteration 1, time=1.18 sec
+  Module:FA1 iteration 2, time=1.30 sec
+  Module:FA1 iteration 3, time=1.17 sec
+  Module:FA1 iteration 4, time=1.36 sec
+  Module:FA1 iteration 5, time=1.14 sec
+  Net:net Iteration 2: time=22.72 bound=-41213.259116
+
+4. Logging
+
+The logging facility gives information on the progress of inference. The options are no logging (--log=none), net level logging (--log=net, only updates of net iterations are logged), module level logging (--log=module, default), and node level logging (--log=node).
+
+> peer --modules=FA --log=node
+  Node: FA Alpha node update, time=0.00 sec
+  Node: FA S node update, time=0.01 sec
+  Node: FA W node update, time=0.07 sec
+  Node: FA Alpha node update, time=0.00 sec
+  Node: Noise node update, time=0.00 sec
+  Module:FA1 iteration 1, time=1.52 sec
+  Node: FA S node update, time=0.02 sec
+  Node: FA W node update, time=0.10 sec
+  Node: FA Alpha node update, time=0.00 sec
+  Node: Noise node update, time=0.00 sec
+  Module:FA1 iteration 2, time=1.77 sec
+  Node: FA S node update, time=0.01 sec
+  Node: FA W node update, time=0.11 sec
+  Node: FA Alpha node update, time=0.00 sec
+  Node: Noise node update, time=0.00 sec
+  Module:FA1 iteration 3, time=1.72 sec
+  Net:net Iteration 1: time=5.09 bound=-80932.612349
+
+5. Run information XML file
+
+Each run produces an XML file of the settings used for it. This can be used later to reproduce the results, validate whether the results were from the run, or check the parameters used for the run. As default, the settings are saved into run.xml file, the locations can be changed with --outxml=.
+
+An existing XML file can be used to rerun an experiment. Instead of reading parameters from the command line, the XML file can be specified with --file= to create the model. E.g.
+
+> peer --modules=FA --log=none --outxml=test.xml --output=net.residuals:residuals1.csv
+> peer --file=test.xml --output=net.residuals:residuals2.csv
+  > diff residuals1.csv residuals2.csv
+
+The XML file is updated at the beginning of the run (to store all parameter values) as well as the end. The input and output files are associated with their md5 signatures that allow to check whether a file was used as input or produced as output for this particular run. Similarly, the random seed used, timestamp of the run, and the version of PEER are stored.
+6. Modules
+
+Here are brief module descriptions as well as their input parameters that can be specified, and output variables that can be stored. Name gives the common name to use when using the module (e.g Name: FA means you can use the module by peer --modules=FA). Parameters refers to options you can specify from command line (e.g FA components - use 'peer --modules=FA --net.FA1.components=5')
+
+All probabilistic modules take the following parameters:
+
+nIterations
+    how many update iterations to perform in a single iteration of the full model. Default=5 
+tolerance
+    limit on lower bound change to say model is converged. Default=1E-3 
+schedule
+    the order in which the individual nodes are updated. 
+
+6.1 Bayesian factor analysis module
+
+Name:
+    FA 
+Parameters
+
+    components
+        how many hidden factors to consider. Default=5 
+    initType
+        how to initialise the model. Options: 'pca' (default), 'prior', 'random'. 
+    Alpha.prior
+        prior of the Alpha node (weight precision). Must be a list of two values enclosed in []. In some shells, the '[' and ']' characters need to be escaped. Default=[1E2,1E-2] 
+    S.prior
+        prior of S node (hidden factor activation). Default=[0,1] 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    S
+
+            * E1 - first moment
+            * E2 - second moment
+
+    W
+
+            * E1 - first moment
+            * E2 - second moment
+
+    Alpha
+
+            * E1 - first moment
+            * lnE - expected value of log(Alpha)
+
+Example use
+
+    > peer --modules=FA --net.FA1.components=3 --net.FA1.Alpha.prior=\[1E3,1E0\] --output=net.FA1.Alpha.E1:stdout --log=none
+      [ 448.54289594 490.91775832 640.49463214]
+
+6.2 Bayesian genetic association module
+
+Name
+    genetic 
+Parameters
+
+    initSnps
+        genotype matrix file. The assumed shape is nIndividuals x nAlleles x nSnps. The [i,j,k] entry of the matrix should be the number of alleles j in individual i for SNP k. Currently, only Python pickle files can be read. Default='snps.pickle' 
+    B.prior
+        prior of the B node (Bernoulli genetic association indicator). Must be a list of two values enclosed in [], adding up to 1. The first value is the prior probability of no association between a SNP and a gene expression, and the second one the prior of an association. In some shells, the '[' and ']' characters need to be escaped. Default=[1-1E-3,1E-3] 
+    W.prior
+        prior of W node (allele weights). Default=[0,1] 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    nAssociations
+        number of gene-SNP pairs for which the posterior probability of an association is greater than 0.5 
+    B
+
+            * E1 - first moment
+            * E2 - second moment
+
+    W
+
+            * E1 - first moment
+            * E2 - second moment
+
+Example use
+
+    > peer --modules=genetic --net.genetic1.initSnps=../sim0/snps.pickle --net.genetic1.B.prior=\[0.99,0.01\] --output=net.genetic1.B.E1:association_posterior.csv --output=net.genetic1.nAssociations:stdout --log=none
+      3
+
+6.3 Bayesian regression module
+
+Name
+    Reg 
+Parameters
+
+    initS
+        known covariates matrix file. The assumed shape is nIndividuals x nCovariates. The [i,j] entry of the matrix should be the value of covariate j in individual i. Currently, only Python pickle files can be read. Default='covs.pickle' 
+    Alpha.prior
+        prior of the Alpha node (weight precision). Must be a list of two values enclosed in []. In some shells, the '[' and ']' characters need to be escaped. Default=[1E2,1E-2] 
+    W.prior
+        prior of W node (allele weights). Default=[0,1] 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    W
+
+            * E1 - first moment
+            * E2 - second moment
+
+    Alpha
+
+            * E1 - first moment
+            * lnE - expected value of log(Alpha)
+
+Example use
+
+    > peer --modules=Reg --net.Reg1.initS=../sim0/truth/env_factors.pickle --net.initData=../sim0/expr.pickle --output=net.Reg1.Alpha.lnE:stdout
+      [ 7.34559366 7.75650984 6.93190545 7.41601537 8.16098741 7.56068192
+      7.77150754 5.19048511 6.76925115 7.35731218]
+
+6.4 PCA module
+
+Name
+    PCA 
+Parameters
+
+    components
+        how many hidden factors to consider. Default=5 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    S
+        estimated hidden factors 
+    W
+        estimated hidden factor weights 
+
+Example use
+
+    > peer --modules=PCA --net.PCA1.components=3 --output=net.PCA1.S:pcs.csv --log=none
+
+6.5 PCAsig module
+
+Name
+    PCAsigve 
+Parameters
+
+    components
+        how many hidden factors to consider. Default=5 
+    NPerm
+        how many permutations to perform. Default=1000 
+    Pcutoff
+        significance cutoff for eigenvalues. Default=0.05 
+    monotonicSignificance
+        whether to enforce uniformity of p-values. Default=False 
+    cumulativeSignificance
+        whether to consider cumulative variance explained by first k eigenvectors instead of individual ones. Default=False 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    S
+        estimated hidden factors 
+    W
+        estimated hidden factor weights 
+    nSignificantComponents
+        number of significant eigenvectors retained 
+
+Example use
+
+    > peer --modules=PCAsig --net.PCAsig1.components=10 --net.PCAsig1.nPerm=100 --output=net.PCAsig1.nSignificantComponents:stdout --log=none
+      2
+
+6.6 SVA module
+
+Name
+    SVA 
+Parameters
+
+    NPerm
+        how many permutations to perform. Default=1000 
+    Pcutoff
+        significance cutoff for eigenvalues. Default=0.05 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    S
+        estimated surrogate variables 
+    W
+        estimated surrogate variable weights 
+    nSignificantComponents
+        number of significant surrogate variables retained 
+
+Example use
+
+    > peer --modules=SVA --net.SVA1.components=20 --net.SVA1.nPerm=100 --output=net.SVA1.nSignificantComponents:stdout --log=none
+      10.0
+
+6.7 Standard regression module
+
+Name
+    MlReg 
+Parameters
+
+    initS
+        known covariates matrix file. The assumed shape is nIndividuals x nSetsofIndependentCovariates x nCovariates. The [i,j,k] entry of the matrix should be the value of covariate k in set j and individual i. Currently, only Python pickle files can be read. The sets are useful for separating independent contributors. Predictions are made only on the first set of independent covariates. 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    W.E1
+        maximum likelihood weights 
+
+Example use
+
+    > peer --modules=MlReg --net.MlReg1.initS=snps.pickle --output=net.MlReg1.W.E1:weights.pickle --log=None
+
+6.8 Standard genetic association module
+
+Name
+    QTLperm 
+Parameters
+
+    nPerm
+        number of permutations, default=1000 
+    significanceCutoff
+        significance cutoff for permutation testing. Default=0 
+    nTopLods
+        number of top lod scores to retain per gene. Default=10 
+    initSnps
+        matrix of SNP genotypes. See Bayesian association module for details 
+    initMiss
+        matrix of missing SNPs. See Bayesian association module for details 
+    initPerm
+        matrix of permutations. Size is nPerm x nIndividuals, each row specifying a permutation to use. Default=None, a new matrix is created. 
+    geneStart
+        starting index of the gene for slicing 
+    geneEnd
+        end index of the gene for slicing 
+
+Output features
+
+    prediction
+        prediction of the module's contribution to the phenotypes 
+    lodOriginal
+        lod scores for considered SNPs and genes 
+    lodPerm
+        nTopLods x nGenes lod scores matrix, giving nTopLods highest permuted lod scores for each gene. 
+    significantAss
+        snps x nGenes boolean matrix, which is true of the association between the SNP and gene is significant. 
+
+Example use
+
+    > peer --modules=QTLperm --net.QTLperm1.nPerm=100 --net.QTLperm1.significanceCutoff=0.05 --net.QTLperm1.geneStart=5 --net.QTLperm1.geneEnd=10 --output=net.QTLperm1.significantAss:stdout --log=none
+
+
