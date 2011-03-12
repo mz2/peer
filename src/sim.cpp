@@ -9,6 +9,7 @@
 
 #include "sim.h"
 #include <Eigen/Eigen>
+#include "ossolog.h"
 
 using namespace Eigen;
 

@@ -70,7 +70,6 @@ namespace {
 			//2. create object
 			
 			
-			
 			cVBFA vb(Y,YE2, 8);
 //			cout << vb.W.E1.cols() << endl << vb.Alpha.E1 << endl;
 			for(int i=0; i < 10; i++){ vb.update();	}

@@ -8,7 +8,7 @@
  */
 
 #include "array_helper.h"
-
+#include "ossolog.h"
 
 
 PMatrix array2matrix(const float32_t* matrix,int32_t rows,int32_t cols)

@@ -200,7 +200,13 @@
 #define ULOG_ERR(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
 #define ULOG_WARN(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
 #define ULOG_INFO(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
+
+#ifdef OSSOLOG_DEBUG
 #define ULOG_DEBUG(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
+#else
+#define ULOG_DEBUG(...) do {} while (0)
+#endif
+
 #define ULOG_CRIT_L(FMT, ARG...) fprintf(stderr, \
 "%s:%d: " FMT "\n", __FILE__, __LINE__, ## ARG)
 #define ULOG_ERR_L(FMT, ARG...) fprintf(stderr, \
@@ -219,14 +225,25 @@
 "%s:%d: " FMT "\n", __FUNCTION__, __LINE__, ## ARG)
 #define ULOG_INFO_F(FMT, ARG...) fprintf(stderr, \
 "%s:%d: " FMT "\n", __FUNCTION__, __LINE__, ## ARG)
+
+#ifdef OSSOLOG_DEBUG
 #define ULOG_DEBUG_F(FMT, ARG...) fprintf(stderr, \
 "%s:%d: " FMT "\n", __FUNCTION__, __LINE__, ## ARG)
+#else
+#define ULOG_DEBUG_F(...) do {} while (0)
+#endif
 
 #define DLOG_CRIT(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
 #define DLOG_ERR(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
 #define DLOG_WARN(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
 #define DLOG_INFO(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
+
+#ifdef OSSOLOG_DEBUG
 #define DLOG_DEBUG(...) (fprintf(stderr, __VA_ARGS__),fprintf(stderr, "\n"))
+#else
+#define DLOG_DEBUG(...)
+#endif
+
 #define DLOG_CRIT_L(FMT, ARG...) fprintf(stderr, \
 "%s:%d: " FMT "\n", __FILE__, __LINE__, ## ARG)
 #define DLOG_ERR_L(FMT, ARG...) fprintf(stderr, \
@@ -245,8 +262,13 @@
 "%s:%d: " FMT "\n", __FUNCTION__, __LINE__, ## ARG)
 #define DLOG_INFO_F(FMT, ARG...) fprintf(stderr, \
 "%s:%d: " FMT "\n", __FUNCTION__, __LINE__, ## ARG)
+
+#ifdef OSSOLOG_DEBUG
 #define DLOG_DEBUG_F(FMT, ARG...) fprintf(stderr, \
 "%s:%d: " FMT "\n", __FUNCTION__, __LINE__, ## ARG)
+#else
+#define DLOG_DEBUG_F(...) do {} while (0)
+#endif
 
 #define ULOG_OPEN(X) do {} while (0)
 #define DLOG_OPEN(X) do {} while (0)

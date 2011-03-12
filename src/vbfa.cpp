@@ -14,6 +14,7 @@
 #include <Eigen/Dense>
 #include "alglib/src/specialfunctions.h"
 #include "vbfa.h"
+#include "ossolog.h"
 
 using namespace Eigen;
 using namespace std;

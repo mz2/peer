@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F184C87132BBAE50098BF50 /* array_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860212D3961F00BAC3A8 /* array_helper.h */; };
+		5F184C88132BBAE50098BF50 /* bayesnet.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860312D3961F00BAC3A8 /* bayesnet.h */; };
+		5F184C89132BBAE50098BF50 /* model.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860412D3961F00BAC3A8 /* model.h */; };
+		5F184C8A132BBAE50098BF50 /* sim.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860512D3961F00BAC3A8 /* sim.h */; };
+		5F184C8B132BBAE50098BF50 /* vbfa.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860612D3961F00BAC3A8 /* vbfa.h */; };
+		5F184C8C132BBAE50098BF50 /* ossolog.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FED860E12D3962C00BAC3A8 /* ossolog.h */; };
 		5F7A868412BA8E7900C6E1F8 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE0C6441295B99B001431C7 /* AppKit.framework */; };
 		5F7A86B312BA8F7100C6E1F8 /* gtest.framework in Copy gtest.framework */ = {isa = PBXBuildFile; fileRef = 5FE0C6271295B967001431C7 /* gtest.framework */; };
 		5FE0C6761295BF53001431C7 /* gtest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE0C6271295B967001431C7 /* gtest.framework */; };
@@ -77,25 +83,32 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5F184C90132BBB220098BF50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB330C9E12C8F0760000432A;
+			remoteInfo = peer;
+		};
 		5FED861D12D3966400BAC3A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5FED861912D3965700BAC3A8 /* alglib */;
+			remoteGlobalIDString = 5FED861912D3965700BAC3A8;
 			remoteInfo = alglib;
 		};
 		5FED861F12D3966D00BAC3A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5FED861912D3965700BAC3A8 /* alglib */;
+			remoteGlobalIDString = 5FED861912D3965700BAC3A8;
 			remoteInfo = alglib;
 		};
 		5FED862112D3967600BAC3A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5FED861912D3965700BAC3A8 /* alglib */;
+			remoteGlobalIDString = 5FED861912D3965700BAC3A8;
 			remoteInfo = alglib;
 		};
 /* End PBXContainerItemProxy section */
@@ -340,6 +353,19 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		5F184C8F132BBB030098BF50 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F184C87132BBAE50098BF50 /* array_helper.h in Headers */,
+				5F184C88132BBAE50098BF50 /* bayesnet.h in Headers */,
+				5F184C89132BBAE50098BF50 /* model.h in Headers */,
+				5F184C8A132BBAE50098BF50 /* sim.h in Headers */,
+				5F184C8B132BBAE50098BF50 /* vbfa.h in Headers */,
+				5F184C8C132BBAE50098BF50 /* ossolog.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5FED861612D3965700BAC3A8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +393,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5FE0C6771295BF59001431C7 /* Build configuration list for PBXNativeTarget "tests" */;
 			buildPhases = (
+				5F184C8F132BBB030098BF50 /* Headers */,
 				5FE0C66F1295BF3E001431C7 /* Sources */,
 				5FE0C6701295BF3E001431C7 /* Frameworks */,
 				5F7A86B612BA8F9000C6E1F8 /* Copy gtest.framework */,
@@ -375,6 +402,7 @@
 			);
 			dependencies = (
 				5FED862012D3966D00BAC3A8 /* PBXTargetDependency */,
+				5F184C91132BBB220098BF50 /* PBXTargetDependency */,
 			);
 			name = tests;
 			productName = tests;
@@ -550,6 +578,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5F184C91132BBB220098BF50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB330C9E12C8F0760000432A /* peer */;
+			targetProxy = 5F184C90132BBB220098BF50 /* PBXContainerItemProxy */;
+		};
 		5FED861E12D3966400BAC3A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5FED861912D3965700BAC3A8 /* alglib */;
@@ -741,7 +774,11 @@
 				FRAMEWORK_SEARCH_PATHS = "${SRCROOT}/External";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = "${SRCROOT}/External";
+				GCC_PREPROCESSOR_DEFINITIONS = "OSSOLOG_COMPILE=1";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/External/alglib/src",
+					"${SRCROOT}/External",
+				);
 				PREBINDING = NO;
 				PRODUCT_NAME = peer;
 			};
