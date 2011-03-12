@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Eigen/Eigen>
+#include "csv_parser.hpp"
 #include "alglib/src/ap.h"
 #include "alglib/src/specialfunctions.h"
 #include "vbfa.h"
