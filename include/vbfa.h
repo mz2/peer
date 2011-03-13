@@ -179,16 +179,22 @@ public:
 	int getNmax_iterations() {return Nmax_iterations;};
 	double getTolerance() {return tolerance;};
 	bool getAdd_mean() { return add_mean;}				
-	//TODO: think about getters for PrioAlpha and Eps
+	double getPriorEpsA() { return Eps_pa;}
+	double getPriorEpsB() { return Eps_pb;}
+	double getPriorAlphaA() { return Alpha_pa;}
+	double getPriorAlphaB() { return Alpha_pb;}
 	
 	//setters 
 	void setNk(int Nk) {this->Nk = Nk;is_initialized=false;}
 	void setAdd_mean(bool add_mean) {this->add_mean = add_mean;is_initialized=false;};
 	void setNmax_iterations(int Nmax_iterations) {this->Nmax_iterations = Nmax_iterations;};
 	void setTolerance(double tolerance){this->tolerance = tolerance;};
+	void setPriorAlphaA(double pa) {Alpha_pa = pa; is_initialized=false;}
+	void setPriorAlphaB(double pb) {Alpha_pb = pb; is_initialized=false;}
+	void setPriorEpsA(double pa) {Eps_pa = pa; is_initialized=false;}
+	void setPriorEpsB(double pb) {Eps_pb = pb; is_initialized=false;}
 	void setPriorAlpha(double pa,double pb){ Alpha_pa=pa;Alpha_pb = pb;is_initialized=false;}
 	void setPriorEps(double pa,double pb){Eps_pa = pa;Eps_pb=pb;is_initialized=false;}
-	
 	
 	//general methods:
 	void init_net();	
