@@ -45,9 +45,10 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 #set(NUMPY_INCLUDE_DIR "/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/core/include")
 #set(PYTHON_SHARED_LIB_PATH "/usr/lib/libpython2.6.dylib")
 
-set(R_INCLUDE_DIR "/Library/Frameworks/R.framework/Versions/2.12/Resources/include")
-set(R_SHARED_LIB_PATH "/Library/Frameworks/R.framework/Versions/2.12/Resources/lib/i386/libR.dylib")
-set(R_SHARED_LIB_PATH_64 "/Library/Frameworks/R.framework/Versions/2.12/Resources/lib/x86_64/libR.dylib")
+#obsoleted by the FindR script
+#set(R_INCLUDE_DIR "/Library/Frameworks/R.framework/Versions/2.12/Resources/include")
+#set(R_SHARED_LIB_PATH "/Library/Frameworks/R.framework/Versions/2.12/Resources/lib/i386/libR.dylib")
+#set(R_SHARED_LIB_PATH_64 "/Library/Frameworks/R.framework/Versions/2.12/Resources/lib/x86_64/libR.dylib")
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
