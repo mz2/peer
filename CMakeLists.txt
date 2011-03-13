@@ -72,6 +72,8 @@ add_subdirectory(./External/alglib/src)
 add_subdirectory(./External/csv_parser)
 add_subdirectory(./src)
 add_subdirectory(./python)
+add_subdirectory(./External/yaml-cpp)
+
 #add_subdirectory(./R)
 
 #include_directories(
