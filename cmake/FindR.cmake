@@ -65,11 +65,15 @@ ENDIF(NOT R_H)
 
 # check for existence of libR.so
 
-MESSAGE(STATUS "Checking for existence of R shared library")
-FIND_LIBRARY(LIBR_SO
-	R
-	PATHS ${R_HOME}/lib ${R_SHAREDLIBDIR} ${R_HOME}/bin
-	NO_DEFAULT_PATH)
+IF(NOT LIBR_SO)
+       MESSAGE(STATUS "Checking for existence of R shared library")
+       FIND_LIBRARY(LIBR_SO
+		R
+		PATHS ${R_HOME}/lib ${R_SHAREDLIBDIR} ${R_HOME}/bin
+		NO_DEFAULT_PATH)
+endif(NOT LIBR_SO)
+
+
 IF(NOT LIBR_SO)
 	MESSAGE(FATAL_ERROR "Not found. Make sure the location of R was detected correctly, above, and R was compiled with the --enable-shlib option")
 ELSE(NOT LIBR_SO)
@@ -78,6 +82,7 @@ ELSE(NOT LIBR_SO)
 				PATH)
 	SET(R_USED_LIBS R)
 ENDIF(NOT LIBR_SO)
+
 
 # for at least some versions of R, we seem to have to link against -lRlapack. Else loading some
 # R packages will fail due to unresolved symbols, or we can't link against -lR.
