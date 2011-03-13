@@ -1,8 +1,30 @@
 PEER package source distribution.
+A complete documentation can be found her
+https://github.com/PMBio/peer/wiki/
+
+##Package content##
+Source distribution of the PEER library with bindings to python,R,standalone
 
 
+######## Installation instructions ##########
 
-***For the impatient***
+##Dependencies##
+cmake (http://www.cmake.org/)
+optional (R/python API)
+SWIG
+python/numpy
+R
+
+
+##Dependencies##
+cmake
+optional (R/python API)
+SWIG
+python/numpy
+R
+
+
+##For the impatient##
 
 Install instructions.
 The peer installation tree is baed on cmake.
@@ -17,7 +39,7 @@ The peer installation tree is baed on cmake.
 #   make install
 
 
-***Troubleshooting and further details***
+##Troubleshooting and further details##
 
 Installing peer binaries:
 If make is called with the "install" flag; the standard behviour is to install a peer binary and the peer C++ library to the system-wide targets.
@@ -31,3 +53,9 @@ The python interface requires a recent numppy version to be present.
 *R module
 TODO: Matias
 
+
+
+######## USAGE ##########
+Quick examples of use cases of peer can be found in examples.
+For a comprehensive documentation and examples please see
+https://github.com/PMBio/peer/wiki/
