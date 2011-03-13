@@ -26,4 +26,14 @@ if (BUILD_R_PACKAGE)
   add_definitions(-DSWIG)
   swig_add_module(peer r peer.i)
   swig_link_libraries(peer ${SWIGLINKLIBS})
-endif()
+
+  ADD_CUSTOM_COMMAND(
+    TARGET peer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+       ${PEER_SOURCE_DIR}/R/peer 
+       ${PEER_SOURCE_DIR}/build/R/peer)
+
+endif(BUILD_R_PACKAGE)
+
+#file(COPY ${CMAKE_CURRENT_BINARY_DIR}/peerR_wrap.cxx 
+#     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/peer/src/peerR_wrap.cpp)
