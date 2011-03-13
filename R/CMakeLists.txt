@@ -39,6 +39,11 @@ if (BUILD_R_PACKAGE)
        ${PEER_SOURCE_DIR}/build/R/peerR_wrap.cxx
        ${PEER_SOURCE_DIR}/build/R/peer/src/peerR_wrap.cpp)
 
+  ADD_CUSTOM_COMMAND(
+    TARGET peer PREINSTALL
+    COMMAND ${CMAKE_COMMAND} -P
+       "R CMD INSTALL --build ${PEER_SOURCE_DIR}/build/R/peer")
+
 endif(BUILD_R_PACKAGE)
 
 #file(COPY ${CMAKE_CURRENT_BINARY_DIR}/peerR_wrap.cxx 
