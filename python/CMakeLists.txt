@@ -1,3 +1,8 @@
+# Python cmake build script
+# This requires swig, python sources and numpy to be installed
+# See README.txt for documentaton on how to circumvent potential problems in detecting the libraries
+
+
 find_package(SWIG REQUIRED)
 
 
@@ -88,18 +93,18 @@ add_definitions(-DSWIG)
 swig_add_module(peer python peer.i)
 swig_link_libraries(peer ${SWIGLINKLIBS} peerlib alglib)
 
+
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")	 
   # Mac OS X specific code
+  # Without this flag it does not find some of the libraries
   SET(CMAKE_MODULE_LINKER_FLAGS "-undefined dynamic_lookup")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 
 
-#TODO:
-#install _peer.so and peer.py into PYTHON_INSTDIR
+#Install python .so and python wrapper
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/_peer.so DESTINATION ${PYTHON_INSTDIR})
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/peer.py DESTINATION ${PYTHON_INSTDIR})
 #install demo into the build directory
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/peer_demo.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 endif(ENABLE_python)
