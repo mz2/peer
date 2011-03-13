@@ -1,1 +1,0 @@
-/usr/bin/c++   -O2 -Wall -Wextra -pedantic -Wno-long-long  -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/run-tests.dir/emittertests.cpp.o CMakeFiles/run-tests.dir/main.cpp.o CMakeFiles/run-tests.dir/parsertests.cpp.o CMakeFiles/run-tests.dir/spectests.cpp.o CMakeFiles/run-tests.dir/tests.cpp.o  -o run-tests  ../libyaml-cpp.a 
