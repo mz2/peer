@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project(PEER)
 
+#compile i386+x86_64 universal binaries on OS X
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 ## Documentation for final package
 # manual installation paths
