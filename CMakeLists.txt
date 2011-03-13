@@ -78,10 +78,7 @@ add_subdirectory(./External/csv_parser)
 add_subdirectory(./src)
 add_subdirectory(./python)
 add_subdirectory(./External/yaml-cpp)
-
-if(BUILD_R_PACKAGE)
-  add_subdirectory(./R)
-endif(BUILD_R_PACKAGE)
+add_subdirectory(./R)
 
 #include_directories(
 #    .
