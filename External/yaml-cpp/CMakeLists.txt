@@ -59,19 +59,19 @@ set_target_properties(yaml-cpp PROPERTIES
 	SOVERSION "${YAML_CPP_VERSION_MAJOR}.${YAML_CPP_VERSION_MINOR}"
 )
 
-install(TARGETS yaml-cpp ${_INSTALL_DESTINATIONS})
-install(
-	FILES ${public_headers}
-	DESTINATION ${INCLUDE_INSTALL_DIR}
-)
+#install(TARGETS yaml-cpp ${_INSTALL_DESTINATIONS})
+#install(
+#	FILES ${public_headers}
+#	DESTINATION ${INCLUDE_INSTALL_DIR}
+#)
 
-if(UNIX)
-	set(PC_FILE ${CMAKE_BINARY_DIR}/yaml-cpp.pc)
-	configure_file("yaml-cpp.pc.cmake" ${PC_FILE} @ONLY)
-	install(FILES ${PC_FILE} DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
-endif(UNIX)
+#if(UNIX)
+#	set(PC_FILE ${CMAKE_BINARY_DIR}/yaml-cpp.pc)
+#	configure_file("yaml-cpp.pc.cmake" ${PC_FILE} @ONLY)
+#	install(FILES ${PC_FILE} DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
+#endif(UNIX)
 
-if(YAML_CPP_BUILD_TOOLS)
-	add_subdirectory (test)
-	add_subdirectory (util)
-endif(YAML_CPP_BUILD_TOOLS)
+#if(YAML_CPP_BUILD_TOOLS)
+#	add_subdirectory (test)
+#	add_subdirectory (util)
+#endif(YAML_CPP_BUILD_TOOLS)

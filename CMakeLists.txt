@@ -74,7 +74,9 @@ add_subdirectory(./src)
 add_subdirectory(./python)
 add_subdirectory(./External/yaml-cpp)
 
-#add_subdirectory(./R)
+if(PEER_R_PACKAGE)
+  add_subdirectory(./R)
+endif(PEER_R_PACKAGE)
 
 #include_directories(
 #    .
