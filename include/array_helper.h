@@ -11,7 +11,7 @@
 #define __ARRAY_HELPER_H__
 
 #include <Eigen/Eigen>
-#include <ap.h>
+#include "ap.h"
 
 using namespace Eigen;
 using alglib::randomreal;
