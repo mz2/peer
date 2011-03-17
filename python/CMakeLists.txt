@@ -7,7 +7,7 @@ find_package(SWIG REQUIRED)
 
 
 #default: enable python bindings
-option(ENABLE_python "Enable Python bindings" ON)
+option(BUILD_PYTHON_PACKAGE "Enable Python bindings" ON)
 
 #1. find swig
 INCLUDE(${SWIG_USE_FILE})
@@ -20,7 +20,7 @@ endif()
 #we got everything?
 if ( (NOT EXISTS ${PYTHON_EXECUTABLE} ) )
    message("Did not find python")
-   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+   set(BUILD_PYTHON_PACKAGE OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 #find python libs and includes
@@ -43,31 +43,31 @@ endif()
 if ( (NOT EXISTS ${PYTHON_EXECUTABLE}))
    message("Did not find python executable, disabling python interface.")
    message("Try specifying executable manually in CMakeLists.txt")
-   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+   set(BUILD_PYTHON_PACKAGE OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 if ( (NOT EXISTS ${PYTHON_INCLUDE_DIRS}))
    message("Did not find python include dirs")
    message(${PYTHON_INCLUDE_DIRS})
-   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+   set(BUILD_PYTHON_PACKAGE OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 
 if ( (NOT EXISTS ${NUMPY_INCLUDE_DIR}) )
    message("Did not find numpy, disabling python interface")
    message(${NUMPY_INCLUDE_DIR})
-   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+   set(BUILD_PYTHON_PACKAGE OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 
 if ( NOT EXISTS ${PYTHON_INSTDIR})
    message("Did not find python install directory, disabling python interface")
-   set(ENABLE_python OFF CACHE BOOL "Enable Python bindings" FORCE)
+   set(BUILD_PYTHON_PACKAGE OFF CACHE BOOL "Enable Python bindings" FORCE)
 endif()
 
 
 
-if(ENABLE_python)
+if(BUILD_PYTHON_PACKAGE)
 
 
 
@@ -107,4 +107,4 @@ INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/_peer.so DESTINATION ${PYTHON_INSTDIR}
 INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/peer.py DESTINATION ${PYTHON_INSTDIR})
 #install demo into the build directory
 
-endif(ENABLE_python)
+endif(BUILD_PYTHON_PACKAGE)

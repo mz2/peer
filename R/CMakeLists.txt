@@ -16,6 +16,7 @@ if (BUILD_R_PACKAGE)
   set(CMAKE_SWIG_FLAGS "")
   #Oli: changed to R_INCLUDEDIR
   include_directories(${R_INCLUDEDIR})
+  include_directories(${R_INCLUDEDIR}/x86_64)
 
   #OLI: changed to LIBR_SO
   SET(SWIGLINKLIBS ${LIBR_SO} alglib peerlib)
