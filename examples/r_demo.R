@@ -13,7 +13,7 @@ VBFA_setNk(vb,Kinf)
 
 #fit mean effect ?
 VBFA_setAdd_mean(vb,FALSE)
-VBFA_setPhenoMean(vb,y)
+VBFA_setPhenoMean(vb,as.matrix(y))
 
 #set prior settings
 #(these are the default settings of PEER)
@@ -31,6 +31,8 @@ W = VBFA_getW(vb)
 Alpha = VBFA_getAlpha(vb)
 
 #get corrected dataset:
-Yc = VBFA_getResiduals()
+Yc = VBFA_getResiduals(vb)
 
+pdf("r_demo.pdf",width=8,height=8)
 plot(1.0 / Alpha,xlab="Factors", ylab="Factor relevance", main="")
+dev.off()
