@@ -16,14 +16,6 @@ python/numpy
 R
 
 
-##Dependencies##
-cmake
-optional (R/python API)
-SWIG
-python/numpy
-R
-
-
 ##For the impatient##
 
 Install instructions.

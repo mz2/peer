@@ -37,6 +37,7 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 # R header and shared library paths
 #set(R_INCLUDE_DIR "/usr/local/Cellar/r/2.12.0/R.framework/Resources/include")
 #set(R_SHARED_LIB_PATH "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
+set(LIBR_SO "/opt/local/lib/R/lib/x86_64/libR.dylib")
 ##/R END
 
 #Matias version
@@ -78,10 +79,7 @@ add_subdirectory(./External/csv_parser)
 add_subdirectory(./src)
 add_subdirectory(./python)
 add_subdirectory(./External/yaml-cpp)
-
-if(BUILD_R_PACKAGE)
-  add_subdirectory(./R)
-endif(BUILD_R_PACKAGE)
+add_subdirectory(./R)
 
 #include_directories(
 #    .

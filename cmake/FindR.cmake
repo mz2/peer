@@ -1,16 +1,16 @@
 # find the R binary
 
 MESSAGE(STATUS "Looking for R executable")
-IF(R_EXECUTABLE)
-	MESSAGE(STATUS "Specified by user")
-ENDIF(R_EXECUTABLE)
+IF(NOT R_EXECUTABLE)
 FIND_PROGRAM(R_EXECUTABLE R)
-
 IF(R_EXECUTABLE-NOTFOUND)
 	MESSAGE(FATAL_ERROR "Could NOT find R (TODO: name option)")
 ELSE(R_EXECUTABLE-NOTFOUND)
 	MESSAGE(STATUS "Using R at ${R_EXECUTABLE}")
 ENDIF(R_EXECUTABLE-NOTFOUND)
+
+ENDIF(NOT R_EXECUTABLE)
+
 
 # find R_HOME
 
@@ -19,8 +19,6 @@ IF(NOT R_HOME)
 	EXECUTE_PROCESS(
 		COMMAND ${R_EXECUTABLE} "--slave" "--no-save" "-e" "cat(R.home())"
 		OUTPUT_VARIABLE R_HOME)
-ELSE(NOT R_HOME)
-	MESSAGE(STATUS "Specified by user")
 ENDIF(NOT R_HOME)
 IF(NOT R_HOME)
 	MESSAGE(FATAL_ERROR "Could NOT determine R_HOME (probably you misspecified the location of R)")
@@ -51,10 +49,13 @@ IF(NOT R_INCLUDEDIR)
 ENDIF(NOT R_INCLUDEDIR)
 MESSAGE(STATUS "Include files should be at ${R_INCLUDEDIR}. Checking for R.h")
 
+IF(NOT R_H)
 FIND_FILE(R_H
 	R.h
 	PATHS ${R_INCLUDEDIR}
 	NO_DEFAULT_PATH)
+ENDIF(NOT R_H)
+
 IF(NOT R_H)
 	MESSAGE(FATAL_ERROR "Not found")
 ELSE(NOT R_H)
@@ -65,11 +66,15 @@ ENDIF(NOT R_H)
 
 # check for existence of libR.so
 
-MESSAGE(STATUS "Checking for existence of R shared library")
-FIND_LIBRARY(LIBR_SO
-	R
-	PATHS ${R_HOME}/lib ${R_SHAREDLIBDIR} ${R_HOME}/bin
-	NO_DEFAULT_PATH)
+IF(NOT LIBR_SO)
+       MESSAGE(STATUS "Checking for existence of R shared library")
+       FIND_LIBRARY(LIBR_SO
+		R
+		PATHS ${R_HOME}/lib ${R_SHAREDLIBDIR} ${R_HOME}/bin
+		NO_DEFAULT_PATH)
+endif(NOT LIBR_SO)
+
+
 IF(NOT LIBR_SO)
 	MESSAGE(FATAL_ERROR "Not found. Make sure the location of R was detected correctly, above, and R was compiled with the --enable-shlib option")
 ELSE(NOT LIBR_SO)
@@ -78,6 +83,7 @@ ELSE(NOT LIBR_SO)
 				PATH)
 	SET(R_USED_LIBS R)
 ENDIF(NOT LIBR_SO)
+
 
 # for at least some versions of R, we seem to have to link against -lRlapack. Else loading some
 # R packages will fail due to unresolved symbols, or we can't link against -lR.

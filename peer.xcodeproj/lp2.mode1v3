@@ -264,15 +264,18 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>08FB7794FE84155DC02AAC07</string>
+								<string>5F31C999126F8D6F0046F4C1</string>
+								<string>9A042D1A132EF19A008CB01D</string>
 								<string>08FB7795FE84155DC02AAC07</string>
+								<string>5FED85FD12D3961100BAC3A8</string>
 								<string>5FE0C5C71295B754001431C7</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>13</integer>
 									<integer>2</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -314,7 +317,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>vbfa.cpp</string>
+								<string>bayesnet.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -322,11 +325,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>vbfa.cpp</string>
+										<string>bayesnet.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>9AB354C112C109A900006A27</string>
+										<string>9A042D43132EF27F008CB01D</string>
 										<key>history</key>
 										<array>
 											<string>9AE962B312AC0DFB00CA8131</string>
@@ -349,6 +352,8 @@
 											<string>9AB354AF12C103E400006A27</string>
 											<string>9AB354BB12C105C900006A27</string>
 											<string>9AB354BC12C105C900006A27</string>
+											<string>9A042D40132EF27F008CB01D</string>
+											<string>9A042D41132EF27F008CB01D</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -375,15 +380,10 @@
 											<string>9A1BA0B012BA9CA3007DAA0E</string>
 											<string>9AB3535412BFA91600006A27</string>
 											<string>9AB3535912BFA91600006A27</string>
-											<string>9AB3540112BFD5AD00006A27</string>
 											<string>9AB3540212BFD5AD00006A27</string>
-											<string>9AB3540312BFD5AD00006A27</string>
 											<string>9AB3540412BFD5AD00006A27</string>
-											<string>9AB3540512BFD5AD00006A27</string>
 											<string>9AB3540E12BFD62600006A27</string>
-											<string>9AB3540F12BFD62600006A27</string>
 											<string>9AB3542212BFD70600006A27</string>
-											<string>9AB3542312BFD70600006A27</string>
 											<string>9AB3542412BFD70600006A27</string>
 											<string>9AB3542D12BFD7DB00006A27</string>
 											<string>9AB3542E12BFD7DB00006A27</string>
@@ -419,6 +419,7 @@
 											<string>9AB354B812C103E400006A27</string>
 											<string>9AB354BD12C105C900006A27</string>
 											<string>9AB354BE12C105C900006A27</string>
+											<string>9A042D42132EF27F008CB01D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -476,9 +477,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>9AB3540712BFD5AD00006A27</string>
+				<string>9A042D44132EF27F008CB01D</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>9AB3540812BFD5AD00006A27</string>
+				<string>9A042D45132EF27F008CB01D</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -612,11 +613,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>9AB3541312BFD62600006A27</string>
-		<string>9AB3541412BFD62600006A27</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>9AA5044C1281A0E400ABCDDC</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/lp2/prog/projects/peer/release_cpp/peer/peer.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -636,14 +633,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>vbfa.cpp</string>
+								<string>bayesnet.cpp</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -660,6 +655,8 @@
 							<string>218pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -699,7 +696,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>9AA5044C1281A0E400ABCDDC</string>
-				<string>9AB353EB12BFD54000006A27</string>
+				<string>9A042D31132EF211008CB01D</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

@@ -9,7 +9,7 @@
 
 #include "bayesnet.h"
 #include <Eigen/Eigen>
-#include <specialfunctions.h>
+#include "specialfunctions.h"
 #include "ossolog.h"
 
 using namespace Eigen;
