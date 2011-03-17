@@ -35,6 +35,6 @@ if __name__ == '__main__':
 
     #use simulated dataset
     Y = simulate_data(N,K,sigma)
-    SP.savetxt('expression.csv',Y)
+    SP.savetxt('expression.csv',Y,delimiter=',')
         
         
