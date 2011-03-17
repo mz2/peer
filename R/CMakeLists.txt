@@ -41,8 +41,7 @@ if (BUILD_R_PACKAGE)
 
   ADD_CUSTOM_COMMAND(
     TARGET peer POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -P
-    R CMD INSTALL --build ${PEER_SOURCE_DIR}/build/R/peer
+    COMMAND R CMD INSTALL --build ${PEER_SOURCE_DIR}/build/R/peer
     COMMENT "Building and installing the peer R package")
 
 endif(BUILD_R_PACKAGE)
