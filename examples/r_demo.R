@@ -12,13 +12,12 @@ vb = VBFA()
 VBFA_setNk(vb,Kinf)
 
 #fit mean effect ?
-VBFA_setAdd_mean(vb,FALSE)
 VBFA_setPhenoMean(vb,as.matrix(y))
 
 #set prior settings
 #(these are the default settings of PEER)
 VBFA_setPriorAlpha(vb,0.001,0.1);
-VBFA_setPriorEps(vb,0.1,10);
+VBFA_setPriorEps(vb,0.1,10.);
 VBFA_setNmax_iterations(vb,Nmax_iterations)
 VBFA_update(vb)
 

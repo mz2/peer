@@ -11,7 +11,7 @@ import peer
 
 if __name__ == '__main__':
 	#1. load expression dataset
-	Y = SP.loadtxt('expression.csv')
+	Y = SP.loadtxt('expression.csv',delimiter=',')
 
 	#2. run PEER
 	#use up to 20 factors
