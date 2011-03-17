@@ -21,8 +21,8 @@ add_library(peerlib STATIC bayesnet.cpp array_helper.cpp sim.cpp vbfa.cpp io.cpp
 #   ARCHIVE DESTINATION lib
 #   LIBRARY DESTINATION lib)
 
-add_executable(peerutil sim.cpp vbfa.cpp main.cpp)
-target_link_libraries(peerutil peerlib alglib csv_parser yaml-cpp)
+add_executable(peer sim.cpp vbfa.cpp main.cpp)
+target_link_libraries(peer peerlib alglib csv_parser yaml-cpp)
 
-INSTALL(TARGETS peerutil
+INSTALL(TARGETS peer
    RUNTIME DESTINATION bin)
