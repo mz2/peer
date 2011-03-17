@@ -1,16 +1,27 @@
 cmake_minimum_required(VERSION 2.8)
 project(PEER)
 
+#build options
+#bindings
+#PYTHON on by default
+option(BUILD_PYTHON_PACKAGE "Enable Python bindings" ON)
+#R optional
+option(BUILD_R_PACKAGE "Enable R bindings" OFF)
+
+#build stuff
+option(BUILD_UNIVERSAL "Build both 32 and 64 bit versions" OFF)
+
 #compile i386+x86_64 universal binaries on OS X
+if (BUILD_UNIVERSAL)
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 SET(CMAKE_OSX_ARCHITECTURES "i386;x86_64")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+endif (BUILD_UNIVERSAL)
 
 ## Documentation for final package
 # manual installation paths
 
-##PYTHON##
-#
+##PYTHON build options##
 # Path to python executable. If specified peer is built against this
 # python version, otherwise "which python" is used for auto-detection
 #SET(PYTHON_EXECUTABLE "")
@@ -33,23 +44,25 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ##/PYTHON END##
 
 
-# R package build configuration
-# R header and shared library paths
-#set(R_INCLUDE_DIR "/usr/local/Cellar/r/2.12.0/R.framework/Resources/include")
-#set(R_SHARED_LIB_PATH "/usr/local/Cellar/r/2.12.0/R.framework/Resources/lib/libR.dylib")
+##R build options###
+#set(R_EXECUTABLE "")
+#R executable 
+#set(R_HOME "")
+#R home directory
+#set(R_H "")
+#R include directory for headers
+#set(R_INCLUDEDIR "")
+#R include dir
+#set(LIBR_SO)
+#R dylib or dynamic link SO 
+##/R END##
+
+
+# OLI's build options
 set(LIBR_SO "/opt/local/lib/R/lib/x86_64/libR.dylib")
 ##/R END
 
-#Matias version
-#set(PYTHON_EXECUTABLE "/usr/bin/python")
-#set(PYTHON_INCLUDE_DIRS "/usr/include/python2.6")
-#set(NUMPY_INCLUDE_DIR "/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/core/include")
-#set(PYTHON_SHARED_LIB_PATH "/usr/lib/libpython2.6.dylib")
 
-#obsoleted by the FindR script
-#set(R_INCLUDE_DIR "/Library/Frameworks/R.framework/Versions/2.12/Resources/include")
-#set(R_SHARED_LIB_PATH "/Library/Frameworks/R.framework/Versions/2.12/Resources/lib/i386/libR.dylib")
-#set(R_SHARED_LIB_PATH_64 "/Library/Frameworks/R.framework/Versions/2.12/Resources/lib/x86_64/libR.dylib")
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -69,26 +82,23 @@ include_directories(./include)
 
 add_definitions(-g -Wextra -D_BSD_SOURCE)
 
-#fPic while compiling on:
+#fPic while compiling on
+#this seems to be needed on some linux systems
 set(CMAKE_CXX_FLAGS "-fPIC")
 
 include_directories(./External/alglib/src)
 
+#add Cmake modules
 add_subdirectory(./External/alglib/src)
 add_subdirectory(./External/csv_parser)
 add_subdirectory(./src)
-add_subdirectory(./python)
 add_subdirectory(./External/yaml-cpp)
-add_subdirectory(./R)
 
-#include_directories(
-#    .
-#    ..
-#    ${CMAKE_CURRENT_BINARY_DIR}
-#    ${CMAKE_CURRENT_SOURCE_DIR}
-#    ${CMAKE_SOURCE_DIR}
-#    ${CMAKE_BINARY_DIR}
-#    ${CMAKE_SOURCE_DIR}/bin/
-#    ./src
-#   )
+#### build external interface (optional) #####
+if (BUILD_PYTHON_PACKAGE)
+add_subdirectory(./python)
+endif (BUILD_PYTHON_PACKAGE)
+if (BUILD_R_PACKAGE)
+add_subdirectory(./R)
+endif (BUILD_R_PACKAGE)
 
