@@ -17,6 +17,7 @@ if (BUILD_R_PACKAGE)
   #Oli: changed to R_INCLUDEDIR
   include_directories(${R_INCLUDEDIR})
   include_directories(${R_INCLUDEDIR}/x86_64)
+  include_directories(${R_INCLUDEDIR}/i386)
 
   #OLI: changed to LIBR_SO
   SET(SWIGLINKLIBS ${LIBR_SO} alglib peerlib)
@@ -40,10 +41,17 @@ if (BUILD_R_PACKAGE)
        ${PEER_SOURCE_DIR}/build/R/peerR_wrap.cxx
        ${PEER_SOURCE_DIR}/build/R/peer/src/peerR_wrap.cpp)
 
-  ADD_CUSTOM_COMMAND(
-    TARGET peer POST_BUILD
-    COMMAND R CMD INSTALL --build ${PEER_SOURCE_DIR}/build/R/peer
-    COMMENT "Building and installing the peer R package")
+  if (BUILD_UNIVERSAL)
+    ADD_CUSTOM_COMMAND(
+      TARGET peer POST_BUILD
+      COMMAND R CMD INSTALL --build ${PEER_SOURCE_DIR}/build/R/peer
+      COMMENT "Building and installing the peer R package")
+  else (BUILD_UNIVERSAL)
+    ADD_CUSTOM_COMMAND(
+      TARGET peer POST_BUILD
+      COMMAND R CMD INSTALL --no-multiarch --build ${PEER_SOURCE_DIR}/build/R/peer
+      COMMENT "Building and installing the peer R package")
+  endif
 
 endif(BUILD_R_PACKAGE)
 
