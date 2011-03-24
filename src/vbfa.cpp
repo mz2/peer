@@ -297,8 +297,9 @@ void cVBFA::init_net()
 	//debug output:
 	if(VERBOSE>=2)
 	{
-		printf("Initialising Net\n");
-		printf("Data dimensions: Nk:%d,Nj: %d,Np: %d, Nc: %d\n", Nk,Nj,Np,Nc);
+		ULOG_INFO("Initialising Net");
+		ULOG_INFO("Initialising Net\n");
+		ULOG_INFO("Data dimensions: Nk:%d,Nj: %d,Np: %d, Nc: %d\n", Nk,Nj,Np,Nc);
 	}
 	//cout << pheno_mean;
 	//1. checkups of parameters passed
@@ -308,6 +309,10 @@ void cVBFA::init_net()
 	assert (Nj>0);
 	assert (Np>0);
 	assert (Nk>0);
+	//check that we don't have more factors than individuals or genes
+	assert (Nk<Np);
+	assert (Nk<Nj);
+	
 	//2. create nodes
 	pheno = cPhenoNode(pheno_mean,pheno_var);
 
@@ -408,7 +413,7 @@ void cVBFA::update(){
 		if (VERBOSE>=2)
 		{
 			double res_var = getResiduals().array().array().pow(2.).mean();
-			printf("Residual variance: %.4f, Delta bound: %.4f, Delta var(residuals): %.4f\n",res_var,delta_bound, delta_residual_var);
+			ULOG_INFO("Residual variance: %.4f, Delta bound: %.4f, Delta var(residuals): %.4f\n",res_var,delta_bound, delta_residual_var);
 		}
 		
 		//converged?
@@ -424,13 +429,13 @@ void cVBFA::update(){
 	{
 		if(abs(delta_bound)<tolerance)
 		{
-			printf("Converged (bound) after %d iterations\n", i);
+			ULOG_INFO("Converged (bound) after %d iterations\n", i);
 		}
 		else if(abs(delta_residual_var) < var_tolerance){
-			printf("Converged (var(residuals)) after %d iterations\n", i);
+			ULOG_INFO("Converged (var(residuals)) after %d iterations\n", i);
 		}
 		else {
-			printf("Maximum number of iterations reached: %d\n",i);
+			ULOG_INFO("Maximum number of iterations reached: %d\n",i);
 		}
 	}
 }
