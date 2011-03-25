@@ -18,8 +18,28 @@ using namespace Eigen;
 
 
 
+sSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sparsity,double sigma)
+{
+	//1. create random matrix with binary indicators and the weights
+	sSimulation RV;
+	RV.Z = PMatrix(K,D);
+	RV.W = PMatrix(K,D);
+	for (int i=0;i<K;i++)
+		for (int j=0;j<D;j++)
+		{
+			//coin flip for the assignment of Z
+			RV.Z(i,j) = (rand()<sparsity)?1:0;
+			//draw W also
+			RV.W(i,j) = RV.Z(i,j) * randomreal();
+		}
+	//2. create random factors
+	RV.X = randn(N,K);
+	RV.Eps = sigma*randn(N,D);
+	RV.expr = RV.X*RV.W + RV.Eps;
+	return RV;
+}
 
-sSimulation simulate_expression(int N, int D, int K,double sigma)
+sSimulation simulate_expressionVBFA(int N, int D, int K,double sigma)
 /*
  Simulate an expresison matrix with N entries, D dimensions and K factors
  */

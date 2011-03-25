@@ -11,6 +11,17 @@
 #include "ossolog.h"
 
 
+double sum(PMatrix m)
+{
+	double rv=0;
+	for (int i=0;i<m.rows();i++)
+		for (int j=0;j<m.cols();j++)
+		{
+			rv+=m(i,j);
+		}
+	return rv;
+			
+}
 PMatrix array2matrix(const float32_t* matrix,int32_t rows,int32_t cols)
 {
 	//create a matrix from a double array
@@ -78,6 +89,19 @@ PMatrix randn(int n, int m)
 	for (int i=0; i<n; i++)
 		for (int j=0; j<m; j++) {
 			rv(i,j) = randomreal();
+		}
+	return rv;
+}
+
+
+PMatrix rand(int n,int m)
+/* create a rand matrix (uniform 0..1)*/
+{
+	PMatrix rv(n,m);
+	for (int i=0;i<n;i++)
+		for(int j=0;j<m;j++)
+		{
+			rv(i,j) = rand();
 		}
 	return rv;
 }

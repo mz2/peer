@@ -13,13 +13,21 @@ using namespace Eigen;
 
 
 struct sSimulation {
+	//resulting expression 
 	PMatrix expr;
+	//weights
 	PMatrix W;
+	//latent factors
 	PMatrix X;
+	//noise
 	PMatrix Eps;
+	//optional sparsity pattern:
+	PMatrix Z;
 };
 
 
 
-sSimulation simulate_expression(int N, int D, int K,double sigma=0.1);
-
+//simulate from standard linear model
+sSimulation simulate_expressionVBFA(int N, int D, int K,double sigma=0.1);
+//simulate from a sparse model
+sSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sparsity=0.001,double sigma=0.1);

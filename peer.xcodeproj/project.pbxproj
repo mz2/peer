@@ -169,6 +169,8 @@
 		DB3A8783133BFE3D0004AD22 /* libpeer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB330C9F12C8F0760000432A /* libpeer.a */; };
 		DB3A87A4133BFF350004AD22 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DC12D395B500BAC3A8 /* main.cpp */; };
 		DB3A87A5133BFF5D0004AD22 /* main_testing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB3A878E133BFE920004AD22 /* main_testing.cpp */; };
+		DBBBD5B2133C0CF200A7A07A /* sparsefa.h in Headers */ = {isa = PBXBuildFile; fileRef = DBBBD5B0133C0CF200A7A07A /* sparsefa.h */; };
+		DBBBD5B3133C0CF200A7A07A /* sparsefa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD5B1133C0CF200A7A07A /* sparsefa.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,6 +396,8 @@
 		DB3A8788133BFE3D0004AD22 /* peer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = peer; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB3A878D133BFE920004AD22 /* main_testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main_testing.h; sourceTree = "<group>"; };
 		DB3A878E133BFE920004AD22 /* main_testing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_testing.cpp; sourceTree = "<group>"; };
+		DBBBD5B0133C0CF200A7A07A /* sparsefa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sparsefa.h; sourceTree = "<group>"; };
+		DBBBD5B1133C0CF200A7A07A /* sparsefa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sparsefa.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -469,6 +473,8 @@
 				5FE0C5C71295B754001431C7 /* Unit Tests */,
 				DB3A878D133BFE920004AD22 /* main_testing.h */,
 				DB3A878E133BFE920004AD22 /* main_testing.cpp */,
+				DBBBD5B0133C0CF200A7A07A /* sparsefa.h */,
+				DBBBD5B1133C0CF200A7A07A /* sparsefa.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -865,6 +871,7 @@
 				5FED860A12D3961F00BAC3A8 /* sim.h in Headers */,
 				5FED860B12D3961F00BAC3A8 /* vbfa.h in Headers */,
 				5FED860F12D3962C00BAC3A8 /* ossolog.h in Headers */,
+				DBBBD5B2133C0CF200A7A07A /* sparsefa.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,6 +1092,7 @@
 				5FED85F012D395B500BAC3A8 /* bayesnet.cpp in Sources */,
 				5FED85F312D395B500BAC3A8 /* sim.cpp in Sources */,
 				5FED85F512D395B500BAC3A8 /* vbfa.cpp in Sources */,
+				DBBBD5B3133C0CF200A7A07A /* sparsefa.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
