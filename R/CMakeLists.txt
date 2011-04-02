@@ -51,7 +51,7 @@ if (BUILD_R_PACKAGE)
       TARGET peer POST_BUILD
       COMMAND R CMD INSTALL --no-multiarch --build ${PEER_SOURCE_DIR}/build/R/peer
       COMMENT "Building and installing the peer R package")
-  endif
+  endif (BUILD_UNIVERSAL)
 
 endif(BUILD_R_PACKAGE)
 
