@@ -73,9 +73,16 @@ PMatrix parseCsv(string filename, bool header){
 	csv_parser file_parser;	
 	vector< vector<float> > data;
 	file_parser.set_skip_lines(header);
-	file_parser.set_field_term_char(',');	
-	file_parser.set_line_term_char('\n');
-	
+	file_parser.set_line_term_char('\n');	
+	if (filename.rfind(".csv") != string::npos) {
+		file_parser.set_field_term_char(',');	
+	}
+	else if (filename.rfind(".tab") != string::npos) {
+		file_parser.set_field_term_char('\t');
+	}
+	else {
+		file_parser.set_field_term_char(' ');		
+	}
 	file_parser.init(filename.c_str());
 	
 	int n_rows = 0, n_cols = 0;
