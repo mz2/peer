@@ -1,0 +1,11 @@
+Package: peer
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2011-01-24
+Author: Who wrote it
+Maintainer: Matias Piipari <matias.piipari@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+LazyLoad: yes
+Packaged: 2011-02-10 10:15:46 UTC; mz2

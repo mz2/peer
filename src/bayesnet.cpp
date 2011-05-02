@@ -8,7 +8,7 @@
  */
 
 #include "bayesnet.h"
-#include <Eigen/Eigen>
+#include "Eigen/Eigen"
 #include "specialfunctions.h"
 #include "ossolog.h"
 

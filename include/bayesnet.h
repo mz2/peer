@@ -9,7 +9,7 @@
 #ifndef __BAYESNET_H__
 #define __BAYESNET_H__
 
-#include <Eigen/Eigen>
+#include "Eigen/Eigen"
 #include "array_helper.h"
 #include <iostream>
 
