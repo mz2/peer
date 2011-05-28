@@ -37,9 +37,7 @@ public:
 	virtual double calcBound(cBayesNet &net);
 	virtual void update(cBayesNet &net);
 
-#ifndef SWIG
 	PMatrix getE1();
-#endif	
 	};
 
 
