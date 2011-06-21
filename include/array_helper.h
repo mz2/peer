@@ -10,7 +10,7 @@
 #ifndef __ARRAY_HELPER_H__
 #define __ARRAY_HELPER_H__
 
-#include <Eigen/Eigen>
+#include "Eigen/Eigen"
 #include "ap.h"
 
 using namespace Eigen;

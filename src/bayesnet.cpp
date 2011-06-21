@@ -8,7 +8,7 @@
  */
 
 #include "bayesnet.h"
-#include <Eigen/Eigen>
+#include "Eigen/Eigen"
 #include "specialfunctions.h"
 #include "ossolog.h"
 
@@ -19,6 +19,7 @@ using alglib::psi;
 double cNode::entropy() {return 0;}
 double cNode::calcBound(cBayesNet &net) {return 0;}
 void cNode::update(cBayesNet &net) {}
+
 
 PMatrix cNode::getE1(){ return E1;}
 

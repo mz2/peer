@@ -9,7 +9,7 @@
 #ifndef __BAYESNET_H__
 #define __BAYESNET_H__
 
-#include <Eigen/Eigen>
+#include "Eigen/Eigen"
 #include "array_helper.h"
 #include <iostream>
 
@@ -37,9 +37,7 @@ public:
 	virtual double calcBound(cBayesNet &net);
 	virtual void update(cBayesNet &net);
 
-#ifndef SWIG
 	PMatrix getE1();
-#endif	
 	};
 
 

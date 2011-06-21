@@ -54,6 +54,11 @@
 #ifndef OSSO_LOG_H
 #define OSSO_LOG_H
 
+#ifndef OSSOLOG_COMPILE 
+#define OSSOLOG_COMPILE 1 
+#endif
+
+
 #ifdef DEBUG
 #define OSSOLOG_COMPILE
 #endif
