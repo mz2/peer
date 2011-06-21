@@ -473,7 +473,6 @@
 				5FE0C5C71295B754001431C7 /* Unit Tests */,
 				DB3A878D133BFE920004AD22 /* main_testing.h */,
 				DB3A878E133BFE920004AD22 /* main_testing.cpp */,
-				DBBBD5B0133C0CF200A7A07A /* sparsefa.h */,
 				DBBBD5B1133C0CF200A7A07A /* sparsefa.cpp */,
 			);
 			name = Source;
@@ -557,6 +556,7 @@
 		5FED85FD12D3961100BAC3A8 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				DBBBD5B0133C0CF200A7A07A /* sparsefa.h */,
 				9A042D23132EF1A6008CB01D /* io.h */,
 				5FED860212D3961F00BAC3A8 /* array_helper.h */,
 				5FED860312D3961F00BAC3A8 /* bayesnet.h */,

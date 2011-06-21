@@ -21,16 +21,33 @@ namespace PEER
 	
 	
 	/*Sparse Factor analysis node for W*/
-	class cWNodeSparse : cWNode {
+	class cWNodeSparse : public cWNode {
+	protected:
+		//private prior on regulatory link being on
+		PMatrix pi;
+		//log prior of link being on
+		PMatrix lpi;
+		//posteior probability of link being on
+		PMatrix C;
+	public:
+		//public stuff is inherited from cWnode...
+		cWNodeSparse(); // 
+		cWNodeSparse(PMatrix pi); // 
+		cWNodeSparse(PMatrix E1,PMatrix CE1,PMatrix pi); //E1 init on W1 and on indicator Z
+		
+		void update(cBayesNet &net);
+		
+
 		
 	};
 	
 	
-	class cSPARSEFA : cVBFA { 
+	class cSPARSEFA : public cVBFA { 
 		//declare friends:
 		friend class cNode;
 		friend class cWNode;
 		friend class cXNode;
+		friend class cWNodeSparse;
 		friend class cPhenoNode;
 		friend class cEpsNode;
 		friend class cAlphaNode;
@@ -50,8 +67,14 @@ namespace PEER
 		
 #ifndef SWIG
 		//constructors that take matrices in 
+		//constructor from expression data
+		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior,int Nfactors);
+		//constructor that takes covariates into account
+		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior, PMatrix covs,int Nfactors);
+		//constructor that take variance and covariates into account
+		cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix sparsity_prior, PMatrix covs, int Nfactors);
+
 		
-			
 #endif
 		
 		void init_net();	

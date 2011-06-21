@@ -13,6 +13,10 @@
 #include "bayesnet.h"
 #include "array_helper.h"
 
+
+//declare external varible for vorbosity
+extern int VERBOSE;
+
 namespace PEER 
 {
 
@@ -99,7 +103,7 @@ public:
 };
 
 
-enum intialisation_types { PCA };
+enum intialisation_types { PCA, RANDN };
 
 /** Main class for variational Bayesian factor analysis */
 class cVBFA : public cBayesNet {
@@ -110,8 +114,9 @@ class cVBFA : public cBayesNet {
 	friend class cPhenoNode;
 	friend class cEpsNode;
 	friend class cAlphaNode;
+//	friend class cWNodeSparse;
 	
-protected:
+public:
 	/** Dimensions */
 	int Nj; //individuals 
 	int Np; //phenotypes

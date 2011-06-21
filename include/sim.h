@@ -21,13 +21,17 @@ struct sSimulation {
 	PMatrix X;
 	//noise
 	PMatrix Eps;
-	//optional sparsity pattern:
-	PMatrix Z;
 };
 
 
+struct sSparseSimulation: sSimulation {
+	//true prior on connectivity matrix
+	PMatrix pi;
+	//true simulated connectivity matrix
+	PMatrix Z;
+};
 
 //simulate from standard linear model
 sSimulation simulate_expressionVBFA(int N, int D, int K,double sigma=0.1);
 //simulate from a sparse model
-sSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sparsity=0.001,double sigma=0.1);
+sSparseSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sigma=0.1,double sparsity=0.001,double fpr=0.1,double fnr=0.1);

@@ -14,6 +14,7 @@
 #include <Eigen/Dense>
 #include "alglib/src/specialfunctions.h"
 #include "vbfa.h"
+#include "sparsefa.h"
 #include "ossolog.h"
 
 using namespace Eigen;
@@ -332,6 +333,10 @@ void cVBFA::init_net()
 		residuals = pheno.E1;
 	}
 
+		
+	if (initialisation != PCA)
+		ULOG_ERR("Only PCA initialization supported");
+	assert(initialisation==PCA);
 	
 	//JacobiSVD test;
 	JacobiSVD<PMatrix> svd(residuals, ComputeThinU | ComputeThinV);
