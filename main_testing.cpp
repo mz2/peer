@@ -25,8 +25,7 @@ int main (int argc, char * const argv[]) {
 	double fnr = 0.1;
 	sSparseSimulation sim = simulate_expressionSPARSEFA(N,D,K,sparsity,sigma,fpr,fnr);
 	//count the number of sparse things?
-	PMatrix Z = sim.Z;
-	
+	PMatrix Z = sim.Z;	
 	int Zsum = (int)sum(Z);
 	//plot diagnoses
 	printf("Net size: NxG: %d x %d. Non-zero enries: %d",N,D,sum);
@@ -35,7 +34,7 @@ int main (int argc, char * const argv[]) {
 	//cVBFA vb = cVBFA(sim.expr,K);
 	//vb.update();
 	
-	cSPARSEFA vbs = cSPARSEFA(sim.expr,sim.pi,K);
+	cSPARSEFA vbs = cSPARSEFA(sim.expr,sim.pi.transpose(),K);
 	vbs.update();
 	
 	

@@ -11,7 +11,7 @@
 #include "ossolog.h"
 
 
-double sum(PMatrix m)
+double sum(PMatrix& m)
 {
 	double rv=0;
 	for (int i=0;i<m.rows();i++)
@@ -22,6 +22,17 @@ double sum(PMatrix m)
 	return rv;
 			
 }
+
+
+PMatrix log(PMatrix& m)
+{
+	PMatrix rv = PMatrix(m.rows(),m.cols());
+	for (int i=0;i<m.rows();i++)
+		for (int j=0;j<m.cols();j++)
+			rv(i,j) = log(m(i,j));
+	return rv;
+}
+
 PMatrix array2matrix(const float32_t* matrix,int32_t rows,int32_t cols)
 {
 	//create a matrix from a double array
@@ -101,12 +112,13 @@ PMatrix rand(int n,int m)
 	for (int i=0;i<n;i++)
 		for(int j=0;j<m;j++)
 		{
-			rv(i,j) = rand();
+			rv(i,j) = ((double)rand())/RAND_MAX;
 		}
 	return rv;
 }
 
-bool isnull(const PMatrix m)
+
+bool isnull(const PMatrix& m)
 {
 	return (m.cols()==0) & (m.rows()==0);
 }

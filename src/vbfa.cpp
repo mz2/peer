@@ -81,7 +81,9 @@ void cWNode::update(cBayesNet &net){
 	cVBFA n = (cVBFA&)net;
 	lndetcovS = 0.;
 	E2S = PMatrix::Zero(n.Nk, n.Nk);
-
+	//TODO: don't we need this?
+	//Xprec = PMatrix::Zero(n.Nk,n.Nk);
+	
 	// for each phenotype, calculate covariance and mean of weight
 	PMatrix diagAE1 = PMatrix::Zero(n.Nk,n.Nk);
 	diagAE1.diagonal() = n.Alpha.E1;

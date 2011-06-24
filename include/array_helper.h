@@ -37,12 +37,13 @@ void matrix2array(const PMatrix m,float64_t** matrix, int32_t* rows, int32_t*col
 
 
 //check for null Matrix (empty)
-bool isnull(const PMatrix m);
-
-double sum(PMatrix m);
+bool isnull(const PMatrix& m);
+double sum(PMatrix& m);
+PMatrix log(PMatrix& m);
 
 
 //create random matrix:
 PMatrix randn(int n, int m);
+PMatrix rand(int n,int m);
 
 #endif

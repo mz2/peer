@@ -17,6 +17,8 @@ using namespace std;
 using namespace Eigen;
 
 
+enum intialisation_types { PCA, RANDN, PRIOR };
+
 class cBayesNet {
 public:
 	int N;
@@ -54,7 +56,7 @@ public:
 	cDirichletNode(int dim, float prior);
 	double entropy();	
 	double calcBound(cBayesNet &net);
-	void update(cBayesNet &net);
+	virtual void update(cBayesNet &net);
 };
 
 
@@ -73,7 +75,7 @@ public:
 	cGammaNode(int dim, float prior_val_a, float prior_val_b, PMatrix E1_val);
 	double entropy();	
 	double calcBound(cBayesNet &net);
-	void update(cBayesNet &net);
+	virtual void update(cBayesNet &net);
 	void updateMoments();
 	
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);

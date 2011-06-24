@@ -23,19 +23,20 @@ namespace PEER
 	/*Sparse Factor analysis node for W*/
 	class cWNodeSparse : public cWNode {
 	protected:
-		//private prior on regulatory link being on
-		PMatrix pi;
 		//log prior of link being on
+		PMatrix pi;
 		PMatrix lpi;
 		//posteior probability of link being on
 		PMatrix C;
+		//posterior probability of link being off (for convenience)
+		PMatrix Coff;
+		double tauOn;
+		double tauOff;
 	public:
 		//public stuff is inherited from cWnode...
 		cWNodeSparse(); // 
-		cWNodeSparse(PMatrix pi); // 
-		cWNodeSparse(PMatrix E1,PMatrix CE1,PMatrix pi); //E1 init on W1 and on indicator Z
-		
-		void update(cBayesNet &net);
+		cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet &net);
+		virtual void update(cBayesNet &net);
 		
 
 		
@@ -55,12 +56,12 @@ namespace PEER
 	protected:
 		//test: matrix with pror information about relations?
 		PMatrix pi;
-		
-		void init_params();
+		double sigmaOff;
+		double sigmaOn;
+		virtual void init_params();
+
 		
 	public:
-		//updated, sparse node for W
-		cWNodeSparse W;
 		
 		//constructor
 		cSPARSEFA();
@@ -76,9 +77,27 @@ namespace PEER
 
 		
 #endif
+		//setters
+		void setSigmaOff(double sigma_off) {this->sigmaOff = sigma_off;};
+		//getters
+		double getSigmaOff() { return this->sigmaOff;};
 		
-		void init_net();	
-		void update();
+#ifdef SWIG
+		//interface-specific methods
+		void setSparsityPrior(float64_t* matrix,int32_t rows,int32_t cols)
+		{this->pi = array2matrix(matrix,rows,cols);is_initialized=false;}
+		void getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols)
+		{return matrix2array(pi,matrix,rows,cols);}
+#else
+		void setSparsityPrior(const PMatrix sparsity_prior) {this->pi = sparsity_prior;is_initialized=false;}
+		PMatrix getSparsityPrior(){return this->pi;}
+
+#endif
+		
+		 virtual double calcBound();
+		 virtual double logprob();
+		 virtual void init_net();	
+		 virtual void update();
 		
 		
 	};// :: sparseFA
