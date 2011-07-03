@@ -32,75 +32,114 @@ cWNodeSparse::cWNodeSparse()
 }
 
 
-cWNodeSparse::cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet& net)
+cWNodeSparse::cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet* net)
 {
-	cSPARSEFA n = (cSPARSEFA&)net;
+	cSPARSEFA* n = (cSPARSEFA*)net;
 
 	//0. parameters for precisions values we need
-	tauOff = pow(n.sigmaOff,-2);
-	tauOn = pow(n.sigmaOn,-2);
+	tauOff = pow(n->sigmaOff,-2);
+	tauOn = pow(n->sigmaOn,-2);
 	
 	//1. moment from W and prior on link pi
 	this->E1 = E1;
 	this->pi = pi;
 	//logarithmated version
 	this->lpi = log(pi);
+	PMatrix pi_ = PMatrix::Ones(pi.rows(),pi.cols())-pi;
+	this->lpi_off = log(pi_);
 	//2. derive initialization of C:
 	this->C  = PMatrix(pi);
 	this->Coff = PMatrix::Ones(C.rows(),C.cols())-C;
+	//diagonal prior on covariance
+	CovPriorDiag = PMatrix::Zero(n->Np,n->Nk);
+	
 	//3. initialisation of second moments based on prior
 	
-	E2S = PMatrix::Zero(n.Nk, n.Nk);
-	Xprec = PMatrix::Zero(n.Nk,n.Nk);
+	E2S = PMatrix::Zero(n->Nk, n->Nk);
+	Xprec = PMatrix::Zero(n->Nk,n->Nk);
 	for (int i=0;i<pi.rows();i++)
 	{
 		//1. contribution from sparistiy prior
-		PMatrix pprior = PMatrix::Zero(n.Nk,n.Nk);
+		PMatrix pprior = PMatrix::Zero(n->Nk,n->Nk);
 		//pprior = diag(1.0*self.C[d,:,1] + self.C[d,:,0]*(tauOff))
 		pprior.diagonal() = (this->C.row(i)*tauOn + this->Coff.row(i)*tauOff);	
 		PMatrix cov = (pprior).inverse();
 		PMatrix E2 = (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
 		E2S += E2;
-		Xprec += n.Eps->E1(i,0)*E2;
+		Xprec += n->Eps->E1(i,0)*E2;
 	}
 }
 
 
-void cWNodeSparse::update(cBayesNet &net)
+
+void cWNodeSparse::update(cBayesNet *net)
 {
-	cSPARSEFA n = (cSPARSEFA&)net;
+	cSPARSEFA* n = (cSPARSEFA*)net;
 	lndetcovS = 0.;
-	E2S = PMatrix::Zero(n.Nk, n.Nk);
+	E2S = PMatrix::Zero(n->Nk, n->Nk);
 	//TODO: don't we need this?
-	Xprec = PMatrix::Zero(n.Nk,n.Nk);
+	Xprec = PMatrix::Zero(n->Nk,n->Nk);
 	
 	// for each phenotype, calculate covariance and mean of weight
-	for(int i = 0; i < n.Np; i++){
+	for(int i = 0; i < n->Np; i++){
 		//procesion matrix, combining info from prior, noise level and incoming S
 		//1. contribution from sparistiy prior
-		PMatrix pprior = PMatrix::Zero(n.Nk,n.Nk);
+		PMatrix pprior = PMatrix::Zero(n->Nk,n->Nk);
 		//pprior = diag(1.0*self.C[d,:,1] + self.C[d,:,0]*(tauOff))
-		pprior.diagonal() = (this->C.row(i)*tauOn + this->Coff.row(i)*tauOff);
+		//store temporary for updateEps:
+		CovPriorDiag.row(i) = (this->C.row(i)*tauOn + this->Coff.row(i)*tauOff);
+		pprior.diagonal() = CovPriorDiag.row(i);
 		//2. incoming message from X and data:
-		PMatrix pin = n.X->E2S*n.Eps->E1(i,0);
+		PMatrix pin = n->X->E2S*n->Eps->E1(i,0);
 		//3. add and invert
 		PMatrix cov = (pin+pprior).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
 		lndetcovS += logdet(cov);
-		E1.row(i) = n.Eps->E1(i,0)*cov*n.X->E1.transpose()*n.pheno->E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+		E1.row(i) = n->Eps->E1(i,0)*cov*n->X->E1.transpose()*n->pheno->E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
 		PMatrix E2 = (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
 		E2S += E2;
-		Xprec += n.Eps->E1(i,0)*E2;
+		Xprec += n->Eps->E1(i,0)*E2;
+		//4. update sparsity prior
+		for (int j=0;j<n->Nk;j++)
+		{
+			double l0 = lpi_off(i,j);
+			double l1 = lpi(i,j);
+			l0 += 0.5*log(tauOff/M_PI) - 0.5*tauOff*cov(i,j);
+			l1 += 0.5*log(tauOn/M_PI)  - 0.5*tauOn*cov(i,j);
+			double coff = exp(l0) + 1E-6;
+			double con  = exp(l1) + 1E-6;
+			double Z  = coff+con;
+			C(i,j) = con/Z;
+			Coff(i,j) = coff/Z;
+		}
+		
 	}
 	
 	// store values needed to calculate covariance for each p
-	E_last = n.Eps->E1;
-	XE2S_last = n.X->E2S;
-//	A_last = n.Alpha->E1;	
+	E_last = n->Eps->E1;
+	XE2S_last = n->X->E2S;
 }
 
 
 
-
+void cEpsNodeSparse::update(cBayesNet* net)
+{
+	cSPARSEFA* n = (cSPARSEFA*)net;
+	a = (pa + 0.5*n->Nj)*PMatrix::Ones(n->Np,1).array();
+	cWNodeSparse* Ws = (cWNodeSparse*) n->W;
+	
+	PMatrix b1 = (PMatrix::Ones(1, n->Nj)*n->pheno->E2).transpose();
+	PMatrix b2 = (PMatrix::Ones(1, n->Nj)*((n->pheno->E1.array()*(n->X->E1*n->W->E1.transpose()).array()).matrix())).transpose();
+	PMatrix b3 = PMatrix::Zero(n->Np,1);
+	PMatrix CovPrior = PMatrix::Zero(n->Nk,n->Nk);
+	for(int i = 0; i < n->Np; i++){
+		//get current covariance for phenotype p form W node
+		CovPrior.diagonal() = Ws->CovPriorDiag.row(i);
+		PMatrix Wcov = (CovPrior + n->W->XE2S_last*n->Eps->E1(i,0)).inverse(); // calculate current covariance matrix of W (cannot use updated values for X,A)
+		b3(i,0) = (n->X->E2S.array()*(Wcov + n->W->E1.row(i).transpose()*n->W->E1.row(i)).array()).sum();
+	}
+	b = pb + 0.5*b1.array() - b2.array() + 0.5*b3.array();
+	updateMoments();	
+}
 
 
 
@@ -126,6 +165,12 @@ cSPARSEFA::cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix sparsity_prio
 	this->pi = sparsity_prior;
 }
 
+
+// destructor
+/* overwrite as we don't have an Alpha Nde in this net*/
+cSPARSEFA::~cSPARSEFA()
+{
+}
 
 void cSPARSEFA::init_params() { 
 	//default settings
@@ -259,9 +304,11 @@ void cSPARSEFA::init_net()
 	Xmean_prior.block(0,0,Nj,Nc) = covs;
 
 	//need Eps for W init
-	Eps = new cEpsNode(Np, Eps_pa,Eps_pb, PMatrix());
-	W = new cWNodeSparse(W0,pi,*this);
+	Eps = new cEpsNodeSparse(Np, Eps_pa,Eps_pb, PMatrix());
+	W = new cWNodeSparse(W0,pi,this);
 	X = new cXNode(X0, Xmean_prior,Xprec_prior);
+	//set Alpha Node to NUll to ensure that delete does not crash
+	Alpha = NULL;
 	// update precision nodes to initialise them
 	//Alpha.update(*this);
 	if (VERBOSE>=2)

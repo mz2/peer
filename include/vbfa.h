@@ -39,8 +39,7 @@ public:
 	
 	cWNode(); // default
 	cWNode(PMatrix E1); // from mean
-	//virtual 
-	void update(cBayesNet* net);
+	virtual void update(cBayesNet* net);
 	double calcBound(cBayesNet* net);
 	double entropy();
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
@@ -73,7 +72,7 @@ class cAlphaNode : public cGammaNode {
 public:
 	cAlphaNode() {};
 	cAlphaNode(int dim, float pa, float pb, PMatrix E1): cGammaNode(dim,pa,pb,E1) {};
-	void update(cBayesNet* net);
+	virtual void update(cBayesNet* net);
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 	
 
@@ -85,7 +84,7 @@ class cEpsNode : public cGammaNode {
 public:
 	cEpsNode() {};
 	cEpsNode(int dim, float pa, float pb, PMatrix E1): cGammaNode(dim,pa,pb,E1) {};
-	void update(cBayesNet* net);
+	virtual void update(cBayesNet* net);
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 };
 
@@ -147,8 +146,7 @@ public:
 	
 	//initialisation of default params
 	
-	//virtual 
-	void init_params();
+	virtual void init_params();
 	PMatrix calc_residuals();
 	
 public:
@@ -206,14 +204,10 @@ public:
 	void setPriorEps(double pa,double pb){Eps_pa = pa;Eps_pb=pb;is_initialized=false;}
 	
 	//general methods:
-	 //virtual 
-	void init_net();	
-	 //virtual 
-	double calcBound();
-	// virtual 
-	double logprob();
-	// virtual 
-	void update();
+	virtual	void init_net();	
+	virtual double calcBound();
+	virtual double logprob();
+	virtual void update();
 	
 
 	//Interface specific methods:

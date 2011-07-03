@@ -385,15 +385,10 @@ void cVBFA::init_net()
 	Alpha = new cAlphaNode((int)Nk,Alpha_pa,Alpha_pb, PMatrix());
 	Eps = new cEpsNode(Np, Eps_pa,Eps_pb, PMatrix());
 
-
-	//W->update(*this);
-	//Alpha->update(*this);
-	
-	// update precision nodes to initialise them
-//	Alpha->update(*this);
-
-//	this->W->update(*this);		
-//	this->Eps->update(*this);		
+	//update precision nodes to initialise them
+	Alpha->update(this);
+	//do we also need to run init on Eps?
+    //this->Eps->update(*this);		
 	
 	if (VERBOSE>=2)
 		cout << "\tAfter initi, residual variance " << (pheno->E1 - X->E1*W->E1.transpose()).array().pow(2.).mean() << endl;

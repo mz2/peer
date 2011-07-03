@@ -22,26 +22,30 @@ namespace PEER
 	
 	/*Sparse Factor analysis node for W*/
 	class cWNodeSparse : public cWNode {
-	protected:
+	public:
 		//log prior of link being on
 		PMatrix pi;
 		PMatrix lpi;
+		PMatrix lpi_off;
 		//posteior probability of link being on
 		PMatrix C;
 		//posterior probability of link being off (for convenience)
 		PMatrix Coff;
+		//diagonal component from C prior
+		PMatrix CovPriorDiag;
 		double tauOn;
 		double tauOff;
-	public:
 		//public stuff is inherited from cWnode...
 		cWNodeSparse(); // 
-		cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet &net);
-		virtual void update(cBayesNet &net);
-		
-
-		
+		cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet* net);
+		virtual void update(cBayesNet* net);
 	};
 	
+	class cEpsNodeSparse : public cEpsNode {
+	public:
+		cEpsNodeSparse(int dim, float pa, float pb, PMatrix E1): cEpsNode(dim,pa,pb,E1) {};
+		virtual void update(cBayesNet* net);
+	};
 	
 	class cSPARSEFA : public cVBFA { 
 		//declare friends:
@@ -65,6 +69,8 @@ namespace PEER
 		
 		//constructor
 		cSPARSEFA();
+		//destructor
+		virtual ~cSPARSEFA();
 		
 #ifndef SWIG
 		//constructors that take matrices in 
