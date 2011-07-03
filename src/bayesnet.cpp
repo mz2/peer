@@ -44,7 +44,7 @@ double cDirichletNode::entropy(){
 }
 
 
-double cDirichletNode::calcBound(cBayesNet &net){
+double cDirichletNode::calcBound(cBayesNet* net){
 	double temp = 0;	
 	double bound = ((a0 - PVector::Ones(a0.rows()))*lnE).sum() - lngamma(a0.sum(), temp);
 	for (int i=0; i < a0.rows(); i++) { bound += lngamma(a0(i), temp); }
@@ -53,7 +53,7 @@ double cDirichletNode::calcBound(cBayesNet &net){
 
 				
 /** Not used, so not implemented */
-void cDirichletNode::update(cBayesNet &net){}
+void cDirichletNode::update(cBayesNet* net){}
 
 
 
@@ -94,7 +94,7 @@ double cGammaNode::entropy(){
 
 
 
-double cGammaNode::calcBound(cBayesNet &net){
+double cGammaNode::calcBound(cBayesNet* net){
 
 	double bound = 0;
 	double temp = 0;	
@@ -109,14 +109,15 @@ double cGammaNode::calcBound(cBayesNet &net){
 
 
 void cGammaNode::updateMoments(){
+	
 	for (int i=0; i < lnE.rows(); i++){
-		this->E1(i) = a(i)/b(i);
-		this->lnE(i) = psi(a(i)) - log(b(i));
+		E1(i) = a(i)/b(i);
+		lnE(i) = psi(a(i)) - log(b(i));
 	}
 }
 
 /** Standard update equation */
-void cGammaNode::update(cBayesNet &net){
+void cGammaNode::update(cBayesNet* net){
 	this->updateMoments();
 }
 

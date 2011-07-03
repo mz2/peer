@@ -39,8 +39,9 @@ public:
 	
 	cWNode(); // default
 	cWNode(PMatrix E1); // from mean
-	virtual void update(cBayesNet &net);
-	double calcBound(cBayesNet &net);
+	//virtual 
+	void update(cBayesNet* net);
+	double calcBound(cBayesNet* net);
 	double entropy();
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 };
@@ -58,8 +59,8 @@ public:
 	cXNode(); // default
 	cXNode(PMatrix E1); // from mean
 	cXNode(PMatrix E1, PMatrix prior_offset, PMatrix prior_prec); // from mean and prior precision
-	void update(cBayesNet &net);
-	double calcBound(cBayesNet &net);
+	void update(cBayesNet* net);
+	double calcBound(cBayesNet* net);
 	double entropy();
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 	
@@ -72,7 +73,7 @@ class cAlphaNode : public cGammaNode {
 public:
 	cAlphaNode() {};
 	cAlphaNode(int dim, float pa, float pb, PMatrix E1): cGammaNode(dim,pa,pb,E1) {};
-	void update(cBayesNet &net);
+	void update(cBayesNet* net);
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 	
 
@@ -84,7 +85,7 @@ class cEpsNode : public cGammaNode {
 public:
 	cEpsNode() {};
 	cEpsNode(int dim, float pa, float pb, PMatrix E1): cGammaNode(dim,pa,pb,E1) {};
-	void update(cBayesNet &net);
+	void update(cBayesNet* net);
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);
 };
 
@@ -146,16 +147,17 @@ public:
 	
 	//initialisation of default params
 	
-	virtual void init_params();
+	//virtual 
+	void init_params();
 	PMatrix calc_residuals();
 	
 public:
 	/** Nodes */ 
-	cWNode W;
-	cXNode X;
-	cEpsNode Eps;
-	cAlphaNode Alpha;
-    cPhenoNode pheno;
+	cWNode* W;
+	cXNode* X;
+	cEpsNode* Eps;
+	cAlphaNode* Alpha;
+    cPhenoNode* pheno;
 	
 	/** Inference parameters */
 	
@@ -172,6 +174,9 @@ public:
 	//constructor that take variance and covariates into account
 	cVBFA(PMatrix pheno_mean, PMatrix pheno_var, PMatrix covs, int Nfactors);
 #endif
+	
+	//destructor
+	virtual ~cVBFA();
 	
 	//getters
 	int getNj() {return Nj;};
@@ -201,16 +206,19 @@ public:
 	void setPriorEps(double pa,double pb){Eps_pa = pa;Eps_pb=pb;is_initialized=false;}
 	
 	//general methods:
-	 virtual void init_net();	
-	 virtual double calcBound();
-	 virtual double logprob();
-	 virtual void update();
+	 //virtual 
+	void init_net();	
+	 //virtual 
+	double calcBound();
+	// virtual 
+	double logprob();
+	// virtual 
+	void update();
 	
 
 	//Interface specific methods:
 #ifdef SWIG
 	//swig versions of setters, avoiding matrix objects
-	
 	//setters
 	void setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
 	{this->pheno_mean = array2matrix(matrix,rows,cols);is_initialized=false;}
@@ -249,10 +257,10 @@ public:
 	PMatrix getPhenoVar() {return this->pheno_var;}
 	PMatrix getCovariates() {return this->covs;}
 
-	PMatrix getX(){return X.E1;}
-	PMatrix getW(){return W.E1;}
-	PMatrix getAlpha(){return Alpha.E1;}
-	PMatrix getEps(){return Eps.E1;}
+	PMatrix getX(){return X->E1;}
+	PMatrix getW(){return W->E1;}
+	PMatrix getAlpha(){return Alpha->E1;}
+	PMatrix getEps(){return Eps->E1;}
 	PMatrix getResiduals() {return calc_residuals();}
 #endif
 };

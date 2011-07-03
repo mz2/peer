@@ -31,8 +31,8 @@ int main (int argc, char * const argv[]) {
 	printf("Net size: NxG: %d x %d. Non-zero enries: %d",N,D,sum);
 	
 
-	//cVBFA vb = cVBFA(sim.expr,K);
-	//vb.update();
+	cVBFA vb = cVBFA(sim.expr,K);
+	vb.update();
 	
 	cSPARSEFA vbs = cSPARSEFA(sim.expr,sim.pi.transpose(),K);
 	vbs.update();

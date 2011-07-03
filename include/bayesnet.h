@@ -35,9 +35,12 @@ public:
 	PMatrix prior;
 	double bound;
 
-	virtual double entropy();	
-	virtual double calcBound(cBayesNet &net);
-	virtual void update(cBayesNet &net);
+	//virtual 
+	double entropy();	
+	//virtual 
+	double calcBound(cBayesNet &net);
+	//virtual 
+	void update(cBayesNet &net);
 
 	PMatrix getE1();
 	};
@@ -55,8 +58,9 @@ protected:
 public:
 	cDirichletNode(int dim, float prior);
 	double entropy();	
-	double calcBound(cBayesNet &net);
-	virtual void update(cBayesNet &net);
+	double calcBound(cBayesNet* net);
+	//virtual 
+	void update(cBayesNet* net);
 };
 
 
@@ -74,8 +78,9 @@ public:
 	cGammaNode();
 	cGammaNode(int dim, float prior_val_a, float prior_val_b, PMatrix E1_val);
 	double entropy();	
-	double calcBound(cBayesNet &net);
-	virtual void update(cBayesNet &net);
+	double calcBound(cBayesNet* net);
+	//virtual 
+	void update(cBayesNet* net);
 	void updateMoments();
 	
 	void getE1(float64_t** matrix,int32_t* rows,int32_t* cols);

@@ -61,7 +61,7 @@ cWNodeSparse::cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet& net)
 		PMatrix cov = (pprior).inverse();
 		PMatrix E2 = (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
 		E2S += E2;
-		Xprec += n.Eps.E1(i,0)*E2;
+		Xprec += n.Eps->E1(i,0)*E2;
 	}
 }
 
@@ -82,20 +82,20 @@ void cWNodeSparse::update(cBayesNet &net)
 		//pprior = diag(1.0*self.C[d,:,1] + self.C[d,:,0]*(tauOff))
 		pprior.diagonal() = (this->C.row(i)*tauOn + this->Coff.row(i)*tauOff);
 		//2. incoming message from X and data:
-		PMatrix pin = n.X.E2S*n.Eps.E1(i,0);
+		PMatrix pin = n.X->E2S*n.Eps->E1(i,0);
 		//3. add and invert
 		PMatrix cov = (pin+pprior).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
 		lndetcovS += logdet(cov);
-		E1.row(i) = n.Eps.E1(i,0)*cov*n.X.E1.transpose()*n.pheno.E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
+		E1.row(i) = n.Eps->E1(i,0)*cov*n.X->E1.transpose()*n.pheno->E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
 		PMatrix E2 = (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
 		E2S += E2;
-		Xprec += n.Eps.E1(i,0)*E2;
+		Xprec += n.Eps->E1(i,0)*E2;
 	}
 	
 	// store values needed to calculate covariance for each p
-	E_last = n.Eps.E1;
-	XE2S_last = n.X.E2S;
-	A_last = n.Alpha.E1;	
+	E_last = n.Eps->E1;
+	XE2S_last = n.X->E2S;
+//	A_last = n.Alpha->E1;	
 }
 
 
@@ -197,7 +197,7 @@ void cSPARSEFA::init_net()
 	assert (Nc==0);
 			
 	//2. create nodes
-	pheno = cPhenoNode(pheno_mean,pheno_var);
+	pheno = new cPhenoNode(pheno_mean,pheno_var);
 	
 	//stating initialization of X0/W0
 	PMatrix X0 = randn(Nj,Nk);
@@ -209,14 +209,14 @@ void cSPARSEFA::init_net()
 	if (Nc>0)
 	//initialize W and X parts that are representing known factors
 	{
-		PMatrix cov_weights = covs.colPivHouseholderQr().solve(pheno.E1);
-		residuals = pheno.E1 - covs*cov_weights;
+		PMatrix cov_weights = covs.colPivHouseholderQr().solve(pheno->E1);
+		residuals = pheno->E1 - covs*cov_weights;
 		W0.block(0,0,Np, Nc) = cov_weights.transpose();
 		X0.block(0,0,Nj,Nc) = covs;
 	}
 	else {
 		//data to use for initialization
-		residuals = pheno.E1;
+		residuals = pheno->E1;
 	}
 	
 	//create complete binary prior matrix inlcuding known effects
@@ -259,14 +259,14 @@ void cSPARSEFA::init_net()
 	Xmean_prior.block(0,0,Nj,Nc) = covs;
 
 	//need Eps for W init
-	Eps = cEpsNode(Np, Eps_pa,Eps_pb, PMatrix());
-	W = cWNodeSparse(W0,pi,*this);
-	X = cXNode(X0, Xmean_prior,Xprec_prior);
+	Eps = new cEpsNode(Np, Eps_pa,Eps_pb, PMatrix());
+	W = new cWNodeSparse(W0,pi,*this);
+	X = new cXNode(X0, Xmean_prior,Xprec_prior);
 	// update precision nodes to initialise them
 	//Alpha.update(*this);
 	if (VERBOSE>=2)
 	{
-		cout << "\tAfter initi, residual variance " << (pheno.E1 - X.E1*W.E1.transpose()).array().pow(2.).mean() << endl;
+		cout << "\tAfter initi, residual variance " << (pheno->E1 - X->E1*W->E1.transpose()).array().pow(2.).mean() << endl;
 	}
 	is_initialized = true;
 	
@@ -306,13 +306,13 @@ void cSPARSEFA::update()
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
 			
-		((cWNodeSparse) this->W).update(*this);		
+		W->update(this);		
 		if((VERBOSE>=3) && (i > 0) )
 		{cout << "\tAfter W " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;}
-		X.update(*this);
+		X->update(this);
 		if (VERBOSE>=3)
 			cout << "\tAfter X " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
-		Eps.update(*this);		
+		Eps->update(this);		
 		if (VERBOSE>=3)
 			cout << "\tAfter E " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
 			

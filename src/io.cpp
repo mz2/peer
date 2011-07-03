@@ -163,7 +163,7 @@ void write_output(cVBFA vb, sPeerArgs args){
 	if (out_dir[strlen(out_dir.c_str()) - 1] != '/') {out_dir = concat(out_dir, "/");}
 
 	if (!args.no_residuals) writeCsv(concat(out_dir, "residuals.csv"), vb.getResiduals());
-	if (!args.no_W) writeCsv(concat(out_dir, "W.csv"), vb.W.E1);
-	if (!args.no_X) writeCsv(concat(out_dir, "X.csv"), vb.X.E1);
-	if (!args.no_Alpha) writeCsv(concat(out_dir, "Alpha.csv"), vb.Alpha.E1);
+	if (!args.no_W) writeCsv(concat(out_dir, "W.csv"), vb.W->E1);
+	if (!args.no_X) writeCsv(concat(out_dir, "X.csv"), vb.X->E1);
+	if (!args.no_Alpha) writeCsv(concat(out_dir, "Alpha.csv"), vb.Alpha->E1);
 }
