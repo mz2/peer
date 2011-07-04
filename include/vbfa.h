@@ -235,13 +235,13 @@ public:
 	{return matrix2array(covs,matrix,rows,cols);}
 
 	void getX(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(X.E1,matrix,rows,cols);}
+	{return matrix2array(X->E1,matrix,rows,cols);}
 	void getW(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(W.E1,matrix,rows,cols);}
+	{return matrix2array(W->E1,matrix,rows,cols);}
 	void getEps(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(Eps.E1,matrix,rows,cols);}
+	{return matrix2array(Eps->E1,matrix,rows,cols);}
 	void getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(Alpha.E1,matrix,rows,cols);}
+	{return matrix2array(Alpha->E1,matrix,rows,cols);}
 	void getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
 	{return matrix2array(calc_residuals(),matrix,rows,cols);}
 #else
