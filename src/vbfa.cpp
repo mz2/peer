@@ -7,6 +7,7 @@
  *
  */
 
+
 #include <iostream>
 #include <assert.h>
 #include "bayesnet.h"
@@ -16,6 +17,7 @@
 #include "vbfa.h"
 #include "sparsefa.h"
 #include "ossolog.h"
+
 
 using namespace Eigen;
 using namespace std;

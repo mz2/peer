@@ -31,6 +31,8 @@ int main (int argc, char * const argv[]) {
 	printf("Net size: NxG: %d x %d. Non-zero enries: %d",N,D,sum);
 	
 
+	VERBOSE = 3;
+	
 	cVBFA vb = cVBFA(sim.expr,K);
 	vb.update();
 	

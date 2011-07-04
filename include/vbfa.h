@@ -10,6 +10,10 @@
 #ifndef __VBFA_H__
 #define __VBFA_H__
 
+//let's just log to standard out by default
+#define OSSOLOG_STDOUT
+
+
 #include "bayesnet.h"
 #include "array_helper.h"
 

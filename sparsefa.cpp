@@ -103,8 +103,8 @@ void cWNodeSparse::update(cBayesNet *net)
 		{
 			double l0 = lpi_off(i,j);
 			double l1 = lpi(i,j);
-			l0 += 0.5*log(tauOff/M_PI) - 0.5*tauOff*cov(i,j);
-			l1 += 0.5*log(tauOn/M_PI)  - 0.5*tauOn*cov(i,j);
+			l0 += 0.5*log(tauOff/M_PI) - 0.5*tauOff*cov(j,j);
+			l1 += 0.5*log(tauOn/M_PI)  - 0.5*tauOn*cov(j,j);
 			double coff = exp(l0) + 1E-6;
 			double con  = exp(l1) + 1E-6;
 			double Z  = coff+con;
@@ -366,11 +366,12 @@ void cSPARSEFA::update()
 		//calc bound?
 		if ((VERBOSE>=2) || (tolerance>0))
 		{
-			last_bound    = current_bound;
+			//deactivate bound calculation as not working at the moment
+			//last_bound    = current_bound;
 			last_residual_var = current_residual_var;
-			current_bound = calcBound();
+			//current_bound = calcBound();
 			current_residual_var = calc_residuals().array().pow(2).mean();
-			delta_bound = (current_bound - last_bound); // bound should increase
+			//delta_bound = (current_bound - last_bound); // bound should increase
 			delta_residual_var = last_residual_var - current_residual_var; // variance should decrease
 		}
 			
@@ -406,3 +407,4 @@ void cSPARSEFA::update()
 	}
 	
 }
+
