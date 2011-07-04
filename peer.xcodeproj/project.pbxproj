@@ -169,8 +169,8 @@
 		DB3A8783133BFE3D0004AD22 /* libpeer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB330C9F12C8F0760000432A /* libpeer.a */; };
 		DB3A87A4133BFF350004AD22 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FED85DC12D395B500BAC3A8 /* main.cpp */; };
 		DB3A87A5133BFF5D0004AD22 /* main_testing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB3A878E133BFE920004AD22 /* main_testing.cpp */; };
-		DBBBD5B2133C0CF200A7A07A /* sparsefa.h in Headers */ = {isa = PBXBuildFile; fileRef = DBBBD5B0133C0CF200A7A07A /* sparsefa.h */; };
-		DBBBD5B3133C0CF200A7A07A /* sparsefa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD5B1133C0CF200A7A07A /* sparsefa.cpp */; };
+		DB98F16B13C20B8F007BA2A0 /* sparsefa.h in Headers */ = {isa = PBXBuildFile; fileRef = DB98F16A13C20B8F007BA2A0 /* sparsefa.h */; };
+		DB98F16D13C20BAF007BA2A0 /* sparsefa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB98F16C13C20BAF007BA2A0 /* sparsefa.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -396,8 +396,8 @@
 		DB3A8788133BFE3D0004AD22 /* peer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = peer; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB3A878D133BFE920004AD22 /* main_testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main_testing.h; sourceTree = "<group>"; };
 		DB3A878E133BFE920004AD22 /* main_testing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_testing.cpp; sourceTree = "<group>"; };
-		DBBBD5B0133C0CF200A7A07A /* sparsefa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sparsefa.h; sourceTree = "<group>"; };
-		DBBBD5B1133C0CF200A7A07A /* sparsefa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sparsefa.cpp; sourceTree = "<group>"; };
+		DB98F16A13C20B8F007BA2A0 /* sparsefa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sparsefa.h; path = include/sparsefa.h; sourceTree = "<group>"; };
+		DB98F16C13C20BAF007BA2A0 /* sparsefa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sparsefa.cpp; path = src/sparsefa.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +463,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DB98F16C13C20BAF007BA2A0 /* sparsefa.cpp */,
 				9A042D25132EF1B1008CB01D /* io.cpp */,
 				5FED85FD12D3961100BAC3A8 /* Headers */,
 				5FED85DA12D395B500BAC3A8 /* array_helper.cpp */,
@@ -473,7 +474,6 @@
 				5FE0C5C71295B754001431C7 /* Unit Tests */,
 				DB3A878D133BFE920004AD22 /* main_testing.h */,
 				DB3A878E133BFE920004AD22 /* main_testing.cpp */,
-				DBBBD5B1133C0CF200A7A07A /* sparsefa.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -556,7 +556,7 @@
 		5FED85FD12D3961100BAC3A8 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				DBBBD5B0133C0CF200A7A07A /* sparsefa.h */,
+				DB98F16A13C20B8F007BA2A0 /* sparsefa.h */,
 				9A042D23132EF1A6008CB01D /* io.h */,
 				5FED860212D3961F00BAC3A8 /* array_helper.h */,
 				5FED860312D3961F00BAC3A8 /* bayesnet.h */,
@@ -871,7 +871,7 @@
 				5FED860A12D3961F00BAC3A8 /* sim.h in Headers */,
 				5FED860B12D3961F00BAC3A8 /* vbfa.h in Headers */,
 				5FED860F12D3962C00BAC3A8 /* ossolog.h in Headers */,
-				DBBBD5B2133C0CF200A7A07A /* sparsefa.h in Headers */,
+				DB98F16B13C20B8F007BA2A0 /* sparsefa.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,7 +1092,7 @@
 				5FED85F012D395B500BAC3A8 /* bayesnet.cpp in Sources */,
 				5FED85F312D395B500BAC3A8 /* sim.cpp in Sources */,
 				5FED85F512D395B500BAC3A8 /* vbfa.cpp in Sources */,
-				DBBBD5B3133C0CF200A7A07A /* sparsefa.cpp in Sources */,
+				DB98F16D13C20BAF007BA2A0 /* sparsefa.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
