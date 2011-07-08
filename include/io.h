@@ -25,5 +25,5 @@ PMatrix parseCsv(const char *filename, bool header);
 
 cVBFA getInstance(sPeerArgs args);
 
-void write_output(cVBFA vb, sPeerArgs args);
+void write_output(cVBFA& vb, sPeerArgs args);
 

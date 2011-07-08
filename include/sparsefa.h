@@ -22,6 +22,8 @@ namespace PEER
 	
 	/*Sparse Factor analysis node for W*/
 	class cWNodeSparse : public cWNode {
+	protected:
+		bool updateC;
 	public:
 		//log prior of link being on
 		PMatrix pi;

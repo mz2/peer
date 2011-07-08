@@ -260,6 +260,7 @@ cVBFA::~cVBFA()
 		delete Alpha;
 		delete pheno;
 	}
+	is_initialized = false;
 }
 
 
@@ -268,7 +269,7 @@ cVBFA::~cVBFA()
 void cVBFA::init_params()
 {
 	tolerance = 1E-3;
-	var_tolerance = 1E-5;	
+	var_tolerance = 1E-8;	
 	Nmax_iterations = 1000;
 	add_mean    = true;
 	initialisation = PCA;	
@@ -312,6 +313,7 @@ void cVBFA::init_net()
 		//create a larger matrix and concatenate mean column:
 		int nc = covs.cols();
 		covs.resize(Nj,nc+1);
+		//TODO: (Oli) I think this is wrong. blocks are (startrows,starcols,numrows,numcols)
 		covs.block(0,nc,Nj,nc+1) = PMatrix::Ones(Nj, 1); 
 	}
 	

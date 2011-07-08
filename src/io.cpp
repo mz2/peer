@@ -154,7 +154,7 @@ string concat(string str1, string str2){
 }
 
 
-void write_output(cVBFA vb, sPeerArgs args){
+void write_output(cVBFA& vb, sPeerArgs args){
     // 1. create out dir
 	system(concat("mkdir ", args.out_dir).c_str());
 

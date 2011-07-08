@@ -34,6 +34,8 @@ cWNodeSparse::cWNodeSparse()
 
 cWNodeSparse::cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet* net)
 {
+	updateC = false;
+	
 	cSPARSEFA* n = (cSPARSEFA*)net;
 
 	//0. parameters for precisions values we need
@@ -56,7 +58,7 @@ cWNodeSparse::cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet* net)
 	//3. initialisation of second moments based on prior
 	
 	E2S = PMatrix::Zero(n->Nk, n->Nk);
-	Xprec = PMatrix::Zero(n->Nk,n->Nk);
+	Xprec = PMatrix::Zero(n->Nk,n->Nk);	
 	for (int i=0;i<pi.rows();i++)
 	{
 		//1. contribution from sparistiy prior
@@ -67,7 +69,8 @@ cWNodeSparse::cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet* net)
 		PMatrix E2 = (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
 		E2S += E2;
 		Xprec += n->Eps->E1(i,0)*E2;
-	}
+	}//end for 
+
 }
 
 
@@ -89,28 +92,37 @@ void cWNodeSparse::update(cBayesNet *net)
 		//store temporary for updateEps:
 		CovPriorDiag.row(i) = (this->C.row(i)*tauOn + this->Coff.row(i)*tauOff);
 		pprior.diagonal() = CovPriorDiag.row(i);
+		//std::cout << CovPriorDiag.row(i) << "\n\n";
 		//2. incoming message from X and data:
 		PMatrix pin = n->X->E2S*n->Eps->E1(i,0);
 		//3. add and invert
 		PMatrix cov = (pin+pprior).inverse(); // linalg.inv(diag(Alpha.E1) + Eps[d]*M)
+		//std::cout << cov << "\n\n";
 		lndetcovS += logdet(cov);
 		E1.row(i) = n->Eps->E1(i,0)*cov*n->X->E1.transpose()*n->pheno->E1.col(i); //  self.E1[d,:] = S.dot(dcov[:,:],Eps[d]*S.dot(_S.E1.T,net.dataNode.E1[ :,d]))
 		PMatrix E2 = (cov + E1.row(i).transpose()*E1.row(i)); //  E2 = dcov + outer(self.E1[d], self.E1[d])
+		
+		//std::cout << E1.row(i) << "\n\n";
+		//std::cout << E2 << "\n\n";
 		E2S += E2;
 		Xprec += n->Eps->E1(i,0)*E2;
-		//4. update sparsity prior
-		for (int j=0;j<n->Nk;j++)
+		
+		if (updateC)
 		{
-			double l0 = lpi_off(i,j);
-			double l1 = lpi(i,j);
-			l0 += 0.5*log(tauOff/M_PI) - 0.5*tauOff*cov(j,j);
-			l1 += 0.5*log(tauOn/M_PI)  - 0.5*tauOn*cov(j,j);
-			double coff = exp(l0) + 1E-6;
-			double con  = exp(l1) + 1E-6;
-			double Z  = coff+con;
-			C(i,j) = con/Z;
-			Coff(i,j) = coff/Z;
-		}
+			//4. update sparsity prior
+			for (int j=0;j<n->Nk;j++)
+			{
+				double l0 = lpi_off(i,j);
+				double l1 = lpi(i,j);
+				l0 += 0.5*log(tauOff/M_PI) - 0.5*tauOff*cov(j,j);
+				l1 += 0.5*log(tauOn/M_PI)  - 0.5*tauOn*cov(j,j);
+				double coff = exp(l0) + 1E-6;
+				double con  = exp(l1) + 1E-6;
+				double Z  = coff+con;
+				C(i,j) = con/Z;
+				Coff(i,j) = coff/Z;
+			}
+		} //end updateC
 		
 	}
 	
@@ -297,6 +309,9 @@ void cSPARSEFA::init_net()
 		W0.block(0,Nc,Np,Nfactors) = SV.block(0,0,Nfactors,SV.cols()).transpose();
 	}
 	
+	std::cout << W0 << "\n\n";
+	
+	//std::cout << W0 << "\n\n";
 	// more
 	PMatrix Xprec_prior = PMatrix::Identity(Nk,Nk);
 	Xprec_prior.diagonal().block(0,0,Nc,1) = PMatrix::Ones(Nc,1)*covariate_prec;
@@ -309,8 +324,11 @@ void cSPARSEFA::init_net()
 	X = new cXNode(X0, Xmean_prior,Xprec_prior);
 	//set Alpha Node to NUll to ensure that delete does not crash
 	Alpha = NULL;
-	// update precision nodes to initialise them
-	//Alpha.update(*this);
+	//updates to complete init
+	X->update(this);		
+	W->update(this);		
+	
+	
 	if (VERBOSE>=2)
 	{
 		cout << "\tAfter initi, residual variance " << (pheno->E1 - X->E1*W->E1.transpose()).array().pow(2.).mean() << endl;
@@ -352,16 +370,30 @@ void cSPARSEFA::update()
 	{
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
-			
-		W->update(this);		
-		if((VERBOSE>=3) && (i > 0) )
-		{cout << "\tAfter W " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;}
-		X->update(this);
-		if (VERBOSE>=3)
-			cout << "\tAfter X " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
-		Eps->update(this);		
+		
+		cout << "data variance" << pheno->E1.array().pow(2).mean() << "\n\n";
+		
+
+		std::cout << Eps->E1 << "\n\n";
+		Eps->update(this);
+		std::cout << Eps->E1 << "\n\n";
 		if (VERBOSE>=3)
 			cout << "\tAfter E " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
+		
+		std::cout << X->E1 << "\n\n";
+		X->update(this);
+		std::cout << X->E1 << "\n\n";
+		if (VERBOSE>=3)
+			cout << "\tAfter X " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
+		
+	
+		std::cout << W->E1 << "\n\n";
+		W->update(this);		
+		std::cout << W->E1 << "\n\n";
+		if((VERBOSE>=3) && (i > 0) )
+		{cout << "\tAfter W " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;}
+		
+			
 			
 		//calc bound?
 		if ((VERBOSE>=2) || (tolerance>0))
@@ -386,8 +418,8 @@ void cSPARSEFA::update()
 		//converged?
 		if (abs(delta_bound)<tolerance)
 			break;
-		if (abs(delta_residual_var)<var_tolerance)
-			break;
+		//if (abs(delta_residual_var)<var_tolerance)
+		//	break;
 	//endfor
 	}
 		
