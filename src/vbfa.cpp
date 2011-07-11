@@ -13,7 +13,7 @@
 #include "bayesnet.h"
 #include <Eigen/Eigen>
 #include <Eigen/Dense>
-#include "alglib/src/specialfunctions.h"
+//#include "alglib/src/specialfunctions.h"
 #include "vbfa.h"
 #include "sparsefa.h"
 #include "ossolog.h"

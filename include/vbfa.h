@@ -264,5 +264,5 @@ public:
 };
 
 	
-}
+} // END namespace PEER
 #endif

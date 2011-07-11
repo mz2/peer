@@ -15,7 +15,8 @@ else(DEBUG_PEER)
   endif(SILENT_PEER)
 endif(DEBUG_PEER)
 
-add_library(peerlib STATIC bayesnet.cpp array_helper.cpp sim.cpp vbfa.cpp io.cpp)
+add_library(peerlib STATIC bayesnet.cpp array_helper.cpp sim.cpp
+vbfa.cpp sparsefa.cpp io.cpp)
 
 #INSTALL(TARGETS peerlib
 #   ARCHIVE DESTINATION lib

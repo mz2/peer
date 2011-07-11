@@ -11,6 +11,42 @@
 #include "ossolog.h"
 
 
+/******************************************************************************/
+//	Standard version with trigonometric calls
+#define PI 3.14159265358979323846
+
+double randn(double mu, double sigma) {
+	static bool deviateAvailable=false;	//	flag
+	static float storedDeviate;			//	deviate from previous calculation
+	double dist, angle;
+	
+	//	If no deviate has been stored, the standard Box-Muller transformation is 
+	//	performed, producing two independent normally-distributed random
+	//	deviates.  One is stored for the next round, and one is returned.
+	if (!deviateAvailable) {
+		
+		//	choose a pair of uniformly distributed deviates, one for the
+		//	distance and one for the angle, and perform transformations
+		dist=sqrt( -2.0 * log(double(rand()) / double(RAND_MAX)) );
+		angle=2.0 * PI * (double(rand()) / double(RAND_MAX));
+		
+		//	calculate and store first deviate and set flag
+		storedDeviate=dist*cos(angle);
+		deviateAvailable=true;
+		
+		//	calcaulate return second deviate
+		return dist * sin(angle) * sigma + mu;
+	}
+	
+	//	If a deviate is available from a previous call to this function, it is
+	//	returned, and the flag is set to false.
+	else {
+		deviateAvailable=false;
+		return storedDeviate*sigma + mu;
+	}
+}
+
+
 double sum(PMatrix& m)
 {
 	double rv=0;
@@ -94,12 +130,12 @@ void matrix2array(const PMatrix m,float64_t** matrix, int32_t* rows, int32_t*col
 
 
 PMatrix randn(int n, int m)
-/* create a randn matrix */
+/* create a randn matrix, i.e. matrix of Gaussian distributed random numbers*/
 {
 	PMatrix rv(n,m);
 	for (int i=0; i<n; i++)
 		for (int j=0; j<m; j++) {
-			rv(i,j) = randomreal();
+			rv(i,j) = randn();
 		}
 	return rv;
 }
