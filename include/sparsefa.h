@@ -96,6 +96,7 @@ namespace PEER
 		{this->pi = array2matrix(matrix,rows,cols);is_initialized=false;}
 		void getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols)
 		{return matrix2array(pi,matrix,rows,cols);}
+
 		//sparsity posterior:
 		void getZ(float64_t** matrix,int32_t* rows,int32_t* cols)
 		{
@@ -106,9 +107,8 @@ namespace PEER
 				return;
 			}
 			cWNodeSparse* W_ = (cWNodeSparse*) (W);
-			return matrix2array((W->C,matrix,rows,cols);
+			return matrix2array(W_->C,matrix,rows,cols);
 		}
-		{return matrix2array((W.E1,matrix,rows,cols);}
 #else
 		void setSparsityPrior(const PMatrix sparsity_prior) {this->pi = sparsity_prior;is_initialized=false;}
 		PMatrix getSparsityPrior(){return this->pi;}

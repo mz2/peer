@@ -153,6 +153,11 @@ void cEpsNodeSparse::update(cBayesNet* net)
 	updateMoments();	
 }
 
+//default constructor
+cSPARSEFA::cSPARSEFA() { 
+	//default settings
+	init_params();
+};
 
 
 //constructor from expression data
@@ -310,6 +315,8 @@ void cSPARSEFA::init_net()
 	}
 	
 	std::cout << W0 << "\n\n";
+	std::cout << X0 << "\n\n";
+	
 	
 	//std::cout << W0 << "\n\n";
 	// more

@@ -16,6 +16,7 @@
 using namespace Eigen;
 using alglib::randomreal;
 
+double randn(double mu=0.0, double sigma=1.0);
 
 //some definitions for the python interface
 #define float64_t double
