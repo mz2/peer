@@ -14,6 +14,7 @@
 
 #include "vbfa.h"
 #include "bayesnet.h"
+#include "ossolog.h"
 
 
 namespace PEER
@@ -74,14 +75,17 @@ namespace PEER
 		//destructor
 		virtual ~cSPARSEFA();
 		
+		void setNk(int Nk) {ULOG_ERR("setNk not available for SPARSEFA, number of factors is implicitly determined from sparsity prior matrix!");}
+		
+		
 #ifndef SWIG
 		//constructors that take matrices in 
 		//constructor from expression data
-		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior,int Nfactors);
+		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior);
 		//constructor that takes covariates into account
-		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior, PMatrix covs,int Nfactors);
+		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior, PMatrix covs);
 		//constructor that take variance and covariates into account
-		cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix spsarsity_prior, PMatrix covs, int Nfactors);
+		cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix spsarsity_prior, PMatrix covs);
 
 		
 #endif

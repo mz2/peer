@@ -16,7 +16,6 @@
 
 
 #include "sparsefa.h"
-#include "ossolog.h"
 #include "sparsefa.h"
 #include "bayesnet.h"
 
@@ -156,27 +155,28 @@ void cEpsNodeSparse::update(cBayesNet* net)
 //default constructor
 cSPARSEFA::cSPARSEFA() { 
 	//default settings
+	Nk = -1;
 	init_params();
 };
 
 
 //constructor from expression data
-cSPARSEFA::cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior,int Nfactors)
-: cVBFA(pheno_mean, Nfactors)
+cSPARSEFA::cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior)
+: cVBFA(pheno_mean, -1)
 {
 	init_params();
 	this->pi = sparsity_prior;
 }
 //constructor that takes covariates into account
-cSPARSEFA::cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior, PMatrix covs,int Nfactors)
-: cVBFA(pheno_mean, covs, Nfactors)
+cSPARSEFA::cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior, PMatrix covs)
+: cVBFA(pheno_mean, covs, -1)
 {
 	init_params();
 	this->pi = sparsity_prior;
 }
 //constructor that take variance and covariates into account
-cSPARSEFA::cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix sparsity_prior, PMatrix covs, int Nfactors)
-: cVBFA(pheno_mean, pheno_var, covs,Nfactors)
+cSPARSEFA::cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix sparsity_prior, PMatrix covs)
+: cVBFA(pheno_mean, pheno_var, covs, -1)
 {
 	init_params();
 	this->pi = sparsity_prior;
@@ -227,9 +227,11 @@ void cSPARSEFA::init_net()
 		covs.block(0,nc,Nj,nc+1) = PMatrix::Ones(Nj, 1); 
 	}
 	
-	
+		
 	Nc = covs.cols();
-	Nk = Nk + Nc;
+	//total number of factors is determined from dimensionality of Pi
+	Nk = pi.cols();
+	
 	//how many "non covariate factors"?
 	int Nfactors = Nk-Nc;
 	

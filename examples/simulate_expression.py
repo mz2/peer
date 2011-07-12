@@ -56,7 +56,7 @@ if __name__ == '__main__':
     #simulate sparse expression dataset
     RV1 = simulate_data_sparse(N,K,sigma)
     SP.savetxt('expression_sparse.csv',RV1['Y'],delimiter=',')
-    SP.savetxt('prior_sparse.csv',RV1['Pi'],delimiter=',')
+    SP.savetxt('prior_sparse.csv',RV1['Pi'].T,delimiter=',')
     SP.savetxt('groundtruth_sparse.csv',RV1['Z'],delimiter=',')
     
         
