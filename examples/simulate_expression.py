@@ -52,12 +52,14 @@ if __name__ == '__main__':
     #simulate non-sparse expression dataset
     RV0 = simulate_data(N,K,sigma)
     SP.savetxt('expression.csv',RV0['Y'],delimiter=',')
+    SP.savetxt('covs.csv', RV0['X'][:,0:2], delimiter=",")
 
     #simulate sparse expression dataset
     RV1 = simulate_data_sparse(N,K,sigma)
     SP.savetxt('expression_sparse.csv',RV1['Y'],delimiter=',')
     SP.savetxt('prior_sparse.csv',RV1['Pi'].T,delimiter=',')
     SP.savetxt('groundtruth_sparse.csv',RV1['Z'],delimiter=',')
+    
     
         
         
