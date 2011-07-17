@@ -75,8 +75,7 @@ namespace PEER
 		//destructor
 		virtual ~cSPARSEFA();
 		
-		void setNk(int Nk) {ULOG_ERR("setNk not available for SPARSEFA, number of factors is implicitly determined from sparsity prior matrix!");}
-		
+	
 		
 #ifndef SWIG
 		//constructors that take matrices in 
@@ -127,7 +126,8 @@ namespace PEER
 		
 		 virtual double calcBound();
 		 virtual double logprob();
-		 virtual void init_net();	
+		 virtual void init_net();
+		 virtual void init_net_sparse();	
 		 virtual void update();
 		
 		

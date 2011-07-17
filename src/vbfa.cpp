@@ -272,7 +272,7 @@ void cVBFA::init_params()
 	var_tolerance = 1E-8;	
 	Nmax_iterations = 1000;
 	add_mean    = true;
-	initialisation = PCA;	
+	initialisation = RANDN;	
 	is_initialized = false;
 	covariate_prec = 100;
 	
@@ -362,22 +362,35 @@ void cVBFA::init_net()
 	}
 
 		
-	if (initialisation != PCA)
-		ULOG_ERR("Only PCA initialization supported");
-	assert(initialisation==PCA);
+	if (initialisation==PCA)
+	{
+		ULOG_INFO("USING PCA initialization");
+		//JacobiSVD test;
+		JacobiSVD<PMatrix> svd(residuals, ComputeThinU | ComputeThinV);
+		//create a diagonal matrix
+		PMatrix Sdiag = svd.singularValues().asDiagonal();
+		PMatrix U = svd.matrixU();
+		PMatrix V = svd.matrixV();
+		//dot product Sdiag V
+		PMatrix SV = Sdiag*V.transpose();
+		//get the factors up to the Kth component
+		X0.block(0,Nc,Nj,Nfactors) = U.block(0,0,U.rows(),Nfactors);
+		W0.block(0,Nc,Np,Nfactors) = SV.block(0,0,Nfactors,SV.cols()).transpose();
+	}
+	else if (initialisation==RANDN)
+	{
+		PMatrix X0r = randn(Nj,Nfactors);
+		PMatrix W0r = randn(Np,Nfactors);
+		ULOG_INFO("USING RANDN initialization");
+		X0.block(0,Nc,Nj,Nfactors) = X0r;
+		W0.block(0,Nc,Np,Nfactors) = W0r;
+	}
+	else	
+    {	
 	
-	//JacobiSVD test;
-	JacobiSVD<PMatrix> svd(residuals, ComputeThinU | ComputeThinV);
-	//create a diagonal matrix
-	PMatrix Sdiag = svd.singularValues().asDiagonal();
-	PMatrix U = svd.matrixU();
-	PMatrix V = svd.matrixV();
-	//dot product Sdiag V
-	PMatrix SV = Sdiag*V.transpose();
-	//get the factors up to the Kth component
-	X0.block(0,Nc,Nj,Nfactors) = U.block(0,0,U.rows(),Nfactors);
-	W0.block(0,Nc,Np,Nfactors) = SV.block(0,0,Nfactors,SV.cols()).transpose();
-	
+	}
+
+
 	// 4. create nodes and initialise
 	PMatrix Xprec_prior = PMatrix::Identity(Nk,Nk);
 	Xprec_prior.diagonal().block(0,0,Nc,1) = PMatrix::Ones(Nc,1)*covariate_prec;

@@ -39,7 +39,7 @@ using namespace PEER;
 
 /* Remove C Prefix */
 %rename(VBFA) cVBFA;
-%rename(SPARSEFA) cSPARSEFA;
+%rename(PEER) cSPARSEFA;
 
 /* Include the header file to be wrapped */
 %include "vbfa.h"

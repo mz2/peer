@@ -20,7 +20,7 @@ def simulate_data(N,K,sigma):
 	return {'Y':Y,'W':W,'X':X}
 
 
-def simulate_data_sparse(N,K,sparsity=1E-2,fpr=0.01, fnr = 0.01, sigma=0.1):
+def simulate_data_sparse(N,K,sparsity=1E-2,fpr=0.05, fnr = 0.01, sigma=0.1):
 	"""simulate expression dataset with N individuals, K factors and a given sparsity"""
 	#1. simulate prior matrix with probability of connectivity
 	Zp = (SP.random.rand(K,G)<sparsity)

@@ -33,7 +33,7 @@ cWNodeSparse::cWNodeSparse()
 
 cWNodeSparse::cWNodeSparse(PMatrix E1,PMatrix pi,cBayesNet* net)
 {
-	updateC = false;
+	updateC = true;
 	
 	cSPARSEFA* n = (cSPARSEFA*)net;
 
@@ -90,6 +90,9 @@ void cWNodeSparse::update(cBayesNet *net)
 		//pprior = diag(1.0*self.C[d,:,1] + self.C[d,:,0]*(tauOff))
 		//store temporary for updateEps:
 		CovPriorDiag.row(i) = (this->C.row(i)*tauOn + this->Coff.row(i)*tauOff);
+		//std::cout << CovPriorDiag.row(i) << "\n";
+		//std::cout << E1.row(i) << "\n";
+		
 		pprior.diagonal() = CovPriorDiag.row(i);
 		//std::cout << CovPriorDiag.row(i) << "\n\n";
 		//2. incoming message from X and data:
@@ -113,13 +116,13 @@ void cWNodeSparse::update(cBayesNet *net)
 			{
 				double l0 = lpi_off(i,j);
 				double l1 = lpi(i,j);
-				l0 += 0.5*log(tauOff/M_PI) - 0.5*tauOff*cov(j,j);
-				l1 += 0.5*log(tauOn/M_PI)  - 0.5*tauOn*cov(j,j);
+				l0 += 0.5*log(tauOff/(2*M_PI)) - 0.5*tauOff*E2(j,j);
+				l1 += 0.5*log(tauOn/(2*M_PI))  - 0.5*tauOn*E2(j,j);
 				double coff = exp(l0) + 1E-6;
 				double con  = exp(l1) + 1E-6;
 				double Z  = coff+con;
 				C(i,j) = con/Z;
-				Coff(i,j) = coff/Z;
+				Coff(i,j) = 1-C(i,j);
 			}
 		} //end updateC
 		
@@ -193,15 +196,36 @@ void cSPARSEFA::init_params() {
 	//default settings
 	//ovewrite initialization
 	initialisation = PRIOR;
-	sigmaOff = 1E-4;
+	sigmaOff = 1E-2;
 	sigmaOn = 1.0;
 	add_mean = false;
 };
 
+
 void cSPARSEFA::init_net()
 {
-	//call enhirted method first	
+	//1. decide whether to run sparse or non-sparse mode
+	if (isnull(pi))
+	{
+		//hard code initialization type
+		initialisation= PCA;
+		cVBFA::init_net();
+	}
+	else 
+	{
+		//hard code initialization type
+		initialisation= PRIOR;
+		init_net_sparse();
+	}
+}
+
+
+void cSPARSEFA::init_net_sparse()
+{
 	
+	tolerance = 0;
+	
+	//call enhirted method first	
 	//0. extract dimensions, fill unspecified parameters 
 	Nj = pheno_mean.rows();
 	Np = pheno_mean.cols();
@@ -334,9 +358,10 @@ void cSPARSEFA::init_net()
 	//set Alpha Node to NUll to ensure that delete does not crash
 	Alpha = NULL;
 	//updates to complete init
+	/*
 	X->update(this);		
 	W->update(this);		
-	
+	*/
 	
 	if (VERBOSE>=2)
 	{
@@ -350,12 +375,23 @@ void cSPARSEFA::init_net()
 
 double cSPARSEFA::calcBound()
 {
-	return 0;
+	//1. decide whether to run sparse or non-sparse mode
+	if (isnull(pi))
+		return cVBFA::calcBound();
+	else {
+		return 0;
+	}
+
 }
 
 double cSPARSEFA::logprob()
 {
-	return 0;
+	if (isnull(pi))
+		return cVBFA::logprob();
+	else {
+		return 0;
+	}
+
 }
 
 
@@ -379,40 +415,52 @@ void cSPARSEFA::update()
 	{
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
-		
-		cout << "data variance" << pheno->E1.array().pow(2).mean() << "\n\n";
-		
-
-		std::cout << Eps->E1 << "\n\n";
-		Eps->update(this);
-		std::cout << Eps->E1 << "\n\n";
-		if (VERBOSE>=3)
-			cout << "\tAfter E " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
-		
-		std::cout << X->E1 << "\n\n";
-		X->update(this);
-		std::cout << X->E1 << "\n\n";
-		if (VERBOSE>=3)
-			cout << "\tAfter X " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
-		
-	
-		std::cout << W->E1 << "\n\n";
+				
+		//W
+		if (VERBOSE>=4)
+			std::cout << W->E1 << "\n\n";
 		W->update(this);		
-		std::cout << W->E1 << "\n\n";
+		if (VERBOSE>=4)
+			std::cout << W->E1 << "\n\n";
 		if((VERBOSE>=3) && (i > 0) )
 		{cout << "\tAfter W " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;}
 		
-			
-			
+		//Alha?
+		if (Alpha!=NULL)
+		{
+			Alpha->update(this);
+			if((VERBOSE>=3) && (i > 0) )
+			{cout << "\tAfter A " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;}
+		}
+		
+		//X
+		if (VERBOSE>=4)
+			std::cout << X->E1 << "\n\n";
+		X->update(this);
+		if (VERBOSE>=4)
+			std::cout << X->E1 << "\n\n";
+		if (VERBOSE>=3)
+			cout << "\tAfter X " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
+		
+		//EPS
+		if (VERBOSE>=3)
+			std::cout << Eps->E1 << "\n\n";
+		Eps->update(this);
+		if (VERBOSE>=3)
+			std::cout << Eps->E1 << "\n\n";
+		if (VERBOSE>=3)
+			cout << "\tAfter E " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
+		
+		
 		//calc bound?
 		if ((VERBOSE>=2) || (tolerance>0))
 		{
 			//deactivate bound calculation as not working at the moment
-			//last_bound    = current_bound;
+			last_bound    = current_bound;
 			last_residual_var = current_residual_var;
-			//current_bound = calcBound();
+			current_bound = calcBound();
 			current_residual_var = calc_residuals().array().pow(2).mean();
-			//delta_bound = (current_bound - last_bound); // bound should increase
+			delta_bound = (current_bound - last_bound); // bound should increase
 			delta_residual_var = last_residual_var - current_residual_var; // variance should decrease
 		}
 			
@@ -427,8 +475,8 @@ void cSPARSEFA::update()
 		//converged?
 		if (abs(delta_bound)<tolerance)
 			break;
-		//if (abs(delta_residual_var)<var_tolerance)
-		//	break;
+		if (abs(delta_residual_var)<var_tolerance)
+			break;
 	//endfor
 	}
 		
