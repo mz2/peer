@@ -2,6 +2,7 @@
 
 %{
 #define SWIG_FILE_WITH_INIT
+#define SWIG
 #include "vbfa.h"
 #include "sparsefa.h"
 //use namessace:

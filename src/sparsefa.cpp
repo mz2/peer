@@ -233,7 +233,7 @@ void cSPARSEFA::init_net_sparse()
 	if (isnull(pheno_var))
 	{	
 		pheno_var = 0.01*(PMatrix::Ones(pheno_mean.rows(), pheno_mean.cols())); // if uncertainty in expression not provided, assume pretty certain
-		printf("XX %d/%d -- %d/%d\n",pheno_mean.rows(),pheno_mean.cols(),pheno_var.rows(),pheno_var.cols());	
+		printf("XX %d/%d -- %d/%d\n",(int) pheno_mean.rows(),(int) pheno_mean.cols(),(int) pheno_var.rows(),(int) pheno_var.cols());	
 	}
 	// if no covariates, create empty structure
 	if (isnull(covs)) 

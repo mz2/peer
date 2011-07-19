@@ -46,7 +46,7 @@ sSparseSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sparsit
 			else
 				RV.Z(i,j) = 0;
 			//draw sparse W also
-			RV.W(i,j) = RV.Z(i,j) * randomreal();
+			RV.W(i,j) = RV.Z(i,j) * randn();
 		}
 	//2. create random factors
 	RV.X = randn(N,K);

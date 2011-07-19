@@ -41,6 +41,12 @@ if (BUILD_R_PACKAGE)
        ${PEER_SOURCE_DIR}/build/R/peerR_wrap.cxx
        ${PEER_SOURCE_DIR}/build/R/peer/src/peerR_wrap.cpp)
 
+  ADD_CUSTOM_COMMAND(
+    TARGET peer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+       ${PEER_SOURCE_DIR}/build/R/peer.R
+       ${PEER_SOURCE_DIR}/build/R/peer/R/peer.R)
+
   if (BUILD_UNIVERSAL)
     ADD_CUSTOM_COMMAND(
       TARGET peer POST_BUILD
