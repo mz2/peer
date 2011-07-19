@@ -1267,6 +1267,7 @@ static swig_module_info swig_module = {swig_types, 15, 0, 0, 0, 0};
 
 
 #define SWIG_FILE_WITH_INIT
+#define SWIG
 #include "vbfa.h"
 #include "sparsefa.h"
 //use namessace:

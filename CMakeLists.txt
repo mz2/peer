@@ -59,7 +59,7 @@ endif (BUILD_UNIVERSAL)
 
 
 # OLI's build options
-#set(LIBR_SO "/opt/local/lib/R/lib/x86_64/libR.dylib")
+set(LIBR_SO "/opt/local/lib/R/lib/x86_64/libR.dylib")
 ##/R END
 
 
