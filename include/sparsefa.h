@@ -19,8 +19,6 @@
 
 namespace PEER
 {
-	
-	
 	/*Sparse Factor analysis node for W*/
 	class cWNodeSparse : public cWNode {
 	protected:
@@ -66,10 +64,8 @@ namespace PEER
 		double sigmaOff;
 		double sigmaOn;
 		virtual void init_params();
-
 		
 	public:
-		
 		//constructor
 		cSPARSEFA();
 		//destructor
@@ -97,17 +93,17 @@ namespace PEER
 		PMatrix getSparsityPrior();
 		PMatrix getZ();
 		
-		 virtual double calcBound();
-		 virtual double logprob();
-		 virtual void init_net();
-		 virtual void init_net_sparse();	
-		 virtual void update();
-		
-		
+		virtual double calcBound();
+		virtual double logprob();
+		virtual void init_net();
+		virtual void init_net_sparse();	
+		virtual void update();
 	};// :: sparseFA
 	
-	
-	
+	//typedef of PEER module
+	typedef cSPARSEFA cPEER;
+	typedef cSPARSEFA& rPEER;
+	typedef cSPARSEFA* pPEER;	
 }
 
 

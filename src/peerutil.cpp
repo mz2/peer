@@ -8,8 +8,8 @@
  */
 
 #include <fstream>
-#include "io.h"
-#include "vbfa.h"
+#include "peerutil.h"
+#include "sparsefa.h"
 #include "tclap/CmdLine.h"
 #include "csv_parser/include/csv_parser/csv_parser.hpp"
 
@@ -31,7 +31,7 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		ValueArg<std::string> out_dir("o","out_dir","Output directory",false,"peer_out","string", cmd);
 		ValueArg<std::string> expr_file("f","file","Expression data file",true,"","string", cmd);
 		ValueArg<std::string> cov_file("c","cov_file","Covariate data file",false,"","string", cmd);
-		ValueArg<std::string> conf_file("","config","PEER config file",false,"","string", cmd);
+		ValueArg<std::string> prior_file("","prior","Factor prior file",false,"","string", cmd);
 		ValueArg<int> n_factors("n","n_factors","Number of hidden factors",false,5,"int", cmd);
 		ValueArg<int> n_iter("i","n_iter","Number of iterations",false,50,"int", cmd);
 		ValueArg<float> alpha_pa("","a_pa","Alpha node prior parameter a",false,1.,"float", cmd);
@@ -40,6 +40,8 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		ValueArg<float> eps_pb("","e_pb","Eps node prior parameter b",false,1.,"float", cmd);
 		ValueArg<float> bound_tolerance("","bound_tol","Bound tolerance",false,0.001,"float", cmd);
 		ValueArg<float> var_tolerance("","var_tol","Variation tolerance",false,0.000001,"float", cmd);
+		ValueArg<float> sigma_off("","sigma_off","Variance inactive component",false,0.001,"float", cmd);
+
 		
 		cmd.parse( argc, argv );
 
@@ -52,7 +54,7 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		args.out_dir = out_dir.getValue();
 		args.expr_file = expr_file.getValue();
 		args.cov_file = cov_file.getValue();
-		args.conf_file = conf_file.getValue();
+		args.prior_file = prior_file.getValue();
 		args.n_factors = n_factors.getValue();
 		args.n_iter = n_iter.getValue();
 		args.alpha_pa = alpha_pa.getValue();
@@ -61,6 +63,7 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		args.eps_pb = eps_pb.getValue();
 		args.bound_tolerance = bound_tolerance.getValue();
 		args.var_tolerance = var_tolerance.getValue();
+		args.sigma_off = sigma_off.getValue();
 	} catch (ArgException &e)  // catch any exceptions
 	{ std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl; }
 	
@@ -125,13 +128,19 @@ void writeCsv(string filename, PMatrix m){
 /**
  Get an instance of PEER FA object from command line arguments
  */
-cVBFA getInstance(sPeerArgs args){
+cSPARSEFA getInstance(sPeerArgs args){
 	
 	PMatrix expr = parseCsv(args.expr_file, args.has_header);
 	PMatrix covs = PMatrix();
 	if (args.cov_file.length() > 0) covs = parseCsv(args.cov_file, args.has_header);
 	
-	cVBFA vb(expr, PMatrix(), covs, args.n_factors);
+	cSPARSEFA vb;
+	
+	vb.setPhenoMean(expr);
+	vb.setCovariates(covs);
+	vb.setNk(args.n_factors);
+	
+	(expr, PMatrix(), covs, args.n_factors);
 
 	vb.setAdd_mean(!args.keep_mean);
 	vb.setNmax_iterations(args.n_iter);

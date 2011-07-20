@@ -59,7 +59,7 @@ endif (BUILD_UNIVERSAL)
 
 
 # OLI's build options
-set(LIBR_SO "/opt/local/lib/R/lib/x86_64/libR.dylib")
+#set(LIBR_SO "/opt/local/lib/R/lib/x86_64/libR.dylib")
 ##/R END
 
 
@@ -84,6 +84,7 @@ add_definitions(-g -Wextra -D_BSD_SOURCE)
 
 #fPic while compiling on
 #this seems to be needed on some linux systems
+#set(CMAKE_CXX_FLAGS "-fPIC -O3 -march=core2")
 set(CMAKE_CXX_FLAGS "-fPIC")
 
 include_directories(./External/alglib/src)

@@ -19,11 +19,12 @@ int main (int argc, char * const argv[]) {
 	int N = 50;
 	int D = 10;
 	int K = 3;
+	int NC = 2;
 	double sigma = 0.1;
 	double sparsity = 2E-1;
 	double fpr= 0;
 	double fnr = 0;
-	sSparseSimulation sim = simulate_expressionSPARSEFA(N,D,K,sparsity,sigma,fpr,fnr);
+	sSparseSimulation sim = simulate_expressionSPARSEFA(N,D,K,NC,sparsity,sigma,fpr,fnr);
 	//count the number of sparse things?
 	PMatrix Z = sim.Z;	
 	int Zsum = (int) Z.sum();
@@ -31,7 +32,7 @@ int main (int argc, char * const argv[]) {
 	printf("Net size: NxG: %d x %d. Non-zero enries: %d",N,D,Zsum);
 	
 
-	VERBOSE = 3;
+	VERBOSE = 1;
 
 	
 	/*
@@ -40,6 +41,8 @@ int main (int argc, char * const argv[]) {
 	vb.setPhenoMean(sim.expr);
 	vb.update();
 	
+	*/
+
 	std::cout << "\n\n";
 	
 	std::cout << sim.Z;
@@ -49,15 +52,16 @@ int main (int argc, char * const argv[]) {
 	std::cout << sim.pi;
 	
 	std::cout << "\n\n";
-	*/
-	
+		
 	PMatrix pi = sim.pi.transpose();
-	pi = PMatrix::Ones(pi.rows(),pi.cols());
 	
-	cSPARSEFA vbs = cSPARSEFA();
-	//vbs.setSparsityPrior(pi);
+	cPEER vbs = cPEER();
+	if (NC>0)
+		vbs.setCovariates(sim.Xcov);
+	vbs.setAdd_mean(true);
 	vbs.setNk(K);
 	vbs.setPhenoMean(sim.expr);
+	vbs.setSparsityPrior(pi);
 	vbs.update();
 	
 	

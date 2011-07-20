@@ -26,12 +26,6 @@ using namespace PEER;
 
 
 
-void cSPARSEFA::setSparsityPrior(float64_t* matrix,int32_t rows,int32_t cols)
-{this->pi = array2matrix(matrix,rows,cols);is_initialized=false;}
-void cSPARSEFA::getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(pi,matrix,rows,cols);}
-
-
 //sparsity posterior:
 void cSPARSEFA::getZ(float64_t** matrix,int32_t* rows,int32_t* cols)
 {
@@ -247,6 +241,7 @@ void cSPARSEFA::init_net()
 	{
 		//hard code initialization type
 		initialisation= PRIOR;
+
 		init_net_sparse();
 	}
 }
@@ -254,7 +249,6 @@ void cSPARSEFA::init_net()
 
 void cSPARSEFA::init_net_sparse()
 {
-	
 	tolerance = 0;
 	
 	//call enhirted method first	
@@ -279,17 +273,17 @@ void cSPARSEFA::init_net_sparse()
 	{
 		//create a larger matrix and concatenate mean column:
 		int nc = covs.cols();
-		covs.resize(Nj,nc+1);
-		covs.block(0,nc,Nj,nc+1) = PMatrix::Ones(Nj, 1); 
+		covs.conservativeResize(Nj,nc+1);
+		covs.block(0,nc,Nj,1) = PMatrix::Ones(Nj, 1); 
 	}
 	
 		
 	Nc = covs.cols();
 	//total number of factors is determined from dimensionality of Pi
-	Nk = pi.cols();
+	Nk = pi.cols() + Nc;
 	
 	//how many "non covariate factors"?
-	int Nfactors = Nk-Nc;
+	int Nhiddens = pi.cols();
 	
 	//debug output:
 	if(VERBOSE>=2)
@@ -304,17 +298,10 @@ void cSPARSEFA::init_net_sparse()
 	assert (pheno_mean.cols()==pheno_var.cols());
 	assert (covs.rows() == pheno_mean.rows());
 	assert (pi.rows()==Np);
-	assert (pi.cols()==Nk);
 	assert (Nj>0);
 	assert (Np>0);
 	assert (Nk>0);
 	//check that we don't have more factors than individuals or genes
-	assert (Nk<Np);
-	assert (Nk<Nj);
-	//check that we don't have covaraites (not supported)
-	if (Nc>0)
-		ULOG_ERR("Covaraites not supported yet");
-	assert (Nc==0);
 			
 	//2. create nodes
 	pheno = new cPhenoNode(pheno_mean,pheno_var);
@@ -339,10 +326,13 @@ void cSPARSEFA::init_net_sparse()
 		residuals = pheno->E1;
 	}
 	
-	//create complete binary prior matrix inlcuding known effects
-	PMatrix pi = PMatrix(Np,Nk);
-	pi.block(0,Nc,Np,Nfactors) = this->pi;
+	//create complete prior matrix inlcuding known covariates etc.
+	PMatrix piX = PMatrix::Ones(Np,Nk);
+	piX.block(0,Nc,Np,Nhiddens) = this->pi;
+	//update Pi
+	this->pi = piX;
 		
+	
 	//4.initialize the model
 	/*continue here: initialize model by sampling from prior!*/
 	if (initialisation==PRIOR)
@@ -368,16 +358,11 @@ void cSPARSEFA::init_net_sparse()
 		//dot product Sdiag V
 		PMatrix SV = Sdiag*V.transpose();
 		//get the factors up to the Kth component
-		X0.block(0,Nc,Nj,Nfactors) = U.block(0,0,U.rows(),Nfactors);
-		W0.block(0,Nc,Np,Nfactors) = SV.block(0,0,Nfactors,SV.cols()).transpose();
+		X0.block(0,Nc,Nj,Nhiddens) = U.block(0,0,U.rows(),Nhiddens);
+		W0.block(0,Nc,Np,Nhiddens) = SV.block(0,0,Nhiddens,SV.cols()).transpose();
 	}
-	
-	std::cout << W0 << "\n\n";
-	std::cout << X0 << "\n\n";
-	
-	
-	//std::cout << W0 << "\n\n";
-	// more
+		
+	// Create prior on X that keeps known factors intact during learning
 	PMatrix Xprec_prior = PMatrix::Identity(Nk,Nk);
 	Xprec_prior.diagonal().block(0,0,Nc,1) = PMatrix::Ones(Nc,1)*covariate_prec;
 	PMatrix Xmean_prior = PMatrix::Zero(Nj, Nk);
@@ -390,10 +375,6 @@ void cSPARSEFA::init_net_sparse()
 	//set Alpha Node to NUll to ensure that delete does not crash
 	Alpha = NULL;
 	//updates to complete init
-	/*
-	X->update(this);		
-	W->update(this);		
-	*/
 	
 	if (VERBOSE>=2)
 	{
@@ -401,7 +382,7 @@ void cSPARSEFA::init_net_sparse()
 	}
 	is_initialized = true;
 	
-}
+} //::init_net_sparse
 
 
 
@@ -427,10 +408,9 @@ double cSPARSEFA::logprob()
 }
 
 
-
+// Global model update
 void cSPARSEFA::update()
 {
-	// Global update
 		
 	//auto init net if needed
 	if(!is_initialized)
@@ -475,10 +455,10 @@ void cSPARSEFA::update()
 			cout << "\tAfter X " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
 		
 		//EPS
-		if (VERBOSE>=3)
+		if (VERBOSE>=4)
 			std::cout << Eps->E1 << "\n\n";
 		Eps->update(this);
-		if (VERBOSE>=3)
+		if (VERBOSE>=4)
 			std::cout << Eps->E1 << "\n\n";
 		if (VERBOSE>=3)
 			cout << "\tAfter E " << calcBound() << "\tResidual variance " << calc_residuals().array().pow(2.).mean() << endl;
@@ -527,5 +507,13 @@ void cSPARSEFA::update()
 		}
 	}
 	
-}
+} // ::update
+
+
+//getters and setters
+void cSPARSEFA::setSparsityPrior(float64_t* matrix,int32_t rows,int32_t cols)
+{this->pi = array2matrix(matrix,rows,cols);is_initialized=false;}
+void cSPARSEFA::getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(pi,matrix,rows,cols);}
+
 
