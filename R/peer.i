@@ -43,8 +43,8 @@ using namespace PEER;
 %rename(VBFA) cVBFA;
 
 /* Include the header file to be wrapped */
-%include "vbfa.h"
-%include "sparsefa.h"
+//%include "vbfa.h"
+%include "sparsefa.i"
 
 
 

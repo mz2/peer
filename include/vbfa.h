@@ -168,14 +168,12 @@ public:
 	cVBFA();	
 	//we could think about adding swig/R constructors also, but these will be less flexible.
 
-#ifndef SWIG
 	//constructor from expression data
 	cVBFA(PMatrix pheno_mean,int Nfactors);
 	//constructor that takes covariates into account
 	cVBFA(PMatrix pheno_mean, PMatrix covs,int Nfactors);
 	//constructor that take variance and covariates into account
 	cVBFA(PMatrix pheno_mean, PMatrix pheno_var, PMatrix covs, int Nfactors);
-#endif
 	
 	//destructor
 	virtual ~cVBFA();
@@ -213,54 +211,34 @@ public:
 	virtual double logprob();
 	virtual void update();
 	
-
-	//Interface specific methods:
-#ifdef SWIG
-	//swig versions of setters, avoiding matrix objects
-	//setters
-	void setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
-	{this->pheno_mean = array2matrix(matrix,rows,cols);is_initialized=false;}
-
-	void setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols)
-	{this->pheno_var = array2matrix(matrix,rows,cols);is_initialized=false;}
-	void setCovariates(float64_t* matrix,int32_t rows,int32_t cols)
-	{this->covs = array2matrix(matrix,rows,cols);is_initialized=false;}	
+	virtual void setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols);
+	virtual void setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols);
+	virtual void setCovariates(float64_t* matrix,int32_t rows,int32_t cols);
 
 	//getters
-	void getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(pheno_mean,matrix,rows,cols);}
-	void getPhenoVar(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(pheno_var,matrix,rows,cols);}
-	void getCovariates(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(covs,matrix,rows,cols);}
+	virtual void getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols);
+	virtual void getPhenoVar(float64_t** matrix,int32_t* rows,int32_t* cols);
+	virtual void getCovariates(float64_t** matrix,int32_t* rows,int32_t* cols);
 
-	void getX(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(X->E1,matrix,rows,cols);}
-	void getW(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(W->E1,matrix,rows,cols);}
-	void getEps(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(Eps->E1,matrix,rows,cols);}
-	void getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(Alpha->E1,matrix,rows,cols);}
-	void getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
-	{return matrix2array(calc_residuals(),matrix,rows,cols);}
-#else
-	//excludede fromo the swig interface as overloade functions do not get type mapped (and we don't port PMatrix anyway)
-	void setPhenoMean(const PMatrix pheno_mean) {this->pheno_mean = pheno_mean;is_initialized=false;}
-	void setPhenoVar(const PMatrix pheno_var) {this->pheno_var = pheno_var;is_initialized=false;}
-	void setCovariates(const PMatrix covs) { this->covs = covs;is_initialized=false;}	
-	
-	//getters
-	PMatrix getPhenoMean(){return this->pheno_mean;}
-	PMatrix getPhenoVar() {return this->pheno_var;}
-	PMatrix getCovariates() {return this->covs;}
+	virtual void getX(float64_t** matrix,int32_t* rows,int32_t* cols);
+	virtual void getW(float64_t** matrix,int32_t* rows,int32_t* cols);
+	virtual void getEps(float64_t** matrix,int32_t* rows,int32_t* cols);
+	virtual void getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols);
+	virtual void getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols);
 
-	PMatrix getX(){return X->E1;}
-	PMatrix getW(){return W->E1;}
-	PMatrix getAlpha(){return Alpha->E1;}
-	PMatrix getEps(){return Eps->E1;}
-	PMatrix getResiduals() {return calc_residuals();}
-#endif
+	void setPhenoMean(const PMatrix pheno_mean);
+	void setPhenoVar(const PMatrix pheno_var);
+	void setCovariates(const PMatrix covs);
+
+	PMatrix getPhenoMean();
+	PMatrix getPhenoVar();
+	PMatrix getCovariates();
+
+	PMatrix getX();
+	PMatrix getW();
+	PMatrix getAlpha();
+	PMatrix getEps();
+	PMatrix getResiduals();
 };
 
 	

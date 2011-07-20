@@ -5,7 +5,7 @@
 # the SWIG interface file instead.
 
 ##   Generated via the command line invocation:
-##	 /usr/bin/swig -r -cpperraswarn -outdir /Users/mz2/PearComp/peer/build/R -c++ -I/Users/mz2/PearComp/peer -I/Users/mz2/PearComp/peer/./include -I/Users/mz2/PearComp/peer/./External/alglib/src -I/Users/mz2/PearComp/peer/R/./../External -I/Users/mz2/PearComp/peer/R/./../External/Eigen -I/External/alglib -I/include -I/opt/local/lib/R/include -I/opt/local/lib/R/include/x86_64 -I/usr/local/Cellar/r/2.12.0/R.framework/Resources/include -o /Users/mz2/PearComp/peer/build/R/peerR_wrap.cxx /Users/mz2/PearComp/peer/R/peer.i
+##	 /opt/local/bin/swig -r -cpperraswarn -outdir /Users/stegle/work/projects/peer/build/R -c++ -I/Users/stegle/work/projects/peer -I/Users/stegle/work/projects/peer/./include -I/Users/stegle/work/projects/peer/./External/alglib/src -I/Users/stegle/work/projects/peer/R/./../External -I/Users/stegle/work/projects/peer/R/./../External/Eigen -I/External/alglib -I/include -I/opt/local/lib/R/include -I/opt/local/lib/R/include/x86_64 -I/opt/local/lib/R/include/i386 -o /Users/stegle/work/projects/peer/build/R/peerR_wrap.cxx /Users/stegle/work/projects/peer/R/peer.i
 
 
 #                         srun.swg                            #
@@ -161,12 +161,9 @@ function(fun, userData = NULL)
 
 
 setClass('C++Reference', contains = 'ExternalReference')
-setClass('_p_PEER__cWNode', contains = 'C++Reference')
-setClass('_p_PEER__cXNode', contains = 'C++Reference')
-setClass('_p_PEER__cAlphaNode', contains = 'C++Reference')
-setClass('_p_PEER__cEpsNode', contains = 'C++Reference')
-setClass('_p_PEER__cPhenoNode', contains = 'C++Reference')
-setClass('_p_PEER__cVBFA', contains = 'C++Reference')
+setClass('_p_PEER__cWNodeSparse', contains = 'C++Reference')
+setClass('_p_PEER__cEpsNodeSparse', contains = 'C++Reference')
+setClass('_p_PEER__cSPARSEFA', contains = 'C++Reference')
 
 
 
@@ -218,466 +215,293 @@ attr(`setVerbose`, 'returnType') = 'void'
 attr(`setVerbose`, "inputTypes") = c('integer')
 class(`setVerbose`) = c("SWIGFunction", class('setVerbose'))
 
-# Start of logdet
+# Start of cWNodeSparse_pi_set
 
-`logdet` = function(m, .copy = FALSE)
+`cWNodeSparse_pi_set` = function(self, s_pi)
 {
-  ;.Call('R_swig_logdet', m, as.logical(.copy), PACKAGE='peer');
+  ;.Call('R_swig_cWNodeSparse_pi_set', self, s_pi, PACKAGE='peer');
   
 }
 
-attr(`logdet`, 'returnType') = 'numeric'
-attr(`logdet`, "inputTypes") = c('_p_PMatrix')
-class(`logdet`) = c("SWIGFunction", class('logdet'))
+attr(`cWNodeSparse_pi_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_pi_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', '_p_PMatrix')
+class(`cWNodeSparse_pi_set`) = c("SWIGFunction", class('cWNodeSparse_pi_set'))
 
-# Start of cWNode_E2S_set
+# Start of cWNodeSparse_pi_get
 
-`cWNode_E2S_set` = function(self, s_E2S)
+`cWNodeSparse_pi_get` = function(self, .copy = FALSE)
 {
-  ;.Call('R_swig_cWNode_E2S_set', self, s_E2S, PACKAGE='peer');
-  
-}
-
-attr(`cWNode_E2S_set`, 'returnType') = 'void'
-attr(`cWNode_E2S_set`, "inputTypes") = c('_p_PEER__cWNode', '_p_PMatrix')
-class(`cWNode_E2S_set`) = c("SWIGFunction", class('cWNode_E2S_set'))
-
-# Start of cWNode_E2S_get
-
-`cWNode_E2S_get` = function(self, .copy = FALSE)
-{
-  ;ans = .Call('R_swig_cWNode_E2S_get', self, as.logical(.copy), PACKAGE='peer');
+  ;ans = .Call('R_swig_cWNodeSparse_pi_get', self, as.logical(.copy), PACKAGE='peer');
   class(ans) <- "_p_PMatrix";
   
   ans
   
 }
 
-attr(`cWNode_E2S_get`, 'returnType') = '_p_PMatrix'
-attr(`cWNode_E2S_get`, "inputTypes") = c('_p_PEER__cWNode')
-class(`cWNode_E2S_get`) = c("SWIGFunction", class('cWNode_E2S_get'))
+attr(`cWNodeSparse_pi_get`, 'returnType') = '_p_PMatrix'
+attr(`cWNodeSparse_pi_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_pi_get`) = c("SWIGFunction", class('cWNodeSparse_pi_get'))
 
-# Start of cWNode_lndetcovS_set
+# Start of cWNodeSparse_lpi_set
 
-`cWNode_lndetcovS_set` = function(self, s_lndetcovS)
+`cWNodeSparse_lpi_set` = function(self, s_lpi)
 {
-  ;.Call('R_swig_cWNode_lndetcovS_set', self, s_lndetcovS, PACKAGE='peer');
+  ;.Call('R_swig_cWNodeSparse_lpi_set', self, s_lpi, PACKAGE='peer');
   
 }
 
-attr(`cWNode_lndetcovS_set`, 'returnType') = 'void'
-attr(`cWNode_lndetcovS_set`, "inputTypes") = c('_p_PEER__cWNode', 'numeric')
-class(`cWNode_lndetcovS_set`) = c("SWIGFunction", class('cWNode_lndetcovS_set'))
+attr(`cWNodeSparse_lpi_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_lpi_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', '_p_PMatrix')
+class(`cWNodeSparse_lpi_set`) = c("SWIGFunction", class('cWNodeSparse_lpi_set'))
 
-# Start of cWNode_lndetcovS_get
+# Start of cWNodeSparse_lpi_get
 
-`cWNode_lndetcovS_get` = function(self, .copy = FALSE)
+`cWNodeSparse_lpi_get` = function(self, .copy = FALSE)
 {
-  ;.Call('R_swig_cWNode_lndetcovS_get', self, as.logical(.copy), PACKAGE='peer');
+  ;ans = .Call('R_swig_cWNodeSparse_lpi_get', self, as.logical(.copy), PACKAGE='peer');
+  class(ans) <- "_p_PMatrix";
   
-}
-
-attr(`cWNode_lndetcovS_get`, 'returnType') = 'numeric'
-attr(`cWNode_lndetcovS_get`, "inputTypes") = c('_p_PEER__cWNode')
-class(`cWNode_lndetcovS_get`) = c("SWIGFunction", class('cWNode_lndetcovS_get'))
-
-# Start of new_cWNode
-
-`cWNode__SWIG_0` = function()
-{
-  ;ans = .Call('R_swig_new_cWNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_PEER__cWNode";
-  
-  reg.finalizer(ans, delete_cWNode)
   ans
   
 }
 
-attr(`cWNode__SWIG_0`, 'returnType') = '_p_PEER__cWNode'
-class(`cWNode__SWIG_0`) = c("SWIGFunction", class('cWNode__SWIG_0'))
+attr(`cWNodeSparse_lpi_get`, 'returnType') = '_p_PMatrix'
+attr(`cWNodeSparse_lpi_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_lpi_get`) = c("SWIGFunction", class('cWNodeSparse_lpi_get'))
 
-# Start of new_cWNode
+# Start of cWNodeSparse_lpi_off_set
 
-`cWNode__SWIG_1` = function(E1)
+`cWNodeSparse_lpi_off_set` = function(self, s_lpi_off)
 {
-  ;ans = .Call('R_swig_new_cWNode__SWIG_1', E1, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cWNode";
+  ;.Call('R_swig_cWNodeSparse_lpi_off_set', self, s_lpi_off, PACKAGE='peer');
   
-  reg.finalizer(ans, delete_cWNode)
+}
+
+attr(`cWNodeSparse_lpi_off_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_lpi_off_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', '_p_PMatrix')
+class(`cWNodeSparse_lpi_off_set`) = c("SWIGFunction", class('cWNodeSparse_lpi_off_set'))
+
+# Start of cWNodeSparse_lpi_off_get
+
+`cWNodeSparse_lpi_off_get` = function(self, .copy = FALSE)
+{
+  ;ans = .Call('R_swig_cWNodeSparse_lpi_off_get', self, as.logical(.copy), PACKAGE='peer');
+  class(ans) <- "_p_PMatrix";
+  
   ans
   
 }
 
-attr(`cWNode__SWIG_1`, 'returnType') = '_p_PEER__cWNode'
-attr(`cWNode__SWIG_1`, "inputTypes") = c('_p_PMatrix')
-class(`cWNode__SWIG_1`) = c("SWIGFunction", class('cWNode__SWIG_1'))
+attr(`cWNodeSparse_lpi_off_get`, 'returnType') = '_p_PMatrix'
+attr(`cWNodeSparse_lpi_off_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_lpi_off_get`) = c("SWIGFunction", class('cWNodeSparse_lpi_off_get'))
 
-`cWNode` <- function(...) {
+# Start of cWNodeSparse_C_set
+
+`cWNodeSparse_C_set` = function(self, s_C)
+{
+  ;.Call('R_swig_cWNodeSparse_C_set', self, s_C, PACKAGE='peer');
+  
+}
+
+attr(`cWNodeSparse_C_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_C_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', '_p_PMatrix')
+class(`cWNodeSparse_C_set`) = c("SWIGFunction", class('cWNodeSparse_C_set'))
+
+# Start of cWNodeSparse_C_get
+
+`cWNodeSparse_C_get` = function(self, .copy = FALSE)
+{
+  ;ans = .Call('R_swig_cWNodeSparse_C_get', self, as.logical(.copy), PACKAGE='peer');
+  class(ans) <- "_p_PMatrix";
+  
+  ans
+  
+}
+
+attr(`cWNodeSparse_C_get`, 'returnType') = '_p_PMatrix'
+attr(`cWNodeSparse_C_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_C_get`) = c("SWIGFunction", class('cWNodeSparse_C_get'))
+
+# Start of cWNodeSparse_Coff_set
+
+`cWNodeSparse_Coff_set` = function(self, s_Coff)
+{
+  ;.Call('R_swig_cWNodeSparse_Coff_set', self, s_Coff, PACKAGE='peer');
+  
+}
+
+attr(`cWNodeSparse_Coff_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_Coff_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', '_p_PMatrix')
+class(`cWNodeSparse_Coff_set`) = c("SWIGFunction", class('cWNodeSparse_Coff_set'))
+
+# Start of cWNodeSparse_Coff_get
+
+`cWNodeSparse_Coff_get` = function(self, .copy = FALSE)
+{
+  ;ans = .Call('R_swig_cWNodeSparse_Coff_get', self, as.logical(.copy), PACKAGE='peer');
+  class(ans) <- "_p_PMatrix";
+  
+  ans
+  
+}
+
+attr(`cWNodeSparse_Coff_get`, 'returnType') = '_p_PMatrix'
+attr(`cWNodeSparse_Coff_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_Coff_get`) = c("SWIGFunction", class('cWNodeSparse_Coff_get'))
+
+# Start of cWNodeSparse_CovPriorDiag_set
+
+`cWNodeSparse_CovPriorDiag_set` = function(self, s_CovPriorDiag)
+{
+  ;.Call('R_swig_cWNodeSparse_CovPriorDiag_set', self, s_CovPriorDiag, PACKAGE='peer');
+  
+}
+
+attr(`cWNodeSparse_CovPriorDiag_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_CovPriorDiag_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', '_p_PMatrix')
+class(`cWNodeSparse_CovPriorDiag_set`) = c("SWIGFunction", class('cWNodeSparse_CovPriorDiag_set'))
+
+# Start of cWNodeSparse_CovPriorDiag_get
+
+`cWNodeSparse_CovPriorDiag_get` = function(self, .copy = FALSE)
+{
+  ;ans = .Call('R_swig_cWNodeSparse_CovPriorDiag_get', self, as.logical(.copy), PACKAGE='peer');
+  class(ans) <- "_p_PMatrix";
+  
+  ans
+  
+}
+
+attr(`cWNodeSparse_CovPriorDiag_get`, 'returnType') = '_p_PMatrix'
+attr(`cWNodeSparse_CovPriorDiag_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_CovPriorDiag_get`) = c("SWIGFunction", class('cWNodeSparse_CovPriorDiag_get'))
+
+# Start of cWNodeSparse_tauOn_set
+
+`cWNodeSparse_tauOn_set` = function(self, s_tauOn)
+{
+  ;.Call('R_swig_cWNodeSparse_tauOn_set', self, s_tauOn, PACKAGE='peer');
+  
+}
+
+attr(`cWNodeSparse_tauOn_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_tauOn_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', 'numeric')
+class(`cWNodeSparse_tauOn_set`) = c("SWIGFunction", class('cWNodeSparse_tauOn_set'))
+
+# Start of cWNodeSparse_tauOn_get
+
+`cWNodeSparse_tauOn_get` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_cWNodeSparse_tauOn_get', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`cWNodeSparse_tauOn_get`, 'returnType') = 'numeric'
+attr(`cWNodeSparse_tauOn_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_tauOn_get`) = c("SWIGFunction", class('cWNodeSparse_tauOn_get'))
+
+# Start of cWNodeSparse_tauOff_set
+
+`cWNodeSparse_tauOff_set` = function(self, s_tauOff)
+{
+  ;.Call('R_swig_cWNodeSparse_tauOff_set', self, s_tauOff, PACKAGE='peer');
+  
+}
+
+attr(`cWNodeSparse_tauOff_set`, 'returnType') = 'void'
+attr(`cWNodeSparse_tauOff_set`, "inputTypes") = c('_p_PEER__cWNodeSparse', 'numeric')
+class(`cWNodeSparse_tauOff_set`) = c("SWIGFunction", class('cWNodeSparse_tauOff_set'))
+
+# Start of cWNodeSparse_tauOff_get
+
+`cWNodeSparse_tauOff_get` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_cWNodeSparse_tauOff_get', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`cWNodeSparse_tauOff_get`, 'returnType') = 'numeric'
+attr(`cWNodeSparse_tauOff_get`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`cWNodeSparse_tauOff_get`) = c("SWIGFunction", class('cWNodeSparse_tauOff_get'))
+
+# Start of new_cWNodeSparse
+
+`cWNodeSparse__SWIG_0` = function()
+{
+  ;ans = .Call('R_swig_new_cWNodeSparse__SWIG_0', PACKAGE='peer');
+  class(ans) <- "_p_PEER__cWNodeSparse";
+  
+  reg.finalizer(ans, delete_cWNodeSparse)
+  ans
+  
+}
+
+attr(`cWNodeSparse__SWIG_0`, 'returnType') = '_p_PEER__cWNodeSparse'
+class(`cWNodeSparse__SWIG_0`) = c("SWIGFunction", class('cWNodeSparse__SWIG_0'))
+
+# Start of new_cWNodeSparse
+
+`cWNodeSparse__SWIG_1` = function(E1, pi, net)
+{
+  ;ans = .Call('R_swig_new_cWNodeSparse__SWIG_1', E1, pi, net, PACKAGE='peer');
+  class(ans) <- "_p_PEER__cWNodeSparse";
+  
+  reg.finalizer(ans, delete_cWNodeSparse)
+  ans
+  
+}
+
+attr(`cWNodeSparse__SWIG_1`, 'returnType') = '_p_PEER__cWNodeSparse'
+attr(`cWNodeSparse__SWIG_1`, "inputTypes") = c('_p_PMatrix', '_p_PMatrix', '_p_cBayesNet')
+class(`cWNodeSparse__SWIG_1`) = c("SWIGFunction", class('cWNodeSparse__SWIG_1'))
+
+`cWNodeSparse` <- function(...) {
   argtypes <- mapply(class, list(...));
   argv <- list(...);
   argc <- length(argtypes);
 # dispatch functions 2
   if (argc == 0) {
-    f <- cWNode__SWIG_0; 
-  } else if (argc == 1) {
-    if (extends(argtypes[1], '_p_PMatrix')) {
-      f <- cWNode__SWIG_1; 
-    }
-  };
-  f(...);
-}
-
-# Dispatch function
-# Start of cWNode_update
-
-`cWNode_update` = function(self, net)
-{
-  ;.Call('R_swig_cWNode_update', self, net, PACKAGE='peer');
-  
-}
-
-attr(`cWNode_update`, 'returnType') = 'void'
-attr(`cWNode_update`, "inputTypes") = c('_p_PEER__cWNode', '_p_cBayesNet')
-class(`cWNode_update`) = c("SWIGFunction", class('cWNode_update'))
-
-# Start of cWNode_calcBound
-
-`cWNode_calcBound` = function(self, net, .copy = FALSE)
-{
-  ;.Call('R_swig_cWNode_calcBound', self, net, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`cWNode_calcBound`, 'returnType') = 'numeric'
-attr(`cWNode_calcBound`, "inputTypes") = c('_p_PEER__cWNode', '_p_cBayesNet')
-class(`cWNode_calcBound`) = c("SWIGFunction", class('cWNode_calcBound'))
-
-# Start of cWNode_entropy
-
-`cWNode_entropy` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_cWNode_entropy', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`cWNode_entropy`, 'returnType') = 'numeric'
-attr(`cWNode_entropy`, "inputTypes") = c('_p_PEER__cWNode')
-class(`cWNode_entropy`) = c("SWIGFunction", class('cWNode_entropy'))
-
-# Start of cWNode_getE1
-
-`cWNode_getE1` = function(self)
-{
-  ;.Call('R_swig_cWNode_getE1', self, PACKAGE='peer');
-  
-}
-
-attr(`cWNode_getE1`, 'returnType') = 'void'
-attr(`cWNode_getE1`, "inputTypes") = c('_p_PEER__cWNode')
-class(`cWNode_getE1`) = c("SWIGFunction", class('cWNode_getE1'))
-
-# Start of delete_cWNode
-
-`delete_cWNode` = function(self)
-{
-  ;.Call('R_swig_delete_cWNode', self, PACKAGE='peer');
-  
-}
-
-attr(`delete_cWNode`, 'returnType') = 'void'
-attr(`delete_cWNode`, "inputTypes") = c('_p_PEER__cWNode')
-class(`delete_cWNode`) = c("SWIGFunction", class('delete_cWNode'))
-
-# Start of accessor method for PEER::cWNode
-setMethod('$', '_p_PEER__cWNode', function(x, name)
-
-{
-  accessorFuns = list('E2S' = cWNode_E2S_get, 'lndetcovS' = cWNode_lndetcovS_get, 'update' = cWNode_update, 'calcBound' = cWNode_calcBound, 'entropy' = cWNode_entropy, 'getE1' = cWNode_getE1);
-  vaccessors = c('E2S', 'lndetcovS');
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name));
-  f = accessorFuns[[idx]];
-  formals(f)[[1]] = x;
-  if (is.na(match(name, vaccessors))) f else f(x);
-}
-
-
-);
-# end of accessor method for PEER::cWNode
-# Start of accessor method for PEER::cWNode
-setMethod('$<-', '_p_PEER__cWNode', function(x, name, value)
-
-{
-  accessorFuns = list('E2S' = cWNode_E2S_set, 'lndetcovS' = cWNode_lndetcovS_set);
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name, value));
-  f = accessorFuns[[idx]];
-  f(x, value);
-  x;
-}
-
-
-);
-setMethod('[[<-', c('_p_PEER__cWNode', 'character'),function(x, i, j, ..., value)
-
-{
-  name = i;
-  accessorFuns = list('E2S' = cWNode_E2S_set, 'lndetcovS' = cWNode_lndetcovS_set);
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name, value));
-  f = accessorFuns[[idx]];
-  f(x, value);
-  x;
-}
-
-
-);
-# end of accessor method for PEER::cWNode
-setMethod('delete', '_p_PEER__cWNode', function(obj) {delete_PEER__cWNode(obj)})
-# Start of cXNode_E2S_set
-
-`cXNode_E2S_set` = function(self, s_E2S)
-{
-  ;.Call('R_swig_cXNode_E2S_set', self, s_E2S, PACKAGE='peer');
-  
-}
-
-attr(`cXNode_E2S_set`, 'returnType') = 'void'
-attr(`cXNode_E2S_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
-class(`cXNode_E2S_set`) = c("SWIGFunction", class('cXNode_E2S_set'))
-
-# Start of cXNode_E2S_get
-
-`cXNode_E2S_get` = function(self, .copy = FALSE)
-{
-  ;ans = .Call('R_swig_cXNode_E2S_get', self, as.logical(.copy), PACKAGE='peer');
-  class(ans) <- "_p_PMatrix";
-  
-  ans
-  
-}
-
-attr(`cXNode_E2S_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_E2S_get`, "inputTypes") = c('_p_PEER__cXNode')
-class(`cXNode_E2S_get`) = c("SWIGFunction", class('cXNode_E2S_get'))
-
-# Start of cXNode_cov_set
-
-`cXNode_cov_set` = function(self, s_cov)
-{
-  ;.Call('R_swig_cXNode_cov_set', self, s_cov, PACKAGE='peer');
-  
-}
-
-attr(`cXNode_cov_set`, 'returnType') = 'void'
-attr(`cXNode_cov_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
-class(`cXNode_cov_set`) = c("SWIGFunction", class('cXNode_cov_set'))
-
-# Start of cXNode_cov_get
-
-`cXNode_cov_get` = function(self, .copy = FALSE)
-{
-  ;ans = .Call('R_swig_cXNode_cov_get', self, as.logical(.copy), PACKAGE='peer');
-  class(ans) <- "_p_PMatrix";
-  
-  ans
-  
-}
-
-attr(`cXNode_cov_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_cov_get`, "inputTypes") = c('_p_PEER__cXNode')
-class(`cXNode_cov_get`) = c("SWIGFunction", class('cXNode_cov_get'))
-
-# Start of cXNode_prior_offset_set
-
-`cXNode_prior_offset_set` = function(self, s_prior_offset)
-{
-  ;.Call('R_swig_cXNode_prior_offset_set', self, s_prior_offset, PACKAGE='peer');
-  
-}
-
-attr(`cXNode_prior_offset_set`, 'returnType') = 'void'
-attr(`cXNode_prior_offset_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
-class(`cXNode_prior_offset_set`) = c("SWIGFunction", class('cXNode_prior_offset_set'))
-
-# Start of cXNode_prior_offset_get
-
-`cXNode_prior_offset_get` = function(self, .copy = FALSE)
-{
-  ;ans = .Call('R_swig_cXNode_prior_offset_get', self, as.logical(.copy), PACKAGE='peer');
-  class(ans) <- "_p_PMatrix";
-  
-  ans
-  
-}
-
-attr(`cXNode_prior_offset_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_prior_offset_get`, "inputTypes") = c('_p_PEER__cXNode')
-class(`cXNode_prior_offset_get`) = c("SWIGFunction", class('cXNode_prior_offset_get'))
-
-# Start of cXNode_prior_prec_set
-
-`cXNode_prior_prec_set` = function(self, s_prior_prec)
-{
-  ;.Call('R_swig_cXNode_prior_prec_set', self, s_prior_prec, PACKAGE='peer');
-  
-}
-
-attr(`cXNode_prior_prec_set`, 'returnType') = 'void'
-attr(`cXNode_prior_prec_set`, "inputTypes") = c('_p_PEER__cXNode', '_p_PMatrix')
-class(`cXNode_prior_prec_set`) = c("SWIGFunction", class('cXNode_prior_prec_set'))
-
-# Start of cXNode_prior_prec_get
-
-`cXNode_prior_prec_get` = function(self, .copy = FALSE)
-{
-  ;ans = .Call('R_swig_cXNode_prior_prec_get', self, as.logical(.copy), PACKAGE='peer');
-  class(ans) <- "_p_PMatrix";
-  
-  ans
-  
-}
-
-attr(`cXNode_prior_prec_get`, 'returnType') = '_p_PMatrix'
-attr(`cXNode_prior_prec_get`, "inputTypes") = c('_p_PEER__cXNode')
-class(`cXNode_prior_prec_get`) = c("SWIGFunction", class('cXNode_prior_prec_get'))
-
-# Start of new_cXNode
-
-`cXNode__SWIG_0` = function()
-{
-  ;ans = .Call('R_swig_new_cXNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_PEER__cXNode";
-  
-  reg.finalizer(ans, delete_cXNode)
-  ans
-  
-}
-
-attr(`cXNode__SWIG_0`, 'returnType') = '_p_PEER__cXNode'
-class(`cXNode__SWIG_0`) = c("SWIGFunction", class('cXNode__SWIG_0'))
-
-# Start of new_cXNode
-
-`cXNode__SWIG_1` = function(E1)
-{
-  ;ans = .Call('R_swig_new_cXNode__SWIG_1', E1, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cXNode";
-  
-  reg.finalizer(ans, delete_cXNode)
-  ans
-  
-}
-
-attr(`cXNode__SWIG_1`, 'returnType') = '_p_PEER__cXNode'
-attr(`cXNode__SWIG_1`, "inputTypes") = c('_p_PMatrix')
-class(`cXNode__SWIG_1`) = c("SWIGFunction", class('cXNode__SWIG_1'))
-
-# Start of new_cXNode
-
-`cXNode__SWIG_2` = function(E1, prior_offset, prior_prec)
-{
-  ;ans = .Call('R_swig_new_cXNode__SWIG_2', E1, prior_offset, prior_prec, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cXNode";
-  
-  reg.finalizer(ans, delete_cXNode)
-  ans
-  
-}
-
-attr(`cXNode__SWIG_2`, 'returnType') = '_p_PEER__cXNode'
-attr(`cXNode__SWIG_2`, "inputTypes") = c('_p_PMatrix', '_p_PMatrix', '_p_PMatrix')
-class(`cXNode__SWIG_2`) = c("SWIGFunction", class('cXNode__SWIG_2'))
-
-`cXNode` <- function(...) {
-  argtypes <- mapply(class, list(...));
-  argv <- list(...);
-  argc <- length(argtypes);
-# dispatch functions 3
-  if (argc == 0) {
-    f <- cXNode__SWIG_0; 
-  } else if (argc == 1) {
-    if (extends(argtypes[1], '_p_PMatrix')) {
-      f <- cXNode__SWIG_1; 
-    }
+    f <- cWNodeSparse__SWIG_0; 
   } else if (argc == 3) {
-    if (extends(argtypes[1], '_p_PMatrix') && extends(argtypes[2], '_p_PMatrix') && extends(argtypes[3], '_p_PMatrix')) {
-      f <- cXNode__SWIG_2; 
+    if (extends(argtypes[1], '_p_PMatrix') && extends(argtypes[2], '_p_PMatrix') && extends(argtypes[3], '_p_cBayesNet')) {
+      f <- cWNodeSparse__SWIG_1; 
     }
   };
   f(...);
 }
 
 # Dispatch function
-# Start of cXNode_update
+# Start of cWNodeSparse_update
 
-`cXNode_update` = function(self, net)
+`cWNodeSparse_update` = function(self, net)
 {
-  ;.Call('R_swig_cXNode_update', self, net, PACKAGE='peer');
+  ;.Call('R_swig_cWNodeSparse_update', self, net, PACKAGE='peer');
   
 }
 
-attr(`cXNode_update`, 'returnType') = 'void'
-attr(`cXNode_update`, "inputTypes") = c('_p_PEER__cXNode', '_p_cBayesNet')
-class(`cXNode_update`) = c("SWIGFunction", class('cXNode_update'))
+attr(`cWNodeSparse_update`, 'returnType') = 'void'
+attr(`cWNodeSparse_update`, "inputTypes") = c('_p_PEER__cWNodeSparse', '_p_cBayesNet')
+class(`cWNodeSparse_update`) = c("SWIGFunction", class('cWNodeSparse_update'))
 
-# Start of cXNode_calcBound
+# Start of delete_cWNodeSparse
 
-`cXNode_calcBound` = function(self, net, .copy = FALSE)
+`delete_cWNodeSparse` = function(self)
 {
-  ;.Call('R_swig_cXNode_calcBound', self, net, as.logical(.copy), PACKAGE='peer');
+  ;.Call('R_swig_delete_cWNodeSparse', self, PACKAGE='peer');
   
 }
 
-attr(`cXNode_calcBound`, 'returnType') = 'numeric'
-attr(`cXNode_calcBound`, "inputTypes") = c('_p_PEER__cXNode', '_p_cBayesNet')
-class(`cXNode_calcBound`) = c("SWIGFunction", class('cXNode_calcBound'))
+attr(`delete_cWNodeSparse`, 'returnType') = 'void'
+attr(`delete_cWNodeSparse`, "inputTypes") = c('_p_PEER__cWNodeSparse')
+class(`delete_cWNodeSparse`) = c("SWIGFunction", class('delete_cWNodeSparse'))
 
-# Start of cXNode_entropy
-
-`cXNode_entropy` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_cXNode_entropy', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`cXNode_entropy`, 'returnType') = 'numeric'
-attr(`cXNode_entropy`, "inputTypes") = c('_p_PEER__cXNode')
-class(`cXNode_entropy`) = c("SWIGFunction", class('cXNode_entropy'))
-
-# Start of cXNode_getE1
-
-`cXNode_getE1` = function(self)
-{
-  ;.Call('R_swig_cXNode_getE1', self, PACKAGE='peer');
-  
-}
-
-attr(`cXNode_getE1`, 'returnType') = 'void'
-attr(`cXNode_getE1`, "inputTypes") = c('_p_PEER__cXNode')
-class(`cXNode_getE1`) = c("SWIGFunction", class('cXNode_getE1'))
-
-# Start of delete_cXNode
-
-`delete_cXNode` = function(self)
-{
-  ;.Call('R_swig_delete_cXNode', self, PACKAGE='peer');
-  
-}
-
-attr(`delete_cXNode`, 'returnType') = 'void'
-attr(`delete_cXNode`, "inputTypes") = c('_p_PEER__cXNode')
-class(`delete_cXNode`) = c("SWIGFunction", class('delete_cXNode'))
-
-# Start of accessor method for PEER::cXNode
-setMethod('$', '_p_PEER__cXNode', function(x, name)
+# Start of accessor method for PEER::cWNodeSparse
+setMethod('$', '_p_PEER__cWNodeSparse', function(x, name)
 
 {
-  accessorFuns = list('E2S' = cXNode_E2S_get, 'cov' = cXNode_cov_get, 'prior_offset' = cXNode_prior_offset_get, 'prior_prec' = cXNode_prior_prec_get, 'update' = cXNode_update, 'calcBound' = cXNode_calcBound, 'entropy' = cXNode_entropy, 'getE1' = cXNode_getE1);
-  vaccessors = c('E2S', 'cov', 'prior_offset', 'prior_prec');
+  accessorFuns = list('pi' = cWNodeSparse_pi_get, 'lpi' = cWNodeSparse_lpi_get, 'lpi_off' = cWNodeSparse_lpi_off_get, 'C' = cWNodeSparse_C_get, 'Coff' = cWNodeSparse_Coff_get, 'CovPriorDiag' = cWNodeSparse_CovPriorDiag_get, 'tauOn' = cWNodeSparse_tauOn_get, 'tauOff' = cWNodeSparse_tauOff_get, 'update' = cWNodeSparse_update);
+  vaccessors = c('pi', 'lpi', 'lpi_off', 'C', 'Coff', 'CovPriorDiag', 'tauOn', 'tauOff');
   ;        idx = pmatch(name, names(accessorFuns));
   if(is.na(idx)) 
   return(callNextMethod(x, name));
@@ -688,12 +512,12 @@ setMethod('$', '_p_PEER__cXNode', function(x, name)
 
 
 );
-# end of accessor method for PEER::cXNode
-# Start of accessor method for PEER::cXNode
-setMethod('$<-', '_p_PEER__cXNode', function(x, name, value)
+# end of accessor method for PEER::cWNodeSparse
+# Start of accessor method for PEER::cWNodeSparse
+setMethod('$<-', '_p_PEER__cWNodeSparse', function(x, name, value)
 
 {
-  accessorFuns = list('E2S' = cXNode_E2S_set, 'cov' = cXNode_cov_set, 'prior_offset' = cXNode_prior_offset_set, 'prior_prec' = cXNode_prior_prec_set);
+  accessorFuns = list('pi' = cWNodeSparse_pi_set, 'lpi' = cWNodeSparse_lpi_set, 'lpi_off' = cWNodeSparse_lpi_off_set, 'C' = cWNodeSparse_C_set, 'Coff' = cWNodeSparse_Coff_set, 'CovPriorDiag' = cWNodeSparse_CovPriorDiag_set, 'tauOn' = cWNodeSparse_tauOn_set, 'tauOff' = cWNodeSparse_tauOff_set);
   ;        idx = pmatch(name, names(accessorFuns));
   if(is.na(idx)) 
   return(callNextMethod(x, name, value));
@@ -704,11 +528,11 @@ setMethod('$<-', '_p_PEER__cXNode', function(x, name, value)
 
 
 );
-setMethod('[[<-', c('_p_PEER__cXNode', 'character'),function(x, i, j, ..., value)
+setMethod('[[<-', c('_p_PEER__cWNodeSparse', 'character'),function(x, i, j, ..., value)
 
 {
   name = i;
-  accessorFuns = list('E2S' = cXNode_E2S_set, 'cov' = cXNode_cov_set, 'prior_offset' = cXNode_prior_offset_set, 'prior_prec' = cXNode_prior_prec_set);
+  accessorFuns = list('pi' = cWNodeSparse_pi_set, 'lpi' = cWNodeSparse_lpi_set, 'lpi_off' = cWNodeSparse_lpi_off_set, 'C' = cWNodeSparse_C_set, 'Coff' = cWNodeSparse_Coff_set, 'CovPriorDiag' = cWNodeSparse_CovPriorDiag_set, 'tauOn' = cWNodeSparse_tauOn_set, 'tauOff' = cWNodeSparse_tauOff_set);
   ;        idx = pmatch(name, names(accessorFuns));
   if(is.na(idx)) 
   return(callNextMethod(x, name, value));
@@ -719,26 +543,11 @@ setMethod('[[<-', c('_p_PEER__cXNode', 'character'),function(x, i, j, ..., value
 
 
 );
-# end of accessor method for PEER::cXNode
-setMethod('delete', '_p_PEER__cXNode', function(obj) {delete_PEER__cXNode(obj)})
-# Start of new_cAlphaNode
+# end of accessor method for PEER::cWNodeSparse
+setMethod('delete', '_p_PEER__cWNodeSparse', function(obj) {delete_PEER__cWNodeSparse(obj)})
+# Start of new_cEpsNodeSparse
 
-`cAlphaNode__SWIG_0` = function()
-{
-  ;ans = .Call('R_swig_new_cAlphaNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_PEER__cAlphaNode";
-  
-  reg.finalizer(ans, delete_cAlphaNode)
-  ans
-  
-}
-
-attr(`cAlphaNode__SWIG_0`, 'returnType') = '_p_PEER__cAlphaNode'
-class(`cAlphaNode__SWIG_0`) = c("SWIGFunction", class('cAlphaNode__SWIG_0'))
-
-# Start of new_cAlphaNode
-
-`cAlphaNode__SWIG_1` = function(dim, pa, pb, E1)
+`cEpsNodeSparse` = function(dim, pa, pb, E1)
 {
   dim = as.integer(dim); 
   
@@ -749,75 +558,47 @@ class(`cAlphaNode__SWIG_0`) = c("SWIGFunction", class('cAlphaNode__SWIG_0'))
   
   
   
-  ;ans = .Call('R_swig_new_cAlphaNode__SWIG_1', dim, pa, pb, E1, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cAlphaNode";
+  ;ans = .Call('R_swig_new_cEpsNodeSparse', dim, pa, pb, E1, PACKAGE='peer');
+  class(ans) <- "_p_PEER__cEpsNodeSparse";
   
-  reg.finalizer(ans, delete_cAlphaNode)
+  reg.finalizer(ans, delete_cEpsNodeSparse)
   ans
   
 }
 
-attr(`cAlphaNode__SWIG_1`, 'returnType') = '_p_PEER__cAlphaNode'
-attr(`cAlphaNode__SWIG_1`, "inputTypes") = c('integer', 'numeric', 'numeric', '_p_PMatrix')
-class(`cAlphaNode__SWIG_1`) = c("SWIGFunction", class('cAlphaNode__SWIG_1'))
+attr(`cEpsNodeSparse`, 'returnType') = '_p_PEER__cEpsNodeSparse'
+attr(`cEpsNodeSparse`, "inputTypes") = c('integer', 'numeric', 'numeric', '_p_PMatrix')
+class(`cEpsNodeSparse`) = c("SWIGFunction", class('cEpsNodeSparse'))
 
-`cAlphaNode` <- function(...) {
-  argtypes <- mapply(class, list(...));
-  argv <- list(...);
-  argc <- length(argtypes);
-# dispatch functions 2
-  if (argc == 0) {
-    f <- cAlphaNode__SWIG_0; 
-  } else if (argc == 4) {
-    if (extends(argtypes[1], 'integer') && is.numeric(argv[[2]]) && is.numeric(argv[[3]]) && extends(argtypes[4], '_p_PMatrix')) {
-      f <- cAlphaNode__SWIG_1; 
-    }
-  };
-  f(...);
-}
+# Start of cEpsNodeSparse_update
 
-# Dispatch function
-# Start of cAlphaNode_update
-
-`cAlphaNode_update` = function(self, net)
+`cEpsNodeSparse_update` = function(self, net)
 {
-  ;.Call('R_swig_cAlphaNode_update', self, net, PACKAGE='peer');
+  ;.Call('R_swig_cEpsNodeSparse_update', self, net, PACKAGE='peer');
   
 }
 
-attr(`cAlphaNode_update`, 'returnType') = 'void'
-attr(`cAlphaNode_update`, "inputTypes") = c('_p_PEER__cAlphaNode', '_p_cBayesNet')
-class(`cAlphaNode_update`) = c("SWIGFunction", class('cAlphaNode_update'))
+attr(`cEpsNodeSparse_update`, 'returnType') = 'void'
+attr(`cEpsNodeSparse_update`, "inputTypes") = c('_p_PEER__cEpsNodeSparse', '_p_cBayesNet')
+class(`cEpsNodeSparse_update`) = c("SWIGFunction", class('cEpsNodeSparse_update'))
 
-# Start of cAlphaNode_getE1
+# Start of delete_cEpsNodeSparse
 
-`cAlphaNode_getE1` = function(self)
+`delete_cEpsNodeSparse` = function(self)
 {
-  ;.Call('R_swig_cAlphaNode_getE1', self, PACKAGE='peer');
+  ;.Call('R_swig_delete_cEpsNodeSparse', self, PACKAGE='peer');
   
 }
 
-attr(`cAlphaNode_getE1`, 'returnType') = 'void'
-attr(`cAlphaNode_getE1`, "inputTypes") = c('_p_PEER__cAlphaNode')
-class(`cAlphaNode_getE1`) = c("SWIGFunction", class('cAlphaNode_getE1'))
+attr(`delete_cEpsNodeSparse`, 'returnType') = 'void'
+attr(`delete_cEpsNodeSparse`, "inputTypes") = c('_p_PEER__cEpsNodeSparse')
+class(`delete_cEpsNodeSparse`) = c("SWIGFunction", class('delete_cEpsNodeSparse'))
 
-# Start of delete_cAlphaNode
-
-`delete_cAlphaNode` = function(self)
-{
-  ;.Call('R_swig_delete_cAlphaNode', self, PACKAGE='peer');
-  
-}
-
-attr(`delete_cAlphaNode`, 'returnType') = 'void'
-attr(`delete_cAlphaNode`, "inputTypes") = c('_p_PEER__cAlphaNode')
-class(`delete_cAlphaNode`) = c("SWIGFunction", class('delete_cAlphaNode'))
-
-# Start of accessor method for PEER::cAlphaNode
-setMethod('$', '_p_PEER__cAlphaNode', function(x, name)
+# Start of accessor method for PEER::cEpsNodeSparse
+setMethod('$', '_p_PEER__cEpsNodeSparse', function(x, name)
 
 {
-  accessorFuns = list('update' = cAlphaNode_update, 'getE1' = cAlphaNode_getE1);
+  accessorFuns = list('update' = cEpsNodeSparse_update);
   ;        idx = pmatch(name, names(accessorFuns));
   if(is.na(idx)) 
   return(callNextMethod(x, name));
@@ -828,532 +609,98 @@ setMethod('$', '_p_PEER__cAlphaNode', function(x, name)
 
 
 );
-# end of accessor method for PEER::cAlphaNode
-setMethod('delete', '_p_PEER__cAlphaNode', function(obj) {delete_PEER__cAlphaNode(obj)})
-# Start of new_cEpsNode
+# end of accessor method for PEER::cEpsNodeSparse
+setMethod('delete', '_p_PEER__cEpsNodeSparse', function(obj) {delete_PEER__cEpsNodeSparse(obj)})
+# Start of new_PEER
 
-`cEpsNode__SWIG_0` = function()
+`PEER` = function()
 {
-  ;ans = .Call('R_swig_new_cEpsNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_PEER__cEpsNode";
+  ;ans = .Call('R_swig_new_PEER', PACKAGE='peer');
+  class(ans) <- "_p_PEER__cSPARSEFA";
   
-  reg.finalizer(ans, delete_cEpsNode)
+  reg.finalizer(ans, delete_PEER)
   ans
   
 }
 
-attr(`cEpsNode__SWIG_0`, 'returnType') = '_p_PEER__cEpsNode'
-class(`cEpsNode__SWIG_0`) = c("SWIGFunction", class('cEpsNode__SWIG_0'))
+attr(`PEER`, 'returnType') = '_p_PEER__cSPARSEFA'
+class(`PEER`) = c("SWIGFunction", class('PEER'))
 
-# Start of new_cEpsNode
+# Start of delete_PEER
 
-`cEpsNode__SWIG_1` = function(dim, pa, pb, E1)
+`delete_PEER` = function(self)
 {
-  dim = as.integer(dim); 
-  
-  if(length(dim) > 1) {
-    warning("using only the first element of dim");
-  };
-  
-  
-  
-  
-  ;ans = .Call('R_swig_new_cEpsNode__SWIG_1', dim, pa, pb, E1, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cEpsNode";
-  
-  reg.finalizer(ans, delete_cEpsNode)
-  ans
+  ;.Call('R_swig_delete_PEER', self, PACKAGE='peer');
   
 }
 
-attr(`cEpsNode__SWIG_1`, 'returnType') = '_p_PEER__cEpsNode'
-attr(`cEpsNode__SWIG_1`, "inputTypes") = c('integer', 'numeric', 'numeric', '_p_PMatrix')
-class(`cEpsNode__SWIG_1`) = c("SWIGFunction", class('cEpsNode__SWIG_1'))
+attr(`delete_PEER`, 'returnType') = 'void'
+attr(`delete_PEER`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`delete_PEER`) = c("SWIGFunction", class('delete_PEER'))
 
-`cEpsNode` <- function(...) {
-  argtypes <- mapply(class, list(...));
-  argv <- list(...);
-  argc <- length(argtypes);
-# dispatch functions 2
-  if (argc == 0) {
-    f <- cEpsNode__SWIG_0; 
-  } else if (argc == 4) {
-    if (extends(argtypes[1], 'integer') && is.numeric(argv[[2]]) && is.numeric(argv[[3]]) && extends(argtypes[4], '_p_PMatrix')) {
-      f <- cEpsNode__SWIG_1; 
-    }
-  };
-  f(...);
-}
+# Start of PEER_setSigmaOff
 
-# Dispatch function
-# Start of cEpsNode_update
-
-`cEpsNode_update` = function(self, net)
+`PEER_setSigmaOff` = function(self, sigma_off)
 {
-  ;.Call('R_swig_cEpsNode_update', self, net, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setSigmaOff', self, sigma_off, PACKAGE='peer');
   
 }
 
-attr(`cEpsNode_update`, 'returnType') = 'void'
-attr(`cEpsNode_update`, "inputTypes") = c('_p_PEER__cEpsNode', '_p_cBayesNet')
-class(`cEpsNode_update`) = c("SWIGFunction", class('cEpsNode_update'))
+attr(`PEER_setSigmaOff`, 'returnType') = 'void'
+attr(`PEER_setSigmaOff`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric')
+class(`PEER_setSigmaOff`) = c("SWIGFunction", class('PEER_setSigmaOff'))
 
-# Start of cEpsNode_getE1
+# Start of PEER_getSigmaOff
 
-`cEpsNode_getE1` = function(self)
+`PEER_getSigmaOff` = function(self, .copy = FALSE)
 {
-  ;.Call('R_swig_cEpsNode_getE1', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_getSigmaOff', self, as.logical(.copy), PACKAGE='peer');
   
 }
 
-attr(`cEpsNode_getE1`, 'returnType') = 'void'
-attr(`cEpsNode_getE1`, "inputTypes") = c('_p_PEER__cEpsNode')
-class(`cEpsNode_getE1`) = c("SWIGFunction", class('cEpsNode_getE1'))
+attr(`PEER_getSigmaOff`, 'returnType') = 'numeric'
+attr(`PEER_getSigmaOff`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getSigmaOff`) = c("SWIGFunction", class('PEER_getSigmaOff'))
 
-# Start of delete_cEpsNode
+# Start of PEER_setSparsityPrior
 
-`delete_cEpsNode` = function(self)
+`PEER_setSparsityPrior` = function(self, matrix)
 {
-  ;.Call('R_swig_delete_cEpsNode', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setSparsityPrior', self, matrix, PACKAGE='peer');
   
 }
 
-attr(`delete_cEpsNode`, 'returnType') = 'void'
-attr(`delete_cEpsNode`, "inputTypes") = c('_p_PEER__cEpsNode')
-class(`delete_cEpsNode`) = c("SWIGFunction", class('delete_cEpsNode'))
+attr(`PEER_setSparsityPrior`, 'returnType') = 'void'
+attr(`PEER_setSparsityPrior`, "inputTypes") = c('_p_PEER__cSPARSEFA', '_p_float64_t')
+class(`PEER_setSparsityPrior`) = c("SWIGFunction", class('PEER_setSparsityPrior'))
 
-# Start of accessor method for PEER::cEpsNode
-setMethod('$', '_p_PEER__cEpsNode', function(x, name)
+# Start of PEER_getSparsityPrior
 
+`PEER_getSparsityPrior` = function(self)
 {
-  accessorFuns = list('update' = cEpsNode_update, 'getE1' = cEpsNode_getE1);
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name));
-  f = accessorFuns[[idx]];
-  formals(f)[[1]] = x;
-  f;
+  ;.Call('R_swig_PEER_getSparsityPrior', self, PACKAGE='peer');
+  
 }
 
+attr(`PEER_getSparsityPrior`, 'returnType') = 'void'
+attr(`PEER_getSparsityPrior`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getSparsityPrior`) = c("SWIGFunction", class('PEER_getSparsityPrior'))
 
-);
-# end of accessor method for PEER::cEpsNode
-setMethod('delete', '_p_PEER__cEpsNode', function(obj) {delete_PEER__cEpsNode(obj)})
-# Start of cPhenoNode_E1_set
+# Start of PEER_getZ
 
-`cPhenoNode_E1_set` = function(self, s_E1)
+`PEER_getZ` = function(self)
 {
-  ;.Call('R_swig_cPhenoNode_E1_set', self, s_E1, PACKAGE='peer');
+  ;.Call('R_swig_PEER_getZ', self, PACKAGE='peer');
   
 }
 
-attr(`cPhenoNode_E1_set`, 'returnType') = 'void'
-attr(`cPhenoNode_E1_set`, "inputTypes") = c('_p_PEER__cPhenoNode', '_p_PMatrix')
-class(`cPhenoNode_E1_set`) = c("SWIGFunction", class('cPhenoNode_E1_set'))
+attr(`PEER_getZ`, 'returnType') = 'void'
+attr(`PEER_getZ`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getZ`) = c("SWIGFunction", class('PEER_getZ'))
 
-# Start of cPhenoNode_E1_get
+# Start of PEER_setNk
 
-`cPhenoNode_E1_get` = function(self, .copy = FALSE)
-{
-  ;ans = .Call('R_swig_cPhenoNode_E1_get', self, as.logical(.copy), PACKAGE='peer');
-  class(ans) <- "_p_PMatrix";
-  
-  ans
-  
-}
-
-attr(`cPhenoNode_E1_get`, 'returnType') = '_p_PMatrix'
-attr(`cPhenoNode_E1_get`, "inputTypes") = c('_p_PEER__cPhenoNode')
-class(`cPhenoNode_E1_get`) = c("SWIGFunction", class('cPhenoNode_E1_get'))
-
-# Start of cPhenoNode_E2_set
-
-`cPhenoNode_E2_set` = function(self, s_E2)
-{
-  ;.Call('R_swig_cPhenoNode_E2_set', self, s_E2, PACKAGE='peer');
-  
-}
-
-attr(`cPhenoNode_E2_set`, 'returnType') = 'void'
-attr(`cPhenoNode_E2_set`, "inputTypes") = c('_p_PEER__cPhenoNode', '_p_PMatrix')
-class(`cPhenoNode_E2_set`) = c("SWIGFunction", class('cPhenoNode_E2_set'))
-
-# Start of cPhenoNode_E2_get
-
-`cPhenoNode_E2_get` = function(self, .copy = FALSE)
-{
-  ;ans = .Call('R_swig_cPhenoNode_E2_get', self, as.logical(.copy), PACKAGE='peer');
-  class(ans) <- "_p_PMatrix";
-  
-  ans
-  
-}
-
-attr(`cPhenoNode_E2_get`, 'returnType') = '_p_PMatrix'
-attr(`cPhenoNode_E2_get`, "inputTypes") = c('_p_PEER__cPhenoNode')
-class(`cPhenoNode_E2_get`) = c("SWIGFunction", class('cPhenoNode_E2_get'))
-
-# Start of new_cPhenoNode
-
-`cPhenoNode__SWIG_0` = function()
-{
-  ;ans = .Call('R_swig_new_cPhenoNode__SWIG_0', PACKAGE='peer');
-  class(ans) <- "_p_PEER__cPhenoNode";
-  
-  reg.finalizer(ans, delete_cPhenoNode)
-  ans
-  
-}
-
-attr(`cPhenoNode__SWIG_0`, 'returnType') = '_p_PEER__cPhenoNode'
-class(`cPhenoNode__SWIG_0`) = c("SWIGFunction", class('cPhenoNode__SWIG_0'))
-
-# Start of new_cPhenoNode
-
-`cPhenoNode__SWIG_1` = function(pheno_mean, pheno_var)
-{
-  ;ans = .Call('R_swig_new_cPhenoNode__SWIG_1', pheno_mean, pheno_var, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cPhenoNode";
-  
-  reg.finalizer(ans, delete_cPhenoNode)
-  ans
-  
-}
-
-attr(`cPhenoNode__SWIG_1`, 'returnType') = '_p_PEER__cPhenoNode'
-attr(`cPhenoNode__SWIG_1`, "inputTypes") = c('_p_PMatrix', '_p_PMatrix')
-class(`cPhenoNode__SWIG_1`) = c("SWIGFunction", class('cPhenoNode__SWIG_1'))
-
-`cPhenoNode` <- function(...) {
-  argtypes <- mapply(class, list(...));
-  argv <- list(...);
-  argc <- length(argtypes);
-# dispatch functions 2
-  if (argc == 0) {
-    f <- cPhenoNode__SWIG_0; 
-  } else if (argc == 2) {
-    if (extends(argtypes[1], '_p_PMatrix') && extends(argtypes[2], '_p_PMatrix')) {
-      f <- cPhenoNode__SWIG_1; 
-    }
-  };
-  f(...);
-}
-
-# Dispatch function
-# Start of cPhenoNode_getE1
-
-`cPhenoNode_getE1` = function(self)
-{
-  ;.Call('R_swig_cPhenoNode_getE1', self, PACKAGE='peer');
-  
-}
-
-attr(`cPhenoNode_getE1`, 'returnType') = 'void'
-attr(`cPhenoNode_getE1`, "inputTypes") = c('_p_PEER__cPhenoNode')
-class(`cPhenoNode_getE1`) = c("SWIGFunction", class('cPhenoNode_getE1'))
-
-# Start of delete_cPhenoNode
-
-`delete_cPhenoNode` = function(self)
-{
-  ;.Call('R_swig_delete_cPhenoNode', self, PACKAGE='peer');
-  
-}
-
-attr(`delete_cPhenoNode`, 'returnType') = 'void'
-attr(`delete_cPhenoNode`, "inputTypes") = c('_p_PEER__cPhenoNode')
-class(`delete_cPhenoNode`) = c("SWIGFunction", class('delete_cPhenoNode'))
-
-# Start of accessor method for PEER::cPhenoNode
-setMethod('$', '_p_PEER__cPhenoNode', function(x, name)
-
-{
-  accessorFuns = list('E1' = cPhenoNode_E1_get, 'E2' = cPhenoNode_E2_get, 'getE1' = cPhenoNode_getE1);
-  vaccessors = c('E1', 'E2');
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name));
-  f = accessorFuns[[idx]];
-  formals(f)[[1]] = x;
-  if (is.na(match(name, vaccessors))) f else f(x);
-}
-
-
-);
-# end of accessor method for PEER::cPhenoNode
-# Start of accessor method for PEER::cPhenoNode
-setMethod('$<-', '_p_PEER__cPhenoNode', function(x, name, value)
-
-{
-  accessorFuns = list('E1' = cPhenoNode_E1_set, 'E2' = cPhenoNode_E2_set);
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name, value));
-  f = accessorFuns[[idx]];
-  f(x, value);
-  x;
-}
-
-
-);
-setMethod('[[<-', c('_p_PEER__cPhenoNode', 'character'),function(x, i, j, ..., value)
-
-{
-  name = i;
-  accessorFuns = list('E1' = cPhenoNode_E1_set, 'E2' = cPhenoNode_E2_set);
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name, value));
-  f = accessorFuns[[idx]];
-  f(x, value);
-  x;
-}
-
-
-);
-# end of accessor method for PEER::cPhenoNode
-setMethod('delete', '_p_PEER__cPhenoNode', function(obj) {delete_PEER__cPhenoNode(obj)})
-defineEnumeration('_PEER__intialisation_types',
-                    .values = c(
-                        'PCA' = 0
-))
-# Start of VBFA_W_set
-
-`VBFA_W_set` = function(self, s_W)
-{
-  ;.Call('R_swig_VBFA_W_set', self, s_W, PACKAGE='peer');
-  
-}
-
-attr(`VBFA_W_set`, 'returnType') = 'void'
-attr(`VBFA_W_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cWNode')
-class(`VBFA_W_set`) = c("SWIGFunction", class('VBFA_W_set'))
-
-# Start of VBFA_W_get
-
-`VBFA_W_get` = function(self)
-{
-  ;ans = .Call('R_swig_VBFA_W_get', self, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cWNode";
-  
-  ans
-  
-}
-
-attr(`VBFA_W_get`, 'returnType') = '_p_PEER__cWNode'
-attr(`VBFA_W_get`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_W_get`) = c("SWIGFunction", class('VBFA_W_get'))
-
-# Start of VBFA_X_set
-
-`VBFA_X_set` = function(self, s_X)
-{
-  ;.Call('R_swig_VBFA_X_set', self, s_X, PACKAGE='peer');
-  
-}
-
-attr(`VBFA_X_set`, 'returnType') = 'void'
-attr(`VBFA_X_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cXNode')
-class(`VBFA_X_set`) = c("SWIGFunction", class('VBFA_X_set'))
-
-# Start of VBFA_X_get
-
-`VBFA_X_get` = function(self)
-{
-  ;ans = .Call('R_swig_VBFA_X_get', self, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cXNode";
-  
-  ans
-  
-}
-
-attr(`VBFA_X_get`, 'returnType') = '_p_PEER__cXNode'
-attr(`VBFA_X_get`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_X_get`) = c("SWIGFunction", class('VBFA_X_get'))
-
-# Start of VBFA_Eps_set
-
-`VBFA_Eps_set` = function(self, s_Eps)
-{
-  ;.Call('R_swig_VBFA_Eps_set', self, s_Eps, PACKAGE='peer');
-  
-}
-
-attr(`VBFA_Eps_set`, 'returnType') = 'void'
-attr(`VBFA_Eps_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cEpsNode')
-class(`VBFA_Eps_set`) = c("SWIGFunction", class('VBFA_Eps_set'))
-
-# Start of VBFA_Eps_get
-
-`VBFA_Eps_get` = function(self)
-{
-  ;ans = .Call('R_swig_VBFA_Eps_get', self, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cEpsNode";
-  
-  ans
-  
-}
-
-attr(`VBFA_Eps_get`, 'returnType') = '_p_PEER__cEpsNode'
-attr(`VBFA_Eps_get`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_Eps_get`) = c("SWIGFunction", class('VBFA_Eps_get'))
-
-# Start of VBFA_Alpha_set
-
-`VBFA_Alpha_set` = function(self, s_Alpha)
-{
-  ;.Call('R_swig_VBFA_Alpha_set', self, s_Alpha, PACKAGE='peer');
-  
-}
-
-attr(`VBFA_Alpha_set`, 'returnType') = 'void'
-attr(`VBFA_Alpha_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cAlphaNode')
-class(`VBFA_Alpha_set`) = c("SWIGFunction", class('VBFA_Alpha_set'))
-
-# Start of VBFA_Alpha_get
-
-`VBFA_Alpha_get` = function(self)
-{
-  ;ans = .Call('R_swig_VBFA_Alpha_get', self, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cAlphaNode";
-  
-  ans
-  
-}
-
-attr(`VBFA_Alpha_get`, 'returnType') = '_p_PEER__cAlphaNode'
-attr(`VBFA_Alpha_get`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_Alpha_get`) = c("SWIGFunction", class('VBFA_Alpha_get'))
-
-# Start of VBFA_pheno_set
-
-`VBFA_pheno_set` = function(self, s_pheno)
-{
-  ;.Call('R_swig_VBFA_pheno_set', self, s_pheno, PACKAGE='peer');
-  
-}
-
-attr(`VBFA_pheno_set`, 'returnType') = 'void'
-attr(`VBFA_pheno_set`, "inputTypes") = c('_p_PEER__cVBFA', '_p_PEER__cPhenoNode')
-class(`VBFA_pheno_set`) = c("SWIGFunction", class('VBFA_pheno_set'))
-
-# Start of VBFA_pheno_get
-
-`VBFA_pheno_get` = function(self)
-{
-  ;ans = .Call('R_swig_VBFA_pheno_get', self, PACKAGE='peer');
-  class(ans) <- "_p_PEER__cPhenoNode";
-  
-  ans
-  
-}
-
-attr(`VBFA_pheno_get`, 'returnType') = '_p_PEER__cPhenoNode'
-attr(`VBFA_pheno_get`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_pheno_get`) = c("SWIGFunction", class('VBFA_pheno_get'))
-
-# Start of new_VBFA
-
-`VBFA` = function()
-{
-  ;ans = .Call('R_swig_new_VBFA', PACKAGE='peer');
-  class(ans) <- "_p_PEER__cVBFA";
-  
-  reg.finalizer(ans, delete_VBFA)
-  ans
-  
-}
-
-attr(`VBFA`, 'returnType') = '_p_PEER__cVBFA'
-class(`VBFA`) = c("SWIGFunction", class('VBFA'))
-
-# Start of VBFA_getNj
-
-`VBFA_getNj` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_VBFA_getNj', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`VBFA_getNj`, 'returnType') = 'integer'
-attr(`VBFA_getNj`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getNj`) = c("SWIGFunction", class('VBFA_getNj'))
-
-# Start of VBFA_getNp
-
-`VBFA_getNp` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_VBFA_getNp', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`VBFA_getNp`, 'returnType') = 'integer'
-attr(`VBFA_getNp`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getNp`) = c("SWIGFunction", class('VBFA_getNp'))
-
-# Start of VBFA_getNk
-
-`VBFA_getNk` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_VBFA_getNk', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`VBFA_getNk`, 'returnType') = 'integer'
-attr(`VBFA_getNk`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getNk`) = c("SWIGFunction", class('VBFA_getNk'))
-
-# Start of VBFA_getNc
-
-`VBFA_getNc` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_VBFA_getNc', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`VBFA_getNc`, 'returnType') = 'integer'
-attr(`VBFA_getNc`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getNc`) = c("SWIGFunction", class('VBFA_getNc'))
-
-# Start of VBFA_getNmax_iterations
-
-`VBFA_getNmax_iterations` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_VBFA_getNmax_iterations', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`VBFA_getNmax_iterations`, 'returnType') = 'integer'
-attr(`VBFA_getNmax_iterations`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getNmax_iterations`) = c("SWIGFunction", class('VBFA_getNmax_iterations'))
-
-# Start of VBFA_getTolerance
-
-`VBFA_getTolerance` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_VBFA_getTolerance', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`VBFA_getTolerance`, 'returnType') = 'numeric'
-attr(`VBFA_getTolerance`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getTolerance`) = c("SWIGFunction", class('VBFA_getTolerance'))
-
-# Start of VBFA_getAdd_mean
-
-`VBFA_getAdd_mean` = function(self, .copy = FALSE)
-{
-  ;.Call('R_swig_VBFA_getAdd_mean', self, as.logical(.copy), PACKAGE='peer');
-  
-}
-
-attr(`VBFA_getAdd_mean`, 'returnType') = 'logical'
-attr(`VBFA_getAdd_mean`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getAdd_mean`) = c("SWIGFunction", class('VBFA_getAdd_mean'))
-
-# Start of VBFA_setNk
-
-`VBFA_setNk` = function(self, Nk)
+`PEER_setNk` = function(self, Nk)
 {
   Nk = as.integer(Nk); 
   
@@ -1361,30 +708,30 @@ class(`VBFA_getAdd_mean`) = c("SWIGFunction", class('VBFA_getAdd_mean'))
     warning("using only the first element of Nk");
   };
   
-  ;.Call('R_swig_VBFA_setNk', self, Nk, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setNk', self, Nk, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setNk`, 'returnType') = 'void'
-attr(`VBFA_setNk`, "inputTypes") = c('_p_PEER__cVBFA', 'integer')
-class(`VBFA_setNk`) = c("SWIGFunction", class('VBFA_setNk'))
+attr(`PEER_setNk`, 'returnType') = 'void'
+attr(`PEER_setNk`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'integer')
+class(`PEER_setNk`) = c("SWIGFunction", class('PEER_setNk'))
 
-# Start of VBFA_setAdd_mean
+# Start of PEER_setAdd_mean
 
-`VBFA_setAdd_mean` = function(self, add_mean)
+`PEER_setAdd_mean` = function(self, add_mean)
 {
   add_mean = as.logical(add_mean);
-  ;.Call('R_swig_VBFA_setAdd_mean', self, add_mean, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setAdd_mean', self, add_mean, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setAdd_mean`, 'returnType') = 'void'
-attr(`VBFA_setAdd_mean`, "inputTypes") = c('_p_PEER__cVBFA', 'logical')
-class(`VBFA_setAdd_mean`) = c("SWIGFunction", class('VBFA_setAdd_mean'))
+attr(`PEER_setAdd_mean`, 'returnType') = 'void'
+attr(`PEER_setAdd_mean`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'logical')
+class(`PEER_setAdd_mean`) = c("SWIGFunction", class('PEER_setAdd_mean'))
 
-# Start of VBFA_setNmax_iterations
+# Start of PEER_setNmax_iterations
 
-`VBFA_setNmax_iterations` = function(self, Nmax_iterations)
+`PEER_setNmax_iterations` = function(self, Nmax_iterations)
 {
   Nmax_iterations = as.integer(Nmax_iterations); 
   
@@ -1392,289 +739,317 @@ class(`VBFA_setAdd_mean`) = c("SWIGFunction", class('VBFA_setAdd_mean'))
     warning("using only the first element of Nmax_iterations");
   };
   
-  ;.Call('R_swig_VBFA_setNmax_iterations', self, Nmax_iterations, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setNmax_iterations', self, Nmax_iterations, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setNmax_iterations`, 'returnType') = 'void'
-attr(`VBFA_setNmax_iterations`, "inputTypes") = c('_p_PEER__cVBFA', 'integer')
-class(`VBFA_setNmax_iterations`) = c("SWIGFunction", class('VBFA_setNmax_iterations'))
+attr(`PEER_setNmax_iterations`, 'returnType') = 'void'
+attr(`PEER_setNmax_iterations`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'integer')
+class(`PEER_setNmax_iterations`) = c("SWIGFunction", class('PEER_setNmax_iterations'))
 
-# Start of VBFA_setTolerance
+# Start of PEER_setTolerance
 
-`VBFA_setTolerance` = function(self, tolerance)
+`PEER_setTolerance` = function(self, tolerance)
 {
-  ;.Call('R_swig_VBFA_setTolerance', self, tolerance, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setTolerance', self, tolerance, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setTolerance`, 'returnType') = 'void'
-attr(`VBFA_setTolerance`, "inputTypes") = c('_p_PEER__cVBFA', 'numeric')
-class(`VBFA_setTolerance`) = c("SWIGFunction", class('VBFA_setTolerance'))
+attr(`PEER_setTolerance`, 'returnType') = 'void'
+attr(`PEER_setTolerance`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric')
+class(`PEER_setTolerance`) = c("SWIGFunction", class('PEER_setTolerance'))
 
-# Start of VBFA_setPriorAlpha
+# Start of PEER_setVarTolerance
 
-`VBFA_setPriorAlpha` = function(self, pa, pb)
+`PEER_setVarTolerance` = function(self, tolerance)
 {
-  ;.Call('R_swig_VBFA_setPriorAlpha', self, pa, pb, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setVarTolerance', self, tolerance, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setPriorAlpha`, 'returnType') = 'void'
-attr(`VBFA_setPriorAlpha`, "inputTypes") = c('_p_PEER__cVBFA', 'numeric', 'numeric')
-class(`VBFA_setPriorAlpha`) = c("SWIGFunction", class('VBFA_setPriorAlpha'))
+attr(`PEER_setVarTolerance`, 'returnType') = 'void'
+attr(`PEER_setVarTolerance`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric')
+class(`PEER_setVarTolerance`) = c("SWIGFunction", class('PEER_setVarTolerance'))
 
-# Start of VBFA_setPriorEps
+# Start of PEER_setPriorAlphaA
 
-`VBFA_setPriorEps` = function(self, pa, pb)
+`PEER_setPriorAlphaA` = function(self, pa)
 {
-  ;.Call('R_swig_VBFA_setPriorEps', self, pa, pb, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPriorAlphaA', self, pa, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setPriorEps`, 'returnType') = 'void'
-attr(`VBFA_setPriorEps`, "inputTypes") = c('_p_PEER__cVBFA', 'numeric', 'numeric')
-class(`VBFA_setPriorEps`) = c("SWIGFunction", class('VBFA_setPriorEps'))
+attr(`PEER_setPriorAlphaA`, 'returnType') = 'void'
+attr(`PEER_setPriorAlphaA`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric')
+class(`PEER_setPriorAlphaA`) = c("SWIGFunction", class('PEER_setPriorAlphaA'))
 
-# Start of VBFA_init_net
+# Start of PEER_setPriorAlphaB
 
-`VBFA_init_net` = function(self)
+`PEER_setPriorAlphaB` = function(self, pb)
 {
-  ;.Call('R_swig_VBFA_init_net', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPriorAlphaB', self, pb, PACKAGE='peer');
   
 }
 
-attr(`VBFA_init_net`, 'returnType') = 'void'
-attr(`VBFA_init_net`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_init_net`) = c("SWIGFunction", class('VBFA_init_net'))
+attr(`PEER_setPriorAlphaB`, 'returnType') = 'void'
+attr(`PEER_setPriorAlphaB`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric')
+class(`PEER_setPriorAlphaB`) = c("SWIGFunction", class('PEER_setPriorAlphaB'))
 
-# Start of VBFA_calcBound
+# Start of PEER_setPriorEpsA
 
-`VBFA_calcBound` = function(self, .copy = FALSE)
+`PEER_setPriorEpsA` = function(self, pa)
 {
-  ;.Call('R_swig_VBFA_calcBound', self, as.logical(.copy), PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPriorEpsA', self, pa, PACKAGE='peer');
   
 }
 
-attr(`VBFA_calcBound`, 'returnType') = 'numeric'
-attr(`VBFA_calcBound`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_calcBound`) = c("SWIGFunction", class('VBFA_calcBound'))
+attr(`PEER_setPriorEpsA`, 'returnType') = 'void'
+attr(`PEER_setPriorEpsA`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric')
+class(`PEER_setPriorEpsA`) = c("SWIGFunction", class('PEER_setPriorEpsA'))
 
-# Start of VBFA_logprob
+# Start of PEER_setPriorEpsB
 
-`VBFA_logprob` = function(self, .copy = FALSE)
+`PEER_setPriorEpsB` = function(self, pb)
 {
-  ;.Call('R_swig_VBFA_logprob', self, as.logical(.copy), PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPriorEpsB', self, pb, PACKAGE='peer');
   
 }
 
-attr(`VBFA_logprob`, 'returnType') = 'numeric'
-attr(`VBFA_logprob`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_logprob`) = c("SWIGFunction", class('VBFA_logprob'))
+attr(`PEER_setPriorEpsB`, 'returnType') = 'void'
+attr(`PEER_setPriorEpsB`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric')
+class(`PEER_setPriorEpsB`) = c("SWIGFunction", class('PEER_setPriorEpsB'))
 
-# Start of VBFA_update
+# Start of PEER_setPriorAlpha
 
-`VBFA_update` = function(self)
+`PEER_setPriorAlpha` = function(self, pa, pb)
 {
-  ;.Call('R_swig_VBFA_update', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPriorAlpha', self, pa, pb, PACKAGE='peer');
   
 }
 
-attr(`VBFA_update`, 'returnType') = 'void'
-attr(`VBFA_update`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_update`) = c("SWIGFunction", class('VBFA_update'))
+attr(`PEER_setPriorAlpha`, 'returnType') = 'void'
+attr(`PEER_setPriorAlpha`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric', 'numeric')
+class(`PEER_setPriorAlpha`) = c("SWIGFunction", class('PEER_setPriorAlpha'))
 
-# Start of VBFA_setPhenoMean
+# Start of PEER_setPriorEps
 
-`VBFA_setPhenoMean` = function(self, matrix)
+`PEER_setPriorEps` = function(self, pa, pb)
 {
-  ;.Call('R_swig_VBFA_setPhenoMean', self, matrix, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPriorEps', self, pa, pb, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setPhenoMean`, 'returnType') = 'void'
-attr(`VBFA_setPhenoMean`, "inputTypes") = c('_p_PEER__cVBFA', '_p_float64_t')
-class(`VBFA_setPhenoMean`) = c("SWIGFunction", class('VBFA_setPhenoMean'))
+attr(`PEER_setPriorEps`, 'returnType') = 'void'
+attr(`PEER_setPriorEps`, "inputTypes") = c('_p_PEER__cSPARSEFA', 'numeric', 'numeric')
+class(`PEER_setPriorEps`) = c("SWIGFunction", class('PEER_setPriorEps'))
 
-# Start of VBFA_setPhenoVar
+# Start of PEER_init_net
 
-`VBFA_setPhenoVar` = function(self, matrix)
+`PEER_init_net` = function(self)
 {
-  ;.Call('R_swig_VBFA_setPhenoVar', self, matrix, PACKAGE='peer');
+  ;.Call('R_swig_PEER_init_net', self, PACKAGE='peer');
   
 }
 
-attr(`VBFA_setPhenoVar`, 'returnType') = 'void'
-attr(`VBFA_setPhenoVar`, "inputTypes") = c('_p_PEER__cVBFA', '_p_float64_t')
-class(`VBFA_setPhenoVar`) = c("SWIGFunction", class('VBFA_setPhenoVar'))
+attr(`PEER_init_net`, 'returnType') = 'void'
+attr(`PEER_init_net`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_init_net`) = c("SWIGFunction", class('PEER_init_net'))
 
-# Start of VBFA_setCovariates
+# Start of PEER_calcBound
 
-`VBFA_setCovariates` = function(self, matrix)
+`PEER_calcBound` = function(self, .copy = FALSE)
 {
-  ;.Call('R_swig_VBFA_setCovariates', self, matrix, PACKAGE='peer');
+  ;.Call('R_swig_PEER_calcBound', self, as.logical(.copy), PACKAGE='peer');
   
 }
 
-attr(`VBFA_setCovariates`, 'returnType') = 'void'
-attr(`VBFA_setCovariates`, "inputTypes") = c('_p_PEER__cVBFA', '_p_float64_t')
-class(`VBFA_setCovariates`) = c("SWIGFunction", class('VBFA_setCovariates'))
+attr(`PEER_calcBound`, 'returnType') = 'numeric'
+attr(`PEER_calcBound`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_calcBound`) = c("SWIGFunction", class('PEER_calcBound'))
 
-# Start of VBFA_getPhenoMean
+# Start of PEER_logprob
 
-`VBFA_getPhenoMean` = function(self)
+`PEER_logprob` = function(self, .copy = FALSE)
 {
-  ;.Call('R_swig_VBFA_getPhenoMean', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_logprob', self, as.logical(.copy), PACKAGE='peer');
   
 }
 
-attr(`VBFA_getPhenoMean`, 'returnType') = 'void'
-attr(`VBFA_getPhenoMean`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getPhenoMean`) = c("SWIGFunction", class('VBFA_getPhenoMean'))
+attr(`PEER_logprob`, 'returnType') = 'numeric'
+attr(`PEER_logprob`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_logprob`) = c("SWIGFunction", class('PEER_logprob'))
 
-# Start of VBFA_getPhenoVar
+# Start of PEER_update
 
-`VBFA_getPhenoVar` = function(self)
+`PEER_update` = function(self)
 {
-  ;.Call('R_swig_VBFA_getPhenoVar', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_update', self, PACKAGE='peer');
   
 }
 
-attr(`VBFA_getPhenoVar`, 'returnType') = 'void'
-attr(`VBFA_getPhenoVar`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getPhenoVar`) = c("SWIGFunction", class('VBFA_getPhenoVar'))
+attr(`PEER_update`, 'returnType') = 'void'
+attr(`PEER_update`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_update`) = c("SWIGFunction", class('PEER_update'))
 
-# Start of VBFA_getCovariates
+# Start of PEER_setPhenoMean
 
-`VBFA_getCovariates` = function(self)
+`PEER_setPhenoMean` = function(self, matrix)
 {
-  ;.Call('R_swig_VBFA_getCovariates', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPhenoMean', self, matrix, PACKAGE='peer');
   
 }
 
-attr(`VBFA_getCovariates`, 'returnType') = 'void'
-attr(`VBFA_getCovariates`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getCovariates`) = c("SWIGFunction", class('VBFA_getCovariates'))
+attr(`PEER_setPhenoMean`, 'returnType') = 'void'
+attr(`PEER_setPhenoMean`, "inputTypes") = c('_p_PEER__cSPARSEFA', '_p_float64_t')
+class(`PEER_setPhenoMean`) = c("SWIGFunction", class('PEER_setPhenoMean'))
 
-# Start of VBFA_getX
+# Start of PEER_setPhenoVar
 
-`VBFA_getX` = function(self)
+`PEER_setPhenoVar` = function(self, matrix)
 {
-  ;.Call('R_swig_VBFA_getX', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setPhenoVar', self, matrix, PACKAGE='peer');
   
 }
 
-attr(`VBFA_getX`, 'returnType') = 'void'
-attr(`VBFA_getX`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getX`) = c("SWIGFunction", class('VBFA_getX'))
+attr(`PEER_setPhenoVar`, 'returnType') = 'void'
+attr(`PEER_setPhenoVar`, "inputTypes") = c('_p_PEER__cSPARSEFA', '_p_float64_t')
+class(`PEER_setPhenoVar`) = c("SWIGFunction", class('PEER_setPhenoVar'))
 
-# Start of VBFA_getW
+# Start of PEER_setCovariates
 
-`VBFA_getW` = function(self)
+`PEER_setCovariates` = function(self, matrix)
 {
-  ;.Call('R_swig_VBFA_getW', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_setCovariates', self, matrix, PACKAGE='peer');
   
 }
 
-attr(`VBFA_getW`, 'returnType') = 'void'
-attr(`VBFA_getW`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getW`) = c("SWIGFunction", class('VBFA_getW'))
+attr(`PEER_setCovariates`, 'returnType') = 'void'
+attr(`PEER_setCovariates`, "inputTypes") = c('_p_PEER__cSPARSEFA', '_p_float64_t')
+class(`PEER_setCovariates`) = c("SWIGFunction", class('PEER_setCovariates'))
 
-# Start of VBFA_getEps
+# Start of PEER_getPhenoMean
 
-`VBFA_getEps` = function(self)
+`PEER_getPhenoMean` = function(self)
 {
-  ;.Call('R_swig_VBFA_getEps', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_getPhenoMean', self, PACKAGE='peer');
   
 }
 
-attr(`VBFA_getEps`, 'returnType') = 'void'
-attr(`VBFA_getEps`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getEps`) = c("SWIGFunction", class('VBFA_getEps'))
+attr(`PEER_getPhenoMean`, 'returnType') = 'void'
+attr(`PEER_getPhenoMean`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getPhenoMean`) = c("SWIGFunction", class('PEER_getPhenoMean'))
 
-# Start of VBFA_getAlpha
+# Start of PEER_getPhenoVar
 
-`VBFA_getAlpha` = function(self)
+`PEER_getPhenoVar` = function(self)
 {
-  ;.Call('R_swig_VBFA_getAlpha', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_getPhenoVar', self, PACKAGE='peer');
   
 }
 
-attr(`VBFA_getAlpha`, 'returnType') = 'void'
-attr(`VBFA_getAlpha`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getAlpha`) = c("SWIGFunction", class('VBFA_getAlpha'))
+attr(`PEER_getPhenoVar`, 'returnType') = 'void'
+attr(`PEER_getPhenoVar`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getPhenoVar`) = c("SWIGFunction", class('PEER_getPhenoVar'))
 
-# Start of VBFA_getResiduals
+# Start of PEER_getCovariates
 
-`VBFA_getResiduals` = function(self)
+`PEER_getCovariates` = function(self)
 {
-  ;.Call('R_swig_VBFA_getResiduals', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_getCovariates', self, PACKAGE='peer');
   
 }
 
-attr(`VBFA_getResiduals`, 'returnType') = 'void'
-attr(`VBFA_getResiduals`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`VBFA_getResiduals`) = c("SWIGFunction", class('VBFA_getResiduals'))
+attr(`PEER_getCovariates`, 'returnType') = 'void'
+attr(`PEER_getCovariates`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getCovariates`) = c("SWIGFunction", class('PEER_getCovariates'))
 
-# Start of delete_VBFA
+# Start of PEER_getX
 
-`delete_VBFA` = function(self)
+`PEER_getX` = function(self)
 {
-  ;.Call('R_swig_delete_VBFA', self, PACKAGE='peer');
+  ;.Call('R_swig_PEER_getX', self, PACKAGE='peer');
   
 }
 
-attr(`delete_VBFA`, 'returnType') = 'void'
-attr(`delete_VBFA`, "inputTypes") = c('_p_PEER__cVBFA')
-class(`delete_VBFA`) = c("SWIGFunction", class('delete_VBFA'))
+attr(`PEER_getX`, 'returnType') = 'void'
+attr(`PEER_getX`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getX`) = c("SWIGFunction", class('PEER_getX'))
 
-# Start of accessor method for PEER::cVBFA
-setMethod('$', '_p_PEER__cVBFA', function(x, name)
+# Start of PEER_getW
+
+`PEER_getW` = function(self)
+{
+  ;.Call('R_swig_PEER_getW', self, PACKAGE='peer');
+  
+}
+
+attr(`PEER_getW`, 'returnType') = 'void'
+attr(`PEER_getW`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getW`) = c("SWIGFunction", class('PEER_getW'))
+
+# Start of PEER_getEps
+
+`PEER_getEps` = function(self)
+{
+  ;.Call('R_swig_PEER_getEps', self, PACKAGE='peer');
+  
+}
+
+attr(`PEER_getEps`, 'returnType') = 'void'
+attr(`PEER_getEps`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getEps`) = c("SWIGFunction", class('PEER_getEps'))
+
+# Start of PEER_getAlpha
+
+`PEER_getAlpha` = function(self)
+{
+  ;.Call('R_swig_PEER_getAlpha', self, PACKAGE='peer');
+  
+}
+
+attr(`PEER_getAlpha`, 'returnType') = 'void'
+attr(`PEER_getAlpha`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getAlpha`) = c("SWIGFunction", class('PEER_getAlpha'))
+
+# Start of PEER_getResiduals
+
+`PEER_getResiduals` = function(self)
+{
+  ;.Call('R_swig_PEER_getResiduals', self, PACKAGE='peer');
+  
+}
+
+attr(`PEER_getResiduals`, 'returnType') = 'void'
+attr(`PEER_getResiduals`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getResiduals`) = c("SWIGFunction", class('PEER_getResiduals'))
+
+# Start of PEER_init_net_sparse
+
+`PEER_init_net_sparse` = function(self)
+{
+  ;.Call('R_swig_PEER_init_net_sparse', self, PACKAGE='peer');
+  
+}
+
+attr(`PEER_init_net_sparse`, 'returnType') = 'void'
+attr(`PEER_init_net_sparse`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_init_net_sparse`) = c("SWIGFunction", class('PEER_init_net_sparse'))
+
+# Start of accessor method for PEER::cSPARSEFA
+setMethod('$', '_p_PEER__cSPARSEFA', function(x, name)
 
 {
-  accessorFuns = list('W' = VBFA_W_get, 'X' = VBFA_X_get, 'Eps' = VBFA_Eps_get, 'Alpha' = VBFA_Alpha_get, 'pheno' = VBFA_pheno_get, 'getNj' = VBFA_getNj, 'getNp' = VBFA_getNp, 'getNk' = VBFA_getNk, 'getNc' = VBFA_getNc, 'getNmax_iterations' = VBFA_getNmax_iterations, 'getTolerance' = VBFA_getTolerance, 'getAdd_mean' = VBFA_getAdd_mean, 'setNk' = VBFA_setNk, 'setAdd_mean' = VBFA_setAdd_mean, 'setNmax_iterations' = VBFA_setNmax_iterations, 'setTolerance' = VBFA_setTolerance, 'setPriorAlpha' = VBFA_setPriorAlpha, 'setPriorEps' = VBFA_setPriorEps, 'init_net' = VBFA_init_net, 'calcBound' = VBFA_calcBound, 'logprob' = VBFA_logprob, 'update' = VBFA_update, 'setPhenoMean' = VBFA_setPhenoMean, 'setPhenoVar' = VBFA_setPhenoVar, 'setCovariates' = VBFA_setCovariates, 'getPhenoMean' = VBFA_getPhenoMean, 'getPhenoVar' = VBFA_getPhenoVar, 'getCovariates' = VBFA_getCovariates, 'getX' = VBFA_getX, 'getW' = VBFA_getW, 'getEps' = VBFA_getEps, 'getAlpha' = VBFA_getAlpha, 'getResiduals' = VBFA_getResiduals);
-  vaccessors = c('W', 'X', 'Eps', 'Alpha', 'pheno');
+  accessorFuns = list('setSigmaOff' = PEER_setSigmaOff, 'getSigmaOff' = PEER_getSigmaOff, 'setSparsityPrior' = PEER_setSparsityPrior, 'getSparsityPrior' = PEER_getSparsityPrior, 'getZ' = PEER_getZ, 'setNk' = PEER_setNk, 'setAdd_mean' = PEER_setAdd_mean, 'setNmax_iterations' = PEER_setNmax_iterations, 'setTolerance' = PEER_setTolerance, 'setVarTolerance' = PEER_setVarTolerance, 'setPriorAlphaA' = PEER_setPriorAlphaA, 'setPriorAlphaB' = PEER_setPriorAlphaB, 'setPriorEpsA' = PEER_setPriorEpsA, 'setPriorEpsB' = PEER_setPriorEpsB, 'setPriorAlpha' = PEER_setPriorAlpha, 'setPriorEps' = PEER_setPriorEps, 'init_net' = PEER_init_net, 'calcBound' = PEER_calcBound, 'logprob' = PEER_logprob, 'update' = PEER_update, 'setPhenoMean' = PEER_setPhenoMean, 'setPhenoVar' = PEER_setPhenoVar, 'setCovariates' = PEER_setCovariates, 'getPhenoMean' = PEER_getPhenoMean, 'getPhenoVar' = PEER_getPhenoVar, 'getCovariates' = PEER_getCovariates, 'getX' = PEER_getX, 'getW' = PEER_getW, 'getEps' = PEER_getEps, 'getAlpha' = PEER_getAlpha, 'getResiduals' = PEER_getResiduals, 'init_net_sparse' = PEER_init_net_sparse);
   ;        idx = pmatch(name, names(accessorFuns));
   if(is.na(idx)) 
   return(callNextMethod(x, name));
   f = accessorFuns[[idx]];
   formals(f)[[1]] = x;
-  if (is.na(match(name, vaccessors))) f else f(x);
+  f;
 }
 
 
 );
-# end of accessor method for PEER::cVBFA
-# Start of accessor method for PEER::cVBFA
-setMethod('$<-', '_p_PEER__cVBFA', function(x, name, value)
-
-{
-  accessorFuns = list('W' = VBFA_W_set, 'X' = VBFA_X_set, 'Eps' = VBFA_Eps_set, 'Alpha' = VBFA_Alpha_set, 'pheno' = VBFA_pheno_set);
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name, value));
-  f = accessorFuns[[idx]];
-  f(x, value);
-  x;
-}
-
-
-);
-setMethod('[[<-', c('_p_PEER__cVBFA', 'character'),function(x, i, j, ..., value)
-
-{
-  name = i;
-  accessorFuns = list('W' = VBFA_W_set, 'X' = VBFA_X_set, 'Eps' = VBFA_Eps_set, 'Alpha' = VBFA_Alpha_set, 'pheno' = VBFA_pheno_set);
-  ;        idx = pmatch(name, names(accessorFuns));
-  if(is.na(idx)) 
-  return(callNextMethod(x, name, value));
-  f = accessorFuns[[idx]];
-  f(x, value);
-  x;
-}
-
-
-);
-# end of accessor method for PEER::cVBFA
-setMethod('delete', '_p_PEER__cVBFA', function(obj) {delete_PEER__cVBFA(obj)})
+# end of accessor method for PEER::cSPARSEFA
+setMethod('delete', '_p_PEER__cSPARSEFA', function(obj) {delete_PEER__cSPARSEFA(obj)})
 

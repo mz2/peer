@@ -5,32 +5,32 @@ y = read.csv("expression.csv",header=FALSE)
 Kinf = 20
 Nmax_iterations = 100
 
-vb = VBFA()
+vb = PEER()
 
 #set data and parameters
 #number of factor for learning
-VBFA_setNk(vb,Kinf)
+PEER_setNk(vb,Kinf)
 
 #fit mean effect ?
-VBFA_setPhenoMean(vb,as.matrix(y))
+PEER_setPhenoMean(vb,as.matrix(y))
 
 #set prior settings
 #(these are the default settings of PEER)
-VBFA_setPriorAlpha(vb,0.001,0.1);
-VBFA_setPriorEps(vb,0.1,10.);
-VBFA_setNmax_iterations(vb,Nmax_iterations)
-VBFA_update(vb)
+PEER_setPriorAlpha(vb,0.001,0.1);
+PEER_setPriorEps(vb,0.1,10.);
+PEER_setNmax_iterations(vb,Nmax_iterations)
+PEER_update(vb)
 
 #investigate inferance results
 #factors:
-X = VBFA_getX(vb)
+X = PEER_getX(vb)
 #weights:
-W = VBFA_getW(vb)
+W = PEER_getW(vb)
 #ARD parameters
-Alpha = VBFA_getAlpha(vb)
+Alpha = PEER_getAlpha(vb)
 
 #get corrected dataset:
-Yc = VBFA_getResiduals(vb)
+Yc = PEER_getResiduals(vb)
 
 pdf("r_demo.pdf",width=8,height=8)
 plot(1.0 / Alpha,xlab="Factors", ylab="Factor relevance", main="")

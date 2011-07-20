@@ -22,7 +22,7 @@ vbfa.cpp sparsefa.cpp io.cpp)
 #   ARCHIVE DESTINATION lib
 #   LIBRARY DESTINATION lib)
 
-add_executable(peertool sim.cpp vbfa.cpp main.cpp)
+add_executable(peertool sim.cpp main.cpp)
 target_link_libraries(peertool peerlib alglib csv_parser yaml-cpp)
 
 INSTALL(TARGETS peertool

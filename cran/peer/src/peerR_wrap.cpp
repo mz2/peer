@@ -1105,23 +1105,16 @@ SWIG_R_ConvertPacked(SEXP obj, void *ptr, size_t sz, swig_type_info *ty) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_PEER__cAlphaNode swig_types[0]
-#define SWIGTYPE_p_PEER__cEpsNode swig_types[1]
-#define SWIGTYPE_p_PEER__cEpsNodeSparse swig_types[2]
-#define SWIGTYPE_p_PEER__cPhenoNode swig_types[3]
-#define SWIGTYPE_p_PEER__cSPARSEFA swig_types[4]
-#define SWIGTYPE_p_PEER__cVBFA swig_types[5]
-#define SWIGTYPE_p_PEER__cWNode swig_types[6]
-#define SWIGTYPE_p_PEER__cWNodeSparse swig_types[7]
-#define SWIGTYPE_p_PEER__cXNode swig_types[8]
-#define SWIGTYPE_p_PMatrix swig_types[9]
-#define SWIGTYPE_p_cBayesNet swig_types[10]
-#define SWIGTYPE_p_char swig_types[11]
-#define SWIGTYPE_p_int32_t swig_types[12]
-#define SWIGTYPE_p_intialisation_types swig_types[13]
-#define SWIGTYPE_p_p_float64_t swig_types[14]
-static swig_type_info *swig_types[16];
-static swig_module_info swig_module = {swig_types, 15, 0, 0, 0, 0};
+#define SWIGTYPE_p_PEER__cEpsNodeSparse swig_types[0]
+#define SWIGTYPE_p_PEER__cSPARSEFA swig_types[1]
+#define SWIGTYPE_p_PEER__cWNodeSparse swig_types[2]
+#define SWIGTYPE_p_PMatrix swig_types[3]
+#define SWIGTYPE_p_cBayesNet swig_types[4]
+#define SWIGTYPE_p_char swig_types[5]
+#define SWIGTYPE_p_int32_t swig_types[6]
+#define SWIGTYPE_p_p_float64_t swig_types[7]
+static swig_type_info *swig_types[9];
+static swig_module_info swig_module = {swig_types, 8, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -1325,6 +1318,14 @@ SWIG_AsVal_int (SEXP obj, int *val)
 }
 
 
+SWIGINTERNINLINE  int
+SWIG_AsVal_double (SEXP obj, double *val)
+{
+   if (val) *val = Rf_asReal(obj);
+   return SWIG_OK;
+}
+
+
 SWIGINTERNINLINE SEXP
 SWIG_From_double  (double value)
 {
@@ -1333,14 +1334,6 @@ SWIG_From_double  (double value)
 
 
 #include <float.h>
-
-
-SWIGINTERNINLINE  int
-SWIG_AsVal_double (SEXP obj, double *val)
-{
-   if (val) *val = Rf_asReal(obj);
-   return SWIG_OK;
-}
 
 
 SWIGINTERN int
@@ -1356,13 +1349,6 @@ SWIG_AsVal_float (SEXP obj, float *val)
     }
   }  
   return res;
-}
-
-
-SWIGINTERNINLINE SEXP
-SWIG_From_float  (float value)
-{    
-  return SWIG_From_double  (value);
 }
 
 
@@ -1382,42 +1368,6 @@ SWIG_AsVal_bool (SEXP obj, bool *val)
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-SWIGEXPORT SEXP
-R_swig_VERBOSE_set ( SEXP s_VERBOSE)
-{
-  int arg1 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  arg1 = static_cast< int >(INTEGER(s_VERBOSE)[0]);
-  VERBOSE = arg1;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VERBOSE_get ( SEXP s_swig_copy)
-{
-  int result;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  result = (int)VERBOSE;
-  r_ans = Rf_ScalarInteger(result);
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
 
 SWIGEXPORT SEXP
 R_swig_getVerbose ( SEXP s_swig_copy)
@@ -1447,4456 +1397,6 @@ R_swig_setVerbose ( SEXP verbose)
   arg1 = static_cast< int >(INTEGER(verbose)[0]);
   PEER::setVerbose(arg1);
   r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_logdet ( SEXP m, SEXP s_swig_copy)
-{
-  double result;
-  PMatrix arg1 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  {
-    res1 = SWIG_R_ConvertPtr(m, &argp1, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "logdet" "', argument " "1"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "logdet" "', argument " "1"" of type '" "PMatrix""'");
-    } else {
-      arg1 = *(reinterpret_cast< PMatrix * >(argp1));
-    }
-  }
-  result = (double)PEER::logdet(arg1);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_E2S_set ( SEXP self, SEXP s_E2S)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_E2S_set" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_E2S, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cWNode_E2S_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cWNode_E2S_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->E2S = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_E2S_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_E2S_get" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  result =  ((arg1)->E2S);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_Xprec_set ( SEXP self, SEXP s_Xprec)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_Xprec_set" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_Xprec, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cWNode_Xprec_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cWNode_Xprec_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->Xprec = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_Xprec_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_Xprec_get" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  result =  ((arg1)->Xprec);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_A_last_set ( SEXP self, SEXP s_A_last)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_A_last_set" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_A_last, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cWNode_A_last_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cWNode_A_last_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->A_last = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_A_last_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_A_last_get" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  result =  ((arg1)->A_last);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_E_last_set ( SEXP self, SEXP s_E_last)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_E_last_set" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_E_last, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cWNode_E_last_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cWNode_E_last_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->E_last = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_E_last_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_E_last_get" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  result =  ((arg1)->E_last);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_XE2S_last_set ( SEXP self, SEXP s_XE2S_last)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_XE2S_last_set" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_XE2S_last, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cWNode_XE2S_last_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cWNode_XE2S_last_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->XE2S_last = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_XE2S_last_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_XE2S_last_get" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  result =  ((arg1)->XE2S_last);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_lndetcovS_set ( SEXP self, SEXP s_lndetcovS)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  float arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_lndetcovS_set" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  arg2 = static_cast< float >(REAL(s_lndetcovS)[0]);
-  if (arg1) (arg1)->lndetcovS = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_lndetcovS_get ( SEXP self, SEXP s_swig_copy)
-{
-  float result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_lndetcovS_get" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  result = (float) ((arg1)->lndetcovS);
-  r_ans = SWIG_From_float(static_cast< float >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cWNode__SWIG_0 ( )
-{
-  PEER::cWNode *result = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  result = (PEER::cWNode *)new PEER::cWNode();
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cWNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cWNode__SWIG_1 ( SEXP E1)
-{
-  PEER::cWNode *result = 0 ;
-  PMatrix arg1 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  {
-    res1 = SWIG_R_ConvertPtr(E1, &argp1, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_cWNode" "', argument " "1"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cWNode" "', argument " "1"" of type '" "PMatrix""'");
-    } else {
-      arg1 = *(reinterpret_cast< PMatrix * >(argp1));
-    }
-  }
-  result = (PEER::cWNode *)new PEER::cWNode(arg1);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cWNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_update ( SEXP self, SEXP net)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  cBayesNet *arg2 = (cBayesNet *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_update" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  res2 = SWIG_R_ConvertPtr(net, &argp2, SWIGTYPE_p_cBayesNet, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cWNode_update" "', argument " "2"" of type '" "cBayesNet *""'"); 
-  }
-  arg2 = reinterpret_cast< cBayesNet * >(argp2);
-  (arg1)->update(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_calcBound ( SEXP self, SEXP net, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  cBayesNet *arg2 = (cBayesNet *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_calcBound" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  res2 = SWIG_R_ConvertPtr(net, &argp2, SWIGTYPE_p_cBayesNet, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cWNode_calcBound" "', argument " "2"" of type '" "cBayesNet *""'"); 
-  }
-  arg2 = reinterpret_cast< cBayesNet * >(argp2);
-  result = (double)(arg1)->calcBound(arg2);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_entropy ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_entropy" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  result = (double)(arg1)->entropy();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cWNode_getE1 ( SEXP self)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cWNode_getE1" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  (arg1)->getE1(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_delete_cWNode ( SEXP self)
-{
-  PEER::cWNode *arg1 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cWNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_cWNode" "', argument " "1"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cWNode * >(argp1);
-  delete arg1;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  R_ClearExternalPtr(self);
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_E2S_set ( SEXP self, SEXP s_E2S)
-{
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_E2S_set" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_E2S, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cXNode_E2S_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cXNode_E2S_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->E2S = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_E2S_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_E2S_get" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  result =  ((arg1)->E2S);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_cov_set ( SEXP self, SEXP s_cov)
-{
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_cov_set" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_cov, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cXNode_cov_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cXNode_cov_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->cov = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_cov_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_cov_get" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  result =  ((arg1)->cov);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_prior_offset_set ( SEXP self, SEXP s_prior_offset)
-{
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_prior_offset_set" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_prior_offset, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cXNode_prior_offset_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cXNode_prior_offset_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->prior_offset = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_prior_offset_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_prior_offset_get" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  result =  ((arg1)->prior_offset);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_prior_prec_set ( SEXP self, SEXP s_prior_prec)
-{
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_prior_prec_set" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_prior_prec, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cXNode_prior_prec_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cXNode_prior_prec_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->prior_prec = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_prior_prec_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_prior_prec_get" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  result =  ((arg1)->prior_prec);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cXNode__SWIG_0 ( )
-{
-  PEER::cXNode *result = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  result = (PEER::cXNode *)new PEER::cXNode();
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cXNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cXNode__SWIG_1 ( SEXP E1)
-{
-  PEER::cXNode *result = 0 ;
-  PMatrix arg1 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  {
-    res1 = SWIG_R_ConvertPtr(E1, &argp1, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_cXNode" "', argument " "1"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cXNode" "', argument " "1"" of type '" "PMatrix""'");
-    } else {
-      arg1 = *(reinterpret_cast< PMatrix * >(argp1));
-    }
-  }
-  result = (PEER::cXNode *)new PEER::cXNode(arg1);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cXNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cXNode__SWIG_2 ( SEXP E1, SEXP prior_offset, SEXP prior_prec)
-{
-  PEER::cXNode *result = 0 ;
-  PMatrix arg1 ;
-  PMatrix arg2 ;
-  PMatrix arg3 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  void *argp3 ;
-  int res3 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  {
-    res1 = SWIG_R_ConvertPtr(E1, &argp1, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_cXNode" "', argument " "1"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cXNode" "', argument " "1"" of type '" "PMatrix""'");
-    } else {
-      arg1 = *(reinterpret_cast< PMatrix * >(argp1));
-    }
-  }
-  {
-    res2 = SWIG_R_ConvertPtr(prior_offset, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_cXNode" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cXNode" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  {
-    res3 = SWIG_R_ConvertPtr(prior_prec, &argp3, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_cXNode" "', argument " "3"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cXNode" "', argument " "3"" of type '" "PMatrix""'");
-    } else {
-      arg3 = *(reinterpret_cast< PMatrix * >(argp3));
-    }
-  }
-  result = (PEER::cXNode *)new PEER::cXNode(arg1,arg2,arg3);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cXNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_update ( SEXP self, SEXP net)
-{
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  cBayesNet *arg2 = (cBayesNet *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_update" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  res2 = SWIG_R_ConvertPtr(net, &argp2, SWIGTYPE_p_cBayesNet, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cXNode_update" "', argument " "2"" of type '" "cBayesNet *""'"); 
-  }
-  arg2 = reinterpret_cast< cBayesNet * >(argp2);
-  (arg1)->update(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_calcBound ( SEXP self, SEXP net, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  cBayesNet *arg2 = (cBayesNet *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_calcBound" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  res2 = SWIG_R_ConvertPtr(net, &argp2, SWIGTYPE_p_cBayesNet, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cXNode_calcBound" "', argument " "2"" of type '" "cBayesNet *""'"); 
-  }
-  arg2 = reinterpret_cast< cBayesNet * >(argp2);
-  result = (double)(arg1)->calcBound(arg2);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_entropy ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_entropy" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  result = (double)(arg1)->entropy();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cXNode_getE1 ( SEXP self)
-{
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cXNode_getE1" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  (arg1)->getE1(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_delete_cXNode ( SEXP self)
-{
-  PEER::cXNode *arg1 = (PEER::cXNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cXNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_cXNode" "', argument " "1"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cXNode * >(argp1);
-  delete arg1;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  R_ClearExternalPtr(self);
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cAlphaNode__SWIG_0 ( )
-{
-  PEER::cAlphaNode *result = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  result = (PEER::cAlphaNode *)new PEER::cAlphaNode();
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cAlphaNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cAlphaNode__SWIG_1 ( SEXP dim, SEXP pa, SEXP pb, SEXP E1)
-{
-  PEER::cAlphaNode *result = 0 ;
-  int arg1 ;
-  float arg2 ;
-  float arg3 ;
-  PMatrix arg4 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  arg1 = static_cast< int >(INTEGER(dim)[0]);
-  arg2 = static_cast< float >(REAL(pa)[0]);
-  arg3 = static_cast< float >(REAL(pb)[0]);
-  {
-    res4 = SWIG_R_ConvertPtr(E1, &argp4, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_cAlphaNode" "', argument " "4"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cAlphaNode" "', argument " "4"" of type '" "PMatrix""'");
-    } else {
-      arg4 = *(reinterpret_cast< PMatrix * >(argp4));
-    }
-  }
-  result = (PEER::cAlphaNode *)new PEER::cAlphaNode(arg1,arg2,arg3,arg4);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cAlphaNode, R_SWIG_OWNER |  0 );
-  
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cAlphaNode_update ( SEXP self, SEXP net)
-{
-  PEER::cAlphaNode *arg1 = (PEER::cAlphaNode *) 0 ;
-  cBayesNet *arg2 = (cBayesNet *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cAlphaNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cAlphaNode_update" "', argument " "1"" of type '" "PEER::cAlphaNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cAlphaNode * >(argp1);
-  res2 = SWIG_R_ConvertPtr(net, &argp2, SWIGTYPE_p_cBayesNet, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cAlphaNode_update" "', argument " "2"" of type '" "cBayesNet *""'"); 
-  }
-  arg2 = reinterpret_cast< cBayesNet * >(argp2);
-  (arg1)->update(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cAlphaNode_getE1 ( SEXP self)
-{
-  PEER::cAlphaNode *arg1 = (PEER::cAlphaNode *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cAlphaNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cAlphaNode_getE1" "', argument " "1"" of type '" "PEER::cAlphaNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cAlphaNode * >(argp1);
-  (arg1)->getE1(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_delete_cAlphaNode ( SEXP self)
-{
-  PEER::cAlphaNode *arg1 = (PEER::cAlphaNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cAlphaNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_cAlphaNode" "', argument " "1"" of type '" "PEER::cAlphaNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cAlphaNode * >(argp1);
-  delete arg1;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  R_ClearExternalPtr(self);
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cEpsNode__SWIG_0 ( )
-{
-  PEER::cEpsNode *result = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  result = (PEER::cEpsNode *)new PEER::cEpsNode();
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cEpsNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cEpsNode__SWIG_1 ( SEXP dim, SEXP pa, SEXP pb, SEXP E1)
-{
-  PEER::cEpsNode *result = 0 ;
-  int arg1 ;
-  float arg2 ;
-  float arg3 ;
-  PMatrix arg4 ;
-  void *argp4 ;
-  int res4 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  arg1 = static_cast< int >(INTEGER(dim)[0]);
-  arg2 = static_cast< float >(REAL(pa)[0]);
-  arg3 = static_cast< float >(REAL(pb)[0]);
-  {
-    res4 = SWIG_R_ConvertPtr(E1, &argp4, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_cEpsNode" "', argument " "4"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp4) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cEpsNode" "', argument " "4"" of type '" "PMatrix""'");
-    } else {
-      arg4 = *(reinterpret_cast< PMatrix * >(argp4));
-    }
-  }
-  result = (PEER::cEpsNode *)new PEER::cEpsNode(arg1,arg2,arg3,arg4);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cEpsNode, R_SWIG_OWNER |  0 );
-  
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cEpsNode_update ( SEXP self, SEXP net)
-{
-  PEER::cEpsNode *arg1 = (PEER::cEpsNode *) 0 ;
-  cBayesNet *arg2 = (cBayesNet *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cEpsNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cEpsNode_update" "', argument " "1"" of type '" "PEER::cEpsNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cEpsNode * >(argp1);
-  res2 = SWIG_R_ConvertPtr(net, &argp2, SWIGTYPE_p_cBayesNet, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cEpsNode_update" "', argument " "2"" of type '" "cBayesNet *""'"); 
-  }
-  arg2 = reinterpret_cast< cBayesNet * >(argp2);
-  (arg1)->update(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cEpsNode_getE1 ( SEXP self)
-{
-  PEER::cEpsNode *arg1 = (PEER::cEpsNode *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cEpsNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cEpsNode_getE1" "', argument " "1"" of type '" "PEER::cEpsNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cEpsNode * >(argp1);
-  (arg1)->getE1(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_delete_cEpsNode ( SEXP self)
-{
-  PEER::cEpsNode *arg1 = (PEER::cEpsNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cEpsNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_cEpsNode" "', argument " "1"" of type '" "PEER::cEpsNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cEpsNode * >(argp1);
-  delete arg1;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  R_ClearExternalPtr(self);
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cPhenoNode_E1_set ( SEXP self, SEXP s_E1)
-{
-  PEER::cPhenoNode *arg1 = (PEER::cPhenoNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cPhenoNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cPhenoNode_E1_set" "', argument " "1"" of type '" "PEER::cPhenoNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cPhenoNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_E1, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cPhenoNode_E1_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cPhenoNode_E1_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->E1 = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cPhenoNode_E1_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cPhenoNode *arg1 = (PEER::cPhenoNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cPhenoNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cPhenoNode_E1_get" "', argument " "1"" of type '" "PEER::cPhenoNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cPhenoNode * >(argp1);
-  result =  ((arg1)->E1);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cPhenoNode_E2_set ( SEXP self, SEXP s_E2)
-{
-  PEER::cPhenoNode *arg1 = (PEER::cPhenoNode *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cPhenoNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cPhenoNode_E2_set" "', argument " "1"" of type '" "PEER::cPhenoNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cPhenoNode * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_E2, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "cPhenoNode_E2_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "cPhenoNode_E2_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->E2 = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cPhenoNode_E2_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cPhenoNode *arg1 = (PEER::cPhenoNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cPhenoNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cPhenoNode_E2_get" "', argument " "1"" of type '" "PEER::cPhenoNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cPhenoNode * >(argp1);
-  result =  ((arg1)->E2);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cPhenoNode__SWIG_0 ( )
-{
-  PEER::cPhenoNode *result = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  result = (PEER::cPhenoNode *)new PEER::cPhenoNode();
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cPhenoNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_cPhenoNode__SWIG_1 ( SEXP pheno_mean, SEXP pheno_var)
-{
-  PEER::cPhenoNode *result = 0 ;
-  PMatrix arg1 ;
-  PMatrix arg2 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  {
-    res1 = SWIG_R_ConvertPtr(pheno_mean, &argp1, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_cPhenoNode" "', argument " "1"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp1) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cPhenoNode" "', argument " "1"" of type '" "PMatrix""'");
-    } else {
-      arg1 = *(reinterpret_cast< PMatrix * >(argp1));
-    }
-  }
-  {
-    res2 = SWIG_R_ConvertPtr(pheno_var, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_cPhenoNode" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_cPhenoNode" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  result = (PEER::cPhenoNode *)new PEER::cPhenoNode(arg1,arg2);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cPhenoNode, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_cPhenoNode_getE1 ( SEXP self)
-{
-  PEER::cPhenoNode *arg1 = (PEER::cPhenoNode *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cPhenoNode, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "cPhenoNode_getE1" "', argument " "1"" of type '" "PEER::cPhenoNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cPhenoNode * >(argp1);
-  (arg1)->getE1(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_delete_cPhenoNode ( SEXP self)
-{
-  PEER::cPhenoNode *arg1 = (PEER::cPhenoNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cPhenoNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_cPhenoNode" "', argument " "1"" of type '" "PEER::cPhenoNode *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cPhenoNode * >(argp1);
-  delete arg1;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  R_ClearExternalPtr(self);
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nj_set ( SEXP self, SEXP s_Nj)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nj_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< int >(INTEGER(s_Nj)[0]);
-  if (arg1) (arg1)->Nj = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nj_get ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nj_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int) ((arg1)->Nj);
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Np_set ( SEXP self, SEXP s_Np)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Np_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< int >(INTEGER(s_Np)[0]);
-  if (arg1) (arg1)->Np = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Np_get ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Np_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int) ((arg1)->Np);
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nk_set ( SEXP self, SEXP s_Nk)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nk_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< int >(INTEGER(s_Nk)[0]);
-  if (arg1) (arg1)->Nk = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nk_get ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nk_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int) ((arg1)->Nk);
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nc_set ( SEXP self, SEXP s_Nc)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nc_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< int >(INTEGER(s_Nc)[0]);
-  if (arg1) (arg1)->Nc = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nc_get ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nc_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int) ((arg1)->Nc);
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Alpha_pa_set ( SEXP self, SEXP s_Alpha_pa)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Alpha_pa_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(s_Alpha_pa)[0]);
-  if (arg1) (arg1)->Alpha_pa = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Alpha_pa_get ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Alpha_pa_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double) ((arg1)->Alpha_pa);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Alpha_pb_set ( SEXP self, SEXP s_Alpha_pb)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Alpha_pb_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(s_Alpha_pb)[0]);
-  if (arg1) (arg1)->Alpha_pb = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Alpha_pb_get ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Alpha_pb_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double) ((arg1)->Alpha_pb);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Eps_pa_set ( SEXP self, SEXP s_Eps_pa)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Eps_pa_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(s_Eps_pa)[0]);
-  if (arg1) (arg1)->Eps_pa = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Eps_pa_get ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Eps_pa_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double) ((arg1)->Eps_pa);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Eps_pb_set ( SEXP self, SEXP s_Eps_pb)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Eps_pb_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(s_Eps_pb)[0]);
-  if (arg1) (arg1)->Eps_pb = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Eps_pb_get ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Eps_pb_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double) ((arg1)->Eps_pb);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nmax_iterations_set ( SEXP self, SEXP s_Nmax_iterations)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nmax_iterations_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< int >(INTEGER(s_Nmax_iterations)[0]);
-  if (arg1) (arg1)->Nmax_iterations = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Nmax_iterations_get ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Nmax_iterations_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int) ((arg1)->Nmax_iterations);
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_tolerance_set ( SEXP self, SEXP s_tolerance)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_tolerance_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(s_tolerance)[0]);
-  if (arg1) (arg1)->tolerance = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_tolerance_get ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_tolerance_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double) ((arg1)->tolerance);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_var_tolerance_set ( SEXP self, SEXP s_var_tolerance)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_var_tolerance_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(s_var_tolerance)[0]);
-  if (arg1) (arg1)->var_tolerance = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_var_tolerance_get ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_var_tolerance_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double) ((arg1)->var_tolerance);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_covariate_prec_set ( SEXP self, SEXP s_covariate_prec)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_covariate_prec_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(s_covariate_prec)[0]);
-  if (arg1) (arg1)->covariate_prec = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_covariate_prec_get ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_covariate_prec_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double) ((arg1)->covariate_prec);
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_is_initialized_set ( SEXP self, SEXP s_is_initialized)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_is_initialized_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = LOGICAL(s_is_initialized)[0] ? true : false;
-  if (arg1) (arg1)->is_initialized = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_is_initialized_get ( SEXP self, SEXP s_swig_copy)
-{
-  bool result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_is_initialized_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (bool) ((arg1)->is_initialized);
-  r_ans = Rf_ScalarLogical(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_add_mean_set ( SEXP self, SEXP s_add_mean)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_add_mean_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = LOGICAL(s_add_mean)[0] ? true : false;
-  if (arg1) (arg1)->add_mean = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_add_mean_get ( SEXP self, SEXP s_swig_copy)
-{
-  bool result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_add_mean_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (bool) ((arg1)->add_mean);
-  r_ans = Rf_ScalarLogical(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_initialisation_set ( SEXP self, SEXP s_initialisation)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  intialisation_types arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_initialisation_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_initialisation, &argp2, SWIGTYPE_p_intialisation_types,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_initialisation_set" "', argument " "2"" of type '" "intialisation_types""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VBFA_initialisation_set" "', argument " "2"" of type '" "intialisation_types""'");
-    } else {
-      arg2 = *(reinterpret_cast< intialisation_types * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->initialisation = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_initialisation_get ( SEXP self, SEXP s_swig_copy)
-{
-  intialisation_types result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_initialisation_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result =  ((arg1)->initialisation);
-  r_ans = SWIG_R_NewPointerObj((new intialisation_types(static_cast< const intialisation_types& >(result))), SWIGTYPE_p_intialisation_types, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_pheno_mean_set ( SEXP self, SEXP s_pheno_mean)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_pheno_mean_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_pheno_mean, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_pheno_mean_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VBFA_pheno_mean_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->pheno_mean = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_pheno_mean_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_pheno_mean_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result =  ((arg1)->pheno_mean);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_pheno_var_set ( SEXP self, SEXP s_pheno_var)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_pheno_var_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_pheno_var, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_pheno_var_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VBFA_pheno_var_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->pheno_var = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_pheno_var_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_pheno_var_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result =  ((arg1)->pheno_var);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_covs_set ( SEXP self, SEXP s_covs)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PMatrix arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_covs_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  {
-    res2 = SWIG_R_ConvertPtr(s_covs, &argp2, SWIGTYPE_p_PMatrix,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_covs_set" "', argument " "2"" of type '" "PMatrix""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VBFA_covs_set" "', argument " "2"" of type '" "PMatrix""'");
-    } else {
-      arg2 = *(reinterpret_cast< PMatrix * >(argp2));
-    }
-  }
-  if (arg1) (arg1)->covs = arg2;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_covs_get ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_covs_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result =  ((arg1)->covs);
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_init_params ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_init_params" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->init_params();
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_calc_residuals ( SEXP self, SEXP s_swig_copy)
-{
-  PMatrix result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_calc_residuals" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (arg1)->calc_residuals();
-  r_ans = SWIG_R_NewPointerObj((new PMatrix(static_cast< const PMatrix& >(result))), SWIGTYPE_p_PMatrix, SWIG_POINTER_OWN |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_W_set ( SEXP self, SEXP s_W)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PEER::cWNode *arg2 = (PEER::cWNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_W_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  res2 = SWIG_R_ConvertPtr(s_W, &argp2, SWIGTYPE_p_PEER__cWNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_W_set" "', argument " "2"" of type '" "PEER::cWNode *""'"); 
-  }
-  arg2 = reinterpret_cast< PEER::cWNode * >(argp2);
-  if (arg1) (arg1)->W = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_W_get ( SEXP self)
-{
-  PEER::cWNode *result = 0 ;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_W_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (PEER::cWNode *) ((arg1)->W);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cWNode, R_SWIG_EXTERNAL |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_X_set ( SEXP self, SEXP s_X)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PEER::cXNode *arg2 = (PEER::cXNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_X_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  res2 = SWIG_R_ConvertPtr(s_X, &argp2, SWIGTYPE_p_PEER__cXNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_X_set" "', argument " "2"" of type '" "PEER::cXNode *""'"); 
-  }
-  arg2 = reinterpret_cast< PEER::cXNode * >(argp2);
-  if (arg1) (arg1)->X = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_X_get ( SEXP self)
-{
-  PEER::cXNode *result = 0 ;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_X_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (PEER::cXNode *) ((arg1)->X);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cXNode, R_SWIG_EXTERNAL |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Eps_set ( SEXP self, SEXP s_Eps)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PEER::cEpsNode *arg2 = (PEER::cEpsNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Eps_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  res2 = SWIG_R_ConvertPtr(s_Eps, &argp2, SWIGTYPE_p_PEER__cEpsNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_Eps_set" "', argument " "2"" of type '" "PEER::cEpsNode *""'"); 
-  }
-  arg2 = reinterpret_cast< PEER::cEpsNode * >(argp2);
-  if (arg1) (arg1)->Eps = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Eps_get ( SEXP self)
-{
-  PEER::cEpsNode *result = 0 ;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Eps_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (PEER::cEpsNode *) ((arg1)->Eps);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cEpsNode, R_SWIG_EXTERNAL |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Alpha_set ( SEXP self, SEXP s_Alpha)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PEER::cAlphaNode *arg2 = (PEER::cAlphaNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Alpha_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  res2 = SWIG_R_ConvertPtr(s_Alpha, &argp2, SWIGTYPE_p_PEER__cAlphaNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_Alpha_set" "', argument " "2"" of type '" "PEER::cAlphaNode *""'"); 
-  }
-  arg2 = reinterpret_cast< PEER::cAlphaNode * >(argp2);
-  if (arg1) (arg1)->Alpha = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_Alpha_get ( SEXP self)
-{
-  PEER::cAlphaNode *result = 0 ;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_Alpha_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (PEER::cAlphaNode *) ((arg1)->Alpha);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cAlphaNode, R_SWIG_EXTERNAL |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_pheno_set ( SEXP self, SEXP s_pheno)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  PEER::cPhenoNode *arg2 = (PEER::cPhenoNode *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_pheno_set" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  res2 = SWIG_R_ConvertPtr(s_pheno, &argp2, SWIGTYPE_p_PEER__cPhenoNode, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VBFA_pheno_set" "', argument " "2"" of type '" "PEER::cPhenoNode *""'"); 
-  }
-  arg2 = reinterpret_cast< PEER::cPhenoNode * >(argp2);
-  if (arg1) (arg1)->pheno = arg2;
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_pheno_get ( SEXP self)
-{
-  PEER::cPhenoNode *result = 0 ;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_pheno_get" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (PEER::cPhenoNode *) ((arg1)->pheno);
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cPhenoNode, R_SWIG_EXTERNAL |  0 );
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_new_VBFA ( )
-{
-  PEER::cVBFA *result = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  result = (PEER::cVBFA *)new PEER::cVBFA();
-  r_ans = SWIG_R_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_PEER__cVBFA, R_SWIG_OWNER |  0 );
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_delete_VBFA ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_VBFA" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  delete arg1;
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  R_ClearExternalPtr(self);
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getNj ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getNj" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int)(arg1)->getNj();
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getNp ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getNp" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int)(arg1)->getNp();
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getNk ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getNk" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int)(arg1)->getNk();
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getNc ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getNc" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int)(arg1)->getNc();
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getNmax_iterations ( SEXP self, SEXP s_swig_copy)
-{
-  int result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getNmax_iterations" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (int)(arg1)->getNmax_iterations();
-  r_ans = Rf_ScalarInteger(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getTolerance ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getTolerance" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->getTolerance();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getVarTolerance ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getVarTolerance" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->getVarTolerance();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getAdd_mean ( SEXP self, SEXP s_swig_copy)
-{
-  bool result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getAdd_mean" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (bool)(arg1)->getAdd_mean();
-  r_ans = Rf_ScalarLogical(result);
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getPriorEpsA ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getPriorEpsA" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->getPriorEpsA();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getPriorEpsB ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getPriorEpsB" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->getPriorEpsB();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getPriorAlphaA ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getPriorAlphaA" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->getPriorAlphaA();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getPriorAlphaB ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getPriorAlphaB" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->getPriorAlphaB();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setNk ( SEXP self, SEXP Nk)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setNk" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< int >(INTEGER(Nk)[0]);
-  (arg1)->setNk(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setAdd_mean ( SEXP self, SEXP add_mean)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setAdd_mean" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = LOGICAL(add_mean)[0] ? true : false;
-  (arg1)->setAdd_mean(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setNmax_iterations ( SEXP self, SEXP Nmax_iterations)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setNmax_iterations" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< int >(INTEGER(Nmax_iterations)[0]);
-  (arg1)->setNmax_iterations(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setTolerance ( SEXP self, SEXP tolerance)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setTolerance" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(tolerance)[0]);
-  (arg1)->setTolerance(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setVarTolerance ( SEXP self, SEXP tolerance)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setVarTolerance" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(tolerance)[0]);
-  (arg1)->setVarTolerance(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPriorAlphaA ( SEXP self, SEXP pa)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPriorAlphaA" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(pa)[0]);
-  (arg1)->setPriorAlphaA(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPriorAlphaB ( SEXP self, SEXP pb)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPriorAlphaB" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(pb)[0]);
-  (arg1)->setPriorAlphaB(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPriorEpsA ( SEXP self, SEXP pa)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPriorEpsA" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(pa)[0]);
-  (arg1)->setPriorEpsA(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPriorEpsB ( SEXP self, SEXP pb)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPriorEpsB" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(pb)[0]);
-  (arg1)->setPriorEpsB(arg2);
-  r_ans = R_NilValue;
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPriorAlpha ( SEXP self, SEXP pa, SEXP pb)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPriorAlpha" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(pa)[0]);
-  arg3 = static_cast< double >(REAL(pb)[0]);
-  (arg1)->setPriorAlpha(arg2,arg3);
-  r_ans = R_NilValue;
-  
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPriorEps ( SEXP self, SEXP pa, SEXP pb)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPriorEps" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  arg2 = static_cast< double >(REAL(pa)[0]);
-  arg3 = static_cast< double >(REAL(pb)[0]);
-  (arg1)->setPriorEps(arg2,arg3);
-  r_ans = R_NilValue;
-  
-  
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_init_net ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_init_net" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->init_net();
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_calcBound ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_calcBound" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->calcBound();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_logprob ( SEXP self, SEXP s_swig_copy)
-{
-  double result;
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_logprob" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  result = (double)(arg1)->logprob();
-  r_ans = SWIG_From_double(static_cast< double >(result));
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_update ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_update" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->update();
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPhenoMean ( SEXP self, SEXP matrix)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t *arg2 = (float64_t *) 0 ;
-  int32_t arg3 ;
-  int32_t arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPhenoMean" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  {
-    if( TYPEOF(matrix) != REALSXP)
-    {
-      /*SG_ERROR("Expected Double Matrix as argument %d\n", m_rhs_counter);*/
-      return Rf_ScalarLogical(NA_LOGICAL);
-    }
-    
-    arg2 = (float64_t*) REAL(matrix);
-    arg3 = Rf_nrows(matrix);
-    arg4 = Rf_ncols(matrix);
-  }
-  (arg1)->setPhenoMean(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setPhenoVar ( SEXP self, SEXP matrix)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t *arg2 = (float64_t *) 0 ;
-  int32_t arg3 ;
-  int32_t arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setPhenoVar" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  {
-    if( TYPEOF(matrix) != REALSXP)
-    {
-      /*SG_ERROR("Expected Double Matrix as argument %d\n", m_rhs_counter);*/
-      return Rf_ScalarLogical(NA_LOGICAL);
-    }
-    
-    arg2 = (float64_t*) REAL(matrix);
-    arg3 = Rf_nrows(matrix);
-    arg4 = Rf_ncols(matrix);
-  }
-  (arg1)->setPhenoVar(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_setCovariates ( SEXP self, SEXP matrix)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t *arg2 = (float64_t *) 0 ;
-  int32_t arg3 ;
-  int32_t arg4 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_setCovariates" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  {
-    if( TYPEOF(matrix) != REALSXP)
-    {
-      /*SG_ERROR("Expected Double Matrix as argument %d\n", m_rhs_counter);*/
-      return Rf_ScalarLogical(NA_LOGICAL);
-    }
-    
-    arg2 = (float64_t*) REAL(matrix);
-    arg3 = Rf_nrows(matrix);
-    arg4 = Rf_ncols(matrix);
-  }
-  (arg1)->setCovariates(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getPhenoMean ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getPhenoMean" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getPhenoMean(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getPhenoVar ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getPhenoVar" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getPhenoVar(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getCovariates ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getCovariates" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getCovariates(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getX ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getX" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getX(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getW ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getW" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getW(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getEps ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getEps" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getEps(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getAlpha ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getAlpha" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getAlpha(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
-SWIGEXPORT SEXP
-R_swig_VBFA_getResiduals ( SEXP self)
-{
-  PEER::cVBFA *arg1 = (PEER::cVBFA *) 0 ;
-  float64_t **arg2 = (float64_t **) 0 ;
-  int32_t *arg3 = (int32_t *) 0 ;
-  int32_t *arg4 = (int32_t *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  SEXP R_OutputValues;
-  
-  {
-    arg2 = (float64_t**) malloc(sizeof(float64_t*));
-    arg3 = (int32_t*) malloc(sizeof(int32_t));
-    arg4 = (int32_t*) malloc(sizeof(int32_t));
-  }
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cVBFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VBFA_getResiduals" "', argument " "1"" of type '" "PEER::cVBFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cVBFA * >(argp1);
-  (arg1)->getResiduals(arg2,arg3,arg4);
-  r_ans = R_NilValue;
-  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
-  r_nprotect += 1;
-  r_ans = R_OutputValues;
-  {
-    float64_t* matrix = *arg2;
-    int32_t num_feat = *arg3;
-    int32_t num_vec = *arg4;
-    
-    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
-    
-    for (int32_t i=0; i<num_vec; i++)
-    {
-      for (int32_t j=0; j<num_feat; j++)
-      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
-    }
-    Rf_unprotect(1);
-    free(*arg2); free(arg2); free(arg3); free(arg4);
-  }
   
   vmaxset(r_vmax);
   if(r_nprotect)  Rf_unprotect(r_nprotect);
@@ -6875,6 +2375,345 @@ R_swig_PEER_getZ ( SEXP self)
 
 
 SWIGEXPORT SEXP
+R_swig_PEER_setNk ( SEXP self, SEXP Nk)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setNk" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< int >(INTEGER(Nk)[0]);
+  (arg1)->setNk(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setAdd_mean ( SEXP self, SEXP add_mean)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  bool arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setAdd_mean" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = LOGICAL(add_mean)[0] ? true : false;
+  (arg1)->setAdd_mean(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setNmax_iterations ( SEXP self, SEXP Nmax_iterations)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setNmax_iterations" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< int >(INTEGER(Nmax_iterations)[0]);
+  (arg1)->setNmax_iterations(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setTolerance ( SEXP self, SEXP tolerance)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setTolerance" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(tolerance)[0]);
+  (arg1)->setTolerance(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setVarTolerance ( SEXP self, SEXP tolerance)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setVarTolerance" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(tolerance)[0]);
+  (arg1)->setVarTolerance(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPriorAlphaA ( SEXP self, SEXP pa)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPriorAlphaA" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(pa)[0]);
+  (arg1)->setPriorAlphaA(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPriorAlphaB ( SEXP self, SEXP pb)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPriorAlphaB" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(pb)[0]);
+  (arg1)->setPriorAlphaB(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPriorEpsA ( SEXP self, SEXP pa)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPriorEpsA" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(pa)[0]);
+  (arg1)->setPriorEpsA(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPriorEpsB ( SEXP self, SEXP pb)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPriorEpsB" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(pb)[0]);
+  (arg1)->setPriorEpsB(arg2);
+  r_ans = R_NilValue;
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPriorAlpha ( SEXP self, SEXP pa, SEXP pb)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPriorAlpha" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(pa)[0]);
+  arg3 = static_cast< double >(REAL(pb)[0]);
+  (arg1)->setPriorAlpha(arg2,arg3);
+  r_ans = R_NilValue;
+  
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPriorEps ( SEXP self, SEXP pa, SEXP pb)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPriorEps" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  arg2 = static_cast< double >(REAL(pa)[0]);
+  arg3 = static_cast< double >(REAL(pb)[0]);
+  (arg1)->setPriorEps(arg2,arg3);
+  r_ans = R_NilValue;
+  
+  
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_init_net ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_init_net" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->init_net();
+  r_ans = R_NilValue;
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
 R_swig_PEER_calcBound ( SEXP self, SEXP s_swig_copy)
 {
   double result;
@@ -6927,7 +2766,7 @@ R_swig_PEER_logprob ( SEXP self, SEXP s_swig_copy)
 
 
 SWIGEXPORT SEXP
-R_swig_PEER_init_net ( SEXP self)
+R_swig_PEER_update ( SEXP self)
 {
   PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
   void *argp1 = 0 ;
@@ -6938,11 +2777,544 @@ R_swig_PEER_init_net ( SEXP self)
   
   res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_init_net" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_update" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
   }
   arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
-  (arg1)->init_net();
+  (arg1)->update();
   r_ans = R_NilValue;
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPhenoMean ( SEXP self, SEXP matrix)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t *arg2 = (float64_t *) 0 ;
+  int32_t arg3 ;
+  int32_t arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPhenoMean" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  {
+    if( TYPEOF(matrix) != REALSXP)
+    {
+      /*SG_ERROR("Expected Double Matrix as argument %d\n", m_rhs_counter);*/
+      return Rf_ScalarLogical(NA_LOGICAL);
+    }
+    
+    arg2 = (float64_t*) REAL(matrix);
+    arg3 = Rf_nrows(matrix);
+    arg4 = Rf_ncols(matrix);
+  }
+  (arg1)->setPhenoMean(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setPhenoVar ( SEXP self, SEXP matrix)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t *arg2 = (float64_t *) 0 ;
+  int32_t arg3 ;
+  int32_t arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setPhenoVar" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  {
+    if( TYPEOF(matrix) != REALSXP)
+    {
+      /*SG_ERROR("Expected Double Matrix as argument %d\n", m_rhs_counter);*/
+      return Rf_ScalarLogical(NA_LOGICAL);
+    }
+    
+    arg2 = (float64_t*) REAL(matrix);
+    arg3 = Rf_nrows(matrix);
+    arg4 = Rf_ncols(matrix);
+  }
+  (arg1)->setPhenoVar(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_setCovariates ( SEXP self, SEXP matrix)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t *arg2 = (float64_t *) 0 ;
+  int32_t arg3 ;
+  int32_t arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_setCovariates" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  {
+    if( TYPEOF(matrix) != REALSXP)
+    {
+      /*SG_ERROR("Expected Double Matrix as argument %d\n", m_rhs_counter);*/
+      return Rf_ScalarLogical(NA_LOGICAL);
+    }
+    
+    arg2 = (float64_t*) REAL(matrix);
+    arg3 = Rf_nrows(matrix);
+    arg4 = Rf_ncols(matrix);
+  }
+  (arg1)->setCovariates(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getPhenoMean ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getPhenoMean" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getPhenoMean(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getPhenoVar ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getPhenoVar" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getPhenoVar(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getCovariates ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getCovariates" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getCovariates(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getX ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getX" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getX(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getW ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getW" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getW(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getEps ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getEps" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getEps(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getAlpha ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getAlpha" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getAlpha(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getResiduals ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getResiduals" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getResiduals(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
   
   vmaxset(r_vmax);
   if(r_nprotect)  Rf_unprotect(r_nprotect);
@@ -6976,117 +3348,49 @@ R_swig_PEER_init_net_sparse ( SEXP self)
 }
 
 
-SWIGEXPORT SEXP
-R_swig_PEER_update ( SEXP self)
-{
-  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  unsigned int r_nprotect = 0;
-  SEXP r_ans = R_NilValue ;
-  VMAXTYPE r_vmax = vmaxget() ;
-  
-  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_update" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
-  }
-  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
-  (arg1)->update();
-  r_ans = R_NilValue;
-  
-  vmaxset(r_vmax);
-  if(r_nprotect)  Rf_unprotect(r_nprotect);
-  
-  return r_ans;
-}
-
-
 #ifdef __cplusplus
 }
 #endif
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_PEER__cSPARSEFATo_p_cBayesNet(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((cBayesNet *) (PEER::cVBFA *) ((PEER::cSPARSEFA *) x));
-}
-static void *_p_PEER__cVBFATo_p_cBayesNet(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((cBayesNet *)  ((PEER::cVBFA *) x));
-}
-static void *_p_PEER__cWNodeSparseTo_p_PEER__cWNode(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((PEER::cWNode *)  ((PEER::cWNodeSparse *) x));
-}
-static void *_p_PEER__cSPARSEFATo_p_PEER__cVBFA(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((PEER::cVBFA *)  ((PEER::cSPARSEFA *) x));
-}
-static void *_p_PEER__cEpsNodeSparseTo_p_PEER__cEpsNode(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((PEER::cEpsNode *)  ((PEER::cEpsNodeSparse *) x));
-}
-static swig_type_info _swigt__p_PEER__cAlphaNode = {"_p_PEER__cAlphaNode", "PEER::cAlphaNode *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_PEER__cEpsNode = {"_p_PEER__cEpsNode", "PEER::cEpsNode *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PEER__cEpsNodeSparse = {"_p_PEER__cEpsNodeSparse", "PEER::cEpsNodeSparse *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_PEER__cPhenoNode = {"_p_PEER__cPhenoNode", "PEER::cPhenoNode *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PEER__cSPARSEFA = {"_p_PEER__cSPARSEFA", "PEER::cSPARSEFA *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_PEER__cVBFA = {"_p_PEER__cVBFA", "PEER::cVBFA *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_PEER__cWNode = {"_p_PEER__cWNode", "PEER::cWNode *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PEER__cWNodeSparse = {"_p_PEER__cWNodeSparse", "PEER::cWNodeSparse *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_PEER__cXNode = {"_p_PEER__cXNode", "PEER::cXNode *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_PMatrix = {"_p_PMatrix", "PMatrix *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_cBayesNet = {"_p_cBayesNet", "cBayesNet *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int32_t = {"_p_int32_t", "int32_t *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_intialisation_types = {"_p_intialisation_types", "intialisation_types *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_float64_t = {"_p_p_float64_t", "float64_t **", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_PEER__cAlphaNode,
-  &_swigt__p_PEER__cEpsNode,
   &_swigt__p_PEER__cEpsNodeSparse,
-  &_swigt__p_PEER__cPhenoNode,
   &_swigt__p_PEER__cSPARSEFA,
-  &_swigt__p_PEER__cVBFA,
-  &_swigt__p_PEER__cWNode,
   &_swigt__p_PEER__cWNodeSparse,
-  &_swigt__p_PEER__cXNode,
   &_swigt__p_PMatrix,
   &_swigt__p_cBayesNet,
   &_swigt__p_char,
   &_swigt__p_int32_t,
-  &_swigt__p_intialisation_types,
   &_swigt__p_p_float64_t,
 };
 
-static swig_cast_info _swigc__p_PEER__cAlphaNode[] = {  {&_swigt__p_PEER__cAlphaNode, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_PEER__cEpsNode[] = {  {&_swigt__p_PEER__cEpsNodeSparse, _p_PEER__cEpsNodeSparseTo_p_PEER__cEpsNode, 0, 0},  {&_swigt__p_PEER__cEpsNode, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PEER__cEpsNodeSparse[] = {  {&_swigt__p_PEER__cEpsNodeSparse, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_PEER__cPhenoNode[] = {  {&_swigt__p_PEER__cPhenoNode, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PEER__cSPARSEFA[] = {  {&_swigt__p_PEER__cSPARSEFA, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_PEER__cVBFA[] = {  {&_swigt__p_PEER__cSPARSEFA, _p_PEER__cSPARSEFATo_p_PEER__cVBFA, 0, 0},  {&_swigt__p_PEER__cVBFA, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_PEER__cWNode[] = {  {&_swigt__p_PEER__cWNode, 0, 0, 0},  {&_swigt__p_PEER__cWNodeSparse, _p_PEER__cWNodeSparseTo_p_PEER__cWNode, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PEER__cWNodeSparse[] = {  {&_swigt__p_PEER__cWNodeSparse, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_PEER__cXNode[] = {  {&_swigt__p_PEER__cXNode, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_PMatrix[] = {  {&_swigt__p_PMatrix, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_cBayesNet[] = {  {&_swigt__p_PEER__cSPARSEFA, _p_PEER__cSPARSEFATo_p_cBayesNet, 0, 0},  {&_swigt__p_PEER__cVBFA, _p_PEER__cVBFATo_p_cBayesNet, 0, 0},  {&_swigt__p_cBayesNet, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_cBayesNet[] = {  {&_swigt__p_cBayesNet, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int32_t[] = {  {&_swigt__p_int32_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_intialisation_types[] = {  {&_swigt__p_intialisation_types, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_float64_t[] = {  {&_swigt__p_p_float64_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_PEER__cAlphaNode,
-  _swigc__p_PEER__cEpsNode,
   _swigc__p_PEER__cEpsNodeSparse,
-  _swigc__p_PEER__cPhenoNode,
   _swigc__p_PEER__cSPARSEFA,
-  _swigc__p_PEER__cVBFA,
-  _swigc__p_PEER__cWNode,
   _swigc__p_PEER__cWNodeSparse,
-  _swigc__p_PEER__cXNode,
   _swigc__p_PMatrix,
   _swigc__p_cBayesNet,
   _swigc__p_char,
   _swigc__p_int32_t,
-  _swigc__p_intialisation_types,
   _swigc__p_p_float64_t,
 };
 
@@ -7346,187 +3650,65 @@ extern "C" {
 #endif
 
 SWIGINTERN R_CallMethodDef CallEntries[] = {
-   {"R_swig_cWNode_lndetcovS_get", (DL_FUNC) &R_swig_cWNode_lndetcovS_get, 2},
-   {"R_swig_cWNodeSparse_CovPriorDiag_get", (DL_FUNC) &R_swig_cWNodeSparse_CovPriorDiag_get, 2},
-   {"R_swig_VBFA_initialisation_set", (DL_FUNC) &R_swig_VBFA_initialisation_set, 2},
-   {"R_swig_VBFA_var_tolerance_get", (DL_FUNC) &R_swig_VBFA_var_tolerance_get, 2},
-   {"R_swig_VBFA_tolerance_get", (DL_FUNC) &R_swig_VBFA_tolerance_get, 2},
-   {"R_swig_PEER_init_net_sparse", (DL_FUNC) &R_swig_PEER_init_net_sparse, 1},
-   {"R_swig_new_VBFA", (DL_FUNC) &R_swig_new_VBFA, 0},
-   {"R_swig_cWNodeSparse_Coff_get", (DL_FUNC) &R_swig_cWNodeSparse_Coff_get, 2},
-   {"R_swig_cWNodeSparse_lpi_off_get", (DL_FUNC) &R_swig_cWNodeSparse_lpi_off_get, 2},
-   {"R_swig_cWNodeSparse_tauOff_get", (DL_FUNC) &R_swig_cWNodeSparse_tauOff_get, 2},
-   {"R_swig_VBFA_setPriorAlpha", (DL_FUNC) &R_swig_VBFA_setPriorAlpha, 3},
-   {"R_swig_VBFA_Nmax_iterations_get", (DL_FUNC) &R_swig_VBFA_Nmax_iterations_get, 2},
-   {"R_swig_cWNodeSparse_pi_get", (DL_FUNC) &R_swig_cWNodeSparse_pi_get, 2},
-   {"R_swig_cWNode_entropy", (DL_FUNC) &R_swig_cWNode_entropy, 2},
-   {"R_swig_cXNode_entropy", (DL_FUNC) &R_swig_cXNode_entropy, 2},
-   {"R_swig_VBFA_Alpha_get", (DL_FUNC) &R_swig_VBFA_Alpha_get, 1},
-   {"R_swig_VBFA_setVarTolerance", (DL_FUNC) &R_swig_VBFA_setVarTolerance, 2},
-   {"R_swig_VBFA_setTolerance", (DL_FUNC) &R_swig_VBFA_setTolerance, 2},
-   {"R_swig_VBFA_getVarTolerance", (DL_FUNC) &R_swig_VBFA_getVarTolerance, 2},
-   {"R_swig_VBFA_getTolerance", (DL_FUNC) &R_swig_VBFA_getTolerance, 2},
-   {"R_swig_cWNode_XE2S_last_get", (DL_FUNC) &R_swig_cWNode_XE2S_last_get, 2},
-   {"R_swig_cWNode_A_last_get", (DL_FUNC) &R_swig_cWNode_A_last_get, 2},
-   {"R_swig_cWNode_E_last_get", (DL_FUNC) &R_swig_cWNode_E_last_get, 2},
-   {"R_swig_cPhenoNode_E2_set", (DL_FUNC) &R_swig_cPhenoNode_E2_set, 2},
-   {"R_swig_cWNodeSparse_tauOn_set", (DL_FUNC) &R_swig_cWNodeSparse_tauOn_set, 2},
-   {"R_swig_VERBOSE_get", (DL_FUNC) &R_swig_VERBOSE_get, 1},
-   {"R_swig_VBFA_init_net", (DL_FUNC) &R_swig_VBFA_init_net, 1},
-   {"R_swig_cPhenoNode_E1_set", (DL_FUNC) &R_swig_cPhenoNode_E1_set, 2},
-   {"R_swig_PEER_init_net", (DL_FUNC) &R_swig_PEER_init_net, 1},
-   {"R_swig_VBFA_pheno_get", (DL_FUNC) &R_swig_VBFA_pheno_get, 1},
-   {"R_swig_delete_cWNodeSparse", (DL_FUNC) &R_swig_delete_cWNodeSparse, 1},
-   {"R_swig_new_cEpsNodeSparse", (DL_FUNC) &R_swig_new_cEpsNodeSparse, 4},
-   {"R_swig_delete_cEpsNodeSparse", (DL_FUNC) &R_swig_delete_cEpsNodeSparse, 1},
-   {"R_swig_cWNodeSparse_C_set", (DL_FUNC) &R_swig_cWNodeSparse_C_set, 2},
-   {"R_swig_VBFA_is_initialized_set", (DL_FUNC) &R_swig_VBFA_is_initialized_set, 2},
-   {"R_swig_VBFA_setNmax_iterations", (DL_FUNC) &R_swig_VBFA_setNmax_iterations, 2},
-   {"R_swig_VBFA_getNmax_iterations", (DL_FUNC) &R_swig_VBFA_getNmax_iterations, 2},
-   {"R_swig_VBFA_setNk", (DL_FUNC) &R_swig_VBFA_setNk, 2},
-   {"R_swig_VBFA_getPhenoMean", (DL_FUNC) &R_swig_VBFA_getPhenoMean, 1},
-   {"R_swig_VBFA_setPhenoMean", (DL_FUNC) &R_swig_VBFA_setPhenoMean, 2},
-   {"R_swig_VBFA_pheno_mean_set", (DL_FUNC) &R_swig_VBFA_pheno_mean_set, 2},
-   {"R_swig_VBFA_add_mean_set", (DL_FUNC) &R_swig_VBFA_add_mean_set, 2},
-   {"R_swig_VBFA_covariate_prec_set", (DL_FUNC) &R_swig_VBFA_covariate_prec_set, 2},
-   {"R_swig_cXNode_prior_prec_set", (DL_FUNC) &R_swig_cXNode_prior_prec_set, 2},
-   {"R_swig_cWNode_Xprec_set", (DL_FUNC) &R_swig_cWNode_Xprec_set, 2},
-   {"R_swig_VBFA_Alpha_pb_get", (DL_FUNC) &R_swig_VBFA_Alpha_pb_get, 2},
-   {"R_swig_VBFA_Eps_pb_get", (DL_FUNC) &R_swig_VBFA_Eps_pb_get, 2},
-   {"R_swig_VBFA_Alpha_pa_get", (DL_FUNC) &R_swig_VBFA_Alpha_pa_get, 2},
-   {"R_swig_VBFA_Eps_pa_get", (DL_FUNC) &R_swig_VBFA_Eps_pa_get, 2},
-   {"R_swig_cWNodeSparse_lpi_get", (DL_FUNC) &R_swig_cWNodeSparse_lpi_get, 2},
-   {"R_swig_VBFA_Np_get", (DL_FUNC) &R_swig_VBFA_Np_get, 2},
-   {"R_swig_VBFA_Eps_set", (DL_FUNC) &R_swig_VBFA_Eps_set, 2},
-   {"R_swig_VBFA_pheno_var_set", (DL_FUNC) &R_swig_VBFA_pheno_var_set, 2},
-   {"R_swig_cWNode_getE1", (DL_FUNC) &R_swig_cWNode_getE1, 1},
-   {"R_swig_cXNode_getE1", (DL_FUNC) &R_swig_cXNode_getE1, 1},
-   {"R_swig_cAlphaNode_getE1", (DL_FUNC) &R_swig_cAlphaNode_getE1, 1},
-   {"R_swig_cEpsNode_getE1", (DL_FUNC) &R_swig_cEpsNode_getE1, 1},
-   {"R_swig_cPhenoNode_getE1", (DL_FUNC) &R_swig_cPhenoNode_getE1, 1},
-   {"R_swig_cXNode_E2S_get", (DL_FUNC) &R_swig_cXNode_E2S_get, 2},
-   {"R_swig_cWNode_E2S_get", (DL_FUNC) &R_swig_cWNode_E2S_get, 2},
-   {"R_swig_VBFA_update", (DL_FUNC) &R_swig_VBFA_update, 1},
-   {"R_swig_cWNode_update", (DL_FUNC) &R_swig_cWNode_update, 2},
-   {"R_swig_cXNode_update", (DL_FUNC) &R_swig_cXNode_update, 2},
-   {"R_swig_cAlphaNode_update", (DL_FUNC) &R_swig_cAlphaNode_update, 2},
-   {"R_swig_cEpsNode_update", (DL_FUNC) &R_swig_cEpsNode_update, 2},
-   {"R_swig_cWNodeSparse_update", (DL_FUNC) &R_swig_cWNodeSparse_update, 2},
    {"R_swig_cEpsNodeSparse_update", (DL_FUNC) &R_swig_cEpsNodeSparse_update, 2},
-   {"R_swig_PEER_update", (DL_FUNC) &R_swig_PEER_update, 1},
-   {"R_swig_cWNodeSparse_CovPriorDiag_set", (DL_FUNC) &R_swig_cWNodeSparse_CovPriorDiag_set, 2},
-   {"R_swig_VBFA_logprob", (DL_FUNC) &R_swig_VBFA_logprob, 2},
-   {"R_swig_cWNode_lndetcovS_set", (DL_FUNC) &R_swig_cWNode_lndetcovS_set, 2},
-   {"R_swig_PEER_logprob", (DL_FUNC) &R_swig_PEER_logprob, 2},
-   {"R_swig_delete_cEpsNode", (DL_FUNC) &R_swig_delete_cEpsNode, 1},
-   {"R_swig_VBFA_var_tolerance_set", (DL_FUNC) &R_swig_VBFA_var_tolerance_set, 2},
-   {"R_swig_VBFA_tolerance_set", (DL_FUNC) &R_swig_VBFA_tolerance_set, 2},
-   {"R_swig_delete_PEER", (DL_FUNC) &R_swig_delete_PEER, 1},
-   {"R_swig_cXNode_prior_offset_get", (DL_FUNC) &R_swig_cXNode_prior_offset_get, 2},
-   {"R_swig_VBFA_getNc", (DL_FUNC) &R_swig_VBFA_getNc, 2},
-   {"R_swig_VBFA_covs_get", (DL_FUNC) &R_swig_VBFA_covs_get, 2},
-   {"R_swig_VBFA_Nk_get", (DL_FUNC) &R_swig_VBFA_Nk_get, 2},
-   {"R_swig_VBFA_setPriorEps", (DL_FUNC) &R_swig_VBFA_setPriorEps, 3},
-   {"R_swig_VBFA_Nj_get", (DL_FUNC) &R_swig_VBFA_Nj_get, 2},
-   {"R_swig_VBFA_getNj", (DL_FUNC) &R_swig_VBFA_getNj, 2},
-   {"R_swig_VBFA_X_get", (DL_FUNC) &R_swig_VBFA_X_get, 1},
-   {"R_swig_VBFA_getNk", (DL_FUNC) &R_swig_VBFA_getNk, 2},
-   {"R_swig_cWNodeSparse_Coff_set", (DL_FUNC) &R_swig_cWNodeSparse_Coff_set, 2},
-   {"R_swig_cWNodeSparse_lpi_off_set", (DL_FUNC) &R_swig_cWNodeSparse_lpi_off_set, 2},
-   {"R_swig_cWNodeSparse_tauOff_set", (DL_FUNC) &R_swig_cWNodeSparse_tauOff_set, 2},
-   {"R_swig_VBFA_W_get", (DL_FUNC) &R_swig_VBFA_W_get, 1},
-   {"R_swig_cXNode_cov_get", (DL_FUNC) &R_swig_cXNode_cov_get, 2},
-   {"R_swig_VBFA_getNp", (DL_FUNC) &R_swig_VBFA_getNp, 2},
-   {"R_swig_VBFA_Nmax_iterations_set", (DL_FUNC) &R_swig_VBFA_Nmax_iterations_set, 2},
-   {"R_swig_cWNodeSparse_pi_set", (DL_FUNC) &R_swig_cWNodeSparse_pi_set, 2},
-   {"R_swig_VBFA_Alpha_set", (DL_FUNC) &R_swig_VBFA_Alpha_set, 2},
-   {"R_swig_PEER_setSparsityPrior", (DL_FUNC) &R_swig_PEER_setSparsityPrior, 2},
-   {"R_swig_PEER_getSparsityPrior", (DL_FUNC) &R_swig_PEER_getSparsityPrior, 1},
-   {"R_swig_delete_cXNode", (DL_FUNC) &R_swig_delete_cXNode, 1},
-   {"R_swig_new_cXNode__SWIG_0", (DL_FUNC) &R_swig_new_cXNode__SWIG_0, 0},
-   {"R_swig_new_cWNode__SWIG_0", (DL_FUNC) &R_swig_new_cWNode__SWIG_0, 0},
-   {"R_swig_new_cAlphaNode__SWIG_0", (DL_FUNC) &R_swig_new_cAlphaNode__SWIG_0, 0},
-   {"R_swig_new_cEpsNode__SWIG_0", (DL_FUNC) &R_swig_new_cEpsNode__SWIG_0, 0},
-   {"R_swig_new_cPhenoNode__SWIG_0", (DL_FUNC) &R_swig_new_cPhenoNode__SWIG_0, 0},
-   {"R_swig_cWNode_A_last_set", (DL_FUNC) &R_swig_cWNode_A_last_set, 2},
-   {"R_swig_cWNode_E_last_set", (DL_FUNC) &R_swig_cWNode_E_last_set, 2},
-   {"R_swig_cWNode_XE2S_last_set", (DL_FUNC) &R_swig_cWNode_XE2S_last_set, 2},
-   {"R_swig_new_cWNodeSparse__SWIG_0", (DL_FUNC) &R_swig_new_cWNodeSparse__SWIG_0, 0},
-   {"R_swig_new_cXNode__SWIG_1", (DL_FUNC) &R_swig_new_cXNode__SWIG_1, 1},
-   {"R_swig_new_cWNode__SWIG_1", (DL_FUNC) &R_swig_new_cWNode__SWIG_1, 1},
-   {"R_swig_new_cAlphaNode__SWIG_1", (DL_FUNC) &R_swig_new_cAlphaNode__SWIG_1, 4},
-   {"R_swig_new_cEpsNode__SWIG_1", (DL_FUNC) &R_swig_new_cEpsNode__SWIG_1, 4},
-   {"R_swig_new_cPhenoNode__SWIG_1", (DL_FUNC) &R_swig_new_cPhenoNode__SWIG_1, 2},
+   {"R_swig_cWNodeSparse_update", (DL_FUNC) &R_swig_cWNodeSparse_update, 2},
    {"R_swig_new_cWNodeSparse__SWIG_1", (DL_FUNC) &R_swig_new_cWNodeSparse__SWIG_1, 3},
-   {"R_swig_new_cXNode__SWIG_2", (DL_FUNC) &R_swig_new_cXNode__SWIG_2, 3},
-   {"R_swig_delete_cWNode", (DL_FUNC) &R_swig_delete_cWNode, 1},
-   {"R_swig_VERBOSE_set", (DL_FUNC) &R_swig_VERBOSE_set, 1},
-   {"R_swig_VBFA_getPhenoVar", (DL_FUNC) &R_swig_VBFA_getPhenoVar, 1},
-   {"R_swig_VBFA_setPhenoVar", (DL_FUNC) &R_swig_VBFA_setPhenoVar, 2},
-   {"R_swig_VBFA_Nc_get", (DL_FUNC) &R_swig_VBFA_Nc_get, 2},
-   {"R_swig_VBFA_setAdd_mean", (DL_FUNC) &R_swig_VBFA_setAdd_mean, 2},
-   {"R_swig_VBFA_getAdd_mean", (DL_FUNC) &R_swig_VBFA_getAdd_mean, 2},
-   {"R_swig_VBFA_pheno_set", (DL_FUNC) &R_swig_VBFA_pheno_set, 2},
-   {"R_swig_delete_cAlphaNode", (DL_FUNC) &R_swig_delete_cAlphaNode, 1},
-   {"R_swig_VBFA_getW", (DL_FUNC) &R_swig_VBFA_getW, 1},
-   {"R_swig_VBFA_getX", (DL_FUNC) &R_swig_VBFA_getX, 1},
+   {"R_swig_PEER_update", (DL_FUNC) &R_swig_PEER_update, 1},
+   {"R_swig_PEER_getSparsityPrior", (DL_FUNC) &R_swig_PEER_getSparsityPrior, 1},
+   {"R_swig_PEER_setSparsityPrior", (DL_FUNC) &R_swig_PEER_setSparsityPrior, 2},
+   {"R_swig_PEER_setAdd_mean", (DL_FUNC) &R_swig_PEER_setAdd_mean, 2},
+   {"R_swig_PEER_setPriorAlpha", (DL_FUNC) &R_swig_PEER_setPriorAlpha, 3},
+   {"R_swig_PEER_getAlpha", (DL_FUNC) &R_swig_PEER_getAlpha, 1},
+   {"R_swig_PEER_setPhenoVar", (DL_FUNC) &R_swig_PEER_setPhenoVar, 2},
+   {"R_swig_PEER_getPhenoVar", (DL_FUNC) &R_swig_PEER_getPhenoVar, 1},
+   {"R_swig_cWNodeSparse_C_get", (DL_FUNC) &R_swig_cWNodeSparse_C_get, 2},
+   {"R_swig_cWNodeSparse_tauOff_get", (DL_FUNC) &R_swig_cWNodeSparse_tauOff_get, 2},
+   {"R_swig_cWNodeSparse_lpi_off_get", (DL_FUNC) &R_swig_cWNodeSparse_lpi_off_get, 2},
+   {"R_swig_cWNodeSparse_Coff_get", (DL_FUNC) &R_swig_cWNodeSparse_Coff_get, 2},
+   {"R_swig_new_PEER", (DL_FUNC) &R_swig_new_PEER, 0},
+   {"R_swig_PEER_setPriorAlphaA", (DL_FUNC) &R_swig_PEER_setPriorAlphaA, 2},
+   {"R_swig_cWNodeSparse_pi_get", (DL_FUNC) &R_swig_cWNodeSparse_pi_get, 2},
+   {"R_swig_PEER_setPriorAlphaB", (DL_FUNC) &R_swig_PEER_setPriorAlphaB, 2},
+   {"R_swig_cWNodeSparse_C_set", (DL_FUNC) &R_swig_cWNodeSparse_C_set, 2},
+   {"R_swig_cWNodeSparse_tauOff_set", (DL_FUNC) &R_swig_cWNodeSparse_tauOff_set, 2},
+   {"R_swig_cWNodeSparse_lpi_off_set", (DL_FUNC) &R_swig_cWNodeSparse_lpi_off_set, 2},
+   {"R_swig_cWNodeSparse_Coff_set", (DL_FUNC) &R_swig_cWNodeSparse_Coff_set, 2},
+   {"R_swig_PEER_init_net", (DL_FUNC) &R_swig_PEER_init_net, 1},
+   {"R_swig_PEER_setCovariates", (DL_FUNC) &R_swig_PEER_setCovariates, 2},
+   {"R_swig_PEER_getCovariates", (DL_FUNC) &R_swig_PEER_getCovariates, 1},
+   {"R_swig_cWNodeSparse_CovPriorDiag_get", (DL_FUNC) &R_swig_cWNodeSparse_CovPriorDiag_get, 2},
+   {"R_swig_cWNodeSparse_pi_set", (DL_FUNC) &R_swig_cWNodeSparse_pi_set, 2},
+   {"R_swig_PEER_setPhenoMean", (DL_FUNC) &R_swig_PEER_setPhenoMean, 2},
+   {"R_swig_PEER_getPhenoMean", (DL_FUNC) &R_swig_PEER_getPhenoMean, 1},
+   {"R_swig_PEER_setPriorEpsA", (DL_FUNC) &R_swig_PEER_setPriorEpsA, 2},
+   {"R_swig_PEER_logprob", (DL_FUNC) &R_swig_PEER_logprob, 2},
+   {"R_swig_PEER_getEps", (DL_FUNC) &R_swig_PEER_getEps, 1},
+   {"R_swig_PEER_setPriorEpsB", (DL_FUNC) &R_swig_PEER_setPriorEpsB, 2},
+   {"R_swig_PEER_setPriorEps", (DL_FUNC) &R_swig_PEER_setPriorEps, 3},
+   {"R_swig_cWNodeSparse_tauOn_get", (DL_FUNC) &R_swig_cWNodeSparse_tauOn_get, 2},
+   {"R_swig_PEER_getSigmaOff", (DL_FUNC) &R_swig_PEER_getSigmaOff, 2},
+   {"R_swig_PEER_setSigmaOff", (DL_FUNC) &R_swig_PEER_setSigmaOff, 2},
+   {"R_swig_cWNodeSparse_CovPriorDiag_set", (DL_FUNC) &R_swig_cWNodeSparse_CovPriorDiag_set, 2},
+   {"R_swig_PEER_setTolerance", (DL_FUNC) &R_swig_PEER_setTolerance, 2},
+   {"R_swig_PEER_setVarTolerance", (DL_FUNC) &R_swig_PEER_setVarTolerance, 2},
+   {"R_swig_PEER_calcBound", (DL_FUNC) &R_swig_PEER_calcBound, 2},
+   {"R_swig_PEER_init_net_sparse", (DL_FUNC) &R_swig_PEER_init_net_sparse, 1},
+   {"R_swig_PEER_getW", (DL_FUNC) &R_swig_PEER_getW, 1},
+   {"R_swig_cWNodeSparse_lpi_get", (DL_FUNC) &R_swig_cWNodeSparse_lpi_get, 2},
+   {"R_swig_PEER_getX", (DL_FUNC) &R_swig_PEER_getX, 1},
+   {"R_swig_cWNodeSparse_tauOn_set", (DL_FUNC) &R_swig_cWNodeSparse_tauOn_set, 2},
+   {"R_swig_PEER_getZ", (DL_FUNC) &R_swig_PEER_getZ, 1},
    {"R_swig_getVerbose", (DL_FUNC) &R_swig_getVerbose, 1},
    {"R_swig_setVerbose", (DL_FUNC) &R_swig_setVerbose, 1},
-   {"R_swig_VBFA_setPriorAlphaA", (DL_FUNC) &R_swig_VBFA_setPriorAlphaA, 2},
-   {"R_swig_VBFA_getPriorAlphaA", (DL_FUNC) &R_swig_VBFA_getPriorAlphaA, 2},
-   {"R_swig_VBFA_setPriorAlphaB", (DL_FUNC) &R_swig_VBFA_setPriorAlphaB, 2},
-   {"R_swig_VBFA_getPriorAlphaB", (DL_FUNC) &R_swig_VBFA_getPriorAlphaB, 2},
-   {"R_swig_VBFA_initialisation_get", (DL_FUNC) &R_swig_VBFA_initialisation_get, 2},
-   {"R_swig_delete_cPhenoNode", (DL_FUNC) &R_swig_delete_cPhenoNode, 1},
-   {"R_swig_VBFA_Alpha_pb_set", (DL_FUNC) &R_swig_VBFA_Alpha_pb_set, 2},
-   {"R_swig_VBFA_Eps_pb_set", (DL_FUNC) &R_swig_VBFA_Eps_pb_set, 2},
-   {"R_swig_new_PEER", (DL_FUNC) &R_swig_new_PEER, 0},
-   {"R_swig_VBFA_Alpha_pa_set", (DL_FUNC) &R_swig_VBFA_Alpha_pa_set, 2},
-   {"R_swig_VBFA_Eps_pa_set", (DL_FUNC) &R_swig_VBFA_Eps_pa_set, 2},
+   {"R_swig_PEER_setNmax_iterations", (DL_FUNC) &R_swig_PEER_setNmax_iterations, 2},
+   {"R_swig_PEER_setNk", (DL_FUNC) &R_swig_PEER_setNk, 2},
    {"R_swig_cWNodeSparse_lpi_set", (DL_FUNC) &R_swig_cWNodeSparse_lpi_set, 2},
-   {"R_swig_VBFA_getCovariates", (DL_FUNC) &R_swig_VBFA_getCovariates, 1},
-   {"R_swig_VBFA_setCovariates", (DL_FUNC) &R_swig_VBFA_setCovariates, 2},
-   {"R_swig_VBFA_getResiduals", (DL_FUNC) &R_swig_VBFA_getResiduals, 1},
-   {"R_swig_VBFA_calc_residuals", (DL_FUNC) &R_swig_VBFA_calc_residuals, 2},
-   {"R_swig_VBFA_getEps", (DL_FUNC) &R_swig_VBFA_getEps, 1},
-   {"R_swig_VBFA_Np_set", (DL_FUNC) &R_swig_VBFA_Np_set, 2},
-   {"R_swig_VBFA_setPriorEpsA", (DL_FUNC) &R_swig_VBFA_setPriorEpsA, 2},
-   {"R_swig_VBFA_getPriorEpsA", (DL_FUNC) &R_swig_VBFA_getPriorEpsA, 2},
-   {"R_swig_VBFA_init_params", (DL_FUNC) &R_swig_VBFA_init_params, 1},
-   {"R_swig_VBFA_setPriorEpsB", (DL_FUNC) &R_swig_VBFA_setPriorEpsB, 2},
-   {"R_swig_VBFA_getPriorEpsB", (DL_FUNC) &R_swig_VBFA_getPriorEpsB, 2},
-   {"R_swig_cXNode_E2S_set", (DL_FUNC) &R_swig_cXNode_E2S_set, 2},
-   {"R_swig_cWNode_E2S_set", (DL_FUNC) &R_swig_cWNode_E2S_set, 2},
-   {"R_swig_PEER_setSigmaOff", (DL_FUNC) &R_swig_PEER_setSigmaOff, 2},
-   {"R_swig_PEER_getSigmaOff", (DL_FUNC) &R_swig_PEER_getSigmaOff, 2},
-   {"R_swig_PEER_getZ", (DL_FUNC) &R_swig_PEER_getZ, 1},
-   {"R_swig_VBFA_calcBound", (DL_FUNC) &R_swig_VBFA_calcBound, 2},
-   {"R_swig_cWNode_calcBound", (DL_FUNC) &R_swig_cWNode_calcBound, 3},
-   {"R_swig_cXNode_calcBound", (DL_FUNC) &R_swig_cXNode_calcBound, 3},
-   {"R_swig_PEER_calcBound", (DL_FUNC) &R_swig_PEER_calcBound, 2},
-   {"R_swig_logdet", (DL_FUNC) &R_swig_logdet, 2},
-   {"R_swig_cPhenoNode_E2_get", (DL_FUNC) &R_swig_cPhenoNode_E2_get, 2},
-   {"R_swig_cWNodeSparse_tauOn_get", (DL_FUNC) &R_swig_cWNodeSparse_tauOn_get, 2},
-   {"R_swig_cPhenoNode_E1_get", (DL_FUNC) &R_swig_cPhenoNode_E1_get, 2},
-   {"R_swig_cXNode_prior_offset_set", (DL_FUNC) &R_swig_cXNode_prior_offset_set, 2},
-   {"R_swig_VBFA_covs_set", (DL_FUNC) &R_swig_VBFA_covs_set, 2},
-   {"R_swig_VBFA_Nk_set", (DL_FUNC) &R_swig_VBFA_Nk_set, 2},
-   {"R_swig_delete_VBFA", (DL_FUNC) &R_swig_delete_VBFA, 1},
-   {"R_swig_VBFA_Nj_set", (DL_FUNC) &R_swig_VBFA_Nj_set, 2},
-   {"R_swig_VBFA_X_set", (DL_FUNC) &R_swig_VBFA_X_set, 2},
-   {"R_swig_cWNodeSparse_C_get", (DL_FUNC) &R_swig_cWNodeSparse_C_get, 2},
-   {"R_swig_VBFA_is_initialized_get", (DL_FUNC) &R_swig_VBFA_is_initialized_get, 2},
-   {"R_swig_VBFA_W_set", (DL_FUNC) &R_swig_VBFA_W_set, 2},
-   {"R_swig_cXNode_cov_set", (DL_FUNC) &R_swig_cXNode_cov_set, 2},
-   {"R_swig_VBFA_pheno_mean_get", (DL_FUNC) &R_swig_VBFA_pheno_mean_get, 2},
-   {"R_swig_VBFA_add_mean_get", (DL_FUNC) &R_swig_VBFA_add_mean_get, 2},
-   {"R_swig_VBFA_covariate_prec_get", (DL_FUNC) &R_swig_VBFA_covariate_prec_get, 2},
-   {"R_swig_cXNode_prior_prec_get", (DL_FUNC) &R_swig_cXNode_prior_prec_get, 2},
-   {"R_swig_cWNode_Xprec_get", (DL_FUNC) &R_swig_cWNode_Xprec_get, 2},
-   {"R_swig_VBFA_getAlpha", (DL_FUNC) &R_swig_VBFA_getAlpha, 1},
-   {"R_swig_VBFA_Eps_get", (DL_FUNC) &R_swig_VBFA_Eps_get, 1},
-   {"R_swig_VBFA_pheno_var_get", (DL_FUNC) &R_swig_VBFA_pheno_var_get, 2},
-   {"R_swig_VBFA_Nc_set", (DL_FUNC) &R_swig_VBFA_Nc_set, 2},
+   {"R_swig_PEER_getResiduals", (DL_FUNC) &R_swig_PEER_getResiduals, 1},
+   {"R_swig_new_cWNodeSparse__SWIG_0", (DL_FUNC) &R_swig_new_cWNodeSparse__SWIG_0, 0},
+   {"R_swig_delete_PEER", (DL_FUNC) &R_swig_delete_PEER, 1},
+   {"R_swig_delete_cEpsNodeSparse", (DL_FUNC) &R_swig_delete_cEpsNodeSparse, 1},
+   {"R_swig_new_cEpsNodeSparse", (DL_FUNC) &R_swig_new_cEpsNodeSparse, 4},
+   {"R_swig_delete_cWNodeSparse", (DL_FUNC) &R_swig_delete_cWNodeSparse, 1},
    {NULL, NULL, 0}
 };
 

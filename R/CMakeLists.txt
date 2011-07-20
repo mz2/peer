@@ -25,7 +25,6 @@ if (BUILD_R_PACKAGE)
   set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
   set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
   set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-cpperraswarn")
-  add_definitions(-DSWIG)
   swig_add_module(peer r peer.i)
   swig_link_libraries(peer ${SWIGLINKLIBS})
 

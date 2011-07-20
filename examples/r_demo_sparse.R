@@ -10,20 +10,20 @@ vb = PEER()
 
 #fit mean effect ?
 #strangely still need to call VB here
-VBFA_setPhenoMean(vb,as.matrix(y))
+PEER_setPhenoMean(vb,as.matrix(y))
 
 #set prior
 PEER_setSparsityPrior(vb,as.matrix(pi))
 
 #set prior settings
 #(these are the default settings of PEER)
-VBFA_setPriorEps(vb,0.1,10.);
-VBFA_setNmax_iterations(vb,Nmax_iterations)
-VBFA_update(vb)
+PEER_setPriorEps(vb,0.1,10.);
+PEER_setNmax_iterations(vb,Nmax_iterations)
+PEER_update(vb)
 
 #investigate inferance results
 #factors:
-X = VBFA_getX(vb)
+X = PEER_getX(vb)
 #weights:
-W = VBFA_getW(vb)
+W = PEER_getW(vb)
 

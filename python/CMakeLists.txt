@@ -89,7 +89,6 @@ set(CMAKE_SWIG_FLAGS "")
 set_source_files_properties(peer.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-includeall")
 set_source_files_properties(peer.i PROPERTIES SWIG_FLAGS "-cpperraswarn")
-#add_definitions(-DSWIG)
 swig_add_module(peer python peer.i)
 swig_link_libraries(peer ${SWIGLINKLIBS} peerlib alglib)
 

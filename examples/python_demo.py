@@ -34,9 +34,9 @@ def demo_supervised(Nmax_iterations=100):
 	vb.setNmax_iterations(Nmax_iterations)
 	vb.update()
 
+	Eps = vb.getEps()
 	W = vb.getW()
 	X = vb.getX()
-	Eps = vb.Eps.getE1()
 	Z = vb.getZ()
 
 	PL.figure()
@@ -91,5 +91,5 @@ def demo_unsupervised(Nmax_iterations=100,Kinf=20):
 
 
 if __name__ == '__main__':
-	demo_unsupervised(Nmax_iterations=20)
+#	demo_unsupervised(Nmax_iterations=20)
 	demo_supervised(Nmax_iterations=20)

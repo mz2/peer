@@ -32,6 +32,60 @@ double PEER::logdet(PMatrix m){
 //verbosity level:
 int VERBOSE = 1;
 
+//Setters
+
+// Matrix
+void cVBFA::setPhenoMean(const PMatrix pheno_mean) 
+{
+this->pheno_mean = pheno_mean;is_initialized=false;
+};
+void cVBFA::setPhenoVar(const PMatrix pheno_var) 
+{this->pheno_var = pheno_var;is_initialized=false;}
+void cVBFA::setCovariates(const PMatrix covs) 
+{ this->covs = covs;is_initialized=false;}
+
+//SWIG	
+void cVBFA::setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
+{
+this->pheno_mean = array2matrix(matrix,rows,cols);is_initialized=false;
+};
+void cVBFA::setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols)
+{this->pheno_var = array2matrix(matrix,rows,cols);is_initialized=false;}
+void cVBFA::setCovariates(float64_t* matrix,int32_t rows,int32_t cols)
+{this->covs = array2matrix(matrix,rows,cols);is_initialized=false;}	
+
+
+//getters
+
+//Matrix
+PMatrix cVBFA::getPhenoMean(){return this->pheno_mean;}
+PMatrix cVBFA::getPhenoVar() {return this->pheno_var;}
+PMatrix cVBFA::getCovariates() {return this->covs;}
+
+PMatrix cVBFA::getX(){return X->E1;}
+PMatrix cVBFA::getW(){return W->E1;}
+PMatrix cVBFA::getAlpha(){return Alpha->E1;}
+PMatrix cVBFA::getEps(){return Eps->E1;}
+PMatrix cVBFA::getResiduals() {return calc_residuals();}
+
+
+void cVBFA::getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(pheno_mean,matrix,rows,cols);}
+void cVBFA::getPhenoVar(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(pheno_var,matrix,rows,cols);}
+void cVBFA::getCovariates(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(covs,matrix,rows,cols);}
+void cVBFA::getX(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(X->E1,matrix,rows,cols);}
+void cVBFA::getW(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(W->E1,matrix,rows,cols);}
+void cVBFA::getEps(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(Eps->E1,matrix,rows,cols);}
+void cVBFA::getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(Alpha->E1,matrix,rows,cols);}
+void cVBFA::getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(calc_residuals(),matrix,rows,cols);}
+
 
 void PEER::setVerbose(int verbose)
 { VERBOSE = verbose;}

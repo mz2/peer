@@ -25,6 +25,38 @@ using namespace std;
 using namespace PEER;
 
 
+
+void cSPARSEFA::setSparsityPrior(float64_t* matrix,int32_t rows,int32_t cols)
+{this->pi = array2matrix(matrix,rows,cols);is_initialized=false;}
+void cSPARSEFA::getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(pi,matrix,rows,cols);}
+
+
+//sparsity posterior:
+void cSPARSEFA::getZ(float64_t** matrix,int32_t* rows,int32_t* cols)
+{
+  if(!is_initialized)
+    {
+      (*rows) = 0;
+      (*cols) = 0;
+      return;
+    }
+  cWNodeSparse* W_ = (cWNodeSparse*) (W);
+  return matrix2array(W_->C,matrix,rows,cols);
+}
+
+void cSPARSEFA::setSparsityPrior(const PMatrix sparsity_prior) {this->pi = sparsity_prior;is_initialized=false;}
+
+PMatrix cSPARSEFA::getSparsityPrior(){return this->pi;}
+
+PMatrix cSPARSEFA::getZ()
+{
+  if(!is_initialized)
+    return PMatrix();
+  cWNodeSparse* W_ = (cWNodeSparse*)W;
+  return W_->C;
+}
+
 /* sparse W node class */
 cWNodeSparse::cWNodeSparse()
 {

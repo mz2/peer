@@ -51,8 +51,8 @@ using namespace PEER;
 %rename(PEER) cSPARSEFA;
 
 /* Include the header file to be wrapped */
-%include "vbfa.h"
-%include "sparsefa.h"
+%include "sparsefa.i"
+
 
 
  

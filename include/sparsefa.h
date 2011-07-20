@@ -74,55 +74,28 @@ namespace PEER
 		cSPARSEFA();
 		//destructor
 		virtual ~cSPARSEFA();
-		
-	
-		
-#ifndef SWIG
+		     
 		//constructors that take matrices in 
 		//constructor from expression data
 		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior);
 		//constructor that takes covariates into account
 		cSPARSEFA(PMatrix pheno_mean,PMatrix sparsity_prior, PMatrix covs);
 		//constructor that take variance and covariates into account
-		cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix spsarsity_prior, PMatrix covs);
+		cSPARSEFA(PMatrix pheno_mean, PMatrix pheno_var,PMatrix spsarsity_prior, PMatrix covs);	
 
-		
-#endif
 		//setters
 		void setSigmaOff(double sigma_off) {this->sigmaOff = sigma_off;};
 		//getters
 		double getSigmaOff() { return this->sigmaOff;};
 		
-#ifdef SWIG
-		//interface-specific methods
-		void setSparsityPrior(float64_t* matrix,int32_t rows,int32_t cols)
-		{this->pi = array2matrix(matrix,rows,cols);is_initialized=false;}
-		void getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols)
-		{return matrix2array(pi,matrix,rows,cols);}
+		//setters
+		void setSparsityPrior(float64_t* matrix,int32_t rows,int32_t cols);
+		void getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols);		
+		void getZ(float64_t** matrix,int32_t* rows,int32_t* cols);
 
-		//sparsity posterior:
-		void getZ(float64_t** matrix,int32_t* rows,int32_t* cols)
-		{
-			if(!is_initialized)
-			{
-				(*rows) = 0;
-				(*cols) = 0;
-				return;
-			}
-			cWNodeSparse* W_ = (cWNodeSparse*) (W);
-			return matrix2array(W_->C,matrix,rows,cols);
-		}
-#else
-		void setSparsityPrior(const PMatrix sparsity_prior) {this->pi = sparsity_prior;is_initialized=false;}
-		PMatrix getSparsityPrior(){return this->pi;}
-		PMatrix getZ()
-		{
-			if(!is_initialized)
-				return PMatrix();
-			cWNodeSparse* W_ = (cWNodeSparse*)W;
-			return W_->C;
-		}
-#endif
+		void setSparsityPrior(const PMatrix sparsity_prior);
+		PMatrix getSparsityPrior();
+		PMatrix getZ();
 		
 		 virtual double calcBound();
 		 virtual double logprob();
