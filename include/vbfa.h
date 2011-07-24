@@ -115,8 +115,6 @@ class cVBFA : public cBayesNet {
 	friend class cPhenoNode;
 	friend class cEpsNode;
 	friend class cAlphaNode;
-//	friend class cWNodeSparse;
-	
 public:
 	/** Dimensions */
 	int Nj; //individuals 

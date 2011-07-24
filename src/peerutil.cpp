@@ -24,12 +24,15 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		SwitchArg no_residuals("","no_res_out","No output of residual values", cmd, false);
 		SwitchArg no_X("","no_x_out","No output of estimated factors", cmd, false);
 		SwitchArg no_W("","no_w_out","No output of estimated factor weights", cmd, false);
+		SwitchArg no_Z("","no_z_out","No output of posterior sparsity prior",cmd,false);
 		SwitchArg no_Alpha("","no_a_out","No output of weight precision", cmd, false);
 		SwitchArg keep_mean("","keep_mean","Do not include a covariate for the mean", cmd, false);
 		SwitchArg has_header("","has_header","Expression and covariates files have a header", cmd, false);
 		
 		ValueArg<std::string> out_dir("o","out_dir","Output directory",false,"peer_out","string", cmd);
 		ValueArg<std::string> expr_file("f","file","Expression data file",true,"","string", cmd);
+		ValueArg<std::string> expr_file_std("","var_file","Expression uncertainty (variance) data file",false,"","string", cmd);
+		
 		ValueArg<std::string> cov_file("c","cov_file","Covariate data file",false,"","string", cmd);
 		ValueArg<std::string> prior_file("","prior","Factor prior file",false,"","string", cmd);
 		ValueArg<int> n_factors("n","n_factors","Number of hidden factors",false,5,"int", cmd);
@@ -49,10 +52,12 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		args.no_X = no_X.getValue();
 		args.no_W = no_W.getValue();
 		args.no_Alpha = no_Alpha.getValue();
+		args.no_Z = no_Z.getValue();
 		args.keep_mean = keep_mean.getValue();
 		args.has_header = has_header.getValue();
 		args.out_dir = out_dir.getValue();
 		args.expr_file = expr_file.getValue();
+		args.expr_file_std = expr_file_std.getValue();
 		args.cov_file = cov_file.getValue();
 		args.prior_file = prior_file.getValue();
 		args.n_factors = n_factors.getValue();
@@ -128,19 +133,29 @@ void writeCsv(string filename, PMatrix m){
 /**
  Get an instance of PEER FA object from command line arguments
  */
-cSPARSEFA getInstance(sPeerArgs args){
+cPEER getInstance(sPeerArgs args){
 	
+	//main expr matrix
 	PMatrix expr = parseCsv(args.expr_file, args.has_header);
+	//optional matrices
+	PMatrix expr_std = PMatrix();
 	PMatrix covs = PMatrix();
+	PMatrix prior = PMatrix();
 	if (args.cov_file.length() > 0) covs = parseCsv(args.cov_file, args.has_header);
+	if (args.expr_file_std.length() > 0) expr_std = parseCsv(args.expr_file_std, args.has_header);
+	if (args.prior_file.length() > 0) prior = parseCsv(args.prior_file, args.has_header);
+	
+
 	
 	cSPARSEFA vb;
 	
 	vb.setPhenoMean(expr);
 	vb.setCovariates(covs);
+	vb.setSparsityPrior(prior);
+	vb.setPhenoVar(expr_std);
 	vb.setNk(args.n_factors);
 	
-	(expr, PMatrix(), covs, args.n_factors);
+	//(expr, PMatrix(), covs, args.n_factors);
 
 	vb.setAdd_mean(!args.keep_mean);
 	vb.setNmax_iterations(args.n_iter);
@@ -163,7 +178,7 @@ string concat(string str1, string str2){
 }
 
 
-void write_output(cVBFA& vb, sPeerArgs args){
+void write_output(cPEER& vb, sPeerArgs args){
     // 1. create out dir
 	system(concat("mkdir ", args.out_dir).c_str());
 
@@ -175,4 +190,12 @@ void write_output(cVBFA& vb, sPeerArgs args){
 	if (!args.no_W) writeCsv(concat(out_dir, "W.csv"), vb.W->E1);
 	if (!args.no_X) writeCsv(concat(out_dir, "X.csv"), vb.X->E1);
 	if (!args.no_Alpha) writeCsv(concat(out_dir, "Alpha.csv"), vb.Alpha->E1);
+	
+	//if sparse mode on, export indicator Z also
+	if(!isnull(vb.getSparsityPrior()))
+	{
+		if (!args.no_Z) writeCsv(concat(out_dir, "Z.csv"), vb.getZ());
+		
+	}
 }
+		

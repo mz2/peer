@@ -64,7 +64,6 @@ namespace PEER
 		double sigmaOff;
 		double sigmaOn;
 		virtual void init_params();
-		
 	public:
 		//constructor
 		cSPARSEFA();

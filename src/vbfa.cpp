@@ -296,7 +296,7 @@ void cVBFA::init_net()
 	if (isnull(pheno_var))
 	{	
 		pheno_var = 0.01*(PMatrix::Ones(pheno_mean.rows(), pheno_mean.cols())); // if uncertainty in expression not provided, assume pretty certain
-		printf("XX %d/%d -- %d/%d\n",(int) pheno_mean.rows(),(int) pheno_mean.cols(),(int) pheno_var.rows(),(int) pheno_var.cols());	
+		//printf("XX %d/%d -- %d/%d\n",(int) pheno_mean.rows(),(int) pheno_mean.cols(),(int) pheno_var.rows(),(int) pheno_var.cols());	
 	}
 	// if no covariates, create empty structure
 	if (isnull(covs)) 
@@ -312,7 +312,6 @@ void cVBFA::init_net()
 		int nc = covs.cols();
 		//use conservative resize which preserves the current entries
 		covs.conservativeResize(Nj,nc+1);
-		std::cout << covs << "\n";
 		//add mean column at the end
 		covs.block(0,nc,Nj,1) = PMatrix::Ones(Nj, 1); 
 	}
@@ -365,7 +364,6 @@ void cVBFA::init_net()
 	
 	if (initialisation==PCA)
 	{
-		ULOG_INFO("USING PCA initialization");
 		//JacobiSVD test;
 		JacobiSVD<PMatrix> svd(residuals, ComputeThinU | ComputeThinV);
 		//create a diagonal matrix
