@@ -12,7 +12,7 @@ As a minimum, PEER requires an expression matrix in csv
 (comma-separated) format, specified with the -f option. The matrix is
 assumed to have N rows and G columns, where N is the number of
 samples, and G is the number of genes. The basic command to apply peer
-to such a matrix given in expression.csv, learning K=10 hidden
+to such a matrix given in expression.csv, learning 10 hidden
 confounders is 
 
 > peer -f expression.csv -n 10
