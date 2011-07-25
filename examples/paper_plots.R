@@ -35,11 +35,21 @@ unsupervised_plots <- function(n_factors=10, n_iterations=10, n_genes=200, load=
     lod_cutoffs = 1:80/2.
     raw_eqtls = count_eqtls(raw_lods, probe_locations, lod_cutoffs)
     residual_eqtls = count_eqtls(residual_lods, probe_locations, lod_cutoffs)
+
     # plot the results - do we find more eQTLs robustly for different cutoffs?
     pdf("store/paper_eqtl_discovery.pdf")
     plot(lod_cutoffs, raw_eqtls, "l", lwd=6, col="blue", xlab="LOD cutoff", ylab="# genes with eQTL", cex.lab=1.5, cex.axis=1.2, yaxp=c(0,5500,5))
     lines(lod_cutoffs, residual_eqtls, "l", lwd=6, col="red")
     legend(25,5300,c("Standard","Using PEER"), fill=c("red","blue"), cex=2)
+    dev.off()
+
+    # plot frequency of associations called at 0.05 false discovery rate
+    pdf("store/paper_eqtl_frequency.pdf", width=8, height=4)
+    qvals = apply(raw_lods[,3:(max_genes+2)],2,function(x){p.adjust(dchisq(2*log(10)*x,1), method="fdr")}) # Apply chi2(1) density calculation to the LOD scores (in base 10) to get p-values, and use FDR adjustment to get q-values
+    frequency = apply(qvals < 0.05, 1, sum)
+    write.table(frequency, file="store/eqtl_frequency.tab")
+    par(cex.axis=2, cex.lab=3, lwd=1, mex=1.3, mai=c(1.1,1.5,0.2,0.2))
+    plot(frequency, xlab="", ylab="# eQTLs", type="l", col="blue", lw=6, xaxt="n")
     dev.off()
 }
 
