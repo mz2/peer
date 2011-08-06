@@ -269,7 +269,7 @@ void cVBFA::init_params()
 	tolerance = 1E-3;
 	var_tolerance = 1E-8;	
 	Nmax_iterations = 1000;
-	add_mean    = true;
+	add_mean    = false;
 	initialisation = RANDN;	
 	is_initialized = false;
 	covariate_prec = 100;

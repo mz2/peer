@@ -662,6 +662,150 @@ attr(`PEER_getSigmaOff`, 'returnType') = 'numeric'
 attr(`PEER_getSigmaOff`, "inputTypes") = c('_p_PEER__cSPARSEFA')
 class(`PEER_getSigmaOff`) = c("SWIGFunction", class('PEER_getSigmaOff'))
 
+# Start of PEER_getNj
+
+`PEER_getNj` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getNj', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getNj`, 'returnType') = 'integer'
+attr(`PEER_getNj`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getNj`) = c("SWIGFunction", class('PEER_getNj'))
+
+# Start of PEER_getNp
+
+`PEER_getNp` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getNp', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getNp`, 'returnType') = 'integer'
+attr(`PEER_getNp`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getNp`) = c("SWIGFunction", class('PEER_getNp'))
+
+# Start of PEER_getNk
+
+`PEER_getNk` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getNk', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getNk`, 'returnType') = 'integer'
+attr(`PEER_getNk`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getNk`) = c("SWIGFunction", class('PEER_getNk'))
+
+# Start of PEER_getNc
+
+`PEER_getNc` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getNc', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getNc`, 'returnType') = 'integer'
+attr(`PEER_getNc`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getNc`) = c("SWIGFunction", class('PEER_getNc'))
+
+# Start of PEER_getNmax_iterations
+
+`PEER_getNmax_iterations` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getNmax_iterations', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getNmax_iterations`, 'returnType') = 'integer'
+attr(`PEER_getNmax_iterations`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getNmax_iterations`) = c("SWIGFunction", class('PEER_getNmax_iterations'))
+
+# Start of PEER_getTolerance
+
+`PEER_getTolerance` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getTolerance', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getTolerance`, 'returnType') = 'numeric'
+attr(`PEER_getTolerance`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getTolerance`) = c("SWIGFunction", class('PEER_getTolerance'))
+
+# Start of PEER_getVarTolerance
+
+`PEER_getVarTolerance` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getVarTolerance', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getVarTolerance`, 'returnType') = 'numeric'
+attr(`PEER_getVarTolerance`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getVarTolerance`) = c("SWIGFunction", class('PEER_getVarTolerance'))
+
+# Start of PEER_getAdd_mean
+
+`PEER_getAdd_mean` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getAdd_mean', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getAdd_mean`, 'returnType') = 'logical'
+attr(`PEER_getAdd_mean`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getAdd_mean`) = c("SWIGFunction", class('PEER_getAdd_mean'))
+
+# Start of PEER_getPriorEpsA
+
+`PEER_getPriorEpsA` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getPriorEpsA', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getPriorEpsA`, 'returnType') = 'numeric'
+attr(`PEER_getPriorEpsA`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getPriorEpsA`) = c("SWIGFunction", class('PEER_getPriorEpsA'))
+
+# Start of PEER_getPriorEpsB
+
+`PEER_getPriorEpsB` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getPriorEpsB', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getPriorEpsB`, 'returnType') = 'numeric'
+attr(`PEER_getPriorEpsB`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getPriorEpsB`) = c("SWIGFunction", class('PEER_getPriorEpsB'))
+
+# Start of PEER_getPriorAlphaA
+
+`PEER_getPriorAlphaA` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getPriorAlphaA', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getPriorAlphaA`, 'returnType') = 'numeric'
+attr(`PEER_getPriorAlphaA`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getPriorAlphaA`) = c("SWIGFunction", class('PEER_getPriorAlphaA'))
+
+# Start of PEER_getPriorAlphaB
+
+`PEER_getPriorAlphaB` = function(self, .copy = FALSE)
+{
+  ;.Call('R_swig_PEER_getPriorAlphaB', self, as.logical(.copy), PACKAGE='peer');
+  
+}
+
+attr(`PEER_getPriorAlphaB`, 'returnType') = 'numeric'
+attr(`PEER_getPriorAlphaB`, "inputTypes") = c('_p_PEER__cSPARSEFA')
+class(`PEER_getPriorAlphaB`) = c("SWIGFunction", class('PEER_getPriorAlphaB'))
+
 # Start of PEER_setSparsityPrior
 
 `PEER_setSparsityPrior` = function(self, matrix)
@@ -1039,7 +1183,7 @@ class(`PEER_init_net_sparse`) = c("SWIGFunction", class('PEER_init_net_sparse'))
 setMethod('$', '_p_PEER__cSPARSEFA', function(x, name)
 
 {
-  accessorFuns = list('setSigmaOff' = PEER_setSigmaOff, 'getSigmaOff' = PEER_getSigmaOff, 'setSparsityPrior' = PEER_setSparsityPrior, 'getSparsityPrior' = PEER_getSparsityPrior, 'getZ' = PEER_getZ, 'setNk' = PEER_setNk, 'setAdd_mean' = PEER_setAdd_mean, 'setNmax_iterations' = PEER_setNmax_iterations, 'setTolerance' = PEER_setTolerance, 'setVarTolerance' = PEER_setVarTolerance, 'setPriorAlphaA' = PEER_setPriorAlphaA, 'setPriorAlphaB' = PEER_setPriorAlphaB, 'setPriorEpsA' = PEER_setPriorEpsA, 'setPriorEpsB' = PEER_setPriorEpsB, 'setPriorAlpha' = PEER_setPriorAlpha, 'setPriorEps' = PEER_setPriorEps, 'init_net' = PEER_init_net, 'calcBound' = PEER_calcBound, 'logprob' = PEER_logprob, 'update' = PEER_update, 'setPhenoMean' = PEER_setPhenoMean, 'setPhenoVar' = PEER_setPhenoVar, 'setCovariates' = PEER_setCovariates, 'getPhenoMean' = PEER_getPhenoMean, 'getPhenoVar' = PEER_getPhenoVar, 'getCovariates' = PEER_getCovariates, 'getX' = PEER_getX, 'getW' = PEER_getW, 'getEps' = PEER_getEps, 'getAlpha' = PEER_getAlpha, 'getResiduals' = PEER_getResiduals, 'init_net_sparse' = PEER_init_net_sparse);
+  accessorFuns = list('setSigmaOff' = PEER_setSigmaOff, 'getSigmaOff' = PEER_getSigmaOff, 'getNj' = PEER_getNj, 'getNp' = PEER_getNp, 'getNk' = PEER_getNk, 'getNc' = PEER_getNc, 'getNmax_iterations' = PEER_getNmax_iterations, 'getTolerance' = PEER_getTolerance, 'getVarTolerance' = PEER_getVarTolerance, 'getAdd_mean' = PEER_getAdd_mean, 'getPriorEpsA' = PEER_getPriorEpsA, 'getPriorEpsB' = PEER_getPriorEpsB, 'getPriorAlphaA' = PEER_getPriorAlphaA, 'getPriorAlphaB' = PEER_getPriorAlphaB, 'setSparsityPrior' = PEER_setSparsityPrior, 'getSparsityPrior' = PEER_getSparsityPrior, 'getZ' = PEER_getZ, 'setNk' = PEER_setNk, 'setAdd_mean' = PEER_setAdd_mean, 'setNmax_iterations' = PEER_setNmax_iterations, 'setTolerance' = PEER_setTolerance, 'setVarTolerance' = PEER_setVarTolerance, 'setPriorAlphaA' = PEER_setPriorAlphaA, 'setPriorAlphaB' = PEER_setPriorAlphaB, 'setPriorEpsA' = PEER_setPriorEpsA, 'setPriorEpsB' = PEER_setPriorEpsB, 'setPriorAlpha' = PEER_setPriorAlpha, 'setPriorEps' = PEER_setPriorEps, 'init_net' = PEER_init_net, 'calcBound' = PEER_calcBound, 'logprob' = PEER_logprob, 'update' = PEER_update, 'setPhenoMean' = PEER_setPhenoMean, 'setPhenoVar' = PEER_setPhenoVar, 'setCovariates' = PEER_setCovariates, 'getPhenoMean' = PEER_getPhenoMean, 'getPhenoVar' = PEER_getPhenoVar, 'getCovariates' = PEER_getCovariates, 'getX' = PEER_getX, 'getW' = PEER_getW, 'getEps' = PEER_getEps, 'getAlpha' = PEER_getAlpha, 'getResiduals' = PEER_getResiduals, 'init_net_sparse' = PEER_init_net_sparse);
   ;        idx = pmatch(name, names(accessorFuns));
   if(is.na(idx)) 
   return(callNextMethod(x, name));

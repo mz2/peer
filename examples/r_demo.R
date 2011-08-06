@@ -125,22 +125,22 @@ supervised_prior_comparison_demo <- function(){
 
 # simple demo of how to use PEER to look for broad variance components.
 # 5 global factors were simulated - PEER is expected to capture this
-#simple_unsupervised_demo()
+simple_unsupervised_demo()
 
 # If some known covariates are given, they can be included in inference, like
 # shown in this demo. Two of the five simulated global expression modifiers
 # are included in the model as covariates, and PEER finds the other three:
-#unsupervised_with_covariates_demo()
+unsupervised_with_covariates_demo()
 
 # Number of factors does not have an effect on PEER, as the unused
 # factors are switched off. 
-#n_factors_demo()
+n_factors_demo()
 
 # Prior on the noise level or factor weight precisions affects factor inference
 # In general the prior parameters for Alpha and Eps can be tweaked to explain some
 # amount of variability in the data. In many settings, PEER is robust to changes in priors
 # for several orders of magnitude
-#eps_prior_demo()
+eps_prior_demo()
 
 
 # Demo on supervised factor learning. A prior information matrix has to be given that determines

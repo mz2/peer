@@ -26,7 +26,7 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		SwitchArg no_W("","no_w_out","No output of estimated factor weights", cmd, false);
 		SwitchArg no_Z("","no_z_out","No output of posterior sparsity prior",cmd,false);
 		SwitchArg no_Alpha("","no_a_out","No output of weight precision", cmd, false);
-		SwitchArg keep_mean("","keep_mean","Do not include a covariate for the mean", cmd, false);
+		SwitchArg add_mean("","add_mean","Add a covariate to model mean effect", cmd, false);
 		SwitchArg has_header("","has_header","Expression and covariates files have a header", cmd, false);
 		
 		ValueArg<std::string> out_dir("o","out_dir","Output directory",false,"peer_out","string", cmd);
@@ -53,7 +53,7 @@ sPeerArgs parseCmdlineArgs(int argc, char * const argv[]){
 		args.no_W = no_W.getValue();
 		args.no_Alpha = no_Alpha.getValue();
 		args.no_Z = no_Z.getValue();
-		args.keep_mean = keep_mean.getValue();
+		args.add_mean = add_mean.getValue();
 		args.has_header = has_header.getValue();
 		args.out_dir = out_dir.getValue();
 		args.expr_file = expr_file.getValue();
@@ -157,7 +157,7 @@ cPEER getInstance(sPeerArgs args){
 	
 	//(expr, PMatrix(), covs, args.n_factors);
 
-	vb.setAdd_mean(!args.keep_mean);
+	vb.setAdd_mean(args.add_mean);
 	vb.setNmax_iterations(args.n_iter);
 	vb.setTolerance(args.bound_tolerance);
 	vb.setVarTolerance(args.var_tolerance);
