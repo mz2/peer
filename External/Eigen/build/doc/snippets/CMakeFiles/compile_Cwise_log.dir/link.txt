@@ -1,1 +1,0 @@
-/usr/bin/c++    -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/compile_Cwise_log.dir/compile_Cwise_log.cpp.o  -o compile_Cwise_log  

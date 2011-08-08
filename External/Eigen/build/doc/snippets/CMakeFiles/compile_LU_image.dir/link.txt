@@ -1,1 +1,0 @@
-/usr/bin/c++    -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/compile_LU_image.dir/compile_LU_image.cpp.o  -o compile_LU_image  
