@@ -132,6 +132,8 @@ namespace PEER
 		virtual void getEps(float64_t** matrix,int32_t* rows,int32_t* cols);
 		virtual void getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols);
 		virtual void getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols);
+		virtual void getBounds(float64_t** matrix,int32_t* rows,int32_t* cols);
+		virtual void getResidualVars(float64_t** matrix,int32_t* rows,int32_t* cols);
 		
 		virtual double calcBound();
 		virtual double logprob();

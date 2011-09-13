@@ -122,6 +122,10 @@ public:
 	int Nk; //Total number of factors
 	int Nc; //Number of covariates
 	
+	/* Convergence monitoring*/
+	PVector Tresidual_varaince;
+	PVector Tbound;
+	
 	/** prior settings **/
 	double Alpha_pa;
 	double Alpha_pb;
@@ -224,6 +228,10 @@ public:
 	virtual void getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols);
 	virtual void getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols);
 
+	virtual void getBounds(float64_t** matrix,int32_t* rows,int32_t* cols);
+	virtual void getResidualVars(float64_t** matrix,int32_t* rows,int32_t* cols);
+
+	
 	void setPhenoMean(const PMatrix pheno_mean);
 	void setPhenoVar(const PMatrix pheno_var);
 	void setCovariates(const PMatrix covs);
@@ -232,6 +240,8 @@ public:
 	PMatrix getPhenoVar();
 	PMatrix getCovariates();
 
+	PVector getBounds();
+	PVector getResidualVars();
 	PMatrix getX();
 	PMatrix getW();
 	PMatrix getAlpha();

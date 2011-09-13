@@ -418,6 +418,10 @@ void cVBFA::init_net()
 // Global update
 void cVBFA::update(){
 	
+	// reserve memory for bound and residual history
+	Tresidual_varaince = PVector(Nmax_iterations);
+	Tbound = PVector(Nmax_iterations);
+	
 	//auto init net if needed
 	if(!is_initialized)
 		init_net();
@@ -455,13 +459,14 @@ void cVBFA::update(){
 			current_residual_var = calc_residuals().array().pow(2).mean();
 			delta_bound = (current_bound - last_bound); // bound should increase
 			delta_residual_var = last_residual_var - current_residual_var; // variance should decrease
+			Tbound[i] = current_bound;
 		}
 		
 		//debug output?
-		
+		double res_var = getResiduals().array().array().pow(2.).mean();
+		Tresidual_varaince[i] = res_var;
 		if (VERBOSE>=2)
 		{
-			double res_var = getResiduals().array().array().pow(2.).mean();
 			ULOG_INFO("Residual variance: %.4f, Delta bound: %.4f, Delta var(residuals): %.4f\n",res_var,delta_bound, delta_residual_var);
 		}
 		
@@ -555,6 +560,8 @@ PMatrix cVBFA::getW(){return W->E1;}
 PMatrix cVBFA::getAlpha(){return Alpha->E1;}
 PMatrix cVBFA::getEps(){return Eps->E1;}
 PMatrix cVBFA::getResiduals() {return calc_residuals();}
+PVector cVBFA::getBounds() { return Tbound;}
+PVector cVBFA::getResidualVars() { return Tresidual_varaince;}
 
 
 void cVBFA::getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols)
@@ -574,3 +581,7 @@ void cVBFA::getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols)
 void cVBFA::getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
 {return matrix2array(calc_residuals(),matrix,rows,cols);}
 
+void cVBFA::getBounds(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(Tbound,matrix,rows,cols);}
+void cVBFA::getResidualVars(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(Tresidual_varaince,matrix,rows,cols);}
