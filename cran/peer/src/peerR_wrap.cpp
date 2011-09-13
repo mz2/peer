@@ -3636,6 +3636,110 @@ R_swig_PEER_getResiduals ( SEXP self)
 
 
 SWIGEXPORT SEXP
+R_swig_PEER_getBounds ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getBounds" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getBounds(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getResidualVars ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getResidualVars" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getResidualVars(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
 R_swig_PEER_init_net_sparse ( SEXP self)
 {
   PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
@@ -4002,6 +4106,7 @@ SWIGINTERN R_CallMethodDef CallEntries[] = {
    {"R_swig_PEER_setPriorEpsA", (DL_FUNC) &R_swig_PEER_setPriorEpsA, 2},
    {"R_swig_PEER_logprob", (DL_FUNC) &R_swig_PEER_logprob, 2},
    {"R_swig_PEER_getEps", (DL_FUNC) &R_swig_PEER_getEps, 1},
+   {"R_swig_PEER_getResidualVars", (DL_FUNC) &R_swig_PEER_getResidualVars, 1},
    {"R_swig_PEER_getPriorEpsB", (DL_FUNC) &R_swig_PEER_getPriorEpsB, 2},
    {"R_swig_PEER_setPriorEpsB", (DL_FUNC) &R_swig_PEER_setPriorEpsB, 2},
    {"R_swig_PEER_setPriorEps", (DL_FUNC) &R_swig_PEER_setPriorEps, 3},
@@ -4018,6 +4123,7 @@ SWIGINTERN R_CallMethodDef CallEntries[] = {
    {"R_swig_PEER_getW", (DL_FUNC) &R_swig_PEER_getW, 1},
    {"R_swig_cWNodeSparse_lpi_get", (DL_FUNC) &R_swig_cWNodeSparse_lpi_get, 2},
    {"R_swig_PEER_getX", (DL_FUNC) &R_swig_PEER_getX, 1},
+   {"R_swig_PEER_getBounds", (DL_FUNC) &R_swig_PEER_getBounds, 1},
    {"R_swig_cWNodeSparse_tauOn_set", (DL_FUNC) &R_swig_cWNodeSparse_tauOn_set, 2},
    {"R_swig_getVerbose", (DL_FUNC) &R_swig_getVerbose, 1},
    {"R_swig_setVerbose", (DL_FUNC) &R_swig_setVerbose, 1},

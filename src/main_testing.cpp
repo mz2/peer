@@ -61,8 +61,17 @@ int main (int argc, char * const argv[]) {
 	vbs.setAdd_mean(true);
 	vbs.setNk(K);
 	vbs.setPhenoMean(sim.expr);
-	vbs.setSparsityPrior(pi);
+	//vbs.setSparsityPrior(pi);
 	vbs.update();
+	
+	PVector test = vbs.getResidualVars();
+	
+	double* matrix;
+	int rows; 
+	int cols;
+	vbs.getResidualVars(&matrix, &rows, &cols);
+	
+	std::cout << test;
 	
 	
 	printf("hi");

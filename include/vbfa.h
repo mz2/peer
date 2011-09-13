@@ -121,6 +121,7 @@ public:
 	int Np; //phenotypes
 	int Nk; //Total number of factors
 	int Nc; //Number of covariates
+	int Niterations; //Number of iterations conducted
 	
 	/* Convergence monitoring*/
 	PVector Tresidual_varaince;

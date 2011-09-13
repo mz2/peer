@@ -436,6 +436,7 @@ void cVBFA::update(){
 	for(i=0; i < this->Nmax_iterations; ++i){
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
+		Niterations+=1;
 		
 		W->update(this);		
 		if((VERBOSE>=3) && (i > 0) )
@@ -560,8 +561,8 @@ PMatrix cVBFA::getW(){return W->E1;}
 PMatrix cVBFA::getAlpha(){return Alpha->E1;}
 PMatrix cVBFA::getEps(){return Eps->E1;}
 PMatrix cVBFA::getResiduals() {return calc_residuals();}
-PVector cVBFA::getBounds() { return Tbound;}
-PVector cVBFA::getResidualVars() { return Tresidual_varaince;}
+PVector cVBFA::getBounds() { return Tbound.head(Niterations);}
+PVector cVBFA::getResidualVars() { return Tresidual_varaince.head(Niterations);}
 
 
 void cVBFA::getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols)
@@ -582,6 +583,6 @@ void cVBFA::getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
 {return matrix2array(calc_residuals(),matrix,rows,cols);}
 
 void cVBFA::getBounds(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(Tbound,matrix,rows,cols);}
+{return matrix2array(getBounds(),matrix,rows,cols);}
 void cVBFA::getResidualVars(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(Tresidual_varaince,matrix,rows,cols);}
+{return matrix2array(getResidualVars(),matrix,rows,cols);}

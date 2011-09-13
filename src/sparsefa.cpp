@@ -428,6 +428,8 @@ void cSPARSEFA::update()
 	int i=0;
 	for(i=0; i < this->Nmax_iterations; ++i)
 	{
+		
+		Niterations+=1;
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
 				
