@@ -189,13 +189,16 @@ void write_output(cPEER& vb, sPeerArgs args){
 	if (!args.no_residuals) writeCsv(concat(out_dir, "residuals.csv"), vb.getResiduals());
 	if (!args.no_W) writeCsv(concat(out_dir, "W.csv"), vb.W->E1);
 	if (!args.no_X) writeCsv(concat(out_dir, "X.csv"), vb.X->E1);
-	if (!args.no_Alpha) writeCsv(concat(out_dir, "Alpha.csv"), vb.Alpha->E1);
 	
 	//if sparse mode on, export indicator Z also
 	if(!isnull(vb.getSparsityPrior()))
 	{
 		if (!args.no_Z) writeCsv(concat(out_dir, "Z.csv"), vb.getZ());
 		
+	}
+	else if (!args.no_Alpha) // if no sparse mode, export posterior weight precision
+	{
+		writeCsv(concat(out_dir, "Alpha.csv"), vb.Alpha->E1);
 	}
 }
 		
