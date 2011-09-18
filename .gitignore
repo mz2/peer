@@ -1,4 +1,5 @@
 build/*
+CMakeFiles/*
 cran/peer/src/*.cpp
 cran/peer/src/*.h
 cran/peer_source.tgz
