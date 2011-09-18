@@ -225,6 +225,7 @@ void cSPARSEFA::init_params() {
 	sigmaOff = 1E-2;
 	sigmaOn = 1.0;
 	add_mean = false;
+	Niterations = 0;
 };
 
 
@@ -428,8 +429,6 @@ void cSPARSEFA::update()
 	int i=0;
 	for(i=0; i < this->Nmax_iterations; ++i)
 	{
-		
-		Niterations+=1;
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
 				
@@ -495,6 +494,7 @@ void cSPARSEFA::update()
 			break;
 		if (abs(delta_residual_var)<var_tolerance)
 			break;
+		Niterations+=1;
 	//endfor
 	}
 		

@@ -279,6 +279,7 @@ void cVBFA::init_params()
 	Alpha_pb = 0.1;
 	Eps_pa  = 0.1;
 	Eps_pb  = 10;
+	Niterations = 0;
 	
 }
 
@@ -433,10 +434,11 @@ void cVBFA::update(){
 	double delta_bound = HUGE_VAL;
 	double delta_residual_var = HUGE_VAL;
 	int i=0;
-	for(i=0; i < this->Nmax_iterations; ++i){
+	for(i=0; i < this->Nmax_iterations; ++i)
+	{
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
-		Niterations+=1;
+		
 		
 		W->update(this);		
 		if((VERBOSE>=3) && (i > 0) )
@@ -476,7 +478,10 @@ void cVBFA::update(){
 			break;
 		if (abs(delta_residual_var)<var_tolerance)
 			break;
-		//endfor
+	
+		//increase iteration counter
+		Niterations+=1;	
+	//endfor
 	}
 	
 	//debug output on convergence?
@@ -561,8 +566,8 @@ PMatrix cVBFA::getW(){return W->E1;}
 PMatrix cVBFA::getAlpha(){return Alpha->E1;}
 PMatrix cVBFA::getEps(){return Eps->E1;}
 PMatrix cVBFA::getResiduals() {return calc_residuals();}
-PVector cVBFA::getBounds() { return Tbound.head(Niterations);}
-PVector cVBFA::getResidualVars() { return Tresidual_varaince.head(Niterations);}
+PVector cVBFA::getBounds() {return Tbound.head(Niterations);}
+PVector cVBFA::getResidualVars() {return Tresidual_varaince.head(Niterations);}
 
 
 void cVBFA::getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols)
