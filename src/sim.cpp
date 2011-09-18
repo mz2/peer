@@ -17,8 +17,7 @@ using namespace Eigen;
 
 
 
-
-sSparseSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sparsity,double sigma,double fpr, double fnr)
+sSparseSimulation simulate_expressionSPARSEFA(int N, int D, int K,int NC,double sigma,double sparsity,double fpr,double fnr)
 {
 	//Sparse factor analysis simulation
 	//1. create a prior connectivity matrix Pi whihc is random (sparsity) with FPR and FNR as specified
@@ -50,23 +49,39 @@ sSparseSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sparsit
 		}
 	//2. create random factors
 	RV.X = randn(N,K);
+	RV.expr = RV.X*RV.W;
+	//3. covariaes ?
+	if (NC>0)
+	{
+		RV.Xcov = randn(N,NC);
+		RV.Wcov = randn(NC,D);
+		RV.expr+= RV.Xcov*RV.Wcov;
+	}
+	//noise
 	RV.Eps = sigma*randn(N,D);
-	RV.expr = RV.X*RV.W + RV.Eps;
+	RV.expr += RV.Eps;
 	return RV;
 }
 
-sSimulation simulate_expressionVBFA(int N, int D, int K,double sigma)
+sSimulation simulate_expressionVBFA(int N, int D, int K,int NC, double sigma)
 /*
  Simulate an expresison matrix with N entries, D dimensions and K factors
  */
 {	
 	//1. create factors
-	sSimulation result;
-	result.X = randn(N,K);
-	result.W = randn(K,D);
-	result.Eps = sigma*randn(N,D);
-	result.expr = result.X*result.W + result.Eps;
-	return result;
+	sSimulation RV;
+	RV.X = randn(N,K);
+	RV.W = randn(K,D);
+	RV.Eps = sigma*randn(N,D);
+	
+	RV.expr = RV.X*RV.W + RV.Eps;
+	if(NC>0)
+	{
+		RV.Xcov = randn(N,NC);
+		RV.Wcov = randn(NC,D);
+		RV.expr+= RV.Xcov*RV.Wcov;
+	}
+	return RV;
 }
 
 

@@ -81,6 +81,19 @@ namespace PEER
 		//getters
 		double getSigmaOff() { return this->sigmaOff;};
 		
+		int getNj() {return Nj;};
+		int getNp() {return Np;};
+		int getNk() {return Nk;};
+		int getNc() {return Nc;};
+		int getNmax_iterations() {return Nmax_iterations;};
+		double getTolerance() {return tolerance;};
+		double getVarTolerance() {return var_tolerance;}
+		bool getAdd_mean() { return add_mean;}				
+		double getPriorEpsA() { return Eps_pa;}
+		double getPriorEpsB() { return Eps_pb;}
+		double getPriorAlphaA() { return Alpha_pa;}
+		double getPriorAlphaB() { return Alpha_pb;}
+
 		//setters
 		void setSparsityPrior(float64_t* matrix,int32_t rows,int32_t cols);
 		void getSparsityPrior(float64_t** matrix,int32_t* rows,int32_t* cols);		
@@ -119,6 +132,8 @@ namespace PEER
 		virtual void getEps(float64_t** matrix,int32_t* rows,int32_t* cols);
 		virtual void getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols);
 		virtual void getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols);
+		virtual void getBounds(float64_t** matrix,int32_t* rows,int32_t* cols);
+		virtual void getResidualVars(float64_t** matrix,int32_t* rows,int32_t* cols);
 		
 		virtual double calcBound();
 		virtual double logprob();

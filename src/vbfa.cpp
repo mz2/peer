@@ -32,60 +32,6 @@ double PEER::logdet(PMatrix m){
 //verbosity level:
 int VERBOSE = 1;
 
-//Setters
-
-// Matrix
-void cVBFA::setPhenoMean(const PMatrix pheno_mean) 
-{
-this->pheno_mean = pheno_mean;is_initialized=false;
-};
-void cVBFA::setPhenoVar(const PMatrix pheno_var) 
-{this->pheno_var = pheno_var;is_initialized=false;}
-void cVBFA::setCovariates(const PMatrix covs) 
-{ this->covs = covs;is_initialized=false;}
-
-//SWIG	
-void cVBFA::setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
-{
-this->pheno_mean = array2matrix(matrix,rows,cols);is_initialized=false;
-};
-void cVBFA::setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols)
-{this->pheno_var = array2matrix(matrix,rows,cols);is_initialized=false;}
-void cVBFA::setCovariates(float64_t* matrix,int32_t rows,int32_t cols)
-{this->covs = array2matrix(matrix,rows,cols);is_initialized=false;}	
-
-
-//getters
-
-//Matrix
-PMatrix cVBFA::getPhenoMean(){return this->pheno_mean;}
-PMatrix cVBFA::getPhenoVar() {return this->pheno_var;}
-PMatrix cVBFA::getCovariates() {return this->covs;}
-
-PMatrix cVBFA::getX(){return X->E1;}
-PMatrix cVBFA::getW(){return W->E1;}
-PMatrix cVBFA::getAlpha(){return Alpha->E1;}
-PMatrix cVBFA::getEps(){return Eps->E1;}
-PMatrix cVBFA::getResiduals() {return calc_residuals();}
-
-
-void cVBFA::getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(pheno_mean,matrix,rows,cols);}
-void cVBFA::getPhenoVar(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(pheno_var,matrix,rows,cols);}
-void cVBFA::getCovariates(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(covs,matrix,rows,cols);}
-void cVBFA::getX(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(X->E1,matrix,rows,cols);}
-void cVBFA::getW(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(W->E1,matrix,rows,cols);}
-void cVBFA::getEps(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(Eps->E1,matrix,rows,cols);}
-void cVBFA::getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(Alpha->E1,matrix,rows,cols);}
-void cVBFA::getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
-{return matrix2array(calc_residuals(),matrix,rows,cols);}
-
 
 void PEER::setVerbose(int verbose)
 { VERBOSE = verbose;}
@@ -323,7 +269,7 @@ void cVBFA::init_params()
 	tolerance = 1E-3;
 	var_tolerance = 1E-8;	
 	Nmax_iterations = 1000;
-	add_mean    = true;
+	add_mean    = false;
 	initialisation = RANDN;	
 	is_initialized = false;
 	covariate_prec = 100;
@@ -350,7 +296,7 @@ void cVBFA::init_net()
 	if (isnull(pheno_var))
 	{	
 		pheno_var = 0.01*(PMatrix::Ones(pheno_mean.rows(), pheno_mean.cols())); // if uncertainty in expression not provided, assume pretty certain
-		printf("XX %d/%d -- %d/%d\n",(int) pheno_mean.rows(),(int) pheno_mean.cols(),(int) pheno_var.rows(),(int) pheno_var.cols());	
+		//printf("XX %d/%d -- %d/%d\n",(int) pheno_mean.rows(),(int) pheno_mean.cols(),(int) pheno_var.rows(),(int) pheno_var.cols());	
 	}
 	// if no covariates, create empty structure
 	if (isnull(covs)) 
@@ -364,16 +310,18 @@ void cVBFA::init_net()
 	{
 		//create a larger matrix and concatenate mean column:
 		int nc = covs.cols();
-		covs.resize(Nj,nc+1);
-		//TODO: (Oli) I think this is wrong. blocks are (startrows,starcols,numrows,numcols)
-		covs.block(0,nc,Nj,nc+1) = PMatrix::Ones(Nj, 1); 
+		//use conservative resize which preserves the current entries
+		covs.conservativeResize(Nj,nc+1);
+		//add mean column at the end
+		covs.block(0,nc,Nj,1) = PMatrix::Ones(Nj, 1); 
 	}
 	
-	
+	//determine number of covariaets
 	Nc = covs.cols();
+	//Nk is total number of factors
 	Nk = Nk + Nc;
 	//how many "non covariate factors"?
-	int Nfactors = Nk-Nc;
+	int Nhidden = Nk-Nc;
 	
 	//debug output:
 	if(VERBOSE>=2)
@@ -413,10 +361,9 @@ void cVBFA::init_net()
 		residuals = pheno->E1;
 	}
 
-		
+	
 	if (initialisation==PCA)
 	{
-		ULOG_INFO("USING PCA initialization");
 		//JacobiSVD test;
 		JacobiSVD<PMatrix> svd(residuals, ComputeThinU | ComputeThinV);
 		//create a diagonal matrix
@@ -426,28 +373,29 @@ void cVBFA::init_net()
 		//dot product Sdiag V
 		PMatrix SV = Sdiag*V.transpose();
 		//get the factors up to the Kth component
-		X0.block(0,Nc,Nj,Nfactors) = U.block(0,0,U.rows(),Nfactors);
-		W0.block(0,Nc,Np,Nfactors) = SV.block(0,0,Nfactors,SV.cols()).transpose();
+		X0.block(0,Nc,Nj,Nhidden) = U.block(0,0,U.rows(),Nhidden);
+		W0.block(0,Nc,Np,Nhidden) = SV.block(0,0,Nhidden,SV.cols()).transpose();
 	}
 	else if (initialisation==RANDN)
 	{
-		PMatrix X0r = randn(Nj,Nfactors);
-		PMatrix W0r = randn(Np,Nfactors);
+		PMatrix X0r = randn(Nj,Nhidden);
+		PMatrix W0r = randn(Np,Nhidden);
 		ULOG_INFO("USING RANDN initialization");
-		X0.block(0,Nc,Nj,Nfactors) = X0r;
-		W0.block(0,Nc,Np,Nfactors) = W0r;
+		X0.block(0,Nc,Nj,Nhidden) = X0r;
+		W0.block(0,Nc,Np,Nhidden) = W0r;
 	}
 	else	
     {	
-	
+		ULOG_ERR("Unknown initialization chosen");
 	}
 
-
+	
 	// 4. create nodes and initialise
 	PMatrix Xprec_prior = PMatrix::Identity(Nk,Nk);
 	Xprec_prior.diagonal().block(0,0,Nc,1) = PMatrix::Ones(Nc,1)*covariate_prec;
 	PMatrix Xmean_prior = PMatrix::Zero(Nj, Nk);
 	Xmean_prior.block(0,0,Nj,Nc) = covs;
+
 	W = new cWNode(W0);
 	X = new cXNode(X0, Xmean_prior,Xprec_prior);
 	
@@ -470,6 +418,10 @@ void cVBFA::init_net()
 // Global update
 void cVBFA::update(){
 	
+	// reserve memory for bound and residual history
+	Tresidual_varaince = PVector(Nmax_iterations);
+	Tbound = PVector(Nmax_iterations);
+	
 	//auto init net if needed
 	if(!is_initialized)
 		init_net();
@@ -484,6 +436,7 @@ void cVBFA::update(){
 	for(i=0; i < this->Nmax_iterations; ++i){
 		if (VERBOSE>=1)
 			printf("\titeration %d/%d\n",i,Nmax_iterations);
+		Niterations+=1;
 		
 		W->update(this);		
 		if((VERBOSE>=3) && (i > 0) )
@@ -507,13 +460,14 @@ void cVBFA::update(){
 			current_residual_var = calc_residuals().array().pow(2).mean();
 			delta_bound = (current_bound - last_bound); // bound should increase
 			delta_residual_var = last_residual_var - current_residual_var; // variance should decrease
+			Tbound[i] = current_bound;
 		}
 		
 		//debug output?
-		
+		double res_var = getResiduals().array().array().pow(2.).mean();
+		Tresidual_varaince[i] = res_var;
 		if (VERBOSE>=2)
 		{
-			double res_var = getResiduals().array().array().pow(2.).mean();
 			ULOG_INFO("Residual variance: %.4f, Delta bound: %.4f, Delta var(residuals): %.4f\n",res_var,delta_bound, delta_residual_var);
 		}
 		
@@ -541,14 +495,15 @@ void cVBFA::update(){
 	}
 }
 
-
+// residual calculation of model
 PMatrix cVBFA::calc_residuals()
 {
 	return (pheno->E1 - X->E1*W->E1.transpose());
 }
 
-
-double cVBFA::logprob(){
+// log prob of model
+double cVBFA::logprob()
+{
 	PMatrix diagAE1 = PMatrix::Zero(Nk,Nk);
 	diagAE1.diagonal() = W->A_last;
 	
@@ -568,3 +523,66 @@ double cVBFA::logprob(){
 double cVBFA::calcBound(){
 	return logprob() + W->calcBound(this) + Alpha->calcBound(this) + X->calcBound(this) + Eps->calcBound(this);
 }
+
+
+
+//Setters
+
+// Matrix
+void cVBFA::setPhenoMean(const PMatrix pheno_mean) 
+{
+	this->pheno_mean = pheno_mean;is_initialized=false;
+};
+void cVBFA::setPhenoVar(const PMatrix pheno_var) 
+{this->pheno_var = pheno_var;is_initialized=false;}
+void cVBFA::setCovariates(const PMatrix covs) 
+{ this->covs = covs;is_initialized=false;}
+
+//SWIG	
+void cVBFA::setPhenoMean(float64_t* matrix,int32_t rows,int32_t cols)
+{
+	this->pheno_mean = array2matrix(matrix,rows,cols);is_initialized=false;
+};
+void cVBFA::setPhenoVar(float64_t* matrix,int32_t rows,int32_t cols)
+{this->pheno_var = array2matrix(matrix,rows,cols);is_initialized=false;}
+void cVBFA::setCovariates(float64_t* matrix,int32_t rows,int32_t cols)
+{this->covs = array2matrix(matrix,rows,cols);is_initialized=false;}	
+
+
+//getters
+
+//Matrix
+PMatrix cVBFA::getPhenoMean(){return this->pheno_mean;}
+PMatrix cVBFA::getPhenoVar() {return this->pheno_var;}
+PMatrix cVBFA::getCovariates() {return this->covs;}
+
+PMatrix cVBFA::getX(){return X->E1;}
+PMatrix cVBFA::getW(){return W->E1;}
+PMatrix cVBFA::getAlpha(){return Alpha->E1;}
+PMatrix cVBFA::getEps(){return Eps->E1;}
+PMatrix cVBFA::getResiduals() {return calc_residuals();}
+PVector cVBFA::getBounds() { return Tbound.head(Niterations);}
+PVector cVBFA::getResidualVars() { return Tresidual_varaince.head(Niterations);}
+
+
+void cVBFA::getPhenoMean(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(pheno_mean,matrix,rows,cols);}
+void cVBFA::getPhenoVar(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(pheno_var,matrix,rows,cols);}
+void cVBFA::getCovariates(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(covs,matrix,rows,cols);}
+void cVBFA::getX(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(X->E1,matrix,rows,cols);}
+void cVBFA::getW(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(W->E1,matrix,rows,cols);}
+void cVBFA::getEps(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(Eps->E1,matrix,rows,cols);}
+void cVBFA::getAlpha(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(Alpha->E1,matrix,rows,cols);}
+void cVBFA::getResiduals(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(calc_residuals(),matrix,rows,cols);}
+
+void cVBFA::getBounds(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(getBounds(),matrix,rows,cols);}
+void cVBFA::getResidualVars(float64_t** matrix,int32_t* rows,int32_t* cols)
+{return matrix2array(getResidualVars(),matrix,rows,cols);}

@@ -2232,6 +2232,318 @@ R_swig_PEER_getSigmaOff ( SEXP self, SEXP s_swig_copy)
 
 
 SWIGEXPORT SEXP
+R_swig_PEER_getNj ( SEXP self, SEXP s_swig_copy)
+{
+  int result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getNj" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (int)(arg1)->getNj();
+  r_ans = Rf_ScalarInteger(result);
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getNp ( SEXP self, SEXP s_swig_copy)
+{
+  int result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getNp" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (int)(arg1)->getNp();
+  r_ans = Rf_ScalarInteger(result);
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getNk ( SEXP self, SEXP s_swig_copy)
+{
+  int result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getNk" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (int)(arg1)->getNk();
+  r_ans = Rf_ScalarInteger(result);
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getNc ( SEXP self, SEXP s_swig_copy)
+{
+  int result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getNc" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (int)(arg1)->getNc();
+  r_ans = Rf_ScalarInteger(result);
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getNmax_iterations ( SEXP self, SEXP s_swig_copy)
+{
+  int result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getNmax_iterations" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (int)(arg1)->getNmax_iterations();
+  r_ans = Rf_ScalarInteger(result);
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getTolerance ( SEXP self, SEXP s_swig_copy)
+{
+  double result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getTolerance" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (double)(arg1)->getTolerance();
+  r_ans = SWIG_From_double(static_cast< double >(result));
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getVarTolerance ( SEXP self, SEXP s_swig_copy)
+{
+  double result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getVarTolerance" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (double)(arg1)->getVarTolerance();
+  r_ans = SWIG_From_double(static_cast< double >(result));
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getAdd_mean ( SEXP self, SEXP s_swig_copy)
+{
+  bool result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getAdd_mean" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (bool)(arg1)->getAdd_mean();
+  r_ans = Rf_ScalarLogical(result);
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getPriorEpsA ( SEXP self, SEXP s_swig_copy)
+{
+  double result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getPriorEpsA" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (double)(arg1)->getPriorEpsA();
+  r_ans = SWIG_From_double(static_cast< double >(result));
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getPriorEpsB ( SEXP self, SEXP s_swig_copy)
+{
+  double result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getPriorEpsB" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (double)(arg1)->getPriorEpsB();
+  r_ans = SWIG_From_double(static_cast< double >(result));
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getPriorAlphaA ( SEXP self, SEXP s_swig_copy)
+{
+  double result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getPriorAlphaA" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (double)(arg1)->getPriorAlphaA();
+  r_ans = SWIG_From_double(static_cast< double >(result));
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getPriorAlphaB ( SEXP self, SEXP s_swig_copy)
+{
+  double result;
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getPriorAlphaB" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  result = (double)(arg1)->getPriorAlphaB();
+  r_ans = SWIG_From_double(static_cast< double >(result));
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
 R_swig_PEER_setSparsityPrior ( SEXP self, SEXP matrix)
 {
   PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
@@ -3324,6 +3636,110 @@ R_swig_PEER_getResiduals ( SEXP self)
 
 
 SWIGEXPORT SEXP
+R_swig_PEER_getBounds ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getBounds" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getBounds(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
+R_swig_PEER_getResidualVars ( SEXP self)
+{
+  PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
+  float64_t **arg2 = (float64_t **) 0 ;
+  int32_t *arg3 = (int32_t *) 0 ;
+  int32_t *arg4 = (int32_t *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int r_nprotect = 0;
+  SEXP r_ans = R_NilValue ;
+  VMAXTYPE r_vmax = vmaxget() ;
+  SEXP R_OutputValues;
+  
+  {
+    arg2 = (float64_t**) malloc(sizeof(float64_t*));
+    arg3 = (int32_t*) malloc(sizeof(int32_t));
+    arg4 = (int32_t*) malloc(sizeof(int32_t));
+  }
+  res1 = SWIG_R_ConvertPtr(self, &argp1, SWIGTYPE_p_PEER__cSPARSEFA, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PEER_getResidualVars" "', argument " "1"" of type '" "PEER::cSPARSEFA *""'"); 
+  }
+  arg1 = reinterpret_cast< PEER::cSPARSEFA * >(argp1);
+  (arg1)->getResidualVars(arg2,arg3,arg4);
+  r_ans = R_NilValue;
+  Rf_protect(R_OutputValues = Rf_allocVector(VECSXP,0));
+  r_nprotect += 1;
+  r_ans = R_OutputValues;
+  {
+    float64_t* matrix = *arg2;
+    int32_t num_feat = *arg3;
+    int32_t num_vec = *arg4;
+    
+    Rf_protect( r_ans = Rf_allocMatrix(REALSXP, num_feat, num_vec) );
+    
+    for (int32_t i=0; i<num_vec; i++)
+    {
+      for (int32_t j=0; j<num_feat; j++)
+      REAL(r_ans)[i*num_feat+j]=(double) matrix[i*num_feat+j];
+    }
+    Rf_unprotect(1);
+    free(*arg2); free(arg2); free(arg3); free(arg4);
+  }
+  
+  vmaxset(r_vmax);
+  if(r_nprotect)  Rf_unprotect(r_nprotect);
+  
+  return r_ans;
+}
+
+
+SWIGEXPORT SEXP
 R_swig_PEER_init_net_sparse ( SEXP self)
 {
   PEER::cSPARSEFA *arg1 = (PEER::cSPARSEFA *) 0 ;
@@ -3654,20 +4070,26 @@ SWIGINTERN R_CallMethodDef CallEntries[] = {
    {"R_swig_cWNodeSparse_update", (DL_FUNC) &R_swig_cWNodeSparse_update, 2},
    {"R_swig_new_cWNodeSparse__SWIG_1", (DL_FUNC) &R_swig_new_cWNodeSparse__SWIG_1, 3},
    {"R_swig_PEER_update", (DL_FUNC) &R_swig_PEER_update, 1},
-   {"R_swig_PEER_getSparsityPrior", (DL_FUNC) &R_swig_PEER_getSparsityPrior, 1},
+   {"R_swig_PEER_getAdd_mean", (DL_FUNC) &R_swig_PEER_getAdd_mean, 2},
    {"R_swig_PEER_setSparsityPrior", (DL_FUNC) &R_swig_PEER_setSparsityPrior, 2},
+   {"R_swig_PEER_getSparsityPrior", (DL_FUNC) &R_swig_PEER_getSparsityPrior, 1},
    {"R_swig_PEER_setAdd_mean", (DL_FUNC) &R_swig_PEER_setAdd_mean, 2},
    {"R_swig_PEER_setPriorAlpha", (DL_FUNC) &R_swig_PEER_setPriorAlpha, 3},
+   {"R_swig_PEER_getNj", (DL_FUNC) &R_swig_PEER_getNj, 2},
+   {"R_swig_PEER_getNk", (DL_FUNC) &R_swig_PEER_getNk, 2},
    {"R_swig_PEER_getAlpha", (DL_FUNC) &R_swig_PEER_getAlpha, 1},
    {"R_swig_PEER_setPhenoVar", (DL_FUNC) &R_swig_PEER_setPhenoVar, 2},
    {"R_swig_PEER_getPhenoVar", (DL_FUNC) &R_swig_PEER_getPhenoVar, 1},
+   {"R_swig_PEER_getNp", (DL_FUNC) &R_swig_PEER_getNp, 2},
    {"R_swig_cWNodeSparse_C_get", (DL_FUNC) &R_swig_cWNodeSparse_C_get, 2},
    {"R_swig_cWNodeSparse_tauOff_get", (DL_FUNC) &R_swig_cWNodeSparse_tauOff_get, 2},
    {"R_swig_cWNodeSparse_lpi_off_get", (DL_FUNC) &R_swig_cWNodeSparse_lpi_off_get, 2},
    {"R_swig_cWNodeSparse_Coff_get", (DL_FUNC) &R_swig_cWNodeSparse_Coff_get, 2},
    {"R_swig_new_PEER", (DL_FUNC) &R_swig_new_PEER, 0},
+   {"R_swig_PEER_getPriorAlphaA", (DL_FUNC) &R_swig_PEER_getPriorAlphaA, 2},
    {"R_swig_PEER_setPriorAlphaA", (DL_FUNC) &R_swig_PEER_setPriorAlphaA, 2},
    {"R_swig_cWNodeSparse_pi_get", (DL_FUNC) &R_swig_cWNodeSparse_pi_get, 2},
+   {"R_swig_PEER_getPriorAlphaB", (DL_FUNC) &R_swig_PEER_getPriorAlphaB, 2},
    {"R_swig_PEER_setPriorAlphaB", (DL_FUNC) &R_swig_PEER_setPriorAlphaB, 2},
    {"R_swig_cWNodeSparse_C_set", (DL_FUNC) &R_swig_cWNodeSparse_C_set, 2},
    {"R_swig_cWNodeSparse_tauOff_set", (DL_FUNC) &R_swig_cWNodeSparse_tauOff_set, 2},
@@ -3680,15 +4102,20 @@ SWIGINTERN R_CallMethodDef CallEntries[] = {
    {"R_swig_cWNodeSparse_pi_set", (DL_FUNC) &R_swig_cWNodeSparse_pi_set, 2},
    {"R_swig_PEER_setPhenoMean", (DL_FUNC) &R_swig_PEER_setPhenoMean, 2},
    {"R_swig_PEER_getPhenoMean", (DL_FUNC) &R_swig_PEER_getPhenoMean, 1},
+   {"R_swig_PEER_getPriorEpsA", (DL_FUNC) &R_swig_PEER_getPriorEpsA, 2},
    {"R_swig_PEER_setPriorEpsA", (DL_FUNC) &R_swig_PEER_setPriorEpsA, 2},
    {"R_swig_PEER_logprob", (DL_FUNC) &R_swig_PEER_logprob, 2},
    {"R_swig_PEER_getEps", (DL_FUNC) &R_swig_PEER_getEps, 1},
+   {"R_swig_PEER_getResidualVars", (DL_FUNC) &R_swig_PEER_getResidualVars, 1},
+   {"R_swig_PEER_getPriorEpsB", (DL_FUNC) &R_swig_PEER_getPriorEpsB, 2},
    {"R_swig_PEER_setPriorEpsB", (DL_FUNC) &R_swig_PEER_setPriorEpsB, 2},
    {"R_swig_PEER_setPriorEps", (DL_FUNC) &R_swig_PEER_setPriorEps, 3},
    {"R_swig_cWNodeSparse_tauOn_get", (DL_FUNC) &R_swig_cWNodeSparse_tauOn_get, 2},
    {"R_swig_PEER_getSigmaOff", (DL_FUNC) &R_swig_PEER_getSigmaOff, 2},
    {"R_swig_PEER_setSigmaOff", (DL_FUNC) &R_swig_PEER_setSigmaOff, 2},
    {"R_swig_cWNodeSparse_CovPriorDiag_set", (DL_FUNC) &R_swig_cWNodeSparse_CovPriorDiag_set, 2},
+   {"R_swig_PEER_getTolerance", (DL_FUNC) &R_swig_PEER_getTolerance, 2},
+   {"R_swig_PEER_getVarTolerance", (DL_FUNC) &R_swig_PEER_getVarTolerance, 2},
    {"R_swig_PEER_setTolerance", (DL_FUNC) &R_swig_PEER_setTolerance, 2},
    {"R_swig_PEER_setVarTolerance", (DL_FUNC) &R_swig_PEER_setVarTolerance, 2},
    {"R_swig_PEER_calcBound", (DL_FUNC) &R_swig_PEER_calcBound, 2},
@@ -3696,14 +4123,17 @@ SWIGINTERN R_CallMethodDef CallEntries[] = {
    {"R_swig_PEER_getW", (DL_FUNC) &R_swig_PEER_getW, 1},
    {"R_swig_cWNodeSparse_lpi_get", (DL_FUNC) &R_swig_cWNodeSparse_lpi_get, 2},
    {"R_swig_PEER_getX", (DL_FUNC) &R_swig_PEER_getX, 1},
+   {"R_swig_PEER_getBounds", (DL_FUNC) &R_swig_PEER_getBounds, 1},
    {"R_swig_cWNodeSparse_tauOn_set", (DL_FUNC) &R_swig_cWNodeSparse_tauOn_set, 2},
-   {"R_swig_PEER_getZ", (DL_FUNC) &R_swig_PEER_getZ, 1},
    {"R_swig_getVerbose", (DL_FUNC) &R_swig_getVerbose, 1},
    {"R_swig_setVerbose", (DL_FUNC) &R_swig_setVerbose, 1},
+   {"R_swig_PEER_getZ", (DL_FUNC) &R_swig_PEER_getZ, 1},
+   {"R_swig_PEER_getNmax_iterations", (DL_FUNC) &R_swig_PEER_getNmax_iterations, 2},
    {"R_swig_PEER_setNmax_iterations", (DL_FUNC) &R_swig_PEER_setNmax_iterations, 2},
-   {"R_swig_PEER_setNk", (DL_FUNC) &R_swig_PEER_setNk, 2},
    {"R_swig_cWNodeSparse_lpi_set", (DL_FUNC) &R_swig_cWNodeSparse_lpi_set, 2},
+   {"R_swig_PEER_setNk", (DL_FUNC) &R_swig_PEER_setNk, 2},
    {"R_swig_PEER_getResiduals", (DL_FUNC) &R_swig_PEER_getResiduals, 1},
+   {"R_swig_PEER_getNc", (DL_FUNC) &R_swig_PEER_getNc, 2},
    {"R_swig_new_cWNodeSparse__SWIG_0", (DL_FUNC) &R_swig_new_cWNodeSparse__SWIG_0, 0},
    {"R_swig_delete_PEER", (DL_FUNC) &R_swig_delete_PEER, 1},
    {"R_swig_delete_cEpsNodeSparse", (DL_FUNC) &R_swig_delete_cEpsNodeSparse, 1},

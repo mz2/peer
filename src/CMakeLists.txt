@@ -16,13 +16,13 @@ else(DEBUG_PEER)
 endif(DEBUG_PEER)
 
 add_library(peerlib STATIC bayesnet.cpp array_helper.cpp sim.cpp
-vbfa.cpp sparsefa.cpp io.cpp)
+vbfa.cpp sparsefa.cpp)
 
 #INSTALL(TARGETS peerlib
 #   ARCHIVE DESTINATION lib
 #   LIBRARY DESTINATION lib)
 
-add_executable(peertool sim.cpp main.cpp)
+add_executable(peertool sim.cpp peerutil_main.cpp peerutil.cpp)
 target_link_libraries(peertool peerlib alglib csv_parser yaml-cpp)
 
 INSTALL(TARGETS peertool

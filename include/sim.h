@@ -21,6 +21,10 @@ struct sSimulation {
 	PMatrix X;
 	//noise
 	PMatrix Eps;
+
+	//covariates
+	PMatrix Xcov;
+	PMatrix Wcov;
 };
 
 
@@ -32,6 +36,6 @@ struct sSparseSimulation: sSimulation {
 };
 
 //simulate from standard linear model
-sSimulation simulate_expressionVBFA(int N, int D, int K,double sigma=0.1);
+sSimulation simulate_expressionVBFA(int N, int D, int K,int NC=0,double sigma=0.1);
 //simulate from a sparse model
-sSparseSimulation simulate_expressionSPARSEFA(int N, int D, int K,double sigma=0.1,double sparsity=0.001,double fpr=0.1,double fnr=0.1);
+sSparseSimulation simulate_expressionSPARSEFA(int N, int D, int K,int NC=0,double sigma=0.1,double sparsity=0.001,double fpr=0.1,double fnr=0.1);
