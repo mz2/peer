@@ -61,6 +61,7 @@ ln -s $(pwd)/../build/R/libpeer.so ./peer/src/libpeer.so
 ln -s $(pwd)/../R/peer/man ./peer/man
 ln -s $(pwd)/../R/peer/NAMESPACE ./peer/NAMESPACE
 ln -s $(pwd)/../R/peer/DESCRIPTION ./peer/DESCRIPTION
+ln -s $(pwd)/../R/peer/R/plot.R ./peer/R/plot.R
 
 #create .tar.gz with symlinks dereferenced
 tar cfzh ./peer_source.tgz ./peer
