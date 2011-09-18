@@ -2,12 +2,15 @@
 
 #shell script to update the R interface files 
 #note: this requires that a current version of PEER is build and ready to run using cmake
-rm -f ./peer/src/*.o	
+rm -f ./peer/src/*.so	
 rm -f ./peer/src/*.h
 rm -f ./peer/src/*.cpp
 rm -rf ./peer/src-i386
 rm -rf ./peer/src-x86_64
 rm -f ./peer/R/peer.R
+rm -f ./peer/man
+rm ./peer/DESCRIPTION
+rm ./peer/NAMESPACE
 
 ln -s $(pwd)/../External/alglib/src/dataanalysis.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/dataanalysis.h ./peer/src/
@@ -52,6 +55,12 @@ ln -s $(pwd)/../include/vbfa.h ./peer/src/
 
 ln -s $(pwd)/../build/R/peerR_wrap.cxx ./peer/src/peerR_wrap.cpp
 ln -s $(pwd)/../build/R/peer.R ./peer/R/peer.R
+
+ln -s $(pwd)/../build/R/libpeer.so ./peer/src/libpeer.so
+
+ln -s $(pwd)/../R/peer/man ./peer/man
+ln -s $(pwd)/../R/peer/NAMESPACE ./peer/NAMESPACE
+ln -s $(pwd)/../R/peer/DESCRIPTION ./peer/DESCRIPTION
 
 #create .tar.gz with symlinks dereferenced
 tar cfzh ./peer_source.tgz ./peer
