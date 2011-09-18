@@ -93,8 +93,10 @@ include_directories(./External/alglib/src)
 add_subdirectory(./External/alglib/src)
 add_subdirectory(./External/csv_parser)
 add_subdirectory(./src)
-add_subdirectory(./External/yaml-cpp)
 
+IF (BUILD_PEERTOOL)
+add_subdirectory(./External/yaml-cpp)
+endif (BUILD_PEERTOOL)
 #### build external interface (optional) #####
 if (BUILD_PYTHON_PACKAGE)
 add_subdirectory(./python)
