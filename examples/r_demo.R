@@ -4,6 +4,7 @@ source("helpers.R")
 
 
 simple_unsupervised_demo <- function(){
+    print("Simple PEER application. All default prior values are set explicitly as demonstration.")
     y = read.csv("data/expression.csv",header=FALSE)
     K = 20
     Nmax_iterations = 100
@@ -37,6 +38,7 @@ simple_unsupervised_demo <- function(){
 
 
 unsupervised_with_covariates_demo <- function(){
+    print("PEER with two known covariates included in inference.")
     model = get_simple_PEER_object() # see simple_unsupervised_demo for how it is constructed
     covs = read.csv("data/covs.csv", header=FALSE)
     PEER_setCovariates(model, as.matrix(covs)) # covariates (e.g batch, RNA quality, ...) - not the as.matrix()!
@@ -53,6 +55,7 @@ unsupervised_with_covariates_demo <- function(){
 
 
 n_factors_demo <- function(){
+    print("Comparing different numbers of factors in inference (n=2,4,6,10).")
     pdf("r_demo_nk.pdf",width=8,height=8)
     colors = c("yellow","red","green","blue","black")
 
@@ -71,19 +74,24 @@ n_factors_demo <- function(){
 
 eps_prior_demo <- function(){
     # plot factor weight variances for a large set of maximum number K of factors, and see if K has an effect
-    for (pb in c(10,100,1000,10000)){
-        model = get_simple_PEER_object() # see simple_unsupervised_demo for how it is constructed
-        PEER_setPriorEps(model,0.1, pb);
-        PEER_update(model)
-        print(paste("Eps pb=", pb, "mean(|residuals|)=",mean(abs(PEER_getResiduals(model)))))
+    print("Comparing different noise priors to see the effect on how aggressively PEER explains variability.")
+
+    # plot factor weight variances for a large set of maximum number K of factors, and see if K has an effect
+    for(pa in c(0.0001, 0.1, 1000)){
+        for(pb in c(0.1,10,1000)){
+            model = get_simple_PEER_object() # see simple_unsupervised_demo for how it is constructed
+            PEER_setPriorEps(model,0.1, pb);
+            PEER_update(model)
+            print(paste("Eps pa=", pa, "pb=", pb, "mean(residuals^2)=",mean((PEER_getResiduals(model))**2)))
+        }
     }
-    # expected result - as the Eps prior b parameter gets larger, soon as there are at least 5 factors, the factor inference will not change any more
 }
 
 
 
 simple_supervised_demo <- function(){
-    y = read.csv("data/expression.csv",header=FALSE) # read expression data
+    print("Simple demo of supervised factor inference")
+    y = read.csv("data/expression_sparse.csv",header=FALSE) # read expression data
     prior = as.matrix(read.csv("data/prior_sparse.csv",header=FALSE)) # and prior for which factor regulates which gene. This matrix has entries between 0 and 1. The (g,k) entry represents the probability that gene g is affected by factor k
     Nmax_iterations = 100
 
@@ -98,12 +106,13 @@ simple_supervised_demo <- function(){
 
 
 supervised_prior_comparison_demo <- function(){
-    y = read.csv("data/expression.csv",header=FALSE) # read expression data - all as in simple_supervised_demo
+    print("Supervised factor inference demo, comparing different error rates in prior specification")
+    y = read.csv("data/expression_sparse.csv",header=FALSE) # read expression data - all as in simple_supervised_demo
     prior = as.matrix(read.csv("data/prior_sparse.csv",header=FALSE)) 
     Nmax_iterations = 100
 
     # compare outcomes of inference depending on uncertainty in prior
-    for(error in c(0,0.01,0.1,0.5)){
+    for(error in c(0,0.01,0.1,0.25)){
         print(paste("Prior error=",error))
         model = PEER()
         PEER_setPhenoMean(model, as.matrix(y)) # expression levels - note as.matrix()!
