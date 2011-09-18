@@ -42,6 +42,10 @@ ln -s $(pwd)/../External/alglib/src/alglibmisc.h ./peer/src/
 ln -s $(pwd)/../External/alglib/src/ap.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/ap.h ./peer/src/
 
+ln -s $(pwd)/../External/alglib ./peer/src/alglib
+ln -s $(pwd)/../External/Eigen ./peer/src/Eigen
+ln -s $(pwd)/../External/csv_parser ./peer/src/csv_parser
+
 ln -s $(pwd)/../src/array_helper.cpp ./peer/src/
 ln -s $(pwd)/../include/array_helper.h ./peer/src/
 ln -s $(pwd)/../src/bayesnet.cpp ./peer/src/
