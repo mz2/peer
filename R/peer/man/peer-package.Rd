@@ -48,6 +48,8 @@ peer-\alias{package}
 \alias{PEER_getSigmaOff}
 \alias{PEER_init_net}
 \alias{PEER_setPhenoMean}
+\alias{PEER_plotModel}
+\alias{PEER_plotQtl}
 \docType{package}
 \title{
 PEER is a collection of Bayesian approaches to infer hidden determinants and their effects from gene expression profiles using factor analysis methods.
