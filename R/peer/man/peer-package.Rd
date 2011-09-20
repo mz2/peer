@@ -74,7 +74,7 @@ Package: \tab peer\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2011-09-18\cr
-License: \tab What license is it under?\cr
+License: \tab CC BY-NC-SA 3.0\cr
 LazyLoad: \tab yes\cr
 }
 ~~ An overview of how to use the package, including the most important ~~
