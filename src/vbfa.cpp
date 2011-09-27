@@ -135,6 +135,7 @@ void cXNode::update(cBayesNet* net){
 		E1 += n->Eps->E1(i,0)*n->pheno->E1.col(i)*n->W->E1.row(i);
 	}
 	E1 = (E1 + prior_offset*prior_prec)*cov;
+        E1.block(0,0,n->Nj,n->Nc) = prior_offset.block(0,0,n->Nj,n->Nc); // overwrite covariates with prior setting
 	
 	E2S = n->Nj*cov;
 	for (int i = 0; i < n->Nj; ++i){
