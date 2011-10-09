@@ -18,6 +18,7 @@ ln -s $(pwd)/../External/alglib/src/diffequations.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/diffequations.h ./peer/src/
 ln -s $(pwd)/../External/alglib/src/fasttransforms.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/alglibinternal.h ./peer/src/
+ln -s $(pwd)/../External/alglib/src/alglibinternal.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/fasttransforms.h ./peer/src/
 ln -s $(pwd)/../External/alglib/src/integration.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/integration.h ./peer/src/
@@ -42,9 +43,9 @@ ln -s $(pwd)/../External/alglib/src/alglibmisc.h ./peer/src/
 ln -s $(pwd)/../External/alglib/src/ap.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/ap.h ./peer/src/
 
-ln -s $(pwd)/../External/alglib ./peer/src/alglib
+#ln -s $(pwd)/../External/alglib ./peer/src/alglib
 ln -s $(pwd)/../External/Eigen ./peer/src/Eigen
-ln -s $(pwd)/../External/csv_parser ./peer/src/csv_parser
+#ln -s $(pwd)/../External/csv_parser ./peer/src/csv_parser
 
 ln -s $(pwd)/../src/array_helper.cpp ./peer/src/
 ln -s $(pwd)/../include/array_helper.h ./peer/src/
