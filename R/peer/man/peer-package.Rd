@@ -43,7 +43,6 @@
 \alias{PEER_getZ}
 \alias{PEER_setNmax_iterations}
 \alias{PEER_setPriorEpsA}
-peer-\alias{package}
 \alias{PEER_getEps}
 \alias{PEER_getPhenoVar}
 \alias{PEER_getSigmaOff}
@@ -99,7 +98,8 @@ Joint Genetic Analysis of Gene Expression Data with Inferred Cellular Phenotypes
 ~~ the R documentation directory ~~
 \keyword{ package }
 \seealso{
-
+~~ Optional links to other man pages, e.g. ~~
+~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
 #TODO: Fill in examples here
