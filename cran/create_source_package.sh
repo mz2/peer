@@ -1,6 +1,7 @@
 #!/bin/sh
 
 #1. copy template into directoyr "peer"
+rm -Rf ./peer
 cp -R ./peer_template ./peer
 
 #2. create symlinks
