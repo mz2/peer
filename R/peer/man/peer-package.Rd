@@ -28,6 +28,7 @@
 \alias{PEER_getW}
 \alias{PEER_setCovariates}
 \alias{PEER_setPriorAlphaB}
+\alias{PEER_setPriorEpsB}
 \alias{PEER_setVarTolerance}
 \alias{PEER_getBounds}
 \alias{PEER_getNp}
