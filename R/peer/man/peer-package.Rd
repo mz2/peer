@@ -96,8 +96,6 @@ Joint Genetic Analysis of Gene Expression Data with Inferred Cellular Phenotypes
 }
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
 #TODO: Fill in examples here
