@@ -1,2 +1,2 @@
 #PKG_CPPFLAGS=-DSWIG -I ./
-PKG_CPPFLAGS= -I ./
+PKG_CPPFLAGS= -Wunused-parameter -Wignored-qualifiers -Wattributes -I ./
