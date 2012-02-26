@@ -9,8 +9,8 @@ rm -rf ./peer/src-i386
 rm -rf ./peer/src-x86_64
 rm -f ./peer/R/peer.R
 rm -f ./peer/man
-rm ./peer/DESCRIPTION
-rm ./peer/NAMESPACE
+rm -f ./peer/DESCRIPTION
+rm -f ./peer/NAMESPACE
 
 ln -s $(pwd)/../External/alglib/src/dataanalysis.cpp ./peer/src/
 ln -s $(pwd)/../External/alglib/src/dataanalysis.h ./peer/src/
