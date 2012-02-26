@@ -102,5 +102,5 @@ Joint Genetic Analysis of Gene Expression Data with Inferred Cellular Phenotypes
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+#TODO: Fill in examples here
 }
