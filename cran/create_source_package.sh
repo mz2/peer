@@ -4,6 +4,7 @@
 #note: this requires that a current version of PEER is build and ready to run using cmake
 rm -f ./peer/src/*.so	
 rm -f ./peer/src/*.h
+rm -f ./peer/src/*.o
 rm -f ./peer/src/*.cpp
 rm -rf ./peer/src-i386
 rm -rf ./peer/src-x86_64
@@ -61,7 +62,8 @@ ln -s $(pwd)/../include/vbfa.h ./peer/src/
 ln -s $(pwd)/../build/R/peerR_wrap.cxx ./peer/src/peerR_wrap.cpp
 ln -s $(pwd)/../build/R/peer.R ./peer/R/peer.R
 
-ln -s $(pwd)/../build/R/libpeer.so ./peer/src/libpeer.so
+#we don't need the so in there..
+#ln -s $(pwd)/../build/R/libpeer.so ./peer/src/libpeer.so
 
 ln -s $(pwd)/../R/peer/man ./peer/man
 ln -s $(pwd)/../R/peer/NAMESPACE ./peer/NAMESPACE
