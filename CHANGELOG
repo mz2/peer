@@ -1,3 +1,9 @@
+3/3/2011 (OS):
+* Changed python install behaviour
+* Added Readme
+* Added some basic documentation in CMakeLists.txt
+* Added Python install targets
+
 30/12/2010 (OS):
 * Changed PMatrix to be a float matrix rather than double to save space
 * Added setVerbose, getVerbose

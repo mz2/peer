@@ -6,7 +6,7 @@ all: $(WRAPPERS) peer_wrap.cxx
 	./setup.py build
 
 %_wrap.cxx: %.i 
-	swig -c++ -python -I../External -I.. $<
+	swig -c++ -python -I../External -I../src -I../include  $<
 
 clean:
 	$(RM) -r build

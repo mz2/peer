@@ -2,7 +2,9 @@
 
 %{
 #define SWIG_FILE_WITH_INIT
+#define SWIG
 #include "vbfa.h"
+#include "sparsefa.h"
 //use namessace:
 using namespace PEER;
 %}
@@ -37,10 +39,12 @@ using namespace PEER;
 
 
 /* Remove C Prefix */
+%rename(PEER) cSPARSEFA;
 %rename(VBFA) cVBFA;
 
 /* Include the header file to be wrapped */
-%include "vbfa.h"
+//%include "vbfa.h"
+%include "sparsefa.i"
 
 
 
